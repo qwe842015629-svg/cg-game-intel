@@ -228,6 +228,7 @@ def main():
     
     data = {
         "last_updated": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "run_id": str(int(time.time())),  # Force update even if content is same
         "rankings": rankings,
         "new_releases": new_releases,
         "strategies": strategies,
