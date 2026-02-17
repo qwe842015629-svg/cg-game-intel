@@ -119,18 +119,20 @@ def fetch_global_releases():
     return results
 
 def fetch_cn_releases():
-    """Fetch from TapTap CN (Domestic)"""
-    print("Fetching CN Releases (TapTap)...")
-    url = "https://www.taptap.cn/webapiv2/game-release/v1/list"
-    headers = COMMON_HEADERS.copy()
-    headers["Referer"] = "https://www.taptap.cn/events/game-release"
-    # X-UA is critical for TapTap. Using a generic PC one.
-    headers["X-UA"] = "V=1&PN=TapTap&VN_CODE=584&LOC=CN&LANG=zh_CN&PLT=PC"
-    
+    """Fetch from multiple CN sources: TapTap + 3733 + App Store"""
+    print("Fetching CN Releases (Multi-Source)...")
     results = []
+    
+    # 1. TapTap (High Quality)
     try:
-        params = {"page": 1, "limit": 20, "type": "all"}
+        url = "https://www.taptap.cn/webapiv2/game-test/v1/list"
+        headers = COMMON_HEADERS.copy()
+        headers["Referer"] = "https://www.taptap.cn/events/game-test"
+        headers["X-UA"] = "V=1&PN=TapTap&VN_CODE=584&LOC=CN&LANG=zh_CN&PLT=PC"
+        
+        params = {"page": 1, "limit": 30, "type": "test"} # Fetch upcoming tests
         resp = requests.get(url, headers=headers, params=params, timeout=10)
+        
         if resp.status_code == 200:
             data = resp.json()
             if data.get("success"):
@@ -138,16 +140,21 @@ def fetch_cn_releases():
                     app = item.get("app", {})
                     ts = item.get("start_time", 0)
                     
-                    # Skip old games (> 30 days ago)
-                    if ts < time.time() - 30 * 86400:
+                    # Filter out old tests (> 7 days ago)
+                    if ts < time.time() - 7 * 86400:
                         continue
+
+                    status_label = item.get("type_label", "测试")
+                    # Clean up status label
+                    if "删档" in status_label: status_label = "删档测试"
+                    elif "公测" in status_label: status_label = "公测"
                         
                     results.append({
-                        "id": f"cn_{app.get('id')}",
+                        "id": f"cn_tap_{app.get('id')}",
                         "title": app.get("title"),
                         "icon": app.get("icon", {}).get("original_url"),
                         "region": "CN",
-                        "status": item.get("type_label", "公测"), # e.g. "删档测试", "公测"
+                        "status": status_label,
                         "release_date": normalize_time(ts),
                         "platform": "Mobile",
                         "url": f"https://www.taptap.cn/app/{app.get('id')}",
@@ -155,8 +162,102 @@ def fetch_cn_releases():
                     })
     except Exception as e:
         print(f"TapTap Error: {e}")
+
+    # 2. 3733 Kaifu (Volume & Live Servers)
+    try:
+        url = "http://www.3733.com/kaifu/"
+        headers = COMMON_HEADERS.copy()
+        resp = requests.get(url, headers=headers, timeout=10)
+        resp.encoding = 'utf-8'
         
-    return results
+        if resp.status_code == 200:
+            soup = BeautifulSoup(resp.text, 'html.parser')
+            # 3733 structure: .kf-list li or table rows
+            # Try generic extraction since structure might change
+            # Looking for common patterns in kaifu tables
+            rows = soup.select('ul.kf-list li')
+            
+            for row in rows[:15]: # Limit to avoid spam
+                try:
+                    name_el = row.select_one('.gname') or row.select_one('h3')
+                    if not name_el: continue
+                    title = name_el.get_text(strip=True)
+                    
+                    time_el = row.select_one('.time') or row.select_one('.date')
+                    time_str = time_el.get_text(strip=True) if time_el else ""
+                    
+                    # Parse simplified time like "10:00" (today) or "02-18"
+                    now = arrow.now("Asia/Shanghai")
+                    if ":" in time_str and "-" not in time_str:
+                        # Today's time
+                        full_time = now.format(f"YYYY-MM-DD {time_str}:00")
+                    elif "-" in time_str:
+                        # Date string
+                        full_time = now.format(f"YYYY-{time_str} 10:00:00")
+                    else:
+                        full_time = now.format("YYYY-MM-DD 10:00:00")
+
+                    # Get icon if possible
+                    img_el = row.select_one('img')
+                    icon = img_el['src'] if img_el else ""
+                    if icon and not icon.startswith('http'): icon = f"http:{icon}"
+
+                    results.append({
+                        "id": f"cn_3733_{hash(title)}",
+                        "title": title,
+                        "icon": icon,
+                        "region": "CN",
+                        "status": "新服",
+                        "release_date": full_time,
+                        "platform": "Mobile",
+                        "url": "http://www.3733.com/kaifu/",
+                        "source": "3733"
+                    })
+                except:
+                    continue
+    except Exception as e:
+        print(f"3733 Error: {e}")
+
+    # 3. App Store CN New Releases (Fallback & High Quality)
+    # Only if we have very few results (< 5)
+    if len(results) < 5:
+        try:
+            print("  - Falling back to App Store CN...")
+            rss_url = "https://itunes.apple.com/cn/rss/newapplications/limit=20/genre=6014/json"
+            resp = requests.get(rss_url, timeout=10)
+            if resp.status_code == 200:
+                data = resp.json()
+                for entry in data.get('feed', {}).get('entry', []):
+                    # Check release date
+                    release_date = entry.get('im:releaseDate', {}).get('label')
+                    # Only keep recent ones (within 30 days)
+                    if arrow.get(release_date) > arrow.now().shift(days=-30):
+                        results.append({
+                            "id": entry.get('id', {}).get('attributes', {}).get('im:id'),
+                            "title": entry.get('im:name', {}).get('label'),
+                            "icon": entry.get('im:image', [])[-1].get('label'),
+                            "region": "CN",
+                            "status": "已上架",
+                            "release_date": normalize_time(release_date),
+                            "platform": "iOS",
+                            "url": entry.get('link', {}).get('attributes', {}).get('href'),
+                            "source": "AppStore"
+                        })
+        except Exception as e:
+            print(f"App Store Fallback Error: {e}")
+            
+    # Deduplicate by title (fuzzy)
+    seen_titles = set()
+    unique_results = []
+    for r in results:
+        # Simple normalization: remove punctuation, lowercase
+        clean_title = re.sub(r'[^\w\u4e00-\u9fa5]', '', r['title']).lower()
+        if clean_title not in seen_titles:
+            seen_titles.add(clean_title)
+            unique_results.append(r)
+            
+    print(f"  - Got {len(unique_results)} CN releases from multi-sources")
+    return unique_results
 
 def merge_calendars(cn_data, global_data):
     """Merge, Sort, and Deduplicate"""
