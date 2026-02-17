@@ -123,43 +123,65 @@ def fetch_cn_releases():
     print("Fetching CN Releases (Multi-Source)...")
     results = []
     
-    # 1. TapTap (High Quality)
+    # 1. TapTap (High Quality - Tests & New Releases)
     try:
-        url = "https://www.taptap.cn/webapiv2/game-test/v1/list"
+        # 1a. Upcoming Tests
+        url_test = "https://www.taptap.cn/webapiv2/game-test/v1/list"
         headers = COMMON_HEADERS.copy()
         headers["Referer"] = "https://www.taptap.cn/events/game-test"
         headers["X-UA"] = "V=1&PN=TapTap&VN_CODE=584&LOC=CN&LANG=zh_CN&PLT=PC"
         
-        params = {"page": 1, "limit": 30, "type": "test"} # Fetch upcoming tests
-        resp = requests.get(url, headers=headers, params=params, timeout=10)
+        # 1b. Hot New Games (Supplement)
+        url_new = "https://www.taptap.cn/webapiv2/game-rank/v1/list"
         
-        if resp.status_code == 200:
-            data = resp.json()
-            if data.get("success"):
-                for item in data.get("data", {}).get("list", []):
-                    app = item.get("app", {})
-                    ts = item.get("start_time", 0)
-                    
-                    # Filter out old tests (> 7 days ago)
-                    if ts < time.time() - 7 * 86400:
-                        continue
+        sources = [
+            {"url": url_test, "params": {"page": 1, "limit": 15, "type": "test"}, "label_key": "type_label"},
+            {"url": url_new, "params": {"page": 1, "limit": 15, "type_name": "new_game_hot"}, "label_key": None}
+        ]
 
-                    status_label = item.get("type_label", "测试")
-                    # Clean up status label
-                    if "删档" in status_label: status_label = "删档测试"
-                    elif "公测" in status_label: status_label = "公测"
-                        
-                    results.append({
-                        "id": f"cn_tap_{app.get('id')}",
-                        "title": app.get("title"),
-                        "icon": app.get("icon", {}).get("original_url"),
-                        "region": "CN",
-                        "status": status_label,
-                        "release_date": normalize_time(ts),
-                        "platform": "Mobile",
-                        "url": f"https://www.taptap.cn/app/{app.get('id')}",
-                        "source": "TapTap"
-                    })
+        for src in sources:
+            try:
+                resp = requests.get(src["url"], headers=headers, params=src["params"], timeout=10)
+                if resp.status_code == 200:
+                    data = resp.json()
+                    if data.get("success"):
+                        for item in data.get("data", {}).get("list", []):
+                            app = item.get("app", {})
+                            if not app: continue
+                            
+                            # Determine Release Date
+                            # For tests: start_time
+                            # For new games: pub_time or stat.update_time
+                            ts = item.get("start_time", 0)
+                            if not ts:
+                                ts = app.get("stat", {}).get("update_time", 0)
+                            
+                            # Filter out old (> 30 days ago)
+                            if ts < time.time() - 30 * 86400:
+                                continue
+
+                            # Status Label
+                            status_label = "新游"
+                            if src["label_key"]:
+                                status_label = item.get(src["label_key"], "测试")
+                            
+                            if "删档" in status_label: status_label = "删档测试"
+                            elif "公测" in status_label: status_label = "公测"
+
+                            results.append({
+                                "id": f"cn_tap_{app.get('id')}",
+                                "title": app.get("title"),
+                                "icon": app.get("icon", {}).get("original_url"),
+                                "region": "CN",
+                                "status": status_label,
+                                "release_date": normalize_time(ts),
+                                "platform": "Mobile",
+                                "url": f"https://www.taptap.cn/app/{app.get('id')}",
+                                "source": "TapTap"
+                            })
+            except Exception as e:
+                print(f"TapTap Sub-source Error: {e}")
+
     except Exception as e:
         print(f"TapTap Error: {e}")
 
@@ -167,7 +189,11 @@ def fetch_cn_releases():
     try:
         url = "http://www.3733.com/kaifu/"
         headers = COMMON_HEADERS.copy()
-        resp = requests.get(url, headers=headers, timeout=10)
+        headers["Referer"] = "http://www.3733.com/"
+        headers["Upgrade-Insecure-Requests"] = "1"
+        
+        # 3733 often blocks non-browser UA
+        resp = requests.get(url, headers=headers, timeout=15)
         resp.encoding = 'utf-8'
         
         if resp.status_code == 200:
@@ -177,30 +203,39 @@ def fetch_cn_releases():
             # Looking for common patterns in kaifu tables
             rows = soup.select('ul.kf-list li')
             
-            for row in rows[:15]: # Limit to avoid spam
+            # If ul.kf-list not found, try table structure (common in kaifu sites)
+            if not rows:
+                rows = soup.select('table tr')[1:] # Skip header
+            
+            for row in rows[:20]: # Limit to avoid spam
                 try:
-                    name_el = row.select_one('.gname') or row.select_one('h3')
+                    name_el = row.select_one('.gname') or row.select_one('h3') or row.select_one('td:nth-child(2)')
                     if not name_el: continue
                     title = name_el.get_text(strip=True)
                     
-                    time_el = row.select_one('.time') or row.select_one('.date')
+                    time_el = row.select_one('.time') or row.select_one('.date') or row.select_one('td:nth-child(1)')
                     time_str = time_el.get_text(strip=True) if time_el else ""
                     
                     # Parse simplified time like "10:00" (today) or "02-18"
                     now = arrow.now("Asia/Shanghai")
+                    full_time = now.format("YYYY-MM-DD HH:mm:ss") # Default
+
                     if ":" in time_str and "-" not in time_str:
-                        # Today's time
+                        # Today's time "10:00"
                         full_time = now.format(f"YYYY-MM-DD {time_str}:00")
                     elif "-" in time_str:
-                        # Date string
-                        full_time = now.format(f"YYYY-{time_str} 10:00:00")
-                    else:
-                        full_time = now.format("YYYY-MM-DD 10:00:00")
-
+                        # Date string "02-18" or "2024-02-18"
+                        if len(time_str) <= 5: # "02-18"
+                             full_time = now.format(f"YYYY-{time_str} 10:00:00")
+                        else:
+                             full_time = f"{time_str} 10:00:00"
+                    
                     # Get icon if possible
                     img_el = row.select_one('img')
                     icon = img_el['src'] if img_el else ""
-                    if icon and not icon.startswith('http'): icon = f"http:{icon}"
+                    if icon and not icon.startswith('http'): 
+                        if icon.startswith('//'): icon = f"http:{icon}"
+                        else: icon = f"http://www.3733.com{icon}"
 
                     results.append({
                         "id": f"cn_3733_{hash(title)}",
@@ -223,11 +258,22 @@ def fetch_cn_releases():
     if len(results) < 5:
         try:
             print("  - Falling back to App Store CN...")
-            rss_url = "https://itunes.apple.com/cn/rss/newapplications/limit=20/genre=6014/json"
+            # Use newfreeapplications which might respect genre better, or stick to newapplications with filtering
+            rss_url = "https://itunes.apple.com/cn/rss/newapplications/limit=50/genre=6014/json"
             resp = requests.get(rss_url, timeout=10)
             if resp.status_code == 200:
                 data = resp.json()
                 for entry in data.get('feed', {}).get('entry', []):
+                    # Strict Category Filter
+                    category = entry.get('category', {}).get('attributes', {})
+                    term = category.get('term', '')
+                    label = category.get('label', '')
+                    cat_id = category.get('im:id', '')
+                    
+                    # Must be a Game
+                    if "Game" not in term and "游戏" not in label and cat_id != "6014":
+                        continue
+
                     # Check release date
                     release_date = entry.get('im:releaseDate', {}).get('label')
                     # Only keep recent ones (within 30 days)
