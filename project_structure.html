@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>游戏充值网站 - 项目架构与路径清单</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f7fa;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            text-align: center;
+        }
+        h2 {
+            color: #2980b9;
+            margin-top: 30px;
+            border-left: 5px solid #3498db;
+            padding-left: 10px;
+            background-color: #e8f4fc;
+            padding: 10px;
+            border-radius: 0 5px 5px 0;
+        }
+        h3 {
+            color: #16a085;
+            margin-top: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #34495e;
+            color: white;
+            font-weight: 600;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        code {
+            background-color: #eef;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: Consolas, Monaco, 'Andale Mono', monospace;
+            color: #c7254e;
+        }
+        .directory-box {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .footer {
+            margin-top: 50px;
+            text-align: center;
+            font-size: 0.9em;
+            color: #7f8c8d;
+            border-top: 1px solid #ddd;
+            padding-top: 20px;
+        }
+        .tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            font-weight: bold;
+        }
+        .tag-backend { background-color: #d1ecf1; color: #0c5460; }
+        .tag-frontend { background-color: #d4edda; color: #155724; }
+        .tag-script { background-color: #fff3cd; color: #856404; }
+    </style>
+</head>
+<body>
+
+    <h1>🎮 游戏充值网站 - 项目架构与路径清单</h1>
+
+    <div class="directory-box">
+        <h2>📂 项目根目录结构</h2>
+        <p><strong>根路径:</strong> <code>e:\小程序开发\游戏充值网站\</code></p>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th width="30%">目录/文件</th>
+                    <th>说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>frontend/</code></td>
+                    <td><span class="tag tag-frontend">前端</span> Vue 3 + Vite 项目根目录</td>
+                </tr>
+                <tr>
+                    <td><code>game_recharge/</code></td>
+                    <td><span class="tag tag-backend">后端</span> Django Settings 核心配置目录</td>
+                </tr>
+                <tr>
+                    <td><code>manage.py</code></td>
+                    <td>Django 项目管理脚本 (入口)</td>
+                </tr>
+                <tr>
+                    <td><code>requirements.txt</code></td>
+                    <td>后端 Python 依赖包列表</td>
+                </tr>
+                <tr>
+                    <td><code>PROJECT_STRUCTURE.md</code></td>
+                    <td>项目结构说明文档</td>
+                </tr>
+                <tr>
+                    <td><code>MAIN_DOCUMENTATION.md</code></td>
+                    <td>项目主技术文档</td>
+                </tr>
+                <tr>
+                    <td><code>venv/</code></td>
+                    <td>Python 虚拟环境目录</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="directory-box">
+        <h2>🏗️ 后端架构 (Django)</h2>
+        <p>主要应用模块位于项目根目录下：</p>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th width="25%">路径</th>
+                    <th width="20%">模块名称</th>
+                    <th>功能描述</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>main/</code></td>
+                    <td>首页管理</td>
+                    <td>轮播图管理、首页布局配置、通用配置</td>
+                </tr>
+                <tr>
+                    <td><code>game_product/</code></td>
+                    <td>游戏产品</td>
+                    <td>游戏分类、游戏列表、商品类型管理</td>
+                </tr>
+                <tr>
+                    <td><code>game_article/</code></td>
+                    <td>资讯文章</td>
+                    <td>文章发布、分类管理、评论系统</td>
+                </tr>
+                <tr>
+                    <td><code>game_page/</code></td>
+                    <td>游戏页面</td>
+                    <td>单页游戏介绍、富文本内容、页面分类</td>
+                </tr>
+                <tr>
+                    <td><code>game_product_show/</code></td>
+                    <td>产品展示</td>
+                    <td>独立的产品展示页面管理</td>
+                </tr>
+                <tr>
+                    <td><code>customer_service/</code></td>
+                    <td>客服系统</td>
+                    <td>联系方式配置、常见问题 (FAQ) 管理</td>
+                </tr>
+                <tr>
+                    <td><code>footer/</code></td>
+                    <td>底部管理</td>
+                    <td>网站底部链接、板块配置</td>
+                </tr>
+                <tr>
+                    <td><code>users/</code></td>
+                    <td>用户系统</td>
+                    <td>用户注册、登录、个人信息管理</td>
+                </tr>
+                <tr>
+                    <td><code>orders/</code></td>
+                    <td>订单系统</td>
+                    <td>充值订单处理与记录</td>
+                </tr>
+                <tr>
+                    <td><code>payments/</code></td>
+                    <td>支付系统</td>
+                    <td>支付接口对接与回调处理</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>关键配置文件</h3>
+        <ul>
+            <li><code>game_recharge/settings.py</code>: 全局配置文件 (数据库、跨域、应用注册)</li>
+            <li><code>game_recharge/urls.py</code>: 全局路由入口</li>
+            <li><code>scripts/</code>: 包含数据初始化、翻译、清理等自动化维护脚本</li>
+        </ul>
+    </div>
+
+    <div class="directory-box">
+        <h2>🎨 前端架构 (Vue 3)</h2>
+        <p><strong>路径:</strong> <code>frontend/src/</code></p>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th width="25%">路径</th>
+                    <th width="15%">类型</th>
+                    <th>功能描述</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>api/</code></td>
+                    <td>API 接口</td>
+                    <td>封装与后端交互的请求 (如 <code>games.ts</code>, <code>auth.ts</code>)</td>
+                </tr>
+                <tr>
+                    <td><code>views/HomePage.vue</code></td>
+                    <td>页面</td>
+                    <td>首页 (轮播图 + 热门游戏展示)</td>
+                </tr>
+                <tr>
+                    <td><code>views/GamesPage.vue</code></td>
+                    <td>页面</td>
+                    <td>游戏列表 (搜索、筛选、游戏网格)</td>
+                </tr>
+                <tr>
+                    <td><code>views/GameDetailPage.vue</code></td>
+                    <td>页面</td>
+                    <td>游戏详情 (充值表单、区服选择、支付方式)</td>
+                </tr>
+                <tr>
+                    <td><code>views/ProfilePage.vue</code></td>
+                    <td>页面</td>
+                    <td>个人中心 (用户信息、订单记录)</td>
+                </tr>
+                <tr>
+                    <td><code>components/ui/</code></td>
+                    <td>UI 组件</td>
+                    <td>基础组件：Button, Input, Dialog 等</td>
+                </tr>
+                <tr>
+                    <td><code>components/Layout.vue</code></td>
+                    <td>布局组件</td>
+                    <td>包含通用的 Header 导航栏和 Footer</td>
+                </tr>
+                <tr>
+                    <td><code>stores/auth.ts</code></td>
+                    <td>状态管理</td>
+                    <td>用户登录状态、信息管理 (Pinia)</td>
+                </tr>
+                <tr>
+                    <td><code>router/index.ts</code></td>
+                    <td>路由配置</td>
+                    <td>页面跳转规则定义</td>
+                </tr>
+                <tr>
+                    <td><code>assets/</code></td>
+                    <td>静态资源</td>
+                    <td>全局样式 (<code>main.css</code>)、图片等</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="directory-box">
+        <h2>🛠️ 关键维护脚本</h2>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th width="30%">脚本/命令</th>
+                    <th>用途</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>python manage.py runserver</code></td>
+                    <td><span class="tag tag-backend">启动</span> 启动后端 Django 开发服务器</td>
+                </tr>
+                <tr>
+                    <td><code>npm run dev</code></td>
+                    <td><span class="tag tag-frontend">启动</span> 启动前端 Vite 开发服务器 (在 frontend 目录运行)</td>
+                </tr>
+                <tr>
+                    <td><code>cleanup.bat</code></td>
+                    <td><span class="tag tag-script">维护</span> Windows 环境清理脚本</td>
+                </tr>
+                <tr>
+                    <td><code>scripts/init_*.py</code></td>
+                    <td><span class="tag tag-script">数据</span> 各模块数据初始化脚本集合</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="footer">
+        <p>生成时间: 2026-02-12 | 游戏充值网站项目文档</p>
+    </div>
+
+</body>
+</html>

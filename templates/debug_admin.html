@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>后台故障自诊断修复</title>
+    <style>
+        body { font-family: system-ui, -apple-system, sans-serif; max-width: 800px; margin: 40px auto; padding: 20px; line-height: 1.6; background: #f4f4f9; color: #333; }
+        .card { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        h1 { color: #d32f2f; margin-top: 0; }
+        h2 { margin-top: 30px; font-size: 1.2em; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        .btn { display: inline-block; background: #d32f2f; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold; cursor: pointer; border: none; font-size: 16px; transition: background 0.2s; }
+        .btn:hover { background: #b71c1c; }
+        .btn-green { background: #2e7d32; }
+        .btn-green:hover { background: #1b5e20; }
+        pre { background: #f5f5f5; padding: 15px; border-radius: 6px; overflow-x: auto; border: 1px solid #ddd; max-height: 300px; }
+        .status-ok { color: #2e7d32; font-weight: bold; }
+        .status-err { color: #d32f2f; font-weight: bold; }
+        .log-item { margin-bottom: 5px; border-bottom: 1px dashed #eee; padding-bottom: 5px; }
+        .highlight { background-color: #fff3cd; padding: 2px 5px; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>🛠️ 后台故障自诊断修复</h1>
+        <p>此页面用于解决 SimpleUI 后台“连接被拒绝”、“组件栏未消失”以及“Dashboard 未显示”的问题。这些问题通常由浏览器本地缓存了旧配置导致。</p>
+
+        <div style="text-align: center; margin: 30px 0;">
+            <button class="btn" onclick="fixAndReload()">🚀 一键修复并重启后台</button>
+            <p style="font-size: 0.9em; color: #666; margin-top: 10px;">点击后将清除缓存并强制刷新，请重新登录。</p>
+        </div>
+
+        <h2>诊断日志 (Diagnostic Log)</h2>
+        <div id="log-container">正在分析本地环境...</div>
+
+        <h2>详细缓存数据</h2>
+        <pre id="storage-preview"></pre>
+    </div>
+
+    <script>
+        function log(msg, type = 'info') {
+            const container = document.getElementById('log-container');
+            const el = document.createElement('div');
+            el.className = 'log-item';
+            el.innerHTML = type === 'error' ? `<span class="status-err">[错误]</span> ${msg}` : `<span class="status-ok">[正常]</span> ${msg}`;
+            container.appendChild(el);
+        }
+
+        function checkStorage() {
+            const storagePreview = document.getElementById('storage-preview');
+            let content = '';
+            let hasError = false;
+
+            // 检查 SimpleUI 缓存
+            const simpleKeys = ['simpleui_menus', 'simpleui_home_page', 'simpleui_index'];
+            let foundKeys = [];
+
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                const value = localStorage.getItem(key);
+                content += `<strong>${key}</strong>: ${value.substring(0, 100)}${value.length > 100 ? '...' : ''}\n`;
+                
+                if (simpleKeys.some(k => key.includes(k))) {
+                    foundKeys.push(key);
+                }
+            }
+            storagePreview.innerHTML = content || '(LocalStorage 为空)';
+
+            if (foundKeys.length > 0) {
+                log(`发现 SimpleUI 缓存残留: <span class="highlight">${foundKeys.join(', ')}</span>`, 'error');
+                log('这会导致后台配置更新不生效，必须清除。', 'error');
+                hasError = true;
+            } else {
+                log('未发现明显的 SimpleUI 缓存残留。');
+            }
+
+            // 检查首页配置
+            const homePage = localStorage.getItem('simpleui_home_page');
+            if (homePage && homePage.includes('localhost')) {
+                log(`检测到致命错误: 首页被缓存为本地绝对路径 <span class="highlight">${homePage}</span>，导致连接被拒绝。`, 'error');
+                hasError = true;
+            }
+
+            if (!hasError) {
+                log('本地缓存看起来很干净，如果问题依旧，可能是服务端配置或网络问题。');
+            }
+        }
+
+        function fixAndReload() {
+            if (!confirm('确定要清除所有缓存并重新加载后台吗？')) return;
+            
+            try {
+                // 清除所有 LocalStorage
+                localStorage.clear();
+                // 清除所有 SessionStorage
+                sessionStorage.clear();
+                
+                alert('缓存已清除！正在跳转回后台...');
+                
+                // 强制跳转回后台首页，并加上时间戳防止 HTTP 缓存
+                window.location.href = '/admin/?t=' + new Date().getTime();
+            } catch (e) {
+                alert('清除失败: ' + e.message);
+            }
+        }
+
+        // 初始化
+        document.getElementById('log-container').innerHTML = '';
+        checkStorage();
+    </script>
+</body>
+</html>

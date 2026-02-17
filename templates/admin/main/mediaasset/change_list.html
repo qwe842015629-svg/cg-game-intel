@@ -1,0 +1,166 @@
+{% extends "admin/change_list.html" %}
+{% load i18n admin_urls static admin_list %}
+
+{% block object-tools %}
+    <ul class="object-tools" id="custom-object-tools">
+        <li>
+            <input type="file" id="batch-upload-input" multiple accept="image/*" style="display: none;" onchange="handleBatchUpload(this)">
+            <span id="batch-upload-btn" onclick="triggerUpload()" class="addlink" style="background-color: #2f80ed; color: white; border-radius: 4px; padding: 8px 16px; font-weight: bold; border: none; box-shadow: 0 2px 5px rgba(0,0,0,0.1); cursor: pointer; display: inline-block;">
+                <span style="font-size: 14px;">☁️ 批量上传图片</span>
+            </span>
+        </li>
+        {{ block.super }}
+    </ul>
+{% endblock %}
+
+{% block extrahead %}
+{{ block.super }}
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    // 定时检查器，确保按钮始终存在 (应对 SimpleUI 的动态渲染)
+    var checkInterval = setInterval(function() {
+        // 先检查原始按钮是否存在
+        var originalBtn = document.getElementById('batch-upload-btn');
+        if (originalBtn && originalBtn.offsetParent !== null) {
+             // 原始按钮存在且可见，不需要注入
+             return;
+        }
+
+        var injectedBtn = document.getElementById('batch-upload-btn-js');
+        // 如果注入按钮已存在，跳过
+        if (injectedBtn) return;
+        
+        console.log('Batch upload button missing, attempting to inject...');
+        
+        // 寻找最佳注入位置
+        var toolbar = null;
+        
+        // 1. 尝试寻找 SimpleUI 的工具栏容器
+        // 通常在 .actions 或 .object-tools 或 .el-row
+        var possibleContainers = [
+            document.querySelector('.object-tools'),
+            document.querySelector('.actions'),
+            document.querySelector('.el-row') // 这是一个比较宽泛的选择器，需要小心
+        ];
+
+        // 尝试找到包含 "添加" 按钮的具体容器
+        var addBtn = document.querySelector('a.addlink') || document.querySelector('.el-button--primary');
+        if (addBtn) {
+            // 如果找到了添加按钮，就插在它前面
+            var parent = addBtn.parentElement;
+            // 如果是 li，则找 ul
+            if (parent.tagName === 'LI') {
+                 toolbar = parent.parentElement;
+            } else {
+                 toolbar = parent;
+            }
+        }
+        
+        if (!toolbar) {
+             // 如果没找到明确的添加按钮，尝试找第一个可能的容器
+             toolbar = possibleContainers.find(c => c !== null);
+        }
+        
+        if (toolbar) {
+            var container = document.createElement('div');
+            container.style.display = 'inline-block';
+            container.style.marginRight = '10px';
+            container.style.verticalAlign = 'middle';
+            container.innerHTML = `
+                <input type="file" id="batch-upload-input-js" multiple accept="image/*" style="display: none;" onchange="handleBatchUpload(this)">
+                <span id="batch-upload-btn-js" onclick="document.getElementById('batch-upload-input-js').click()" class="el-button el-button--primary el-button--small" style="background-color: #2f80ed; color: white; border-color: #2f80ed; cursor: pointer; padding: 9px 15px; font-weight: bold; line-height: 1;">
+                    <i class="fas fa-cloud-upload-alt"></i> 批量上传图片
+                </span>
+            `;
+            
+            // 插入到最前面
+            toolbar.insertBefore(container, toolbar.firstChild);
+            console.log('Batch upload button injected successfully.');
+        }
+    }, 1000); // 每秒检查一次
+});
+
+function triggerUpload() {
+    // 优先使用 JS 注入的 input
+    var input = document.getElementById('batch-upload-input-js');
+    if (!input) input = document.getElementById('batch-upload-input');
+    
+    if (input) {
+        input.click();
+    } else {
+        alert('Upload input not found');
+    }
+}
+
+function handleBatchUpload(input) {
+    const files = input.files;
+    if (files.length === 0) return;
+
+    const formData = new FormData();
+    for (let i = 0; i < files.length; i++) {
+        formData.append('file', files[i]);
+    }
+
+    // Show loading state (优先找注入的按钮，其次找原始按钮)
+    let btn = document.getElementById('batch-upload-btn-js');
+    if (!btn) btn = document.getElementById('batch-upload-btn');
+    
+    let originalContent = '';
+    if (btn) {
+        originalContent = btn.innerHTML;
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 上传中... (' + files.length + ')';
+        btn.style.opacity = '0.7';
+        btn.style.pointerEvents = 'none';
+    }
+
+    fetch('upload/', {
+        method: 'POST',
+        headers: {
+            'X-CSRFToken': '{{ csrf_token }}'
+        },
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'success') {
+            const uploaded = Number(data.count || 0);
+            const deduped = Number(data.deduped_count || 0);
+            const failed = Number(data.error_count || 0);
+            alert(`Upload done: created ${uploaded}, deduped ${deduped}, failed ${failed}`);
+            window.location.reload();
+        } else {
+            alert('Upload failed: ' + (data.message || 'Unknown error'));
+            if (btn) {
+                btn.innerHTML = originalContent;
+                btn.style.opacity = '1';
+                btn.style.pointerEvents = 'auto';
+            }
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Network error');
+        if (btn) {
+            btn.innerHTML = originalContent;
+            btn.style.opacity = '1';
+            btn.style.pointerEvents = 'auto';
+        }
+    });
+}
+</script>
+<style>
+    /* 隐藏默认的 "添加 媒体资源" 按钮，如果需要的话，或者保留作为单条添加 */
+    /* .object-tools .addlink { display: none; } */
+    
+    /* 优化表格样式 */
+    #result_list img {
+        transition: transform 0.2s;
+    }
+    #result_list img:hover {
+        transform: scale(1.5);
+        z-index: 10;
+        position: relative;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+</style>
+{% endblock %}

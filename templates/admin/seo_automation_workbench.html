@@ -1,0 +1,856 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SEO 自动化工作台</title>
+  <style>
+    body { margin: 0; font-family: "Microsoft YaHei", "PingFang SC", sans-serif; background: #f5f7fb; color: #1f2d3d; }
+    .page { max-width: 1320px; margin: 0 auto; padding: 18px; }
+    .header, .card { background: #fff; border: 1px solid #e7ecf3; border-radius: 12px; box-shadow: 0 8px 20px rgba(15,35,95,.06); }
+    .header { padding: 18px; margin-bottom: 14px; }
+    .header h1 { margin: 0 0 6px; font-size: 24px; }
+    .header p { margin: 0; color: #5f7393; font-size: 13px; }
+    .header-actions { margin-top: 10px; display: flex; gap: 8px; flex-wrap: wrap; }
+    .layout { display: grid; grid-template-columns: 1.35fr 1fr; gap: 12px; margin-bottom: 12px; }
+    .card { padding: 14px; }
+    .card h2 { margin: 0 0 8px; font-size: 16px; }
+    .sub { margin: 0 0 12px; color: #6b7a90; font-size: 12px; }
+    .grid { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 8px; }
+    .field { display: flex; flex-direction: column; gap: 4px; }
+    .field label { font-size: 12px; color: #6b7a90; }
+    .field input, .field select { border: 1px solid #dbe5f4; border-radius: 8px; padding: 8px 9px; font-size: 13px; }
+    .span-2 { grid-column: span 2; }
+    .span-4 { grid-column: span 4; }
+    .checks { display: flex; gap: 8px; flex-wrap: wrap; }
+    .checks label { border: 1px solid #d9e8fb; border-radius: 999px; background: #f8fbff; font-size: 13px; padding: 5px 9px; }
+    .btn { border: 1px solid #2f80ed; border-radius: 8px; background: #2f80ed; color: #fff; padding: 7px 10px; font-size: 13px; cursor: pointer; text-decoration: none; }
+    .btn:disabled { opacity: .55; cursor: not-allowed; }
+    .btn.ghost { background: #fff; color: #1d4f8c; border-color: #c8dbf6; }
+    .btn.link { background: #f2f7ff; color: #1d5ea8; border-color: #c8dbf6; }
+    .btn.success { background: #1f9d58; border-color: #1f9d58; }
+    .btn.danger { background: #e55353; border-color: #e55353; color: #fff; }
+    .actions, .step-actions { margin-top: 10px; display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+    .status { border: 1px solid #dbe6f6; border-radius: 999px; padding: 3px 10px; font-size: 12px; font-weight: 700; background: #f7fbff; color: #2d4e75; }
+    .status.completed { border-color: #bde8ce; background: #e9f9f0; color: #168c4b; }
+    .status.failed { border-color: #f7d1d1; background: #fff1f1; color: #ba2c2c; }
+    .status.running, .status.pending, .status.crawling, .status.enriching, .status.seoing, .status.publishing { border-color: #f6dfba; background: #fff8ed; color: #a25f12; }
+    .current-task { margin-top: 8px; font-size: 13px; }
+    .current-task code { background: #eef4ff; border: 1px solid #d9e7fb; border-radius: 5px; padding: 2px 6px; }
+    .stage-grid { margin-top: 10px; display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 8px; }
+    .stage { border: 1px solid #dce8f8; border-radius: 8px; background: #f9fcff; padding: 8px; font-size: 12px; }
+    .stage strong { display: block; margin-bottom: 3px; color: #35557b; }
+    .stage.ok { border-color: #bde8ce; background: #ecfbf3; }
+    .stage.warn { border-color: #f8dfb7; background: #fff8ec; }
+    .stage.bad { border-color: #f4caca; background: #fff2f2; }
+    .json { min-height: 320px; max-height: 520px; overflow: auto; border: 1px dashed #d5e2f5; border-radius: 8px; background: #fbfdff; padding: 9px; font-size: 12px; font-family: Consolas, monospace; white-space: pre-wrap; }
+    .summary-box { border: 1px solid #dce8f8; border-radius: 10px; background: #f8fbff; padding: 10px; font-size: 12px; margin-bottom: 10px; }
+    .summary-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 8px; margin-top: 8px; }
+    .summary-item { border: 1px solid #d9e6f8; border-radius: 8px; background: #fff; padding: 8px; }
+    .summary-item strong { display: block; color: #35557b; margin-bottom: 4px; }
+    .summary-list { margin-top: 8px; font-size: 12px; color: #40556f; }
+    .summary-list p { margin: 4px 0; }
+    .raw-toggle { margin-bottom: 8px; }
+    .modal-mask { position: fixed; inset: 0; background: rgba(8,20,45,.42); display: none; align-items: center; justify-content: center; z-index: 9999; }
+    .modal-mask.open { display: flex; }
+    .modal { width: min(980px, calc(100vw - 32px)); max-height: calc(100vh - 40px); overflow: auto; background: #fff; border: 1px solid #d8e5f7; border-radius: 12px; box-shadow: 0 18px 40px rgba(17,40,89,.25); padding: 14px; }
+    .modal h3 { margin: 0 0 10px; font-size: 18px; }
+    .modal .grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    .modal textarea { width: 100%; min-height: 260px; border: 1px solid #dbe5f4; border-radius: 8px; padding: 10px; font-size: 13px; font-family: Consolas, monospace; line-height: 1.5; resize: vertical; }
+    .modal-actions { margin-top: 10px; display: flex; gap: 8px; justify-content: flex-end; }
+    .table-card { margin-bottom: 12px; }
+    .table-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 8px; }
+    .muted { color: #7b8ea8; font-size: 12px; margin-bottom: 8px; }
+    table { width: 100%; border-collapse: collapse; font-size: 12px; }
+    th, td { border-bottom: 1px solid #edf2f9; padding: 8px 6px; text-align: left; vertical-align: top; }
+    th { color: #4e6582; border-bottom-color: #dbe5f4; }
+    .mini-actions { display: flex; gap: 6px; flex-wrap: wrap; }
+    .empty { color: #7b8ea8; padding: 10px; }
+    @media (max-width: 1120px) { .layout { grid-template-columns: 1fr; } .summary-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 900px) { .grid { grid-template-columns: repeat(2, minmax(0,1fr)); } .span-4 { grid-column: span 2; } .stage-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+<div class="page">
+  <div class="header">
+    <h1>SEO 自动化工作台</h1>
+    <p>更新时间：{{ now|date:"Y-m-d H:i:s" }} · 严格五步流程：1爬取链接 → 2提取详情 → 3SEO分析 → 4SEO文章生成 → 5高质量图文优化</p>
+    <div class="header-actions">
+      <button class="btn ghost" type="button" onclick="goBack()">返回看板</button>
+      <a class="btn ghost js-admin-tab-link" href="/admin/seo_automation/crawlertask/" data-name="SEO任务列表" data-eid="seo-task-list" data-icon="fas fa-spider">任务模型</a>
+      <a class="btn ghost js-admin-tab-link" href="/admin/seo_automation/seoarticle/" data-name="SEO文章列表" data-eid="seo-article-list" data-icon="fas fa-file-lines">文章模型</a>
+      <a class="btn ghost js-admin-tab-link" href="/admin/seo-api-settings/" data-name="SEO API设置" data-eid="seo-api-settings" data-icon="fas fa-key">API设置</a>
+    </div>
+  </div>
+
+  <div class="layout">
+    <div class="card">
+      <h2>任务参数</h2>
+      <p class="sub">步骤1建议新建任务，步骤2/3/4/5基于当前任务ID继续执行。</p>
+      <div class="grid">
+        <div class="field"><label for="bsn">BSN</label><input id="bsn" type="number" placeholder="742"></div>
+        <div class="field span-2"><label for="sourceUrl">来源地址（可选）</label><input id="sourceUrl" type="text" placeholder="https://forum.gamer.com.tw/B.php?bsn=742"></div>
+        <div class="field"><label for="keyword">关键词过滤（可选）</label><input id="keyword" type="text" placeholder="游戏名"></div>
+        <div class="field"><label for="startPage">起始页</label><input id="startPage" type="number" value="1" min="1"></div>
+        <div class="field"><label for="endPage">结束页</label><input id="endPage" type="number" value="1" min="1"></div>
+        <div class="field"><label for="maxPosts">最大帖子数</label><input id="maxPosts" type="number" value="10" min="1" max="200"></div>
+        <div class="field"><label for="rewriteLimit">生成篇数</label><input id="rewriteLimit" type="number" value="3" min="1" max="20"></div>
+        <div class="field span-2">
+          <label for="relatedGameId">关联游戏（用于内链/封面回退）</label>
+          <select id="relatedGameId">
+            <option value="">不关联</option>
+            {% for game in game_choices %}
+              <option value="{{ game.id }}">{{ game.id }} - {{ game.title }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="field span-2"><label for="customKeywords">SEO关键词（逗号分隔）</label><input id="customKeywords" type="text" placeholder="代储, 充值, 攻略, 兑换码"></div>
+        <div class="field span-4">
+          <label>执行选项</label>
+          <div class="checks">
+            <label><input id="runRewrite" type="checkbox" checked> 运行AI改写</label>
+            <label><input id="storeDraft" type="checkbox" checked> 保存SEO草稿</label>
+            <label><input id="autoPublish" type="checkbox"> 自动发布到资讯</label>
+            <label><input id="publishNow" type="checkbox"> 发布状态为已发布</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-actions">
+        <button class="btn" id="step1Btn" type="button">步骤1：爬取链接列表（新任务）</button>
+        <button class="btn success" id="allInOneBtn" type="button">一键全流程（到步骤5）</button>
+        <button class="btn link" id="step2Btn" type="button" disabled>步骤2：提取详情内容</button>
+        <button class="btn link" id="step3Btn" type="button" disabled>步骤3：SEO分析</button>
+        <button class="btn link" id="step4Btn" type="button" disabled>步骤4：SEO文章生成（草稿）</button>
+        <button class="btn link" id="step5Btn" type="button" disabled>步骤5：高质量图文优化</button>
+      </div>
+
+      <div class="actions">
+        <span id="runStatus" class="status">待执行</span>
+        <button class="btn link" id="refreshAllBtn" type="button">刷新任务/文章</button>
+        <button class="btn ghost" id="refreshLegacyBtn" type="button">一键重刷旧草稿来源+筛图</button>
+      </div>
+
+      <div class="current-task">当前任务ID：<code id="currentTaskId">未设置</code></div>
+
+      <div class="stage-grid">
+        <div id="stage1" class="stage"><strong>步骤1 爬取链接列表</strong><span>状态：pending · 数量：0 · 错误：0</span></div>
+        <div id="stage2" class="stage"><strong>步骤2 提取详情内容</strong><span>状态：pending · 数量：0 · 错误：0</span></div>
+        <div id="stage3" class="stage"><strong>步骤3 SEO分析</strong><span>状态：pending · 数量：0 · 错误：0</span></div>
+        <div id="stage4" class="stage"><strong>步骤4 SEO文章生成</strong><span>状态：pending · 数量：0 · 错误：0</span></div>
+        <div id="stage5" class="stage"><strong>步骤5 高质量图文优化</strong><span>状态：pending · 数量：0 · 错误：0</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>执行日志 / 返回结果</h2>
+      <p class="sub">默认展示运营可读摘要；原始 JSON 可随时展开查看。</p>
+      <div id="resultSummary" class="summary-box">等待执行任务...</div>
+      <div class="raw-toggle"><button class="btn ghost" id="toggleRawBtn" type="button">展开原始JSON</button></div>
+      <div id="resultJson" class="json">{}</div>
+    </div>
+  </div>
+
+  <div class="card table-card">
+    <div class="table-head"><h2>爬虫任务列表</h2><button class="btn link" id="refreshTasksBtn" type="button">刷新任务</button></div>
+    <div class="muted">可以把任意任务设为“当前任务”，再继续执行步骤2/3/4/5。</div>
+    <table>
+      <thead><tr><th>ID</th><th>关键词</th><th>状态</th><th>进度</th><th>结果数</th><th>更新时间</th><th>错误</th><th>操作</th></tr></thead>
+      <tbody id="tasksBody"><tr><td colspan="8" class="empty">加载中...</td></tr></tbody>
+    </table>
+  </div>
+
+  <div class="card table-card">
+    <div class="table-head"><h2>SEO文章草稿 / 发布</h2><button class="btn link" id="refreshArticlesBtn" type="button">刷新文章</button></div>
+    <div class="muted">发布时会自动尝试写入封面图，确保首页 NEWS 入口图可显示。</div>
+    <table>
+      <thead><tr><th>ID</th><th>标题</th><th>状态</th><th>游戏</th><th>来源</th><th>创建时间</th><th>操作</th></tr></thead>
+      <tbody id="articlesBody"><tr><td colspan="7" class="empty">加载中...</td></tr></tbody>
+    </table>
+  </div>
+</div>
+
+<div id="editDraftModal" class="modal-mask" role="dialog" aria-modal="true">
+  <div class="modal">
+    <h3>编辑SEO草稿</h3>
+    <div class="grid">
+      <div class="field"><label for="editTitle">标题</label><input id="editTitle" type="text"></div>
+      <div class="field"><label for="editMetaTitle">Meta Title</label><input id="editMetaTitle" type="text"></div>
+      <div class="field span-2"><label for="editMetaDescription">Meta Description</label><input id="editMetaDescription" type="text"></div>
+      <div class="field span-2"><label for="editTags">标签（逗号分隔）</label><input id="editTags" type="text"></div>
+      <div class="field span-2"><label for="editBodyHtml">正文HTML</label><textarea id="editBodyHtml"></textarea></div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn ghost" id="cancelEditDraftBtn" type="button">取消</button>
+      <button class="btn success" id="saveEditDraftBtn" type="button">保存草稿</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  const resultJson = document.getElementById("resultJson");
+  const resultSummary = document.getElementById("resultSummary");
+  const toggleRawBtn = document.getElementById("toggleRawBtn");
+  const runStatus = document.getElementById("runStatus");
+  const tasksBody = document.getElementById("tasksBody");
+  const articlesBody = document.getElementById("articlesBody");
+  const currentTaskIdEl = document.getElementById("currentTaskId");
+  const step2Btn = document.getElementById("step2Btn");
+  const step3Btn = document.getElementById("step3Btn");
+  const step4Btn = document.getElementById("step4Btn");
+  const step5Btn = document.getElementById("step5Btn");
+  const refreshLegacyBtn = document.getElementById("refreshLegacyBtn");
+  const editDraftModal = document.getElementById("editDraftModal");
+  const editTitleInput = document.getElementById("editTitle");
+  const editMetaTitleInput = document.getElementById("editMetaTitle");
+  const editMetaDescriptionInput = document.getElementById("editMetaDescription");
+  const editTagsInput = document.getElementById("editTags");
+  const editBodyHtmlInput = document.getElementById("editBodyHtml");
+  const saveEditDraftBtn = document.getElementById("saveEditDraftBtn");
+  const cancelEditDraftBtn = document.getElementById("cancelEditDraftBtn");
+
+  const stageEls = {
+    stage1_links: document.getElementById("stage1"),
+    stage2_details: document.getElementById("stage2"),
+    stage3_seo_analysis: document.getElementById("stage3"),
+    stage4_seo_generation: document.getElementById("stage4"),
+    stage5_quality_output: document.getElementById("stage5"),
+  };
+
+  let currentTaskId = null;
+  let rawJsonVisible = false;
+  let editingArticleId = null;
+
+  function getCsrfToken() {
+    const match = document.cookie.match(/(?:^|; )csrftoken=([^;]+)/);
+    return match ? decodeURIComponent(match[1]) : "";
+  }
+
+  function toJsonText(value) {
+    try { return JSON.stringify(value, null, 2); } catch (e) { return String(value); }
+  }
+
+  function normalizeList(payload) {
+    if (Array.isArray(payload)) return payload;
+    if (payload && Array.isArray(payload.results)) return payload.results;
+    return [];
+  }
+
+  function normalizeStatusClass(status) {
+    const s = String(status || "").toLowerCase();
+    if (!s) return "";
+    if (s === "completed" || s === "published") return "completed";
+    if (s === "failed" || s === "error") return "failed";
+    if (["running", "pending", "crawling", "enriching", "seoing", "publishing"].includes(s)) return s;
+    return s;
+  }
+
+  function setRunStatus(status) {
+    const text = status || "unknown";
+    runStatus.textContent = text;
+    runStatus.className = "status " + normalizeStatusClass(text);
+  }
+
+  function setRawJsonVisible(visible) {
+    rawJsonVisible = !!visible;
+    resultJson.style.display = rawJsonVisible ? "block" : "none";
+    toggleRawBtn.textContent = rawJsonVisible ? "收起原始JSON" : "展开原始JSON";
+  }
+
+  function renderResult(payload) {
+    resultJson.textContent = toJsonText(payload || {});
+    renderOperatorSummary(payload || {});
+  }
+
+  function renderOperatorSummary(payload) {
+    const rp = resolveResultPayload(payload);
+    const op = (payload && payload.operator_summary && typeof payload.operator_summary === "object")
+      ? payload.operator_summary
+      : ((rp && rp.operator_summary && typeof rp.operator_summary === "object") ? rp.operator_summary : {});
+    const summary = (rp && rp.summary) || {};
+    const rewrite = (rp && rp.rewrite) || {};
+    const quality = (rp && rp.quality) || {};
+    const crawl = (rp && rp.crawl) || {};
+    const stages = (crawl && crawl.stages) || {};
+
+    const stageItems = Array.isArray(op.stages) && op.stages.length
+      ? op.stages.map(item => [String(item.label || item.key || "步骤"), item || {}])
+      : [
+          ["步骤1 链接抓取", stages.stage1_links || {}],
+          ["步骤2 内容提取", stages.stage2_details || {}],
+          ["步骤3 SEO分析", stages.stage3_seo_analysis || {}],
+          ["步骤4 文章生成", stages.stage4_seo_generation || {}],
+          ["步骤5 图文优化", stages.stage5_quality_output || {}],
+        ];
+    const stageHtml = stageItems.map(([name, data]) => {
+      const st = String((data && data.status) || "pending");
+      const count = Number((data && data.count) || 0);
+      const err = Number((data && data.errors_count) || 0);
+      return `
+        <div class="summary-item">
+          <strong>${name}</strong>
+          <div>状态：${st}</div>
+          <div>数量：${count} · 错误：${err}</div>
+        </div>
+      `;
+    }).join("");
+
+    const issueLines = Array.isArray(op.issues) ? op.issues.slice(0, 8).map(v => escapeHtml(String(v || ""))) : [];
+    const rewriteErrors = Array.isArray(rewrite.errors) ? rewrite.errors : [];
+    const qualityErrors = Array.isArray(quality.errors) ? quality.errors : [];
+    if (!issueLines.length) {
+      rewriteErrors.slice(0, 4).forEach(item => issueLines.push(`改写异常：${escapeHtml(item)}`));
+      qualityErrors.slice(0, 4).forEach(item => issueLines.push(`优化异常：${escapeHtml(item)}`));
+    }
+    if (!issueLines.length) issueLines.push("暂无异常，流程可继续。");
+
+    const metrics = (op && typeof op.metrics === "object") ? op.metrics : {};
+    const linksCount = Number(metrics.links_count || summary.links_count || 0);
+    const detailsCount = Number(metrics.details_count || summary.details_count || 0);
+    const rewriteCount = Number(metrics.rewrite_count || summary.rewrite_count || 0);
+    const qualityCount = Number(metrics.quality_count || summary.quality_count || 0);
+    const imageStep4 = Number(metrics.image_count_step4 || summary.media_count || 0);
+    const imageStep5 = Number(metrics.image_count_step5 || summary.quality_image_count || 0);
+    const articleIds = Array.isArray(op.article_ids) && op.article_ids.length
+      ? op.article_ids
+      : (Array.isArray(summary.article_ids) ? summary.article_ids : []);
+    const taskStatus = String((payload && payload.status) || op.status || rp.status || "unknown");
+
+    resultSummary.innerHTML = `
+      <div><strong>运营摘要</strong></div>
+      <div class="summary-grid">${stageHtml}</div>
+      <div class="summary-list">
+        <p>任务状态：${escapeHtml(taskStatus)}</p>
+        <p>链接数：${linksCount} · 详情数：${detailsCount} · 草稿数：${rewriteCount} · 优化数：${qualityCount}</p>
+        <p>图片数：步骤4=${imageStep4} · 步骤5=${imageStep5}</p>
+        <p>草稿ID：${escapeHtml(String((articleIds || []).join(", ") || "-"))}</p>
+        ${issueLines.map(v => `<p>${v}</p>`).join("")}
+      </div>
+    `;
+  }
+
+  function resolveResultPayload(payload) {
+    if (payload && payload.result_payload && typeof payload.result_payload === "object") return payload.result_payload;
+    return payload && typeof payload === "object" ? payload : {};
+  }
+
+  function updateCurrentTask(taskId) {
+    const id = Number(taskId || 0);
+    if (!id) {
+      currentTaskId = null;
+      currentTaskIdEl.textContent = "未设置";
+      step2Btn.disabled = true;
+      step3Btn.disabled = true;
+      step4Btn.disabled = true;
+      step5Btn.disabled = true;
+      return;
+    }
+    currentTaskId = id;
+    currentTaskIdEl.textContent = String(id);
+    step2Btn.disabled = false;
+    step3Btn.disabled = false;
+    step4Btn.disabled = false;
+    step5Btn.disabled = false;
+  }
+
+  function stageClass(status) {
+    const s = String(status || "pending").toLowerCase();
+    if (s === "completed") return "stage ok";
+    if (s === "failed") return "stage bad";
+    return "stage warn";
+  }
+
+  function renderStageCard(el, title, data) {
+    if (!el) return;
+    const status = data && data.status ? String(data.status) : "pending";
+    const count = Number((data && data.count) || 0);
+    const errors = Number((data && data.errors_count) || 0);
+    el.className = stageClass(status);
+    el.innerHTML = `<strong>${title}</strong><span>状态：${status} · 数量：${count} · 错误：${errors}</span>`;
+  }
+
+  function renderStageBoard(payload) {
+    const rp = resolveResultPayload(payload);
+    const stages = (((rp || {}).crawl || {}).stages) || {};
+    renderStageCard(stageEls.stage1_links, "步骤1 爬取链接列表", stages.stage1_links || {});
+    renderStageCard(stageEls.stage2_details, "步骤2 提取详情内容", stages.stage2_details || {});
+    renderStageCard(stageEls.stage3_seo_analysis, "步骤3 SEO分析", stages.stage3_seo_analysis || {});
+    renderStageCard(stageEls.stage4_seo_generation, "步骤4 SEO文章生成", stages.stage4_seo_generation || {});
+    renderStageCard(stageEls.stage5_quality_output, "步骤5 高质量图文优化", stages.stage5_quality_output || {});
+  }
+
+  async function apiRequest(url, options) {
+    const cfg = options || {};
+    const method = (cfg.method || "GET").toUpperCase();
+    const headers = Object.assign({}, cfg.headers || {});
+    const timeoutMs = Number(cfg.timeoutMs || 45000);
+    if (method !== "GET") {
+      headers["X-CSRFToken"] = getCsrfToken();
+      headers["Content-Type"] = "application/json";
+    }
+
+    const controller = new AbortController();
+    const timeoutId = window.setTimeout(() => controller.abort(), timeoutMs);
+    let res;
+    try {
+      res = await fetch(url, {
+        method,
+        headers,
+        credentials: "same-origin",
+        body: cfg.body !== undefined ? JSON.stringify(cfg.body) : undefined,
+        signal: controller.signal,
+      });
+    } catch (error) {
+      if (error && error.name === "AbortError") {
+        throw new Error(`请求超时（${Math.round(timeoutMs / 1000)}秒），请重试`);
+      }
+      throw error;
+    } finally {
+      window.clearTimeout(timeoutId);
+    }
+
+    const text = await res.text();
+    let payload = {};
+    try { payload = text ? JSON.parse(text) : {}; } catch (e) { payload = { raw: text }; }
+
+    if (!res.ok) {
+      const msg = payload && (payload.detail || payload.error || payload.message)
+        ? (payload.detail || payload.error || payload.message)
+        : `HTTP ${res.status}`;
+      throw new Error(msg);
+    }
+    return payload;
+  }
+
+  function collectTaskPayload() {
+    const bsn = String(document.getElementById("bsn").value || "").trim();
+    const sourceUrl = String(document.getElementById("sourceUrl").value || "").trim();
+    const keyword = String(document.getElementById("keyword").value || "").trim();
+    const startPage = Number(document.getElementById("startPage").value || 1);
+    const endPage = Number(document.getElementById("endPage").value || 1);
+    const maxPosts = Number(document.getElementById("maxPosts").value || 10);
+    const rewriteLimit = Number(document.getElementById("rewriteLimit").value || 3);
+    const relatedGameId = String(document.getElementById("relatedGameId").value || "").trim();
+    const customKeywordsRaw = String(document.getElementById("customKeywords").value || "").trim();
+
+    const payload = {
+      source_url: sourceUrl,
+      keyword: keyword,
+      start_page: startPage,
+      end_page: endPage,
+      max_posts: maxPosts,
+      run_rewrite: document.getElementById("runRewrite").checked,
+      rewrite_limit: rewriteLimit,
+      store_draft: document.getElementById("storeDraft").checked,
+      auto_publish: document.getElementById("autoPublish").checked,
+      publish_now: document.getElementById("publishNow").checked,
+    };
+    if (bsn) payload.bsn = Number(bsn);
+    if (relatedGameId) payload.related_game_id = Number(relatedGameId);
+    if (customKeywordsRaw) {
+      payload.custom_keywords = customKeywordsRaw.split(/[，,\n]+/).map(v => v.trim()).filter(Boolean);
+    }
+    return payload;
+  }
+
+  function escapeHtml(value) {
+    return String(value || "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/\"/g, "&quot;")
+      .replace(/'/g, "&#39;");
+  }
+
+  function openInSimpleUITab(url, name, eid, icon) {
+    try {
+      if (window.parent && window.parent !== window && window.parent.app && typeof window.parent.app.openTab === "function") {
+        window.parent.app.openTab({
+          url,
+          name: name || "管理页面",
+          icon: icon || "far fa-file",
+          eid: eid || `seo-workbench-${Date.now()}-${Math.random()}`,
+          newUrl: `${window.location.origin}${url}`,
+          breadcrumbs: [
+            { name: "运营看板", icon: "fas fa-tachometer-alt" },
+            { name: "SEO自动化工作台", icon: "fas fa-robot" },
+            { name: name || "管理页面", icon: icon || "far fa-file" },
+          ],
+        });
+        return true;
+      }
+    } catch (e) { console.warn("Open tab fallback", e); }
+    return false;
+  }
+
+  function bindAdminTabLinks() {
+    document.querySelectorAll("a.js-admin-tab-link").forEach(link => {
+      link.addEventListener("click", function (event) {
+        const url = this.getAttribute("href");
+        if (!url || !url.startsWith("/admin/")) return;
+        const name = this.dataset.name || this.textContent.trim();
+        const eid = this.dataset.eid || "";
+        const icon = this.dataset.icon || "far fa-file";
+        if (openInSimpleUITab(url, name, eid, icon)) event.preventDefault();
+      });
+    });
+  }
+
+  async function runNewTask(stopAfterStep) {
+    setRunStatus("running");
+    try {
+      const payload = collectTaskPayload();
+      payload.stop_after_step = Number(stopAfterStep || 5);
+      const result = await apiRequest("/api/seo-automation/tasks/run/", { method: "POST", body: payload });
+      if (result.task_id) updateCurrentTask(result.task_id);
+      renderResult(result);
+      renderStageBoard(result);
+      setRunStatus(result.status || "completed");
+      await Promise.all([loadTasks(), loadArticles()]);
+    } catch (error) {
+      renderResult({ error: error.message || String(error) });
+      setRunStatus("failed");
+    }
+  }
+
+  async function runCurrentTask(stopAfterStep) {
+    if (!currentTaskId) {
+      renderResult({ error: "请先执行步骤1，或在任务列表中设为当前任务。" });
+      setRunStatus("failed");
+      return;
+    }
+    setRunStatus("running");
+    try {
+      const payload = collectTaskPayload();
+      payload.stop_after_step = Number(stopAfterStep || 5);
+      const result = await apiRequest(`/api/seo-automation/tasks/${currentTaskId}/run/`, { method: "POST", body: payload });
+      renderResult(result);
+      renderStageBoard(result);
+      setRunStatus(result.status || "completed");
+      await Promise.all([loadTasks(), loadArticles()]);
+    } catch (error) {
+      renderResult({ task_id: currentTaskId, error: error.message || String(error) });
+      setRunStatus("failed");
+    }
+  }
+
+  function renderTasks(rows) {
+    if (!rows.length) {
+      tasksBody.innerHTML = '<tr><td colspan="8" class="empty">暂无任务数据</td></tr>';
+      return;
+    }
+    tasksBody.innerHTML = rows.map(row => {
+      const status = String(row.status || "").toLowerCase();
+      const errorText = row.error_message ? escapeHtml(String(row.error_message).slice(0, 120)) : "-";
+      return `
+        <tr>
+          <td>${row.id}</td>
+          <td>${escapeHtml(row.keyword || "-")}</td>
+          <td><span class="status ${status}">${escapeHtml(row.status || "unknown")}</span></td>
+          <td>${Number(row.progress || 0)}%</td>
+          <td>${Number(row.result_count || 0)}</td>
+          <td>${escapeHtml((row.updated_at || "").replace("T", " ").slice(0, 19))}</td>
+          <td title="${errorText}">${errorText}</td>
+          <td>
+            <div class="mini-actions">
+              <button class="btn link" type="button" data-action="set-current-task" data-task-id="${row.id}">设为当前</button>
+              <button class="btn" type="button" data-action="rerun-step4" data-task-id="${row.id}">执行到步骤4</button>
+              <button class="btn" type="button" data-action="rerun-step5" data-task-id="${row.id}">执行到步骤5</button>
+              <button class="btn link" type="button" data-action="show-task-json" data-task-id="${row.id}">详情</button>
+              <a class="btn link js-admin-tab-link" href="/admin/seo_automation/crawlertask/${row.id}/change/" data-name="任务 #${row.id}" data-eid="seo-task-${row.id}" data-icon="fas fa-spider">后台</a>
+            </div>
+          </td>
+        </tr>
+      `;
+    }).join("");
+    bindAdminTabLinks();
+  }
+
+  function renderArticles(rows) {
+    if (!rows.length) {
+      articlesBody.innerHTML = '<tr><td colspan="7" class="empty">暂无文章数据</td></tr>';
+      return;
+    }
+    articlesBody.innerHTML = rows.map(row => {
+      const title = escapeHtml(row.title || "-");
+      const game = row.game_title ? escapeHtml(row.game_title) : "-";
+      const source = escapeHtml(row.source_platform || "-");
+      const createdAt = escapeHtml((row.created_at || "").replace("T", " ").slice(0, 19));
+      const publishedArticle = row.published_article ? Number(row.published_article) : 0;
+      const reviewLabel = row.status === "published" ? "设为review" : "标记review";
+      return `
+        <tr>
+          <td>${row.id}</td>
+          <td title="${title}">${title}</td>
+          <td><span class="status ${escapeHtml(row.status || "")}">${escapeHtml(row.status || "-")}</span></td>
+          <td>${game}</td>
+          <td>${source}</td>
+          <td>${createdAt}</td>
+          <td>
+            <div class="mini-actions">
+              <button class="btn link" type="button" data-action="edit-draft" data-article-id="${row.id}">编辑草稿</button>
+              <button class="btn" type="button" data-action="publish-now" data-article-id="${row.id}">立即发布</button>
+              <button class="btn link" type="button" data-action="publish-review" data-article-id="${row.id}">${reviewLabel}</button>
+              <button
+                class="btn danger"
+                type="button"
+                data-action="delete-article"
+                data-article-id="${row.id}"
+                data-article-title="${title}"
+                data-published-article-id="${publishedArticle || ""}"
+              >删除</button>
+              <a class="btn link js-admin-tab-link" href="/admin/seo_automation/seoarticle/${row.id}/change/" data-name="SEO文章 #${row.id}" data-eid="seo-article-${row.id}" data-icon="fas fa-file-lines">SEO后台</a>
+              ${publishedArticle ? `<a class="btn link js-admin-tab-link" href="/admin/game_article/article/${publishedArticle}/change/" data-name="资讯文章 #${publishedArticle}" data-eid="pub-article-${publishedArticle}" data-icon="fas fa-newspaper">资讯后台</a>` : ""}
+            </div>
+          </td>
+        </tr>
+      `;
+    }).join("");
+    bindAdminTabLinks();
+  }
+
+  async function loadTasks() {
+    try {
+      const payload = await apiRequest("/api/seo-automation/tasks/");
+      renderTasks(normalizeList(payload));
+    } catch (error) {
+      tasksBody.innerHTML = `<tr><td colspan="8" class="empty">加载失败：${escapeHtml(error.message || error)}</td></tr>`;
+    }
+  }
+
+  async function loadArticles() {
+    try {
+      const payload = await apiRequest("/api/seo-automation/articles/");
+      renderArticles(normalizeList(payload));
+    } catch (error) {
+      articlesBody.innerHTML = `<tr><td colspan="7" class="empty">加载失败：${escapeHtml(error.message || error)}</td></tr>`;
+    }
+  }
+
+  async function publishArticle(articleId, publishNow, triggerBtn) {
+    const buttonEl = triggerBtn && triggerBtn.nodeType === 1 ? triggerBtn : null;
+    const originalLabel = buttonEl ? buttonEl.textContent : "";
+    if (buttonEl && buttonEl.dataset.loading === "1") return;
+    if (buttonEl) {
+      buttonEl.dataset.loading = "1";
+      buttonEl.disabled = true;
+      buttonEl.textContent = publishNow ? "发布中..." : "处理中...";
+    }
+    setRunStatus("publishing");
+    try {
+      const payload = await apiRequest(`/api/seo-automation/articles/${articleId}/publish/`, {
+        method: "POST",
+        body: { publish_now: publishNow },
+        timeoutMs: 30000,
+      });
+      renderResult(payload);
+      setRunStatus("completed");
+      await loadArticles();
+    } catch (error) {
+      renderResult({ seo_article_id: articleId, error: error.message || String(error) });
+      setRunStatus("failed");
+    } finally {
+      if (buttonEl) {
+        buttonEl.disabled = false;
+        buttonEl.textContent = originalLabel || (publishNow ? "立即发布" : "设为review");
+        delete buttonEl.dataset.loading;
+      }
+    }
+  }
+
+  function closeEditDraftModal() {
+    editingArticleId = null;
+    editDraftModal.classList.remove("open");
+  }
+
+  async function openEditDraftModal(articleId) {
+    try {
+      const row = await apiRequest(`/api/seo-automation/articles/${articleId}/`);
+      editingArticleId = Number(row.id || 0);
+      if (!editingArticleId) throw new Error("草稿ID无效");
+      editTitleInput.value = String(row.title || "");
+      editMetaTitleInput.value = String(row.meta_title || "");
+      editMetaDescriptionInput.value = String(row.meta_description || "");
+      editTagsInput.value = Array.isArray(row.tags) ? row.tags.join(", ") : "";
+      editBodyHtmlInput.value = String(row.body_html || "");
+      editDraftModal.classList.add("open");
+    } catch (error) {
+      renderResult({ action: "edit_draft", article_id: articleId, error: error.message || String(error) });
+      setRunStatus("failed");
+    }
+  }
+
+  async function saveEditDraft() {
+    if (!editingArticleId) return;
+    saveEditDraftBtn.disabled = true;
+    try {
+      const payload = {
+        title: String(editTitleInput.value || "").trim(),
+        meta_title: String(editMetaTitleInput.value || "").trim(),
+        meta_description: String(editMetaDescriptionInput.value || "").trim(),
+        body_html: String(editBodyHtmlInput.value || ""),
+        tags: String(editTagsInput.value || "")
+          .split(/[，,\n]+/)
+          .map(v => v.trim())
+          .filter(Boolean),
+      };
+      const result = await apiRequest(`/api/seo-automation/articles/${editingArticleId}/`, {
+        method: "PATCH",
+        body: payload,
+      });
+      renderResult({ action: "edit_draft_saved", article_id: editingArticleId, result });
+      setRunStatus("completed");
+      closeEditDraftModal();
+      await loadArticles();
+    } catch (error) {
+      renderResult({ action: "edit_draft_saved", article_id: editingArticleId, error: error.message || String(error) });
+      setRunStatus("failed");
+    } finally {
+      saveEditDraftBtn.disabled = false;
+    }
+  }
+
+  async function deleteArticle(articleId, articleTitle, publishedArticleId) {
+    const title = String(articleTitle || "未命名文章");
+    const hasPublishedArticle = Number(publishedArticleId || 0) > 0;
+    const warning = hasPublishedArticle
+      ? "该 SEO 稿件已关联资讯文章。删除后不会自动删除资讯文章，请确认继续。"
+      : "删除后不可恢复，请确认继续。";
+    const confirmed = window.confirm(`确认删除 SEO 稿件 #${articleId}？\n标题：${title}\n\n${warning}`);
+    if (!confirmed) return;
+
+    try {
+      await apiRequest(`/api/seo-automation/articles/${articleId}/`, { method: "DELETE" });
+      renderResult({
+        action: "delete",
+        seo_article_id: articleId,
+        title,
+        linked_article_kept: hasPublishedArticle,
+      });
+      setRunStatus("completed");
+      await loadArticles();
+    } catch (error) {
+      renderResult({ action: "delete", seo_article_id: articleId, error: error.message || String(error) });
+      setRunStatus("failed");
+    }
+  }
+
+  async function showTaskJson(taskId) {
+    try {
+      const payload = await apiRequest(`/api/seo-automation/tasks/${taskId}/`);
+      updateCurrentTask(taskId);
+      renderResult(payload);
+      renderStageBoard(payload);
+      setRunStatus(payload.status || "unknown");
+    } catch (error) {
+      renderResult({ task_id: taskId, error: error.message || String(error) });
+      setRunStatus("failed");
+    }
+  }
+
+  async function rerunStep4(taskId) {
+    updateCurrentTask(taskId);
+    await runCurrentTask(4);
+  }
+
+  async function rerunStep5(taskId) {
+    updateCurrentTask(taskId);
+    await runCurrentTask(5);
+  }
+
+  async function refreshLegacyDrafts() {
+    const confirmed = window.confirm("将批量重刷旧草稿来源链接并重新筛图，是否继续？");
+    if (!confirmed) return;
+    refreshLegacyBtn.disabled = true;
+    setRunStatus("running");
+    try {
+      const payload = await apiRequest("/api/seo-automation/articles/refresh-legacy-drafts/", {
+        method: "POST",
+        body: { limit: 60, include_published: false },
+      });
+      renderResult(payload);
+      setRunStatus(payload.status || "completed");
+      await loadArticles();
+    } catch (error) {
+      renderResult({ action: "refresh_legacy_drafts", error: error.message || String(error) });
+      setRunStatus("failed");
+    } finally {
+      refreshLegacyBtn.disabled = false;
+    }
+  }
+
+  document.getElementById("step1Btn").addEventListener("click", () => runNewTask(1));
+  document.getElementById("allInOneBtn").addEventListener("click", () => runNewTask(5));
+  document.getElementById("step2Btn").addEventListener("click", () => runCurrentTask(2));
+  document.getElementById("step3Btn").addEventListener("click", () => runCurrentTask(3));
+  document.getElementById("step4Btn").addEventListener("click", () => runCurrentTask(4));
+  document.getElementById("step5Btn").addEventListener("click", () => runCurrentTask(5));
+  document.getElementById("refreshTasksBtn").addEventListener("click", loadTasks);
+  document.getElementById("refreshArticlesBtn").addEventListener("click", loadArticles);
+  document.getElementById("refreshAllBtn").addEventListener("click", () => Promise.all([loadTasks(), loadArticles()]));
+  refreshLegacyBtn.addEventListener("click", refreshLegacyDrafts);
+
+  document.addEventListener("click", function (event) {
+    const rawTarget = event.target;
+    const baseEl = rawTarget && rawTarget.nodeType === 1 ? rawTarget : (rawTarget ? rawTarget.parentElement : null);
+    const target = baseEl && typeof baseEl.closest === "function" ? baseEl.closest("[data-action]") : null;
+    if (!target || !target.dataset) return;
+    const action = target.dataset.action;
+    if (!action) return;
+    event.preventDefault();
+
+    if (action === "set-current-task") {
+      const taskId = Number(target.dataset.taskId || 0);
+      if (taskId) showTaskJson(taskId);
+    }
+    if (action === "rerun-step4") {
+      const taskId = Number(target.dataset.taskId || 0);
+      if (taskId) rerunStep4(taskId);
+    }
+    if (action === "rerun-step5") {
+      const taskId = Number(target.dataset.taskId || 0);
+      if (taskId) rerunStep5(taskId);
+    }
+    if (action === "show-task-json") {
+      const taskId = Number(target.dataset.taskId || 0);
+      if (taskId) showTaskJson(taskId);
+    }
+    if (action === "publish-now") {
+      const articleId = Number(target.dataset.articleId || 0);
+      if (articleId) publishArticle(articleId, true, target);
+    }
+    if (action === "edit-draft") {
+      const articleId = Number(target.dataset.articleId || 0);
+      if (articleId) openEditDraftModal(articleId);
+    }
+    if (action === "publish-review") {
+      const articleId = Number(target.dataset.articleId || 0);
+      if (articleId) publishArticle(articleId, false, target);
+    }
+    if (action === "delete-article") {
+      const articleId = Number(target.dataset.articleId || 0);
+      const articleTitle = target.dataset.articleTitle || "";
+      const publishedArticleId = Number(target.dataset.publishedArticleId || 0);
+      if (articleId) deleteArticle(articleId, articleTitle, publishedArticleId);
+    }
+  });
+
+  window.goBack = function () { window.location.href = "/admin/dashboard/"; };
+
+  toggleRawBtn.addEventListener("click", () => setRawJsonVisible(!rawJsonVisible));
+  saveEditDraftBtn.addEventListener("click", saveEditDraft);
+  cancelEditDraftBtn.addEventListener("click", closeEditDraftModal);
+  editDraftModal.addEventListener("click", (event) => {
+    if (event.target === editDraftModal) closeEditDraftModal();
+  });
+
+  updateCurrentTask(null);
+  renderStageBoard({});
+  setRawJsonVisible(false);
+  bindAdminTabLinks();
+  Promise.all([loadTasks(), loadArticles()]);
+})();
+</script>
+</body>
+</html>

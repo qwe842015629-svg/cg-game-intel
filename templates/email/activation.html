@@ -1,0 +1,168 @@
+{% load i18n %}
+
+{% block subject %}
+激活您的 CYPHER GAME BUY 账号
+{% endblock subject %}
+
+{% block text_body %}
+Hi {{ user.username }},
+
+欢迎加入 CYPHER GAME BUY！
+
+请使用以下链接激活您的账号：
+{{ protocol }}://{{ domain }}/{{ url }}
+
+此链接将在 24 小时后失效。
+
+如果您没有注册此账号，请忽略此邮件。
+
+祝您游戏愉快！
+CYPHER GAME BUY 团队
+{% endblock text_body %}
+
+{% block html_body %}
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>激活您的账号</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, #0f3460 0%, #16213e 100%);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 255, 255, 0.3);
+            border: 2px solid rgba(0, 255, 255, 0.5);
+        }
+        .header {
+            background: linear-gradient(135deg, #00ffff 0%, #a855f7 50%, #ec4899 100%);
+            padding: 30px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            color: #000;
+            font-size: 32px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .content {
+            padding: 40px 30px;
+            color: #00ffff;
+        }
+        .content h2 {
+            color: #00ffff;
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+        }
+        .content p {
+            line-height: 1.8;
+            font-size: 16px;
+            color: #a0aec0;
+            margin-bottom: 15px;
+        }
+        .activation-button {
+            display: inline-block;
+            margin: 30px 0;
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #00ffff 0%, #a855f7 100%);
+            color: #000;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 18px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+            transition: all 0.3s ease;
+        }
+        .activation-button:hover {
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.8);
+            transform: translateY(-2px);
+        }
+        .info-box {
+            background: rgba(0, 255, 255, 0.1);
+            border-left: 4px solid #00ffff;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        .info-box p {
+            margin: 5px 0;
+            color: #00ffff;
+        }
+        .footer {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px 30px;
+            text-align: center;
+            color: #718096;
+            font-size: 14px;
+            border-top: 1px solid rgba(0, 255, 255, 0.2);
+        }
+        .footer a {
+            color: #00ffff;
+            text-decoration: none;
+        }
+        .logo {
+            font-size: 14px;
+            color: #000;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>CYPHER GAME BUY</h1>
+            <p class="logo">游戏充值 · 快速 · 安全 · 便捷</p>
+        </div>
+        
+        <div class="content">
+            <h2>🎮 欢迎加入 CYPHER GAME BUY！</h2>
+            
+            <p>亲爱的 <strong style="color: #00ffff;">{{ user.username }}</strong>，</p>
+            
+            <p>感谢您注册我们的游戏充值平台！为了确保账号安全，请点击下方按钮激活您的账号：</p>
+            
+            <div style="text-align: center;">
+                <a href="{{ protocol }}://{{ domain }}/{{ url }}" class="activation-button">
+                    ⚡ 立即激活账号 ⚡
+                </a>
+            </div>
+            
+            <div class="info-box">
+                <p><strong>📧 您的注册邮箱：</strong>{{ user.email }}</p>
+                <p><strong>⏰ 链接有效期：</strong>24小时</p>
+            </div>
+            
+            <p>如果上方按钮无法点击，请复制以下链接到浏览器地址栏：</p>
+            <p style="background: rgba(0,0,0,0.3); padding: 10px; border-radius: 5px; word-break: break-all; color: #a855f7; font-family: monospace;">
+                {{ protocol }}://{{ domain }}/{{ url }}
+            </p>
+            
+            <p style="margin-top: 30px; color: #e53e3e; font-weight: bold;">
+                ⚠️ 如果您没有注册此账号，请忽略此邮件。
+            </p>
+        </div>
+        
+        <div class="footer">
+            <p>此邮件由系统自动发送，请勿直接回复。</p>
+            <p>如有疑问，请访问 <a href="{{ protocol }}://{{ domain }}">CYPHER GAME BUY</a></p>
+            <p style="margin-top: 10px;">© 2026 CYPHER GAME BUY. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>
+{% endblock html_body %}

@@ -1,0 +1,754 @@
+﻿﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>运营看板</title>
+    <style>
+        :root {
+            --bg: #f4f7fb;
+            --card-bg: #ffffff;
+            --text-main: #1f2d3d;
+            --text-sub: #6b7a90;
+            --border: #e7ecf3;
+            --shadow: 0 8px 24px rgba(15, 35, 95, 0.08);
+            --radius: 14px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+            background: var(--bg);
+            color: var(--text-main);
+        }
+
+        .page {
+            max-width: 1320px;
+            margin: 0 auto;
+            padding: 20px 20px 28px;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2f80ed 0%, #56ccf2 100%);
+            color: #fff;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 24px;
+            margin-bottom: 16px;
+        }
+
+        .header-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 26px;
+            font-weight: 700;
+        }
+
+        .header p {
+            margin: 10px 0 0;
+            opacity: 0.95;
+            font-size: 14px;
+        }
+
+        .back-btn {
+            border: 1px solid rgba(255, 255, 255, 0.55);
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
+            border-radius: 10px;
+            padding: 8px 12px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+            gap: 14px;
+            margin-bottom: 16px;
+        }
+
+        .seo-spotlight {
+            display: grid;
+            grid-template-columns: 1.3fr 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+
+        .seo-main {
+            background: linear-gradient(135deg, #1f8f5f 0%, #2bb673 100%);
+            color: #ffffff;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-decoration: none;
+            display: block;
+        }
+
+        .seo-main:hover {
+            filter: brightness(1.03);
+        }
+
+        .seo-main h2 {
+            margin: 0 0 6px;
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .seo-main p {
+            margin: 0;
+            font-size: 13px;
+            opacity: 0.95;
+        }
+
+        .seo-mini {
+            background: #ffffff;
+            border: 1px solid #dcebe3;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 14px;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .seo-mini:hover {
+            transform: translateY(-1px);
+        }
+
+        .seo-mini-title {
+            margin: 0;
+            font-size: 13px;
+            color: #5b6f66;
+        }
+
+        .seo-mini-value {
+            margin: 8px 0 4px;
+            font-size: 28px;
+            font-weight: 700;
+            line-height: 1;
+            color: #1d6e4c;
+        }
+
+        .seo-mini-desc {
+            margin: 0;
+            font-size: 12px;
+            color: #6e8579;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 16px;
+            box-shadow: var(--shadow);
+            text-decoration: none;
+            color: inherit;
+            transition: transform 0.18s ease, box-shadow 0.18s ease;
+            display: block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--accent, #2f80ed);
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 28px rgba(15, 35, 95, 0.12);
+        }
+
+        .card-title {
+            margin: 0;
+            font-size: 14px;
+            color: var(--text-sub);
+        }
+
+        .card-value {
+            margin: 10px 0 6px;
+            font-size: 34px;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .card-desc {
+            margin: 0;
+            font-size: 13px;
+            color: var(--text-sub);
+        }
+
+        .chart-layout {
+            display: grid;
+            grid-template-columns: 1.8fr 1fr;
+            gap: 14px;
+            margin-bottom: 16px;
+        }
+
+        .main-layout {
+            display: grid;
+            grid-template-columns: 1.35fr 1fr;
+            gap: 14px;
+        }
+
+        .panel {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 16px;
+        }
+
+        .panel h2 {
+            margin: 0;
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .panel-subtitle {
+            margin: 6px 0 12px;
+            font-size: 12px;
+            color: var(--text-sub);
+        }
+
+        .trend-wrapper {
+            border: 1px dashed #dfe7f5;
+            border-radius: 12px;
+            padding: 12px 12px 10px;
+            background: #fbfdff;
+        }
+
+        .trend-chart {
+            display: flex;
+            align-items: end;
+            gap: 10px;
+            min-height: 230px;
+            padding: 6px 4px 0;
+        }
+
+        .trend-day {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .trend-bars {
+            display: flex;
+            align-items: end;
+            justify-content: center;
+            gap: 4px;
+            min-height: 190px;
+            border-bottom: 1px solid #dfe7f5;
+            padding-bottom: 6px;
+        }
+
+        .trend-bar {
+            width: 16px;
+            border-radius: 6px 6px 2px 2px;
+            min-height: 2px;
+            transition: all 0.2s ease;
+        }
+
+        .trend-bar:hover {
+            filter: brightness(1.08);
+            transform: translateY(-1px);
+        }
+
+        .trend-label {
+            text-align: center;
+            font-size: 11px;
+            color: #8191a8;
+            margin-top: 6px;
+        }
+
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .legend-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            color: var(--text-sub);
+        }
+
+        .legend-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .donut-block {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .donut {
+            width: 156px;
+            height: 156px;
+            border-radius: 50%;
+            position: relative;
+            flex-shrink: 0;
+            border: 1px solid #edf2fb;
+        }
+
+        .donut::after {
+            content: "";
+            position: absolute;
+            inset: 26px;
+            border-radius: 50%;
+            background: #ffffff;
+            border: 1px solid #edf2fb;
+        }
+
+        .donut-center {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+            font-size: 24px;
+            font-weight: 700;
+            color: #2f80ed;
+        }
+
+        .status-legend {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .status-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 7px 0;
+            border-bottom: 1px dashed #eef2f8;
+            font-size: 13px;
+        }
+
+        .status-item:last-child {
+            border-bottom: none;
+        }
+
+        .status-name {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: #4a5a71;
+        }
+
+        .status-value {
+            color: #364963;
+            font-weight: 600;
+        }
+
+        .quick-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+
+        .quick-links a {
+            text-decoration: none;
+            color: #2f80ed;
+            border: 1px solid #d4e5fb;
+            background: #f7fbff;
+            border-radius: 10px;
+            padding: 9px 10px;
+            text-align: center;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .quick-links a:hover {
+            background: #edf6ff;
+        }
+
+        .ranking-item {
+            margin-bottom: 12px;
+        }
+
+        .ranking-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .ranking-head {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            color: #4a5a71;
+            margin-bottom: 5px;
+        }
+
+        .ranking-bar {
+            width: 100%;
+            height: 8px;
+            border-radius: 8px;
+            background: #eff4fc;
+            overflow: hidden;
+        }
+
+        .ranking-fill {
+            height: 100%;
+            border-radius: 8px;
+            background: linear-gradient(90deg, #56ccf2, #2f80ed);
+        }
+
+        .list {
+            border-top: 1px dashed var(--border);
+            margin-top: 12px;
+            padding-top: 12px;
+        }
+
+        .list-item {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 8px 0;
+            border-bottom: 1px solid #f0f3f8;
+            font-size: 13px;
+        }
+
+        .list-item:last-child {
+            border-bottom: none;
+        }
+
+        .list-item a {
+            color: #2f80ed;
+            text-decoration: none;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            max-width: 75%;
+        }
+
+        .time {
+            color: var(--text-sub);
+            white-space: nowrap;
+            font-size: 12px;
+        }
+
+        .empty {
+            color: var(--text-sub);
+            font-size: 13px;
+            padding: 8px 0;
+        }
+
+        @media (max-width: 1120px) {
+            .seo-spotlight,
+            .chart-layout,
+            .main-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+    <div class="header">
+        <div class="header-top">
+            <h1>游戏充值网站运营看板</h1>
+            <button type="button" class="back-btn" onclick="goBack()">返回上一页</button>
+        </div>
+        <p>更新时间：{{ now|date:"Y-m-d H:i:s" }} · 当前首页为站内 Dashboard，不依赖前端开发端口。</p>
+    </div>
+
+    <div class="seo-spotlight">
+        <a class="seo-main js-admin-tab-link" href="/admin/seo-automation-workbench/" data-name="SEO自动化工作台" data-eid="dash-seo-main" data-icon="fas fa-robot">
+            <h2>SEO 自动化工作台</h2>
+            <p>论坛抓取 → AI 改写 → 图片增强 → 一键发布到资讯</p>
+        </a>
+        <a class="seo-mini js-admin-tab-link" href="/admin/seo-automation-workbench/" data-name="SEO任务" data-eid="dash-seo-task" data-icon="fas fa-spider">
+            <p class="seo-mini-title">SEO任务</p>
+            <div class="seo-mini-value">{{ seo_summary.task_total|default:0 }}</div>
+            <p class="seo-mini-desc">已完成 {{ seo_summary.task_completed|default:0 }} 个</p>
+        </a>
+        <a class="seo-mini js-admin-tab-link" href="/admin/seo-automation-workbench/" data-name="SEO文章" data-eid="dash-seo-article" data-icon="fas fa-file-lines">
+            <p class="seo-mini-title">SEO文章</p>
+            <div class="seo-mini-value">{{ seo_summary.article_total|default:0 }}</div>
+            <p class="seo-mini-desc">已发布 {{ seo_summary.article_published|default:0 }} 篇</p>
+        </a>
+    </div>
+
+    <div class="cards">
+        {% for card in cards %}
+            <a class="card js-admin-tab-link" href="{{ card.url }}" data-name="{{ card.title }}" data-eid="dash-card-{{ forloop.counter }}" data-icon="fas fa-chart-line" style="--accent: {{ card.accent }};">
+                <p class="card-title">{{ card.title }}</p>
+                <div class="card-value">{{ card.value }}</div>
+                <p class="card-desc">{{ card.desc }}</p>
+            </a>
+        {% endfor %}
+    </div>
+
+    <div class="chart-layout">
+        <div class="panel">
+            <h2>近 7 天运营趋势</h2>
+            <p class="panel-subtitle">按天统计新增资讯、商品、用户数量</p>
+            <div class="legend" id="trendLegend"></div>
+            <div class="trend-wrapper">
+                <div class="trend-chart" id="trendChart"></div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <h2>资讯状态占比</h2>
+            <p class="panel-subtitle">草稿 / 已发布 / 已归档</p>
+            <div class="donut-block">
+                <div class="donut" id="statusDonut">
+                    <div class="donut-center" id="statusTotal">0</div>
+                </div>
+                <div class="status-legend" id="statusLegend"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-layout">
+        <div class="panel">
+            <h2>快捷入口</h2>
+            <div class="quick-links">
+                {% for link in quick_links %}
+                    <a class="js-admin-tab-link" href="{{ link.url }}" data-name="{{ link.name }}" data-eid="dash-quick-{{ forloop.counter }}" data-icon="fas fa-link">{{ link.name }}</a>
+                {% endfor %}
+            </div>
+
+            <div class="list">
+                <h2>最近更新的资讯</h2>
+                {% if recent_articles %}
+                    {% for article in recent_articles %}
+                        <div class="list-item">
+                            <a class="js-admin-tab-link" href="/admin/game_article/article/{{ article.id }}/change/" data-eid="dash-article-{{ article.id }}" data-icon="fas fa-newspaper" title="{{ article.title }}">{{ article.title }}</a>
+                            <span class="time">{{ article.updated_at|date:"m-d H:i" }}</span>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="empty">暂无资讯数据</div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="panel">
+            <h2>商品分类排行</h2>
+            <p class="panel-subtitle">按商品数量统计 Top 分类</p>
+            {% if category_ranking %}
+                {% for item in category_ranking %}
+                    <div class="ranking-item">
+                        <div class="ranking-head">
+                            <span>{{ item.name }}</span>
+                            <span>{{ item.value }}</span>
+                        </div>
+                        <div class="ranking-bar">
+                            <div class="ranking-fill" style="width: {{ item.percent }}%"></div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="empty">暂无分类排行数据</div>
+            {% endif %}
+
+            <div class="list">
+                <h2>最近更新的轮播图</h2>
+                {% if recent_banners %}
+                    {% for banner in recent_banners %}
+                        <div class="list-item">
+                            <a class="js-admin-tab-link" href="/admin/main/banner/{{ banner.id }}/change/" data-eid="dash-banner-{{ banner.id }}" data-icon="fas fa-images" title="{{ banner.title }}">{{ banner.title }}</a>
+                            <span class="time">{{ banner.updated_at|date:"m-d H:i" }}</span>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="empty">暂无轮播图数据</div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{{ trend_data|json_script:"trend-data" }}
+{{ status_data|json_script:"status-data" }}
+
+<script>
+    (function () {
+        const trendData = JSON.parse(document.getElementById('trend-data').textContent || '{}');
+        const statusData = JSON.parse(document.getElementById('status-data').textContent || '[]');
+
+        window.goBack = function () {
+            if (document.referrer && window.history.length > 1) {
+                window.history.back();
+                return;
+            }
+            window.location.href = '/admin/';
+        };
+
+        function openInSimpleUITab(url, name, eid, icon) {
+            try {
+                if (
+                    window.parent &&
+                    window.parent !== window &&
+                    window.parent.app &&
+                    typeof window.parent.app.openTab === 'function'
+                ) {
+                    window.parent.app.openTab({
+                        url: url,
+                        name: name || '管理页面',
+                        icon: icon || 'far fa-file',
+                        eid: eid || `dashboard-${Date.now()}-${Math.random()}`,
+                        newUrl: `${window.location.origin}${url}`,
+                        breadcrumbs: [
+                            { name: '运营看板', icon: 'fas fa-tachometer-alt' },
+                            { name: name || '管理页面', icon: icon || 'far fa-file' }
+                        ]
+                    });
+                    return true;
+                }
+            } catch (error) {
+                console.warn('Open tab fallback to normal navigation:', error);
+            }
+            return false;
+        }
+
+        function bindDashboardAdminLinks() {
+            const links = document.querySelectorAll('a.js-admin-tab-link');
+            links.forEach(link => {
+                link.addEventListener('click', function (event) {
+                    const url = this.getAttribute('href');
+                    if (!url || !url.startsWith('/admin/')) return;
+
+                    const name = this.dataset.name || this.textContent.trim();
+                    const eid = this.dataset.eid || '';
+                    const icon = this.dataset.icon || 'far fa-file';
+
+                    if (openInSimpleUITab(url, name, eid, icon)) {
+                        event.preventDefault();
+                    }
+                });
+            });
+        }
+
+        function renderTrend() {
+            const chart = document.getElementById('trendChart');
+            const legend = document.getElementById('trendLegend');
+            const labels = trendData.labels || [];
+            const series = trendData.series || [];
+
+            if (!labels.length || !series.length) {
+                chart.innerHTML = '<div class="empty">暂无趋势数据</div>';
+                return;
+            }
+
+            const allValues = [];
+            series.forEach(item => (item.data || []).forEach(value => allValues.push(Number(value) || 0)));
+            const maxValue = Math.max(...allValues, 1);
+
+            legend.innerHTML = '';
+            series.forEach(item => {
+                const node = document.createElement('span');
+                node.className = 'legend-item';
+                node.innerHTML = `<span class="legend-dot" style="background:${item.color}"></span>${item.name}`;
+                legend.appendChild(node);
+            });
+
+            chart.innerHTML = '';
+            labels.forEach((label, index) => {
+                const day = document.createElement('div');
+                day.className = 'trend-day';
+
+                const bars = document.createElement('div');
+                bars.className = 'trend-bars';
+
+                series.forEach(item => {
+                    const value = Number((item.data || [])[index] || 0);
+                    const bar = document.createElement('div');
+                    bar.className = 'trend-bar';
+                    bar.title = `${item.name}: ${value}`;
+                    bar.style.background = item.color;
+                    bar.style.height = `${Math.max((value / maxValue) * 160, value ? 8 : 2)}px`;
+                    bars.appendChild(bar);
+                });
+
+                const text = document.createElement('div');
+                text.className = 'trend-label';
+                text.textContent = label;
+
+                day.appendChild(bars);
+                day.appendChild(text);
+                chart.appendChild(day);
+            });
+        }
+
+        function renderDonut() {
+            const donut = document.getElementById('statusDonut');
+            const totalNode = document.getElementById('statusTotal');
+            const legend = document.getElementById('statusLegend');
+
+            if (!statusData.length) {
+                donut.style.background = '#f1f5fb';
+                totalNode.textContent = '0';
+                legend.innerHTML = '<div class="empty">暂无状态数据</div>';
+                return;
+            }
+
+            const total = statusData.reduce((sum, item) => sum + (Number(item.value) || 0), 0);
+            totalNode.textContent = total;
+
+            let progress = 0;
+            const segments = statusData.map(item => {
+                const value = Number(item.value) || 0;
+                const percent = total ? (value / total) * 100 : 0;
+                const start = progress;
+                progress += percent;
+                return `${item.color} ${start}% ${progress}%`;
+            });
+            donut.style.background = `conic-gradient(${segments.join(', ')})`;
+
+            legend.innerHTML = '';
+            statusData.forEach(item => {
+                const row = document.createElement('div');
+                row.className = 'status-item';
+                row.innerHTML = `
+                    <span class="status-name">
+                        <span class="legend-dot" style="background:${item.color}"></span>
+                        ${item.label}
+                    </span>
+                    <span class="status-value">${item.value}</span>
+                `;
+                legend.appendChild(row);
+            });
+        }
+
+        renderTrend();
+        renderDonut();
+        bindDashboardAdminLinks();
+
+        // 不在 Dashboard 页面清理浏览器缓存，也不改写父页面导航结构，
+        // 避免破坏 SimpleUI 菜单状态，导致“子菜单后无法返回”。
+    })();
+</script>
+</body>
+</html>

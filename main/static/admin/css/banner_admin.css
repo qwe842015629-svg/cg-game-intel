@@ -1,0 +1,4 @@
+/* 修复后台 Banner 样式 404 */
+.simpleui-banner {
+    display: none !important;
+}

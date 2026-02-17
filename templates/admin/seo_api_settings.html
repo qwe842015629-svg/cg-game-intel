@@ -1,0 +1,385 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEO API 设置</title>
+    <style>
+        :root {
+            --bg: #f4f7fb;
+            --card: #ffffff;
+            --line: #e7ecf3;
+            --text: #1f2d3d;
+            --sub: #6b7a90;
+            --primary: #2f80ed;
+            --ok: #27ae60;
+            --danger: #eb5757;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--text);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+        }
+
+        .page {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2f80ed 0%, #56ccf2 100%);
+            color: #fff;
+            border-radius: 14px;
+            padding: 20px;
+            box-shadow: 0 8px 24px rgba(15, 35, 95, 0.1);
+            margin-bottom: 14px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .header p {
+            margin: 8px 0 0;
+            font-size: 13px;
+            opacity: 0.95;
+        }
+
+        .actions {
+            margin-top: 12px;
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            box-shadow: 0 8px 20px rgba(15, 35, 95, 0.07);
+            padding: 16px;
+        }
+
+        .card h2 {
+            margin: 0 0 8px;
+            font-size: 18px;
+        }
+
+        .sub {
+            margin: 0 0 14px;
+            color: var(--sub);
+            font-size: 12px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .field.span-2 {
+            grid-column: span 2;
+        }
+
+        .field label {
+            font-size: 12px;
+            color: var(--sub);
+        }
+
+        .field input,
+        .field select {
+            width: 100%;
+            border: 1px solid #dbe5f4;
+            border-radius: 10px;
+            padding: 9px 10px;
+            font-size: 13px;
+            background: #fff;
+            color: var(--text);
+            outline: none;
+        }
+
+        .field input:focus,
+        .field select:focus {
+            border-color: #8ab7f6;
+            box-shadow: 0 0 0 3px rgba(47, 128, 237, 0.12);
+        }
+
+        .btn {
+            border: 1px solid transparent;
+            border-radius: 10px;
+            padding: 8px 12px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            background: var(--primary);
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .btn:disabled {
+            opacity: 0.65;
+            cursor: not-allowed;
+        }
+
+        .btn.ghost {
+            background: #fff;
+            color: #1d4f8c;
+            border-color: #c8dbf6;
+        }
+
+        .status {
+            display: inline-flex;
+            align-items: center;
+            border: 1px solid #dbe6f6;
+            border-radius: 999px;
+            padding: 4px 10px;
+            font-size: 12px;
+            background: #f7fbff;
+            color: #2d4e75;
+        }
+
+        .status.ok {
+            color: #168c4b;
+            border-color: #bde8ce;
+            background: #e9f9f0;
+        }
+
+        .status.error {
+            color: #ba2c2c;
+            border-color: #f7d1d1;
+            background: #fff1f1;
+        }
+
+        .mono {
+            margin-top: 10px;
+            padding: 10px;
+            border: 1px dashed #d5e2f5;
+            border-radius: 10px;
+            background: #fbfdff;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+            font-size: 12px;
+            line-height: 1.5;
+            white-space: pre-wrap;
+            min-height: 80px;
+        }
+
+        @media (max-width: 880px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .field.span-2 {
+                grid-column: span 1;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+    <div class="header">
+        <h1>SEO API 设置</h1>
+        <p>更新时间：{{ now|date:"Y-m-d H:i:s" }} · 可配置 Base URL、API Key、模型名并实时生效</p>
+        <div class="actions">
+            <button class="btn ghost" type="button" onclick="goBack()">返回工作台</button>
+            <a class="btn ghost" href="/admin/seo_automation/llmapisetting/">打开模型配置后台</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>模型与接口配置</h2>
+        <p class="sub">推荐模型：`grok-4-fast-reasoning`、`grok-4-fast`、`grok-4`，也支持自定义模型。</p>
+        <div class="grid">
+            <div class="field span-2">
+                <label for="baseUrl">Base URL</label>
+                <input id="baseUrl" type="text" placeholder="https://api.x.ai/v1">
+            </div>
+            <div class="field span-2">
+                <label for="apiKey">API Key</label>
+                <input id="apiKey" type="password" placeholder="sk-...">
+            </div>
+            <div class="field span-2">
+                <label for="modelName">模型名</label>
+                <input id="modelName" type="text" list="modelOptions" placeholder="grok-4-fast">
+                <datalist id="modelOptions">
+                    <option value="grok-4-fast-reasoning"></option>
+                    <option value="grok-4-fast"></option>
+                    <option value="grok-4"></option>
+                </datalist>
+            </div>
+            <div class="field">
+                <label for="timeoutSeconds">超时秒数</label>
+                <input id="timeoutSeconds" type="number" min="5" max="180" value="45">
+            </div>
+            <div class="field">
+                <label for="isActive">是否启用</label>
+                <select id="isActive">
+                    <option value="true">启用</option>
+                    <option value="false">停用</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="actions">
+            <button id="loadBtn" class="btn ghost" type="button">加载当前配置</button>
+            <button id="saveBtn" class="btn" type="button">保存配置</button>
+            <button id="testBtn" class="btn ghost" type="button">测试连接（成功提示）</button>
+            <span id="status" class="status">未加载</span>
+        </div>
+        <pre id="resultView" class="mono">{}</pre>
+    </div>
+</div>
+
+<script>
+    (function () {
+        const baseUrlInput = document.getElementById('baseUrl');
+        const apiKeyInput = document.getElementById('apiKey');
+        const modelNameInput = document.getElementById('modelName');
+        const timeoutInput = document.getElementById('timeoutSeconds');
+        const isActiveInput = document.getElementById('isActive');
+        const testBtn = document.getElementById('testBtn');
+        const statusEl = document.getElementById('status');
+        const resultView = document.getElementById('resultView');
+
+        function getCsrfToken() {
+            const match = document.cookie.match(/(?:^|; )csrftoken=([^;]+)/);
+            return match ? decodeURIComponent(match[1]) : '';
+        }
+
+        function setStatus(text, type) {
+            statusEl.textContent = text || '';
+            statusEl.className = `status ${type || ''}`.trim();
+        }
+
+        function toJsonText(value) {
+            try {
+                return JSON.stringify(value, null, 2);
+            } catch (error) {
+                return String(value);
+            }
+        }
+
+        async function apiRequest(url, options) {
+            const config = options || {};
+            const method = (config.method || 'GET').toUpperCase();
+            const headers = Object.assign({}, config.headers || {});
+            if (method !== 'GET') {
+                headers['X-CSRFToken'] = getCsrfToken();
+                headers['Content-Type'] = 'application/json';
+            }
+
+            const response = await fetch(url, {
+                method,
+                headers,
+                credentials: 'same-origin',
+                body: config.body ? JSON.stringify(config.body) : undefined,
+            });
+
+            const text = await response.text();
+            let payload = {};
+            try {
+                payload = text ? JSON.parse(text) : {};
+            } catch (error) {
+                payload = { raw: text };
+            }
+
+            if (!response.ok) {
+                const msg = payload && (payload.detail || payload.error || payload.message)
+                    ? (payload.detail || payload.error || payload.message)
+                    : `HTTP ${response.status}`;
+                throw new Error(msg);
+            }
+            return payload;
+        }
+
+        function writeForm(data) {
+            baseUrlInput.value = data.base_url || '';
+            apiKeyInput.value = data.api_key || '';
+            modelNameInput.value = data.model_name || 'grok-4-fast';
+            timeoutInput.value = Number(data.timeout_seconds || 45);
+            isActiveInput.value = String(Boolean(data.is_active));
+        }
+
+        function collectForm() {
+            return {
+                base_url: String(baseUrlInput.value || '').trim(),
+                api_key: String(apiKeyInput.value || '').trim(),
+                model_name: String(modelNameInput.value || '').trim() || 'grok-4-fast',
+                timeout_seconds: Number(timeoutInput.value || 45),
+                is_active: String(isActiveInput.value || 'true') === 'true',
+            };
+        }
+
+        async function loadSettings() {
+            setStatus('加载中...', '');
+            try {
+                const payload = await apiRequest('/api/seo-automation/llm-settings/current/');
+                writeForm(payload);
+                resultView.textContent = toJsonText(payload);
+                setStatus('已加载', 'ok');
+            } catch (error) {
+                resultView.textContent = toJsonText({ error: error.message || String(error) });
+                setStatus('加载失败', 'error');
+            }
+        }
+
+        async function saveSettings() {
+            setStatus('保存中...', '');
+            try {
+                const payload = collectForm();
+                const result = await apiRequest('/api/seo-automation/llm-settings/current/', {
+                    method: 'PUT',
+                    body: payload,
+                });
+                writeForm(result);
+                resultView.textContent = toJsonText(result);
+                setStatus('保存成功', 'ok');
+            } catch (error) {
+                resultView.textContent = toJsonText({ error: error.message || String(error) });
+                setStatus('保存失败', 'error');
+            }
+        }
+
+        async function testConnection() {
+            setStatus('连接测试中...', '');
+            testBtn.disabled = true;
+            try {
+                const payload = collectForm();
+                const result = await apiRequest('/api/seo-automation/llm-settings/test/', {
+                    method: 'POST',
+                    body: payload,
+                });
+                resultView.textContent = toJsonText(result);
+                setStatus('测试成功：连接可用', 'ok');
+            } catch (error) {
+                resultView.textContent = toJsonText({ error: error.message || String(error) });
+                setStatus('测试失败：连接不可用', 'error');
+            } finally {
+                testBtn.disabled = false;
+            }
+        }
+
+        document.getElementById('loadBtn').addEventListener('click', loadSettings);
+        document.getElementById('saveBtn').addEventListener('click', saveSettings);
+        document.getElementById('testBtn').addEventListener('click', testConnection);
+
+        window.goBack = function () {
+            window.location.href = '/admin/seo-automation-workbench/';
+        };
+
+        loadSettings();
+    })();
+</script>
+</body>
+</html>

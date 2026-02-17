@@ -1,0 +1,114 @@
+﻿(function () {
+    function setStatus(statusEl, text, color, useHtml) {
+        if (!statusEl) return;
+        if (useHtml) {
+            statusEl.innerHTML = text;
+        } else {
+            statusEl.innerText = text;
+        }
+        statusEl.style.color = color || "#666";
+    }
+
+    function fillField(fieldId, value) {
+        const el = document.getElementById(fieldId);
+        if (!el) return;
+        el.value = value || "";
+        el.dispatchEvent(new Event("input", { bubbles: true }));
+        el.dispatchEvent(new Event("change", { bubbles: true }));
+    }
+
+    async function requestScrape(url) {
+        const resp = await fetch(`/admin/game_page/gamepage/scrape-google-play/?url=${encodeURIComponent(url)}`, {
+            credentials: "same-origin",
+            headers: {
+                "Accept": "application/json"
+            }
+        });
+
+        let data = null;
+        try {
+            data = await resp.json();
+        } catch (e) {
+            throw new Error(`抓取接口返回了非 JSON 响应 (HTTP ${resp.status})`);
+        }
+
+        if (!resp.ok || (data && data.error)) {
+            throw new Error((data && data.error) || `抓取失败 (HTTP ${resp.status})`);
+        }
+        return data || {};
+    }
+
+    function initScraper() {
+        const btn = document.getElementById("scrape-btn");
+        const input = document.getElementById("google-play-url");
+        const status = document.getElementById("scrape-status");
+
+        if (!btn || !input || !status) {
+            return;
+        }
+
+        if (btn.dataset.bound === "true") return;
+        btn.dataset.bound = "true";
+
+        btn.addEventListener("click", async function () {
+            const url = input.value.trim();
+            if (!url) {
+                alert("请输入 Google Play 链接");
+                return;
+            }
+
+            setStatus(status, "正在抓取，请稍候...", "#666");
+            btn.style.opacity = "0.5";
+            btn.style.pointerEvents = "none";
+
+            try {
+                const data = await requestScrape(url);
+
+                const fallbackDescription = data.description || (data.title ? `${data.title} 游戏介绍待完善。` : "");
+                const fallbackContent = data.content || fallbackDescription;
+
+                // 基础字段
+                fillField("id_title", data.title);
+                fillField("id_developer", data.developer);
+                fillField("id_google_play_id", data.package_id);
+                fillField("id_description", fallbackDescription);
+
+                // 内容字段：确保“游戏详情”不再空白
+                fillField("id_content", fallbackContent);
+
+                // 如果 SEO 标题为空，顺便补齐
+                const seoTitle = document.getElementById("id_seo_title");
+                if (seoTitle && !seoTitle.value && data.title) {
+                    seoTitle.value = `${data.title}代储_充值 - MEME港台游戏工具箱`;
+                }
+
+                if (data.media_id) {
+                    setStatus(
+                        status,
+                        `导入成功。图标已保存到素材库 (ID: ${data.media_id})，请在“游戏图标”处点“从素材库选择”。`,
+                        "#14853b"
+                    );
+                } else {
+                    setStatus(status, "导入成功（未获取到图标）。", "#14853b");
+                }
+            } catch (err) {
+                console.error("Google Play scrape failed:", err);
+                const msg = `导入失败：${err.message}`;
+                setStatus(status, msg, "#cc2e2e");
+                alert(msg);
+            } finally {
+                btn.style.opacity = "1";
+                btn.style.pointerEvents = "auto";
+            }
+        });
+    }
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initScraper);
+    } else {
+        initScraper();
+    }
+
+    // SimpleUI 会动态替换页面内容，定时重绑可保证按钮始终可用。
+    setInterval(initScraper, 1000);
+})();

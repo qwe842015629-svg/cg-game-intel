@@ -1,0 +1,5 @@
+{
+  "api_key": "",
+  "base_url": "https://api.x.ai/v1",
+  "model": "grok-4-fast"
+}

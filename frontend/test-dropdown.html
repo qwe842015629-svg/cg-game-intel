@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>下拉菜单测试</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .cyber-neon-green { color: #00ff88; }
+        .bg-cyber-dark { background-color: #0a0a1a; }
+        .border-cyber-neon-green { border-color: #00ff88; }
+        .hover\:text-cyber-neon-green:hover { color: #00ff88; }
+        .hover\:bg-cyber-neon-green\/10:hover { background-color: rgba(0, 255, 136, 0.1); }
+    </style>
+</head>
+<body class="bg-gray-900 p-8">
+    <div class="max-w-4xl mx-auto">
+        <h1 class="text-3xl text-white mb-8">下拉菜单测试</h1>
+        
+        <!-- 游戏下拉菜单 -->
+        <div class="relative group inline-block mr-8">
+            <button class="relative px-6 py-3 text-white/70 hover:text-cyber-neon-green transition-all">
+                游戏菜单
+            </button>
+            
+            <!-- 下拉内容 -->
+            <div class="absolute hidden group-hover:block top-full left-0 mt-2 w-48 bg-slate-900/95 border-2 border-cyber-neon-green/50 rounded-xl shadow-[0_0_30px_rgba(0,255,200,0.3)] backdrop-blur-sm overflow-hidden z-50">
+                <a href="#" class="block px-4 py-3 text-sm text-white/80 hover:text-cyber-neon-green hover:bg-cyber-neon-green/10 transition-all">
+                    国际服
+                </a>
+                <a href="#" class="block px-4 py-3 text-sm text-white/80 hover:text-cyber-neon-green hover:bg-cyber-neon-green/10 transition-all">
+                    港台服
+                </a>
+                <a href="#" class="block px-4 py-3 text-sm text-white/80 hover:text-cyber-neon-green hover:bg-cyber-neon-green/10 transition-all">
+                    东南亚服
+                </a>
+            </div>
+        </div>
+
+        <!-- 资讯下拉菜单 -->
+        <div class="relative group inline-block">
+            <button class="relative px-6 py-3 text-white/70 hover:text-cyber-neon-green transition-all">
+                资讯菜单
+            </button>
+            
+            <!-- 下拉内容 -->
+            <div class="absolute hidden group-hover:block top-full left-0 mt-2 w-48 bg-slate-900/95 border-2 border-cyber-neon-green/50 rounded-xl shadow-[0_0_30px_rgba(0,255,200,0.3)] backdrop-blur-sm overflow-hidden z-50">
+                <a href="#" class="block px-4 py-3 text-sm text-white/80 hover:text-cyber-neon-green hover:bg-cyber-neon-green/10 transition-all">
+                    游戏资讯
+                </a>
+                <a href="#" class="block px-4 py-3 text-sm text-white/80 hover:text-cyber-neon-green hover:bg-cyber-neon-green/10 transition-all">
+                    攻略教程
+                </a>
+                <a href="#" class="block px-4 py-3 text-sm text-white/80 hover:text-cyber-neon-green hover:bg-cyber-neon-green/10 transition-all">
+                    充值指南
+                </a>
+                <a href="#" class="block px-4 py-3 text-sm text-white/80 hover:text-cyber-neon-green hover:bg-cyber-neon-green/10 transition-all">
+                    活动公告
+                </a>
+            </div>
+        </div>
+
+        <div class="mt-12 p-6 bg-slate-800 rounded-lg">
+            <h2 class="text-xl text-white mb-4">测试说明：</h2>
+            <ul class="text-gray-300 space-y-2">
+                <li>✅ 鼠标悬停在"游戏菜单"或"资讯菜单"上</li>
+                <li>✅ 应该看到深色半透明背景的下拉菜单</li>
+                <li>✅ 带霓虹绿色发光边框</li>
+                <li>✅ 圆角设计</li>
+                <li>✅ 悬停菜单项时高亮</li>
+            </ul>
+        </div>
+
+        <div class="mt-8">
+            <a href="http://localhost:5183/" class="inline-block px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+                返回主站测试
+            </a>
+        </div>
+    </div>
+</body>
+</html>
