@@ -22,6 +22,7 @@ from django.utils.dateparse import parse_datetime
 from django.utils.text import slugify
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters, status, viewsets
+from rest_framework.authentication import SessionAuthentication, TokenAuthentication
 from rest_framework.decorators import action
 from rest_framework.permissions import AllowAny, IsAdminUser
 from rest_framework.response import Response
@@ -53,6 +54,7 @@ from .services import (
     merge_unique_tags,
     run_step5_quality_enhancement,
     rewrite_bahamut_text,
+    sanitize_seo_summary_text,
     test_llm_connection,
 )
 from .services.quality_enhancement import _filter_quality_image_candidates, _search_bing_images
@@ -1002,6 +1004,11 @@ def _run_bahamut_pipeline(
 
     stop_after_step = _normalize_stop_after_step(payload.get("stop_after_step"))
     run_rewrite = bool(payload.get("run_rewrite", True))
+    auto_publish = _to_bool(payload.get("auto_publish"), default=False)
+    # Keep generated articles visually consistent: auto-publish must pass Step5 image filtering.
+    if auto_publish and stop_after_step < 5:
+        stop_after_step = 5
+        payload["stop_after_step"] = 5
     rewrite_limit_requested = int(payload.get("rewrite_limit", 3))
 
     task.status = "crawling"
@@ -1145,6 +1152,14 @@ def _run_bahamut_pipeline(
         task.save(update_fields=["status", "progress", "result_count", "result_payload", "updated_at"])
 
         if stop_after_step == 1:
+            task.status = "completed"
+            task.finished_at = timezone.now()
+            task.result_payload = _attach_operator_summary(
+                task_id=task.id,
+                task_status=task.status,
+                result_payload=task.result_payload or {},
+            )
+            task.save(update_fields=["status", "finished_at", "result_payload", "updated_at"])
             return {
                 "task_id": task.id,
                 "status": task.status,
@@ -1191,6 +1206,14 @@ def _run_bahamut_pipeline(
         task.save(update_fields=["status", "progress", "result_count", "result_payload", "updated_at"])
 
         if stop_after_step == 2:
+            task.status = "completed"
+            task.finished_at = timezone.now()
+            task.result_payload = _attach_operator_summary(
+                task_id=task.id,
+                task_status=task.status,
+                result_payload=task.result_payload or {},
+            )
+            task.save(update_fields=["status", "finished_at", "result_payload", "updated_at"])
             return {
                 "task_id": task.id,
                 "status": task.status,
@@ -1231,6 +1254,14 @@ def _run_bahamut_pipeline(
         task.save(update_fields=["status", "progress", "result_payload", "updated_at"])
 
         if stop_after_step == 3:
+            task.status = "completed"
+            task.finished_at = timezone.now()
+            task.result_payload = _attach_operator_summary(
+                task_id=task.id,
+                task_status=task.status,
+                result_payload=task.result_payload or {},
+            )
+            task.save(update_fields=["status", "finished_at", "result_payload", "updated_at"])
             return {
                 "task_id": task.id,
                 "status": task.status,
@@ -1498,6 +1529,14 @@ def _run_bahamut_pipeline(
                 result_payload=result_payload,
             )
             task.save(update_fields=["status", "progress", "result_payload", "updated_at"])
+            task.status = "completed"
+            task.finished_at = timezone.now()
+            task.result_payload = _attach_operator_summary(
+                task_id=task.id,
+                task_status=task.status,
+                result_payload=task.result_payload or {},
+            )
+            task.save(update_fields=["status", "finished_at", "result_payload", "updated_at"])
             return {
                 "task_id": task.id,
                 "status": task.status,
@@ -1791,9 +1830,26 @@ def _publish_seo_article(
     related_game = seo_article.game or _resolve_related_game_by_name(seo_article.title)
     article.game = related_game
     article.author = created_by if created_by else article.author
-    article.excerpt = (seo_article.meta_description or "")[:500]
-    article.summary = (seo_article.meta_description or "")[:500]
+    summary_seed = sanitize_seo_summary_text(
+        seo_article.meta_description or "",
+        game_name=related_game.title if related_game else seo_article.title,
+        limit=500,
+    )
+    if not summary_seed:
+        summary_seed = str(seo_article.meta_description or "").strip()
+    article.excerpt = summary_seed[:500]
+    article.summary = summary_seed[:500]
     article.content = seo_article.body_html
+    article.title_i18n = _sync_primary_locale_i18n(article.title_i18n, locale="zh-CN", text=article.title)
+    article.excerpt_i18n = _sync_primary_locale_i18n(
+        article.excerpt_i18n, locale="zh-CN", text=article.excerpt
+    )
+    article.summary_i18n = _sync_primary_locale_i18n(
+        article.summary_i18n, locale="zh-CN", text=article.summary
+    )
+    article.content_i18n = _sync_primary_locale_i18n(
+        article.content_i18n, locale="zh-CN", text=article.content
+    )
     article.meta_title = (seo_article.meta_title or seo_article.title)[:200]
     article.meta_description = (seo_article.meta_description or "")[:300]
     article.meta_keywords = ",".join((seo_article.tags or [])[:10])[:200]
@@ -1834,6 +1890,25 @@ def _publish_seo_article(
         ]
     )
     return article
+
+
+def _sync_primary_locale_i18n(existing_map: Any, *, locale: str, text: str) -> dict[str, str]:
+    data = dict(existing_map) if isinstance(existing_map, dict) else {}
+    value = str(text or "").strip()
+    if not value:
+        return data
+
+    normalized_locale = str(locale or "").strip() or "zh-CN"
+    aliases = [
+        normalized_locale,
+        normalized_locale.lower(),
+        normalized_locale.replace("-", "_"),
+        normalized_locale.lower().replace("-", "_"),
+    ]
+    for alias in aliases:
+        if alias:
+            data[alias] = value
+    return data
 
 
 def _find_media_asset_urls_for_game(game_name: str, limit: int = 4) -> list[str]:
@@ -2215,6 +2290,28 @@ class SeoArticleViewSet(viewsets.ModelViewSet):
     def publish(self, request, pk=None):
         seo_article = self.get_object()
         publish_now = _to_bool(request.data.get("publish_now"), default=True)
+        run_step5 = _to_bool(request.data.get("run_step5"), default=True)
+        quality_result = None
+
+        if run_step5:
+            try:
+                quality_result = _refresh_seo_article_source_and_media(
+                    seo_article=seo_article,
+                    task_keyword=seo_article.task.keyword if seo_article.task else "",
+                    request_user=request.user,
+                )
+                seo_article.refresh_from_db()
+            except Exception as exc:
+                return Response(
+                    {
+                        "seo_article_id": seo_article.id,
+                        "status": "failed",
+                        "run_step5": run_step5,
+                        "error": f"step5_failed: {str(exc)[:180]}",
+                    },
+                    status=status.HTTP_400_BAD_REQUEST,
+                )
+
         article = _publish_seo_article(
             seo_article=seo_article,
             request_user=request.user,
@@ -2229,12 +2326,15 @@ class SeoArticleViewSet(viewsets.ModelViewSet):
                 "status": seo_article.status,
                 "publish_now": publish_now,
                 "publish_at": seo_article.publish_at.isoformat() if seo_article.publish_at else None,
+                "run_step5": run_step5,
+                "quality": quality_result,
             },
             status=status.HTTP_200_OK,
         )
 
 
 class LLMApiSettingAPIView(APIView):
+    authentication_classes = [SessionAuthentication, TokenAuthentication]
     permission_classes = [IsAdminUser]
 
     def get(self, request):
@@ -2252,6 +2352,7 @@ class LLMApiSettingAPIView(APIView):
 
 
 class LLMApiConnectionTestAPIView(APIView):
+    authentication_classes = [SessionAuthentication, TokenAuthentication]
     permission_classes = [IsAdminUser]
 
     def post(self, request):
