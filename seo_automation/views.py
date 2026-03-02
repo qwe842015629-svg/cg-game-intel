@@ -2231,6 +2231,20 @@ class SeoArticleViewSet(viewsets.ModelViewSet):
         try:
             seo_article = self.get_object()
             _sync_seo_article_rewrite_payload(seo_article)
+            # If this SEO draft is already linked to a published article, keep
+            # the live article in sync after manual draft edits.
+            if seo_article.published_article_id:
+                linked_article_published = (
+                    bool(seo_article.published_article)
+                    and str(getattr(seo_article.published_article, "status", "")).strip() == "published"
+                )
+                if seo_article.status == "published" or linked_article_published:
+                    _publish_seo_article(
+                        seo_article=seo_article,
+                        request_user=request.user,
+                        publish_now=True,
+                        publish_at=seo_article.publish_at.isoformat() if seo_article.publish_at else None,
+                    )
         except Exception:
             pass
         return response
@@ -2291,7 +2305,9 @@ class SeoArticleViewSet(viewsets.ModelViewSet):
         seo_article = self.get_object()
         publish_now = _to_bool(request.data.get("publish_now"), default=True)
         run_step5 = _to_bool(request.data.get("run_step5"), default=True)
+        strict_step5 = _to_bool(request.data.get("strict_step5"), default=False)
         quality_result = None
+        quality_error = None
 
         if run_step5:
             try:
@@ -2302,15 +2318,18 @@ class SeoArticleViewSet(viewsets.ModelViewSet):
                 )
                 seo_article.refresh_from_db()
             except Exception as exc:
-                return Response(
-                    {
-                        "seo_article_id": seo_article.id,
-                        "status": "failed",
-                        "run_step5": run_step5,
-                        "error": f"step5_failed: {str(exc)[:180]}",
-                    },
-                    status=status.HTTP_400_BAD_REQUEST,
-                )
+                quality_error = f"step5_failed: {str(exc)[:180]}"
+                if strict_step5:
+                    return Response(
+                        {
+                            "seo_article_id": seo_article.id,
+                            "status": "failed",
+                            "run_step5": run_step5,
+                            "strict_step5": strict_step5,
+                            "error": quality_error,
+                        },
+                        status=status.HTTP_400_BAD_REQUEST,
+                    )
 
         article = _publish_seo_article(
             seo_article=seo_article,
@@ -2327,7 +2346,10 @@ class SeoArticleViewSet(viewsets.ModelViewSet):
                 "publish_now": publish_now,
                 "publish_at": seo_article.publish_at.isoformat() if seo_article.publish_at else None,
                 "run_step5": run_step5,
+                "strict_step5": strict_step5,
+                "step5_status": "failed" if quality_error else ("completed" if run_step5 else "skipped"),
                 "quality": quality_result,
+                "quality_error": quality_error,
             },
             status=status.HTTP_200_OK,
         )
