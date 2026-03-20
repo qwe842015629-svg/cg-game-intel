@@ -278,6 +278,7 @@ def admin_dashboard(request):
         {'name': 'SEO自动化工作台', 'url': '/admin/seo-automation-workbench/', 'icon': 'sparkles'},
         {'name': 'SEO API设置', 'url': '/admin/seo-api-settings/', 'icon': 'key-round'},
         {'name': '机器人审批工作台', 'url': '/admin/ops-gateway-workbench/', 'icon': 'shield-check'},
+        {'name': '巴哈排行榜工作台', 'url': '/admin/bahamut-ranking-workbench/', 'icon': 'trophy'},
         {'name': '用户管理', 'url': '/admin/auth/user/', 'icon': 'user-cog'},
     ]
 
@@ -349,6 +350,18 @@ def ops_gateway_workbench(request):
     return render(
         request,
         'admin/ops_gateway_workbench.html',
+        {
+            'now': timezone.now(),
+        },
+    )
+
+
+@staff_member_required
+def bahamut_ranking_workbench(request):
+    """巴哈排行榜工作台。"""
+    return render(
+        request,
+        'admin/bahamut_ranking_workbench.html',
         {
             'now': timezone.now(),
         },

@@ -1,0 +1,257 @@
+﻿{% load static %}
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴哈姆特排行榜工作台</title>
+    <link rel="stylesheet" href="{% static 'admin/css/galaxy_admin_pages.css' %}">
+    <style>
+        .rank-shell {
+            max-width: 1600px;
+            margin: 16px auto 36px;
+            padding: 0 16px;
+        }
+        .rank-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 16px;
+            align-items: center;
+        }
+        .rank-actions form {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin: 0;
+        }
+        .rank-btn {
+            border: 0;
+            border-radius: 999px;
+            padding: 10px 18px;
+            font-weight: 700;
+            cursor: pointer;
+            color: #fff;
+            background: linear-gradient(135deg, #2563eb, #14b8a6);
+        }
+        .rank-query {
+            min-width: 220px;
+            border: 1px solid #d7deea;
+            border-radius: 12px;
+            padding: 8px 12px;
+            font-size: 14px;
+        }
+        .rank-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+        .rank-card {
+            background: #fff;
+            border: 1px solid #e5ebf5;
+            border-radius: 14px;
+            padding: 12px;
+        }
+        .rank-card p {
+            margin: 0 0 8px;
+            color: #64748b;
+            font-size: 12px;
+        }
+        .rank-card strong {
+            font-size: 24px;
+            color: #0f172a;
+        }
+        .rank-alert {
+            background: #ecfdf5;
+            color: #065f46;
+            border: 1px solid #10b981;
+            border-radius: 12px;
+            padding: 10px 12px;
+            margin: 10px 0 16px;
+            font-size: 13px;
+        }
+        .rank-table-wrap {
+            background: #fff;
+            border: 1px solid #e5ebf5;
+            border-radius: 14px;
+            overflow: auto;
+        }
+        .rank-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 1120px;
+        }
+        .rank-table th,
+        .rank-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #eef3fb;
+            text-align: left;
+            font-size: 13px;
+            vertical-align: top;
+        }
+        .rank-table th {
+            background: #f8fbff;
+            color: #334155;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+        }
+        .flag {
+            display: inline-block;
+            border-radius: 999px;
+            padding: 2px 8px;
+            font-size: 11px;
+            line-height: 1.6;
+            margin-right: 4px;
+            margin-bottom: 4px;
+            color: #0f172a;
+            background: #e2e8f0;
+        }
+        .flag.hit {
+            background: #dbeafe;
+            color: #1d4ed8;
+        }
+        .flag.new {
+            background: #dcfce7;
+            color: #166534;
+        }
+        .trend-up {
+            color: #166534;
+            font-weight: 700;
+        }
+        .trend-down {
+            color: #b91c1c;
+            font-weight: 700;
+        }
+        .trend-flat {
+            color: #475569;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body class="galaxy-page-body">
+<div class="galaxy-page-shell rank-shell">
+    <header class="galaxy-page-hero">
+        <div>
+            <p class="galaxy-page-kicker">运营工具台</p>
+            <h1>巴哈姆特哈啦区排行榜</h1>
+            <p>每日自动更新 + 手动刷新，榜单数据与每日资讯任务共享 BSN 缓存。</p>
+        </div>
+        <a class="galaxy-page-return" href="/admin/dashboard/">返回运营看板</a>
+    </header>
+
+    <section class="rank-actions">
+        <form method="post" action="/admin/bahamut-ranking-workbench/">
+            {% csrf_token %}
+            <button class="rank-btn" type="submit">手动更新今日榜单</button>
+        </form>
+        <form method="get" action="/admin/bahamut-ranking-workbench/">
+            <input class="rank-query" type="text" name="q" value="{{ query|default:'' }}" placeholder="按游戏名搜索榜单">
+            <button class="rank-btn" type="submit">查询</button>
+        </form>
+        <span>当前时间：{{ now|date:"Y-m-d H:i:s" }}</span>
+    </section>
+
+    {% if update_result %}
+        <div class="rank-alert">
+            手动更新结果：status={{ update_result.status }}，snapshot={{ update_result.snapshot_date }}，game_count={{ update_result.game_count }}。
+        </div>
+    {% endif %}
+
+    <section class="rank-grid">
+        <div class="rank-card">
+            <p>最新快照日期</p>
+            <strong>{% if latest_snapshot %}{{ latest_snapshot.snapshot_date }}{% else %}暂无{% endif %}</strong>
+        </div>
+        <div class="rank-card">
+            <p>快照状态</p>
+            <strong>{% if latest_snapshot %}{{ latest_snapshot.status }}{% else %}-{% endif %}</strong>
+        </div>
+        <div class="rank-card">
+            <p>榜单条数（当前视图）</p>
+            <strong>{{ stats.entry_count|default:0 }}</strong>
+        </div>
+        <div class="rank-card">
+            <p>命中每日资讯条件</p>
+            <strong>{{ stats.selected_count|default:0 }}</strong>
+        </div>
+        <div class="rank-card">
+            <p>新进榜</p>
+            <strong>{{ stats.new_count|default:0 }}</strong>
+        </div>
+        <div class="rank-card">
+            <p>明显上升</p>
+            <strong>{{ stats.rising_count|default:0 }}</strong>
+        </div>
+        <div class="rank-card">
+            <p>高排名</p>
+            <strong>{{ stats.high_rank_count|default:0 }}</strong>
+        </div>
+        <div class="rank-card">
+            <p>高热度</p>
+            <strong>{{ stats.hot_count|default:0 }}</strong>
+        </div>
+    </section>
+
+    <section class="rank-table-wrap">
+        <table class="rank-table">
+            <thead>
+            <tr>
+                <th>排名</th>
+                <th>游戏名</th>
+                <th>热度</th>
+                <th>排名波动</th>
+                <th>BSN</th>
+                <th>条件命中</th>
+                <th>哈啦区链接</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% if entries %}
+                {% for row in entries %}
+                    <tr>
+                        <td>#{{ row.rank }}</td>
+                        <td>{{ row.board_title }}</td>
+                        <td>
+                            <div>{{ row.heat_text|default:"-" }}</div>
+                            <small>heat={{ row.heat_value|default:0 }}</small>
+                        </td>
+                        <td>
+                            {% if row.is_new_entry %}
+                                <span class="trend-up">NEW</span>
+                            {% elif row.rank_change > 0 %}
+                                <span class="trend-up">&uarr;{{ row.rank_change }}</span>
+                                <small>(昨 {{ row.previous_rank }})</small>
+                            {% elif row.rank_change < 0 %}
+                                <span class="trend-down">&darr;{{ row.rank_change }}</span>
+                                <small>(昨 {{ row.previous_rank }})</small>
+                            {% else %}
+                                <span class="trend-flat">-</span>
+                                <small>(昨 {{ row.previous_rank|default:"-" }})</small>
+                            {% endif %}
+                        </td>
+                        <td>{{ row.bsn }}</td>
+                        <td>
+                            {% if row.selected_for_daily %}<span class="flag hit">每日任务命中</span>{% endif %}
+                            {% if row.is_new_entry %}<span class="flag new">新进榜</span>{% endif %}
+                            {% if row.is_rank_rising %}<span class="flag">明显上升</span>{% endif %}
+                            {% if row.is_high_rank %}<span class="flag">高排名</span>{% endif %}
+                            {% if row.is_hot %}<span class="flag">高热度</span>{% endif %}
+                        </td>
+                        <td>
+                            <a href="{{ row.board_url }}" target="_blank" rel="noopener noreferrer">{{ row.board_url }}</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="7">暂无榜单数据，请先点击“手动更新今日榜单”。</td>
+                </tr>
+            {% endif %}
+            </tbody>
+        </table>
+    </section>
+</div>
+</body>
+</html>

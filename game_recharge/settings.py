@@ -431,6 +431,24 @@ SIMPLEUI_CONFIG = {
                     'eid': 'ops_gateway_workbench_menu',
                 },
                 {
+                    'name': '巴哈排行榜工作台',
+                    'icon': 'fas fa-trophy',
+                    'url': '/admin/bahamut-ranking-workbench/',
+                    'eid': 'bahamut_ranking_workbench_menu',
+                },
+                {
+                    'name': '排行榜快照',
+                    'icon': 'fas fa-calendar-day',
+                    'url': '/admin/ops_gateway/bahamutboardrankingsnapshot/',
+                    'eid': 'bahamut_ranking_snapshot_menu',
+                },
+                {
+                    'name': '排行榜条目',
+                    'icon': 'fas fa-list-ol',
+                    'url': '/admin/ops_gateway/bahamutboardrankingentry/',
+                    'eid': 'bahamut_ranking_entry_menu',
+                },
+                {
                     'name': '每日任务配置',
                     'icon': 'fas fa-sliders-h',
                     'url': '/admin/ops_gateway/dailyrobotconfig/',
