@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 
 from pathlib import Path
 import os
+from urllib.parse import urlparse
 from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -59,6 +60,8 @@ INSTALLED_APPS = [
     # 'game_product_show',  # Removed
     'game_page',  # 游戏页面管理
     'seo_automation',  # SEO automation workflow
+    'ops_gateway',  # 机器人操作中间层与审批
+    'email_marketing',  # 邮件营销
 ]
 
 MIDDLEWARE = [
@@ -163,7 +166,6 @@ MEDIA_ROOT = BASE_DIR / 'media'
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',  # Token 认证
-        'rest_framework.authentication.SessionAuthentication',
     ],
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticatedOrReadOnly',
@@ -172,9 +174,38 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 10,
 }
 
+# Coqui TTS (optional)
+COQUI_TTS_ENABLED = config('COQUI_TTS_ENABLED', default=False, cast=bool)
+COQUI_TTS_DEFAULT_MODEL = config(
+    'COQUI_TTS_DEFAULT_MODEL',
+    default='tts_models/multilingual/multi-dataset/xtts_v2',
+)
+COQUI_TTS_DEFAULT_LANGUAGE = config('COQUI_TTS_DEFAULT_LANGUAGE', default='zh-cn')
+COQUI_TTS_DEFAULT_SPEAKER = config('COQUI_TTS_DEFAULT_SPEAKER', default='')
+COQUI_TTS_USE_GPU = config('COQUI_TTS_USE_GPU', default=False, cast=bool)
+COQUI_TOS_AGREED = config('COQUI_TOS_AGREED', default=False, cast=bool)
+
 # CORS settings - 配置跨域请求
 # 开发环境允许前端访问
 CORS_ALLOWED_ORIGINS = [
+    'https://www.cyphergamebuy.com',
+    'https://cyphergamebuy.com',
+    'https://cypher-frontend-pied.vercel.app',
+    'http://localhost:5176',
+    'http://127.0.0.1:5176',
+    'http://localhost:5177',
+    'http://127.0.0.1:5177',
+    'http://localhost:5178',
+    'http://127.0.0.1:5178',
+]
+
+# CSRF trusted origins（与前端开发地址保持一致）
+CSRF_TRUSTED_ORIGINS = [
+    'https://www.cyphergamebuy.com',
+    'https://cyphergamebuy.com',
+    'https://cypher-frontend-pied.vercel.app',
+    'http://localhost:5175',
+    'http://127.0.0.1:5175',
     'http://localhost:5176',
     'http://127.0.0.1:5176',
     'http://localhost:5177',
@@ -206,6 +237,7 @@ CORS_ALLOW_HEADERS = [
     'origin',
     'user-agent',
     'x-csrftoken',
+    'x-locale',
     'x-requested-with',
 ]
 
@@ -231,12 +263,12 @@ SIMPLEUI_CONFIG = {
     'system_keep': False,
     'dynamic': False,
     'tabs': True,
-    'menu_display': ['可视化装修', '首页管理', '游戏页面管理', '资讯管理', '客服管理', '页面底部管理', '用户管理'],
+    'menu_display': ['可视化装修', '首页管理', '游戏页面管理', '资讯管理', '客服管理', 'SEO自动化', '邮件营销', '页面底部管理', '用户管理'],
     'menus': [
         {
             'name': '可视化装修',
             'icon': 'fas fa-magic',
-            'url': '/cms-builder/?v=4',
+            'url': '/admin/visual-builder/?v=4',
             'eid': 'cms_builder_v4',
         },
         {
@@ -267,6 +299,12 @@ SIMPLEUI_CONFIG = {
                     'icon': 'fas fa-photo-video',
                     'url': '/admin/main/mediaasset/',
                     'eid': 'media_asset_unique',
+                },
+                {
+                    'name': '多语言翻译工具',
+                    'icon': 'fas fa-language',
+                    'url': '/admin/i18n-tools/?v=20260222-ui',
+                    'eid': 'i18n_tools_unique_v2',
                 },
             ],
             'eid': 'main_app_group_unique',
@@ -348,9 +386,92 @@ SIMPLEUI_CONFIG = {
                     'url': '/admin/customer_service/customerserviceconfig/',
                     'eid': 1018,
                 },
+                {
+                    'name': 'AI客服配置',
+                    'icon': 'fas fa-robot',
+                    'url': '/admin/customer_service/chatagentconfig/',
+                    'eid': 1116,
+                },
+                {
+                    'name': '会话管理',
+                    'icon': 'fas fa-comments',
+                    'url': '/admin/customer_service/chatsession/',
+                    'eid': 1117,
+                },
+                {
+                    'name': '客服会话台',
+                    'icon': 'fas fa-headset',
+                    'url': '/admin/customer_service/chatsession/console/?v=20260220',
+                    'eid': 1118,
+                },
             ],
             '_weight': 4,
             'eid': 1019,
+        },
+        {
+            'name': 'SEO自动化',
+            'icon': 'fas fa-robot',
+            'models': [
+                {
+                    'name': 'SEO自动化工作台',
+                    'icon': 'fas fa-sparkles',
+                    'url': '/admin/seo-automation-workbench/',
+                    'eid': 'seo_workbench_menu',
+                },
+                {
+                    'name': 'SEO API设置',
+                    'icon': 'fas fa-key',
+                    'url': '/admin/seo-api-settings/',
+                    'eid': 'seo_api_settings_menu',
+                },
+                {
+                    'name': '机器人审批工作台',
+                    'icon': 'fas fa-shield-alt',
+                    'url': '/admin/ops-gateway-workbench/',
+                    'eid': 'ops_gateway_workbench_menu',
+                },
+                {
+                    'name': '每日任务配置',
+                    'icon': 'fas fa-sliders-h',
+                    'url': '/admin/ops_gateway/dailyrobotconfig/',
+                    'eid': 'daily_robot_config_menu',
+                },
+                {
+                    'name': '每日运行记录',
+                    'icon': 'fas fa-calendar-check',
+                    'url': '/admin/ops_gateway/dailyrobotrun/',
+                    'eid': 'daily_robot_run_menu',
+                },
+            ],
+            '_weight': 4.2,
+            'eid': 'seo_automation_group_unique',
+        },
+        {
+            'app': 'email_marketing',
+            'name': '邮件营销',
+            'icon': 'fas fa-envelope-open-text',
+            'models': [
+                {
+                    'name': '发送邮箱配置',
+                    'icon': 'fas fa-paper-plane',
+                    'url': '/admin/email_marketing/emailsenderconfig/',
+                    'eid': 1120,
+                },
+                {
+                    'name': '营销活动',
+                    'icon': 'fas fa-bullhorn',
+                    'url': '/admin/email_marketing/emailcampaign/',
+                    'eid': 1121,
+                },
+                {
+                    'name': '发送日志',
+                    'icon': 'fas fa-list-check',
+                    'url': '/admin/email_marketing/campaignrecipientlog/',
+                    'eid': 1122,
+                },
+            ],
+            '_weight': 4.5,
+            'eid': 1123,
         },
         {
             'app': 'footer',
@@ -378,27 +499,6 @@ SIMPLEUI_CONFIG = {
             ],
             '_weight': 5,
             'eid': 1023,
-        },
-        {
-            'app': 'game_page',
-            'name': '游戏页面管理',
-            'icon': 'fas fa-file-alt',
-            'models': [
-                {
-                    'name': '页面分类',
-                    'icon': 'fas fa-folder',
-                    'url': '/admin/game_page/gamepagecategory/',
-                    'eid': 1027,
-                },
-                {
-                    'name': '游戏页面',
-                    'icon': 'fas fa-file-alt',
-                    'url': '/admin/game_page/gamepage/',
-                    'eid': 1028,
-                },
-            ],
-            '_weight': 5.6,
-            'eid': 1029,
         },
         {
             'app': 'auth',
@@ -435,6 +535,23 @@ EMAIL_HOST_USER = '842015629@qq.com'  # 发件人邮箱
 EMAIL_HOST_PASSWORD = 'siwlfnlqfxrobahj'  # QQ邮箱授权码
 DEFAULT_FROM_EMAIL = '842015629@qq.com'  # 默认发件人
 
+
+def _split_origin(origin: str, fallback_protocol: str = "https") -> tuple[str, str]:
+    value = str(origin or "").strip()
+    if not value:
+        return ("", fallback_protocol)
+
+    parsed = urlparse(value if "://" in value else f"{fallback_protocol}://{value}")
+    domain = parsed.netloc or parsed.path
+    protocol = parsed.scheme or fallback_protocol
+    return (domain.strip(), protocol.strip())
+
+
+# Frontend origin used in activation emails and auth links.
+# Use env to avoid hardcoding localhost in production.
+FRONTEND_ORIGIN = config("FRONTEND_ORIGIN", default="https://www.cyphergamebuy.com")
+FRONTEND_DOMAIN, FRONTEND_PROTOCOL = _split_origin(FRONTEND_ORIGIN, fallback_protocol="https")
+
 # ==============================================
 # Djoser 配置 - 用户认证
 # ==============================================
@@ -450,11 +567,15 @@ DJOSER = {
     # 邮件类配置（使用自定义邮件类强制使用前端域名）
     'EMAIL': {
         'activation': 'main.email.CustomActivationEmail',
+        'password_reset': 'main.email.CustomPasswordResetEmail',
     },
     
     # 序列化器
     'SERIALIZERS': {
-        'user_create': 'djoser.serializers.UserCreateSerializer',
+        'user_create': 'users.djoser_serializers.EmailLoginUserCreateSerializer',
+        'user_create_password_retype': 'users.djoser_serializers.EmailLoginUserCreatePasswordRetypeSerializer',
+        'token_create': 'users.djoser_serializers.EmailLoginTokenCreateSerializer',
+        'password_reset': 'users.djoser_serializers.DuplicateSafeSendEmailResetSerializer',
         'user': 'djoser.serializers.UserSerializer',
         'current_user': 'djoser.serializers.UserSerializer',
         'user_delete': 'djoser.serializers.UserDeleteSerializer',
@@ -470,7 +591,7 @@ DJOSER = {
     'TOKEN_MODEL': 'rest_framework.authtoken.models.Token',
     
     # 前端域名（重要：必须与前端实际运行端口一致）
-    'DOMAIN': 'localhost:5176',
+    'DOMAIN': FRONTEND_DOMAIN or 'www.cyphergamebuy.com',
     'SITE_NAME': 'CYPHER GAME BUY',
     
     # 允许的用户名字符
@@ -484,3 +605,52 @@ DJOSER = {
 
 # 用户模型配置（如果使用自定义用户模型）
 # AUTH_USER_MODEL = 'users.CustomUser'
+
+# ChargeX Gateway
+CHARGEX_BASE_URL = config('CHARGEX_BASE_URL', default='https://charge-x.app/api/v1/public')
+CHARGEX_API_KEY = config('CHARGEX_API_KEY', default='')
+CHARGEX_TIMEOUT_SEC = config('CHARGEX_TIMEOUT_SEC', default=15, cast=int)
+CHARGEX_RETRY_ON_RATE_LIMIT = config('CHARGEX_RETRY_ON_RATE_LIMIT', default=2, cast=int)
+CHARGEX_MIN_INTERVAL_MS = config('CHARGEX_MIN_INTERVAL_MS', default=1200, cast=int)
+CHARGEX_CACHE_TTL_PROVIDERS = config('CHARGEX_CACHE_TTL_PROVIDERS', default=300, cast=int)
+CHARGEX_CACHE_TTL_PRODUCTS = config('CHARGEX_CACHE_TTL_PRODUCTS', default=600, cast=int)
+CHARGEX_CACHE_TTL_PRODUCT_DETAIL = config('CHARGEX_CACHE_TTL_PRODUCT_DETAIL', default=600, cast=int)
+CHARGEX_CACHE_TTL_ORDER_DETAIL = config('CHARGEX_CACHE_TTL_ORDER_DETAIL', default=10, cast=int)
+CHARGEX_INVENTORY_SNAPSHOT_TTL = config('CHARGEX_INVENTORY_SNAPSHOT_TTL', default=21600, cast=int)
+CHARGEX_INVENTORY_DELAY_WARN_SEC = config('CHARGEX_INVENTORY_DELAY_WARN_SEC', default=600, cast=int)
+CHARGEX_INVENTORY_DELAY_STALE_SEC = config('CHARGEX_INVENTORY_DELAY_STALE_SEC', default=1200, cast=int)
+CHARGEX_INVENTORY_SYNC_LOCK_TTL = config('CHARGEX_INVENTORY_SYNC_LOCK_TTL', default=21600, cast=int)
+CHARGEX_INVENTORY_SNAPSHOT_FILE = config(
+    'CHARGEX_INVENTORY_SNAPSHOT_FILE',
+    default=str(BASE_DIR / '_runtime_tmp_chargex_inventory_snapshot.json'),
+)
+CHARGEX_INVENTORY_SYNC_LOCK_FILE = config(
+    'CHARGEX_INVENTORY_SYNC_LOCK_FILE',
+    default=str(BASE_DIR / '_runtime_tmp_chargex_inventory_snapshot.lock'),
+)
+CHARGEX_INVENTORY_HEALTH_LOG_FILE = config(
+    'CHARGEX_INVENTORY_HEALTH_LOG_FILE',
+    default=str(BASE_DIR / '_runtime_logs' / 'chargex_inventory_health.jsonl'),
+)
+CHARGEX_PENDING_SYNC_LIMIT = config('CHARGEX_PENDING_SYNC_LIMIT', default=200, cast=int)
+CHARGEX_PENDING_SYNC_MIN_AGE_MINUTES = config('CHARGEX_PENDING_SYNC_MIN_AGE_MINUTES', default=1, cast=int)
+CHARGEX_BALANCE_ALERT_THRESHOLD = config('CHARGEX_BALANCE_ALERT_THRESHOLD', default='20')
+CHARGEX_BALANCE_ALERT_COOLDOWN_SEC = config('CHARGEX_BALANCE_ALERT_COOLDOWN_SEC', default=1800, cast=int)
+CHARGEX_BALANCE_ALERT_WEBHOOKS = [
+    item.strip()
+    for item in config('CHARGEX_BALANCE_ALERT_WEBHOOKS', default='').split(',')
+    if item.strip()
+]
+CHARGEX_BALANCE_ALERT_EMAILS = [
+    item.strip()
+    for item in config('CHARGEX_BALANCE_ALERT_EMAILS', default='').split(',')
+    if item.strip()
+]
+
+# KaiYiXin Gateway
+KAYIXIN_BASE_URL = config('KAYIXIN_BASE_URL', default='')
+KAYIXIN_APP_ID = config('KAYIXIN_APP_ID', default='')
+KAYIXIN_APP_SECRET = config('KAYIXIN_APP_SECRET', default='')
+KAYIXIN_TIMEOUT_SEC = config('KAYIXIN_TIMEOUT_SEC', default=15, cast=int)
+KAYIXIN_VERSION = config('KAYIXIN_VERSION', default='3.0')
+KAYIXIN_NOTIFY_URL = config('KAYIXIN_NOTIFY_URL', default='')

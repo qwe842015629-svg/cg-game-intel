@@ -1,0 +1,1634 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>机器人审批工作台</title>
+  <style>
+    body { margin: 0; font-family: "Microsoft YaHei", "PingFang SC", sans-serif; background: #f5f7fb; color: #1f2d3d; }
+    .page { max-width: 1360px; margin: 0 auto; padding: 18px; }
+    .header, .card { background: #fff; border: 1px solid #e6edf6; border-radius: 12px; box-shadow: 0 8px 20px rgba(15,35,95,.06); }
+    .header { padding: 16px; margin-bottom: 12px; }
+    .header h1 { margin: 0 0 6px; font-size: 24px; }
+    .header p { margin: 0; color: #5f7393; font-size: 13px; }
+    .header-actions { margin-top: 10px; display: flex; gap: 8px; flex-wrap: wrap; }
+    .btn { border: 1px solid #2f80ed; border-radius: 8px; background: #2f80ed; color: #fff; padding: 7px 10px; font-size: 13px; cursor: pointer; text-decoration: none; }
+    .btn:disabled { opacity: .58; cursor: not-allowed; }
+    .btn.ghost { background: #fff; color: #1d4f8c; border-color: #c8dbf6; }
+    .btn.success { background: #1f9d58; border-color: #1f9d58; }
+    .btn.warn { background: #e67e22; border-color: #e67e22; }
+    .btn.danger { background: #e55353; border-color: #e55353; }
+    .btn.link { background: #f2f7ff; color: #1d5ea8; border-color: #c8dbf6; }
+
+    .grid-top { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+    .grid-main { display: grid; grid-template-columns: 1.4fr 1fr; gap: 12px; }
+    .card { padding: 14px; }
+    .card h2 { margin: 0 0 8px; font-size: 16px; }
+    .sub { margin: 0 0 10px; color: #6b7a90; font-size: 12px; }
+    .muted { color: #7b8ea8; font-size: 12px; }
+    .meta-line { margin-top: 8px; color: #5f7393; font-size: 12px; }
+    .empty { color: #7b8ea8; padding: 10px; }
+
+    .kpis { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+    .kpi { border: 1px solid #dbe7f6; border-radius: 10px; background: #f8fbff; padding: 10px; }
+    .kpi .label { color: #5f7393; font-size: 12px; }
+    .kpi .value { margin-top: 4px; font-size: 24px; font-weight: 700; line-height: 1; color: #213b63; }
+    .trend-list { margin-top: 8px; display: flex; flex-direction: column; gap: 6px; }
+    .trend-row { display: grid; grid-template-columns: 54px 1fr 90px; gap: 8px; align-items: center; font-size: 12px; }
+    .trend-bar { height: 8px; border-radius: 999px; background: #ebf1fb; overflow: hidden; }
+    .trend-bar span { display: block; height: 100%; border-radius: 999px; background: linear-gradient(90deg, #2f80ed, #1f9d58); }
+    .trend-meta { text-align: right; color: #5f7393; }
+
+    .grid-fields { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 8px; }
+    .field { display: flex; flex-direction: column; gap: 4px; }
+    .field label { font-size: 12px; color: #5f7393; }
+    .field input, .field select, .field textarea { border: 1px solid #dbe5f4; border-radius: 8px; padding: 8px; font-size: 13px; }
+    .field textarea { min-height: 64px; resize: vertical; }
+    .span-2 { grid-column: span 2; }
+    .checks { display: flex; gap: 8px; flex-wrap: wrap; }
+    .checks label { border: 1px solid #d9e8fb; border-radius: 999px; background: #f8fbff; font-size: 12px; padding: 5px 9px; }
+    .form-actions { margin-top: 10px; display: flex; gap: 8px; flex-wrap: wrap; }
+
+    .guide { margin: 0; padding-left: 20px; color: #345271; font-size: 13px; line-height: 1.7; }
+    .guide strong { color: #1d4f8c; }
+    .msg { margin-top: 10px; border: 1px solid #dbe7f6; border-radius: 8px; background: #f8fbff; padding: 8px; font-size: 12px; color: #35557b; }
+    .msg.success { border-color: #bde8ce; background: #ecfbf3; color: #167c46; }
+    .msg.error { border-color: #f7d1d1; background: #fff1f1; color: #b02d2d; }
+
+    .filters { display: grid; grid-template-columns: 140px 1fr 90px 1fr auto auto; gap: 8px; align-items: center; margin-top: 10px; }
+    .filters input, .filters select { border: 1px solid #dbe5f4; border-radius: 8px; padding: 7px 8px; font-size: 13px; }
+    table { width: 100%; border-collapse: collapse; font-size: 12px; }
+    th, td { border-bottom: 1px solid #edf2f9; padding: 8px 6px; text-align: left; vertical-align: top; }
+    th { color: #4e6582; border-bottom-color: #dbe5f4; }
+    tr.active { background: #f4f8ff; }
+    .status { border: 1px solid #dbe6f6; border-radius: 999px; padding: 2px 8px; font-size: 12px; font-weight: 700; background: #f7fbff; color: #2d4e75; white-space: nowrap; }
+    .status.pending { border-color: #f6dfba; background: #fff8ed; color: #a25f12; }
+    .status.approved { border-color: #bedff7; background: #eef7ff; color: #1664a0; }
+    .status.executed { border-color: #bde8ce; background: #e9f9f0; color: #168c4b; }
+    .status.failed { border-color: #f7d1d1; background: #fff1f1; color: #ba2c2c; }
+    .status.rejected { border-color: #ead7f7; background: #f8f0ff; color: #7a3db7; }
+    .mini-actions { display: flex; gap: 6px; flex-wrap: wrap; }
+    .mini-actions .btn { padding: 5px 8px; font-size: 12px; }
+    .json { min-height: 180px; max-height: 320px; overflow: auto; border: 1px dashed #d5e2f5; border-radius: 8px; background: #fbfdff; padding: 9px; font-size: 12px; font-family: Consolas, monospace; white-space: pre-wrap; }
+    .detail-actions { margin-bottom: 8px; display: flex; gap: 8px; flex-wrap: wrap; }
+    .detail-human { border: 1px solid #dce8f8; border-radius: 8px; background: #fbfdff; padding: 10px; display: flex; flex-direction: column; gap: 10px; }
+    .detail-group { border: 1px solid #dce8f8; border-radius: 8px; overflow: hidden; background: #fff; }
+    .detail-group h4 { margin: 0; padding: 8px 10px; font-size: 13px; color: #234b7a; background: #f2f7ff; border-bottom: 1px solid #e5eefb; }
+    .detail-grid { display: grid; grid-template-columns: 150px 1fr; }
+    .detail-grid .k, .detail-grid .v { padding: 8px 10px; border-top: 1px solid #edf3fb; font-size: 12px; }
+    .detail-grid .k { color: #5f7393; background: #fcfdff; }
+    .detail-grid .v { color: #1f2d3d; white-space: pre-wrap; word-break: break-word; overflow-wrap: anywhere; }
+    .inline-dash { color: #7b8ea8; }
+    .raw-json-wrap { margin-top: 8px; }
+    .raw-json-wrap summary { cursor: pointer; color: #1d5ea8; font-size: 12px; user-select: none; }
+    .raw-json-wrap .json { margin-top: 8px; min-height: 90px; max-height: 260px; }
+    .log-list { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; max-height: 280px; overflow: auto; }
+    .log-item { border: 1px solid #dce8f8; border-radius: 8px; background: #f9fcff; padding: 8px; font-size: 12px; }
+    .log-item .line-1 { display: flex; justify-content: space-between; gap: 8px; color: #2f4f79; font-weight: 700; }
+    .log-item .line-2 { margin-top: 4px; color: #5f7393; }
+    .automation-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-top: 8px; }
+    .automation-panel { border: 1px solid #dce8f8; border-radius: 10px; background: #f8fbff; padding: 10px; }
+    .automation-panel h3 { margin: 0 0 8px; font-size: 14px; color: #1d4f8c; }
+    .automation-panel .field textarea { min-height: 70px; }
+    .automation-panel .field small { color: #6b7a90; font-size: 11px; line-height: 1.4; }
+    .automation-result { margin-top: 10px; }
+    .automation-result .msg { margin-top: 0; }
+    .automation-json { min-height: 170px; }
+    .ops-health-toolbar { display: flex; gap: 8px; align-items: center; justify-content: space-between; flex-wrap: wrap; margin-bottom: 8px; }
+    .ops-health-meta { color: #5f7393; font-size: 12px; }
+    .ops-health-json { min-height: 120px; max-height: 260px; }
+    .status.ops-ok { border-color: #bde8ce; background: #e9f9f0; color: #168c4b; }
+    .status.ops-warn { border-color: #f6dfba; background: #fff8ed; color: #a25f12; }
+    .status.ops-error { border-color: #f7d1d1; background: #fff1f1; color: #ba2c2c; }
+    .status.ops-pending { border-color: #d9e8fb; background: #f0f7ff; color: #1b5ea1; }
+
+    @media (max-width: 1200px) {
+      .grid-top { grid-template-columns: 1fr; }
+      .grid-main { grid-template-columns: 1fr; }
+      .automation-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 860px) {
+      .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .filters { grid-template-columns: 1fr 1fr; }
+      .filters .btn { width: 100%; }
+      .grid-fields { grid-template-columns: 1fr; }
+      .span-2 { grid-column: span 1; }
+      .automation-grid { grid-template-columns: 1fr; }
+      .detail-grid { grid-template-columns: 1fr; }
+      .detail-grid .k { border-top: 1px solid #edf3fb; border-bottom: none; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+  <div class="header">
+    <h1>机器人审批工作台</h1>
+    <p>更新时间：{{ now|date:"Y-m-d H:i:s" }} · 审批链路：申请 -> 人工审批 -> 执行发布 -> 审计追踪</p>
+    <div class="header-actions">
+      <button class="btn ghost" type="button" id="backDashboardBtn">返回运营看板</button>
+      <a class="btn ghost" href="/admin/ops_gateway/operationapproval/">审批单模型</a>
+      <a class="btn ghost" href="/admin/ops_gateway/operationauditlog/">审计日志模型</a>
+      <button class="btn" type="button" id="refreshNowBtn">立即刷新</button>
+    </div>
+  </div>
+
+  <div class="grid-top">
+    <div class="card">
+      <h2>实时状态总览</h2>
+      <p class="sub">按审批状态统计，可快速识别任务堆积与失败波动。</p>
+      <div class="kpis">
+        <div class="kpi"><div class="label">待审批</div><div id="kpiPending" class="value">0</div></div>
+        <div class="kpi"><div class="label">已通过</div><div id="kpiApproved" class="value">0</div></div>
+        <div class="kpi"><div class="label">执行成功</div><div id="kpiExecuted" class="value">0</div></div>
+        <div class="kpi"><div class="label">执行失败</div><div id="kpiFailed" class="value">0</div></div>
+        <div class="kpi"><div class="label">已驳回</div><div id="kpiRejected" class="value">0</div></div>
+        <div class="kpi"><div class="label">总请求数</div><div id="kpiTotal" class="value">0</div></div>
+      </div>
+      <div class="meta-line" id="summaryMeta">24小时新增: 0 / 执行: 0 / 失败: 0</div>
+      <div id="trendList" class="trend-list"><div class="empty">加载中...</div></div>
+    </div>
+
+    <div class="card">
+      <h2>创建审批请求</h2>
+      <p class="sub">无需机器人也可手工创建一条请求，便于你先跑通流程。</p>
+      <div class="grid-fields">
+        <div class="field span-2">
+          <label for="articleSelect">选择 SEO 草稿</label>
+          <select id="articleSelect">
+            <option value="">加载中...</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="manualArticleId">或手工输入 SEO 文章ID</label>
+          <input id="manualArticleId" type="number" min="1" placeholder="例如 123">
+        </div>
+        <div class="field">
+          <label for="riskLevel">风险等级</label>
+          <select id="riskLevel">
+            <option value="1">1 - 极低</option>
+            <option value="2">2 - 低</option>
+            <option value="3" selected>3 - 中</option>
+            <option value="4">4 - 高</option>
+            <option value="5">5 - 极高</option>
+          </select>
+        </div>
+        <div class="field span-2">
+          <label for="reasonInput">申请说明</label>
+          <textarea id="reasonInput" placeholder="例如：用于日常运营发布，内容已审核。"></textarea>
+        </div>
+        <div class="field span-2">
+          <label for="idempotencyKey">幂等键（避免重复创建）</label>
+          <input id="idempotencyKey" type="text" placeholder="自动生成，可手动修改">
+        </div>
+        <div class="field span-2">
+          <label>执行参数</label>
+          <div class="checks">
+            <label><input id="publishNowChk" type="checkbox"> 文章状态设为已发布</label>
+            <label><input id="runStep5Chk" type="checkbox" checked> 执行步骤5图文优化</label>
+          </div>
+        </div>
+      </div>
+      <div class="form-actions">
+        <button class="btn success" type="button" id="createRequestBtn">创建审批请求</button>
+        <button class="btn ghost" type="button" id="refreshArticleOptionsBtn">刷新草稿选项</button>
+        <a class="btn link" href="/admin/seo-automation-workbench/">打开SEO工作台</a>
+      </div>
+      <div id="actionMessage" class="msg">提示：先选择一篇 SEO 草稿，然后点击“创建审批请求”。</div>
+    </div>
+
+    <div class="card">
+      <h2>快速教程</h2>
+      <p class="sub">第一次使用建议按这个顺序跑一遍：</p>
+      <ol class="guide">
+        <li><strong>准备草稿：</strong>在 <code>SEO自动化工作台</code> 先生成至少一篇草稿。</li>
+        <li><strong>创建申请：</strong>在本页选择草稿并点击“创建审批请求”。</li>
+        <li><strong>人工审批：</strong>在下方列表点“详情”，再点“审批通过”。</li>
+        <li><strong>执行发布：</strong>点“执行发布”，成功后状态会变 <code>executed</code>。</li>
+        <li><strong>审计复核：</strong>右侧“审计日志”确认 request_created / approved / executed 全链路。</li>
+      </ol>
+      <div class="form-actions">
+        <button class="btn ghost" type="button" id="fillDemoBtn">填充演示参数</button>
+      </div>
+      <p class="muted">机器人正式接入时，只让机器人调用 <code>POST /api/ops/v1/publish-requests/</code>，审批与执行继续由人工控制。</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>自动化机器人</h2>
+    <p class="sub">在此面板可一键执行 Google Play 导入、SEO 每日抓取/生成、已发布文章复审。</p>
+    <div class="automation-grid">
+      <div class="automation-panel">
+        <h3>1) Google Play 导入</h3>
+        <div class="grid-fields">
+          <div class="field span-2">
+            <label for="autoPlayUrls">Play 链接（每行一个）</label>
+            <textarea id="autoPlayUrls" placeholder="https://play.google.com/store/apps/details?id=com.example.game"></textarea>
+            <small>支持多个链接，机器人会自动提取包名并批量导入产品页面。</small>
+          </div>
+          <div class="field span-2">
+            <label for="autoPackageIds">包名 Package ID（逗号或换行）</label>
+            <textarea id="autoPackageIds" placeholder="com.example.game"></textarea>
+          </div>
+          <div class="field">
+            <label for="autoTemplateKey">充值说明模板 Key</label>
+            <input id="autoTemplateKey" type="text" value="default" placeholder="default">
+          </div>
+          <div class="field">
+            <label for="autoCategoryId">分类 ID（可选）</label>
+            <input id="autoCategoryId" type="number" min="1" placeholder="例如：3">
+          </div>
+          <div class="field">
+            <label for="autoPublishStatus">发布状态</label>
+            <select id="autoPublishStatus">
+              <option value="draft" selected>草稿</option>
+              <option value="published">已发布</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="autoImportLimit">导入上限</label>
+            <input id="autoImportLimit" type="number" min="1" max="100" value="30">
+          </div>
+          <div class="field span-2">
+            <label><input id="autoOverwriteExisting" type="checkbox"> 覆盖已存在的产品字段</label>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button class="btn success" id="autoImportBtn" type="button">立即导入</button>
+        </div>
+      </div>
+
+      <div class="automation-panel">
+        <h3>2) SEO 每日任务</h3>
+        <div class="grid-fields">
+          <div class="field span-2">
+            <label for="autoSeoGameIds">游戏 ID（可选，逗号或换行）</label>
+            <textarea id="autoSeoGameIds" placeholder="12, 45, 68"></textarea>
+            <small>留空表示自动选择热门/推荐/新游戏。</small>
+          </div>
+          <div class="field">
+            <label for="autoSeoLimitGames">游戏数上限</label>
+            <input id="autoSeoLimitGames" type="number" min="1" max="100" value="6">
+          </div>
+          <div class="field">
+            <label for="autoSeoRecentDays">回溯天数</label>
+            <input id="autoSeoRecentDays" type="number" min="1" max="120" value="30">
+          </div>
+          <div class="field">
+            <label for="autoSeoPostsMin">每游戏帖子最小数</label>
+            <input id="autoSeoPostsMin" type="number" min="1" max="200" value="10">
+          </div>
+          <div class="field">
+            <label for="autoSeoPostsMax">每游戏帖子最大数</label>
+            <input id="autoSeoPostsMax" type="number" min="1" max="200" value="20">
+          </div>
+          <div class="field">
+            <label for="autoSeoReviewThreshold">质量阈值</label>
+            <input id="autoSeoReviewThreshold" type="number" min="1" max="100" value="72">
+          </div>
+          <div class="field">
+            <label for="autoSeoPublishStatus">发布状态</label>
+            <select id="autoSeoPublishStatus">
+              <option value="published" selected>已发布</option>
+              <option value="draft">草稿</option>
+            </select>
+          </div>
+          <div class="field span-2 checks">
+            <label><input id="autoSeoRewriteLowQuality" type="checkbox" checked> 改写低质量草稿</label>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button class="btn success" id="autoSeoDailyBtn" type="button">运行 SEO 每日任务</button>
+        </div>
+      </div>
+
+      <div class="automation-panel">
+        <h3>3) 已发布复审</h3>
+        <div class="grid-fields">
+          <div class="field span-2">
+            <label for="autoReviewGameIds">游戏 ID（可选，逗号或换行）</label>
+            <textarea id="autoReviewGameIds" placeholder="12, 45"></textarea>
+          </div>
+          <div class="field">
+            <label for="autoReviewLimit">复审上限</label>
+            <input id="autoReviewLimit" type="number" min="1" max="300" value="100">
+          </div>
+          <div class="field">
+            <label for="autoReviewThreshold">质量阈值</label>
+            <input id="autoReviewThreshold" type="number" min="1" max="100" value="72">
+          </div>
+          <div class="field span-2 checks">
+            <label><input id="autoReviewRewrite" type="checkbox" checked> 改写低质量文章</label>
+            <label><input id="autoReviewArchiveDup" type="checkbox" checked> 归档低价值重复文章</label>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button class="btn success" id="autoReviewBtn" type="button">执行复审</button>
+        </div>
+      </div>
+
+      <div class="automation-panel">
+        <h3>4) 每日任务配置</h3>
+        <div class="grid-fields">
+          <div class="field span-2 checks">
+            <label><input id="dailyCfgEnabled" type="checkbox" checked> 启用每日自动任务</label>
+          </div>
+          <div class="field">
+            <label for="dailyCfgPublishStatus">发布状态</label>
+            <select id="dailyCfgPublishStatus">
+              <option value="published" selected>已发布</option>
+              <option value="draft">草稿</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="dailyCfgHour">每日执行小时 (0-23)</label>
+            <input id="dailyCfgHour" type="number" min="0" max="23" value="4">
+          </div>
+          <div class="field">
+            <label for="dailyCfgPollSeconds">轮询秒数</label>
+            <input id="dailyCfgPollSeconds" type="number" min="60" max="86400" value="900">
+          </div>
+          <div class="field">
+            <label for="dailyCfgMaxRunningMinutes">最长运行分钟</label>
+            <input id="dailyCfgMaxRunningMinutes" type="number" min="10" max="1440" value="180">
+          </div>
+          <div class="field">
+            <label for="dailyCfgImportLimit">每日产品提取数量</label>
+            <input id="dailyCfgImportLimit" type="number" min="1" max="100" value="30">
+          </div>
+          <div class="field">
+            <label for="dailyCfgLimitGames">每日文章游戏数量</label>
+            <input id="dailyCfgLimitGames" type="number" min="1" max="100" value="6">
+          </div>
+          <div class="field">
+            <label for="dailyCfgPostsMin">单游戏最少抓帖</label>
+            <input id="dailyCfgPostsMin" type="number" min="1" max="200" value="10">
+          </div>
+          <div class="field">
+            <label for="dailyCfgPostsMax">单游戏最多抓帖</label>
+            <input id="dailyCfgPostsMax" type="number" min="1" max="200" value="20">
+          </div>
+          <div class="field">
+            <label for="dailyCfgMaxAttemptsPerGame">单游戏最大抓取尝试次数</label>
+            <input id="dailyCfgMaxAttemptsPerGame" type="number" min="1" max="5" value="1">
+          </div>
+          <div class="field">
+            <label for="dailyCfgRewriteLimit">单游戏改写次数上限</label>
+            <input id="dailyCfgRewriteLimit" type="number" min="1" max="5" value="1">
+          </div>
+          <div class="field">
+            <label for="dailyCfgReviewThreshold">质量阈值</label>
+            <input id="dailyCfgReviewThreshold" type="number" min="1" max="100" value="78">
+          </div>
+          <div class="field">
+            <label for="dailyCfgRecentDays">新游回溯天数</label>
+            <input id="dailyCfgRecentDays" type="number" min="1" max="120" value="30">
+          </div>
+          <div class="field span-2">
+            <label for="dailyCfgActorUsername">执行账号用户名</label>
+            <input id="dailyCfgActorUsername" type="text" value="admin_root" placeholder="admin_root">
+          </div>
+        </div>
+        <div class="form-actions">
+          <button class="btn ghost" id="dailyCfgLoadBtn" type="button">读取配置</button>
+          <button class="btn success" id="dailyCfgSaveBtn" type="button">保存配置</button>
+        </div>
+      </div>
+    </div>
+
+  <div class="automation-result">
+      <div id="autoRobotMessage" class="msg">自动化运行结果将在此显示。</div>
+      <div id="autoRobotJson" class="json automation-json">{}</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>每日自动发布运维状态表</h2>
+    <p class="sub">按“功能点 / 状态 / 证据 / 建议”实时展示当天运行健康。默认包含外部源探测。</p>
+    <div class="ops-health-toolbar">
+      <div id="opsHealthMeta" class="ops-health-meta">加载中...</div>
+      <div class="mini-actions">
+        <button class="btn ghost" id="refreshOpsHealthBtn" type="button">刷新状态表</button>
+        <button class="btn ghost" id="refreshOpsHealthNoProbeBtn" type="button">快速刷新（不探测外部）</button>
+      </div>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th style="width: 22%;">功能点</th>
+          <th style="width: 10%;">状态</th>
+          <th style="width: 38%;">证据</th>
+          <th style="width: 30%;">建议</th>
+        </tr>
+      </thead>
+      <tbody id="opsHealthBody">
+        <tr><td colspan="4" class="empty">加载中...</td></tr>
+      </tbody>
+    </table>
+    <details class="raw-json-wrap" style="margin-top:10px;">
+      <summary>查看运维原始 JSON</summary>
+      <div id="opsHealthJson" class="json ops-health-json">{}</div>
+    </details>
+  </div>
+
+  <div class="grid-main">
+    <div class="card">
+      <h2>审批请求列表</h2>
+      <p class="sub">支持状态过滤和关键字搜索。点击“详情”可查看审计轨迹并执行审批动作。</p>
+
+      <div class="filters">
+        <select id="statusFilter">
+          <option value="">全部状态</option>
+          <option value="pending" selected>pending</option>
+          <option value="approved">approved</option>
+          <option value="executed">executed</option>
+          <option value="failed">failed</option>
+          <option value="rejected">rejected</option>
+        </select>
+        <input id="searchInput" type="text" placeholder="搜索 target_id / reason / idempotency_key">
+        <input id="limitInput" type="number" value="80" min="1" max="200">
+        <label class="muted"><input id="autoRefreshChk" type="checkbox" checked> 自动刷新</label>
+        <button class="btn ghost" id="applyFilterBtn" type="button">应用筛选</button>
+        <button class="btn ghost" id="clearFilterBtn" type="button">重置</button>
+      </div>
+
+      <div class="meta-line" id="listMeta">最近拉取：--</div>
+      <table>
+        <thead>
+          <tr>
+            <th>request_id</th>
+            <th>状态</th>
+            <th>动作</th>
+            <th>目标</th>
+            <th>风险</th>
+            <th>申请时间</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody id="approvalsBody">
+          <tr><td colspan="7" class="empty">加载中...</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="display:flex; flex-direction:column; gap:12px;">
+      <div class="card">
+        <h2>审批详情</h2>
+        <p class="sub">选中请求后可进行审批、驳回、执行（支持强制执行）。</p>
+        <div class="detail-actions">
+          <button class="btn success" id="approveBtn" type="button" disabled>审批通过</button>
+          <button class="btn warn" id="rejectBtn" type="button" disabled>审批驳回</button>
+          <button class="btn" id="executeBtn" type="button" disabled>执行发布</button>
+          <button class="btn danger" id="forceExecuteBtn" type="button" disabled>强制执行</button>
+        </div>
+        <div id="detailHint" class="muted">请在左侧列表中选择一条请求。</div>
+        <div id="detailHuman" class="detail-human"><div class="empty">请在左侧列表中选择一条请求。</div></div>
+        <details class="raw-json-wrap">
+          <summary>查看原始 JSON</summary>
+          <div id="detailJson" class="json">{}</div>
+        </details>
+      </div>
+
+      <div class="card">
+        <h2>审计日志</h2>
+        <p class="sub">按时间倒序展示，便于追踪机器人动作责任链。</p>
+        <ul id="logList" class="log-list">
+          <li class="empty">暂无数据</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  const API_BASE = "/api/ops/v1";
+
+  const approvalsBody = document.getElementById("approvalsBody");
+  const detailHuman = document.getElementById("detailHuman");
+  const detailJson = document.getElementById("detailJson");
+  const detailHint = document.getElementById("detailHint");
+  const logList = document.getElementById("logList");
+  const listMeta = document.getElementById("listMeta");
+  const summaryMeta = document.getElementById("summaryMeta");
+  const trendList = document.getElementById("trendList");
+  const actionMessage = document.getElementById("actionMessage");
+
+  const approveBtn = document.getElementById("approveBtn");
+  const rejectBtn = document.getElementById("rejectBtn");
+  const executeBtn = document.getElementById("executeBtn");
+  const forceExecuteBtn = document.getElementById("forceExecuteBtn");
+
+  const statusFilter = document.getElementById("statusFilter");
+  const searchInput = document.getElementById("searchInput");
+  const limitInput = document.getElementById("limitInput");
+  const autoRefreshChk = document.getElementById("autoRefreshChk");
+
+  const articleSelect = document.getElementById("articleSelect");
+  const manualArticleId = document.getElementById("manualArticleId");
+  const riskLevel = document.getElementById("riskLevel");
+  const reasonInput = document.getElementById("reasonInput");
+  const idempotencyKey = document.getElementById("idempotencyKey");
+  const publishNowChk = document.getElementById("publishNowChk");
+  const runStep5Chk = document.getElementById("runStep5Chk");
+  const autoRobotMessage = document.getElementById("autoRobotMessage");
+  const autoRobotJson = document.getElementById("autoRobotJson");
+  const autoPlayUrls = document.getElementById("autoPlayUrls");
+  const autoPackageIds = document.getElementById("autoPackageIds");
+  const autoTemplateKey = document.getElementById("autoTemplateKey");
+  const autoCategoryId = document.getElementById("autoCategoryId");
+  const autoPublishStatus = document.getElementById("autoPublishStatus");
+  const autoImportLimit = document.getElementById("autoImportLimit");
+  const autoOverwriteExisting = document.getElementById("autoOverwriteExisting");
+  const autoSeoGameIds = document.getElementById("autoSeoGameIds");
+  const autoSeoLimitGames = document.getElementById("autoSeoLimitGames");
+  const autoSeoRecentDays = document.getElementById("autoSeoRecentDays");
+  const autoSeoPostsMin = document.getElementById("autoSeoPostsMin");
+  const autoSeoPostsMax = document.getElementById("autoSeoPostsMax");
+  const autoSeoReviewThreshold = document.getElementById("autoSeoReviewThreshold");
+  const autoSeoPublishStatus = document.getElementById("autoSeoPublishStatus");
+  const autoSeoRewriteLowQuality = document.getElementById("autoSeoRewriteLowQuality");
+  const autoReviewGameIds = document.getElementById("autoReviewGameIds");
+  const autoReviewLimit = document.getElementById("autoReviewLimit");
+  const autoReviewThreshold = document.getElementById("autoReviewThreshold");
+  const autoReviewRewrite = document.getElementById("autoReviewRewrite");
+  const autoReviewArchiveDup = document.getElementById("autoReviewArchiveDup");
+  const dailyCfgEnabled = document.getElementById("dailyCfgEnabled");
+  const dailyCfgHour = document.getElementById("dailyCfgHour");
+  const dailyCfgPollSeconds = document.getElementById("dailyCfgPollSeconds");
+  const dailyCfgMaxRunningMinutes = document.getElementById("dailyCfgMaxRunningMinutes");
+  const dailyCfgImportLimit = document.getElementById("dailyCfgImportLimit");
+  const dailyCfgLimitGames = document.getElementById("dailyCfgLimitGames");
+  const dailyCfgPostsMin = document.getElementById("dailyCfgPostsMin");
+  const dailyCfgPostsMax = document.getElementById("dailyCfgPostsMax");
+  const dailyCfgMaxAttemptsPerGame = document.getElementById("dailyCfgMaxAttemptsPerGame");
+  const dailyCfgRewriteLimit = document.getElementById("dailyCfgRewriteLimit");
+  const dailyCfgReviewThreshold = document.getElementById("dailyCfgReviewThreshold");
+  const dailyCfgRecentDays = document.getElementById("dailyCfgRecentDays");
+  const dailyCfgPublishStatus = document.getElementById("dailyCfgPublishStatus");
+  const dailyCfgActorUsername = document.getElementById("dailyCfgActorUsername");
+  const opsHealthMeta = document.getElementById("opsHealthMeta");
+  const opsHealthBody = document.getElementById("opsHealthBody");
+  const opsHealthJson = document.getElementById("opsHealthJson");
+  const refreshOpsHealthBtn = document.getElementById("refreshOpsHealthBtn");
+  const refreshOpsHealthNoProbeBtn = document.getElementById("refreshOpsHealthNoProbeBtn");
+
+  let selectedRequestId = "";
+  let selectedRequestStatus = "";
+  let autoRefreshTimer = null;
+
+  function getCsrfToken() {
+    const match = document.cookie.match(/(?:^|; )csrftoken=([^;]+)/);
+    return match ? decodeURIComponent(match[1]) : "";
+  }
+
+  function toJsonText(value) {
+    try { return JSON.stringify(value, null, 2); } catch (e) { return String(value); }
+  }
+
+  function escapeHtml(value) {
+    return String(value || "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/\"/g, "&quot;")
+      .replace(/'/g, "&#39;");
+  }
+
+  function fmtDate(value) {
+    if (!value) return "-";
+    return String(value).replace("T", " ").slice(0, 19);
+  }
+
+  const STATUS_LABELS = {
+    pending: "待审批",
+    approved: "已通过",
+    executed: "已执行",
+    failed: "执行失败",
+    rejected: "已驳回",
+  };
+
+  const ACTION_LABELS = {
+    seo_article_publish: "SEO文章发布",
+  };
+
+  const RISK_LABELS = {
+    1: "1 - 极低",
+    2: "2 - 低",
+    3: "3 - 中",
+    4: "4 - 高",
+    5: "5 - 极高",
+  };
+
+  const OPS_HEALTH_STATUS_META = {
+    ok: { label: "正常", icon: "✅", className: "ops-ok" },
+    warn: { label: "告警", icon: "⚠️", className: "ops-warn" },
+    error: { label: "异常", icon: "❌", className: "ops-error" },
+    pending: { label: "进行中", icon: "⏳", className: "ops-pending" },
+  };
+
+  function asDisplayText(value) {
+    if (value === null || value === undefined) return '<span class="inline-dash">-</span>';
+    const text = String(value).trim();
+    if (!text) return '<span class="inline-dash">-</span>';
+    return escapeHtml(text);
+  }
+
+  function asBoolText(value) {
+    if (value === true) return "是";
+    if (value === false) return "否";
+    return "-";
+  }
+
+  function toStatusBadge(statusRaw) {
+    const status = String(statusRaw || "unknown").toLowerCase();
+    const label = STATUS_LABELS[status] || status;
+    return '<span class="status ' + escapeHtml(status) + '">' + escapeHtml(label) + "</span>";
+  }
+
+  function toActionText(actionRaw) {
+    const action = String(actionRaw || "").trim();
+    if (!action) return '<span class="inline-dash">-</span>';
+    const label = ACTION_LABELS[action] || action;
+    return escapeHtml(label) + " (" + escapeHtml(action) + ")";
+  }
+
+  function toRiskText(riskRaw) {
+    const num = Number(riskRaw || 0);
+    if (!num) return '<span class="inline-dash">-</span>';
+    return escapeHtml(RISK_LABELS[num] || String(num));
+  }
+
+  function toResultSummary(lastResult) {
+    if (!lastResult || typeof lastResult !== "object") return '<span class="inline-dash">-</span>';
+    const parts = [];
+    if (lastResult.seo_article_id) parts.push("SEO草稿ID: " + Number(lastResult.seo_article_id));
+    if (lastResult.article_id) parts.push("发布文章ID: " + Number(lastResult.article_id));
+    if (lastResult.seo_status) parts.push("状态: " + String(lastResult.seo_status));
+    if (lastResult.publish_at) parts.push("发布时间: " + fmtDate(lastResult.publish_at));
+    if (typeof lastResult.run_step5 === "boolean") parts.push("图文优化: " + asBoolText(lastResult.run_step5));
+    if (lastResult.quality && typeof lastResult.quality === "object") {
+      const q = lastResult.quality;
+      const score = q.score || q.total_score || q.overall_score || q.final_score;
+      if (score !== undefined && score !== null && String(score).trim() !== "") {
+        parts.push("质量分: " + score);
+      }
+    }
+    if (!parts.length) {
+      const keys = Object.keys(lastResult);
+      if (keys.length) parts.push("返回字段: " + keys.slice(0, 6).join("、"));
+    }
+    return parts.length ? escapeHtml(parts.join("；")) : '<span class="inline-dash">-</span>';
+  }
+
+  function renderDetailGroup(title, rows) {
+    const htmlRows = rows.map(function (row) {
+      return (
+        '<div class="k">' + escapeHtml(row[0]) + "</div>" +
+        '<div class="v">' + row[1] + "</div>"
+      );
+    }).join("");
+    return (
+      '<div class="detail-group">' +
+      "<h4>" + escapeHtml(title) + "</h4>" +
+      '<div class="detail-grid">' + htmlRows + "</div>" +
+      "</div>"
+    );
+  }
+
+  function renderApprovalDetailHuman(detail) {
+    if (!detailHuman) return;
+    const payload = detail && typeof detail.payload === "object" ? detail.payload : {};
+    const action = String(detail && detail.action || "");
+    const targetType = String(detail && detail.target_type || "");
+    const targetId = String(detail && detail.target_id || "");
+    const requestBy = String(detail && (detail.requested_by_username || detail.requested_by) || "");
+    const approvedBy = String(detail && (detail.approved_by_username || detail.approved_by) || "");
+    const executedBy = String(detail && (detail.executed_by_username || detail.executed_by) || "");
+
+    const groups = [];
+    groups.push(renderDetailGroup("基础信息", [
+      ["请求ID", asDisplayText(detail && detail.request_id)],
+      ["当前状态", toStatusBadge(detail && detail.status)],
+      ["审批动作", toActionText(action)],
+      ["目标对象", asDisplayText((targetType || "-") + " / " + (targetId || "-"))],
+      ["风险等级", toRiskText(detail && detail.risk_level)],
+      ["申请说明", asDisplayText(detail && detail.reason)],
+    ]));
+
+    groups.push(renderDetailGroup("发布参数", [
+      ["SEO草稿ID", asDisplayText(payload.seo_article_id)],
+      ["立即发布", escapeHtml(asBoolText(payload.publish_now))],
+      ["执行图文优化(step5)", escapeHtml(asBoolText(payload.run_step5))],
+      ["预约发布时间", asDisplayText(fmtDate(payload.publish_at))],
+    ]));
+
+    groups.push(renderDetailGroup("审批与执行", [
+      ["申请人", asDisplayText(requestBy)],
+      ["审批人", asDisplayText(approvedBy)],
+      ["执行人", asDisplayText(executedBy)],
+      ["幂等键", asDisplayText(detail && detail.idempotency_key)],
+      ["客户端标识", asDisplayText(detail && detail.client_id)],
+      ["客户端IP", asDisplayText(detail && detail.client_ip)],
+    ]));
+
+    groups.push(renderDetailGroup("时间线与结果", [
+      ["申请时间", asDisplayText(fmtDate(detail && detail.requested_at))],
+      ["审批时间", asDisplayText(fmtDate(detail && detail.approved_at))],
+      ["执行时间", asDisplayText(fmtDate(detail && detail.executed_at))],
+      ["失败时间", asDisplayText(fmtDate(detail && detail.failed_at))],
+      ["最近更新时间", asDisplayText(fmtDate(detail && detail.updated_at))],
+      ["错误信息", asDisplayText(detail && detail.error_message)],
+      ["执行结果摘要", toResultSummary(detail && detail.last_result)],
+    ]));
+
+    detailHuman.innerHTML = groups.join("");
+  }
+
+  function normalizeApprovalStatus(statusRaw) {
+    return String(statusRaw || "").trim().toLowerCase();
+  }
+
+  function canApproveStatus(statusRaw) {
+    return normalizeApprovalStatus(statusRaw) === "pending";
+  }
+
+  function canRejectStatus(statusRaw) {
+    const status = normalizeApprovalStatus(statusRaw);
+    return status === "pending" || status === "approved";
+  }
+
+  function canExecuteStatus(statusRaw) {
+    return normalizeApprovalStatus(statusRaw) === "approved";
+  }
+
+  function canForceExecuteStatus(statusRaw) {
+    return !!normalizeApprovalStatus(statusRaw);
+  }
+
+  function updateDetailActionButtonsByStatus(statusRaw) {
+    const status = normalizeApprovalStatus(statusRaw);
+    approveBtn.disabled = !canApproveStatus(status);
+    rejectBtn.disabled = !canRejectStatus(status);
+    executeBtn.disabled = !canExecuteStatus(status);
+    forceExecuteBtn.disabled = !canForceExecuteStatus(status);
+  }
+
+  function setActionButtonsEnabled(enabled) {
+    if (!enabled) {
+      updateDetailActionButtonsByStatus("");
+      return;
+    }
+    updateDetailActionButtonsByStatus(selectedRequestStatus);
+  }
+
+  function generateIdempotencyKey() {
+    const rand = Math.random().toString(36).slice(2, 8);
+    return "ops-ui-" + Date.now() + "-" + rand;
+  }
+
+  function showMessage(text, type) {
+    actionMessage.className = "msg" + (type ? (" " + type) : "");
+    actionMessage.textContent = text || "";
+  }
+
+  function showAutoRobotMessage(text, type) {
+    if (!autoRobotMessage) return;
+    autoRobotMessage.className = "msg" + (type ? (" " + type) : "");
+    autoRobotMessage.textContent = text || "";
+  }
+
+  function showAutoRobotResult(payload) {
+    if (!autoRobotJson) return;
+    autoRobotJson.textContent = toJsonText(payload || {});
+  }
+
+  function splitTextTokens(value) {
+    return String(value || "")
+      .split(/[\n,;\t ]+/)
+      .map(function (item) { return String(item || "").trim(); })
+      .filter(Boolean);
+  }
+
+  function parseIntList(value) {
+    const tokens = splitTextTokens(value);
+    const values = [];
+    for (let i = 0; i < tokens.length; i += 1) {
+      const num = Number(tokens[i]);
+      if (Number.isInteger(num) && num > 0) values.push(num);
+    }
+    return values;
+  }
+
+  function parseTextList(value) {
+    return splitTextTokens(value);
+  }
+
+  async function runAutomationAction(buttonId, runner) {
+    const btn = document.getElementById(buttonId);
+    if (!btn) return;
+    btn.disabled = true;
+    try {
+      const result = await runner();
+      showAutoRobotResult(result);
+      showAutoRobotMessage("自动化任务执行成功。", "success");
+      return result;
+    } catch (error) {
+      showAutoRobotMessage("自动化任务执行失败：" + String(error.message || error), "error");
+      showAutoRobotResult({ error: String(error.message || error) });
+      throw error;
+    } finally {
+      btn.disabled = false;
+    }
+  }
+
+  function buildRequestCandidates(path) {
+    const first = String(path || "").trim();
+    if (!first) return [];
+    if (/^https?:\/\//i.test(first)) return [first];
+
+    const candidates = [first];
+    const isApiPath = first.indexOf("/api/") === 0;
+    if (typeof window === "undefined") return candidates;
+
+    if (first.indexOf("/") === 0 && window.location && window.location.origin) {
+      candidates.push(String(window.location.origin).replace(/\/$/, "") + first);
+    }
+    if (!isApiPath) return Array.from(new Set(candidates));
+
+    const protocol = String(window.location.protocol || "http:");
+    const host = String(window.location.hostname || "").toLowerCase();
+    const port = String(window.location.port || "");
+    const isLocal = host === "127.0.0.1" || host === "localhost";
+    if (isLocal) {
+      const hosts = host === "localhost" ? ["localhost", "127.0.0.1"] : ["127.0.0.1", "localhost"];
+      const ports = [];
+      if (port) ports.push(port);
+      if (port !== "8000") ports.push("8000");
+      for (let i = 0; i < hosts.length; i += 1) {
+        for (let j = 0; j < ports.length; j += 1) {
+          candidates.push(protocol + "//" + hosts[i] + ":" + ports[j] + first);
+        }
+      }
+    }
+    return Array.from(new Set(candidates));
+  }
+
+  async function apiRequest(path, cfg) {
+    const options = Object.assign({ method: "GET" }, cfg || {});
+    const method = String(options.method || "GET").toUpperCase();
+    const headers = Object.assign({}, options.headers || {});
+    if (method !== "GET") {
+      headers["X-CSRFToken"] = getCsrfToken();
+      headers["Content-Type"] = "application/json";
+    }
+
+    const candidates = buildRequestCandidates(path);
+    let lastError = null;
+    const traces = [];
+    for (let i = 0; i < candidates.length; i += 1) {
+      const requestUrl = candidates[i];
+      const isAbsolute = /^https?:\/\//i.test(requestUrl);
+      let response = null;
+      try {
+        response = await fetch(requestUrl, {
+          method,
+          headers,
+          credentials: isAbsolute ? "include" : "same-origin",
+          mode: isAbsolute ? "cors" : "same-origin",
+          body: options.body !== undefined ? JSON.stringify(options.body) : undefined,
+        });
+      } catch (networkError) {
+        lastError = networkError;
+        traces.push(requestUrl + " => " + String(networkError.message || networkError));
+        continue;
+      }
+
+      const text = await response.text();
+      let payload = {};
+      try { payload = text ? JSON.parse(text) : {}; } catch (e) { payload = { raw: text || "" }; }
+      if (!response.ok) {
+        const message = payload.detail || payload.error || payload.message || ("HTTP " + response.status);
+        lastError = new Error(String(message));
+        traces.push(requestUrl + " => HTTP " + response.status + " " + String(message));
+        if (i < candidates.length - 1) continue;
+        throw lastError;
+      }
+      if (payload && typeof payload.raw === "string" && /<html|<!doctype/i.test(payload.raw)) {
+        lastError = new Error("unexpected_html_response");
+        traces.push(requestUrl + " => unexpected html response");
+        if (i < candidates.length - 1) continue;
+      } else {
+        return payload;
+      }
+    }
+
+    const extra = lastError ? (" / " + String(lastError.message || lastError)) : "";
+    const traceText = traces.length ? (" / tried: " + traces.join(" | ")) : "";
+    throw new Error("网络请求失败: " + String(path || "") + extra + traceText);
+  }
+
+  function buildOpsHealthStatusBadge(statusRaw) {
+    const status = String(statusRaw || "error").toLowerCase();
+    const meta = OPS_HEALTH_STATUS_META[status] || { label: "未知", icon: "❔", className: "ops-error" };
+    const text = meta.icon + " " + meta.label;
+    return '<span class="status ' + escapeHtml(meta.className) + '">' + escapeHtml(text) + "</span>";
+  }
+
+  function renderDailyOpsHealth(payload) {
+    if (!opsHealthMeta || !opsHealthBody || !opsHealthJson) return;
+    const data = payload && typeof payload === "object" ? payload : {};
+    const checklist = Array.isArray(data.checklist) ? data.checklist : [];
+    const latestRun = data.latest_run && typeof data.latest_run === "object" ? data.latest_run : {};
+    const staleInflight = data.stale_inflight && typeof data.stale_inflight === "object" ? data.stale_inflight : {};
+    const generatedAt = fmtDate(data.generated_at || "");
+    const runsToday = Number(data.runs_today || 0);
+    const latestStatus = String(latestRun.status || "-");
+    const staleCount = Number(staleInflight.count || 0);
+
+    let okCount = 0;
+    let warnCount = 0;
+    let errorCount = 0;
+    let pendingCount = 0;
+    for (let i = 0; i < checklist.length; i += 1) {
+      const status = String(checklist[i] && checklist[i].status || "").toLowerCase();
+      if (status === "ok") okCount += 1;
+      else if (status === "warn") warnCount += 1;
+      else if (status === "error") errorCount += 1;
+      else if (status === "pending") pendingCount += 1;
+    }
+
+    opsHealthMeta.textContent =
+      "更新时间: " + generatedAt +
+      " / runs_today=" + runsToday +
+      " / latest=" + latestStatus +
+      " / stale=" + staleCount +
+      " / checks=" + checklist.length +
+      " (ok " + okCount + ", warn " + warnCount + ", error " + errorCount + ", pending " + pendingCount + ")";
+
+    if (!checklist.length) {
+      opsHealthBody.innerHTML = '<tr><td colspan="4" class="empty">暂无运维检查项</td></tr>';
+    } else {
+      opsHealthBody.innerHTML = checklist.map(function (row) {
+        const name = escapeHtml(String(row && row.name || "-"));
+        const status = buildOpsHealthStatusBadge(row && row.status);
+        const evidence = asDisplayText(row && row.evidence);
+        const suggestion = asDisplayText(row && row.suggestion);
+        return "<tr><td>" + name + "</td><td>" + status + "</td><td>" + evidence + "</td><td>" + suggestion + "</td></tr>";
+      }).join("");
+    }
+    opsHealthJson.textContent = toJsonText(data);
+  }
+
+  function setOpsHealthLoading(text) {
+    if (!opsHealthMeta || !opsHealthBody || !opsHealthJson) return;
+    opsHealthMeta.textContent = text || "加载中...";
+    opsHealthBody.innerHTML = '<tr><td colspan="4" class="empty">加载中...</td></tr>';
+    opsHealthJson.textContent = "{}";
+  }
+
+  async function loadDailyOpsHealth(includeProbe) {
+    if (!opsHealthMeta || !opsHealthBody || !opsHealthJson) return null;
+    const withProbe = includeProbe !== false;
+    setOpsHealthLoading(withProbe ? "正在刷新（含外部探测）..." : "正在快速刷新（不探测外部）...");
+    try {
+      const payload = await apiRequest(
+        API_BASE + "/automation/health-daily/?include_probe=" + (withProbe ? "1" : "0")
+      );
+      renderDailyOpsHealth(payload);
+      return payload;
+    } catch (error) {
+      opsHealthMeta.textContent = "运维状态拉取失败";
+      opsHealthBody.innerHTML = '<tr><td colspan="4" class="empty">加载失败: ' + escapeHtml(error.message || error) + "</td></tr>";
+      opsHealthJson.textContent = toJsonText({ error: String(error.message || error) });
+      throw error;
+    }
+  }
+
+  function renderSummary(payload) {
+    const counts = payload && payload.counts ? payload.counts : {};
+    const in24h = payload && payload.in_24h ? payload.in_24h : {};
+    document.getElementById("kpiPending").textContent = Number(counts.pending || 0);
+    document.getElementById("kpiApproved").textContent = Number(counts.approved || 0);
+    document.getElementById("kpiExecuted").textContent = Number(counts.executed || 0);
+    document.getElementById("kpiFailed").textContent = Number(counts.failed || 0);
+    document.getElementById("kpiRejected").textContent = Number(counts.rejected || 0);
+    document.getElementById("kpiTotal").textContent = Number(counts.total || 0);
+    summaryMeta.textContent = "24小时新增: " + Number(in24h.requested || 0)
+      + " / 执行: " + Number(in24h.executed || 0)
+      + " / 失败: " + Number(in24h.failed || 0);
+
+    const trendRows = Array.isArray(payload && payload.trend_7d) ? payload.trend_7d : [];
+    if (!trendRows.length) {
+      trendList.innerHTML = '<div class="empty">暂无趋势数据</div>';
+      return;
+    }
+    const maxTotal = trendRows.reduce((acc, row) => Math.max(acc, Number(row.total || 0)), 1);
+    trendList.innerHTML = trendRows.map(row => {
+      const total = Number(row.total || 0);
+      const pct = Math.max(4, Math.round(total * 100 / maxTotal));
+      const dateText = String(row.date || "").slice(5);
+      return `
+        <div class="trend-row">
+          <span>${escapeHtml(dateText || "--")}</span>
+          <div class="trend-bar"><span style="width:${pct}%"></span></div>
+          <span class="trend-meta">total ${total}</span>
+        </div>
+      `;
+    }).join("");
+  }
+
+  function renderApprovals(rows) {
+    if (!rows.length) {
+      approvalsBody.innerHTML = '<tr><td colspan="7" class="empty">暂无审批请求</td></tr>';
+      return;
+    }
+    approvalsBody.innerHTML = rows.map(row => {
+      const requestId = String(row.request_id || "");
+      const isActive = selectedRequestId && selectedRequestId === requestId;
+      const status = String(row.status || "unknown").toLowerCase();
+      const target = (row.target_type || "-") + " / " + (row.target_id || "-");
+      const actionButtons = [
+        '<button class="btn ghost" type="button" data-action="detail" data-request-id="' + escapeHtml(requestId) + '">详情</button>',
+      ];
+      if (canApproveStatus(status)) {
+        actionButtons.push('<button class="btn success" type="button" data-action="approve" data-request-id="' + escapeHtml(requestId) + '">通过</button>');
+      }
+      if (canRejectStatus(status)) {
+        actionButtons.push('<button class="btn warn" type="button" data-action="reject" data-request-id="' + escapeHtml(requestId) + '">驳回</button>');
+      }
+      if (canExecuteStatus(status)) {
+        actionButtons.push('<button class="btn" type="button" data-action="execute" data-request-id="' + escapeHtml(requestId) + '">执行</button>');
+      }
+      return `
+        <tr class="${isActive ? "active" : ""}" data-row-request-id="${escapeHtml(requestId)}">
+          <td>${escapeHtml(requestId)}</td>
+          <td><span class="status ${escapeHtml(status)}">${escapeHtml(status)}</span></td>
+          <td>${escapeHtml(row.action || "-")}</td>
+          <td>${escapeHtml(target)}</td>
+          <td>${Number(row.risk_level || 0)}</td>
+          <td>${escapeHtml(fmtDate(row.requested_at))}</td>
+          <td>
+            <div class="mini-actions">
+              ${actionButtons.join("")}
+            </div>
+          </td>
+        </tr>
+      `;
+    }).join("");
+  }
+
+  function highlightSelectedRow(requestId) {
+    const rows = approvalsBody.querySelectorAll("tr[data-row-request-id]");
+    rows.forEach(row => {
+      const rowId = row.getAttribute("data-row-request-id");
+      if (rowId && requestId && rowId === requestId) {
+        row.classList.add("active");
+      } else {
+        row.classList.remove("active");
+      }
+    });
+  }
+
+  function renderLogs(rows) {
+    if (!rows.length) {
+      logList.innerHTML = '<li class="empty">暂无日志</li>';
+      return;
+    }
+    logList.innerHTML = rows.map(log => {
+      const actor = log.actor_username || log.actor_name || log.client_id || "system";
+      const message = log.message ? escapeHtml(log.message) : "无备注";
+      return `
+        <li class="log-item">
+          <div class="line-1">
+            <span>${escapeHtml(log.event_type || "unknown")}</span>
+            <span>${escapeHtml(fmtDate(log.created_at))}</span>
+          </div>
+          <div class="line-2">执行者: ${escapeHtml(actor)} · IP: ${escapeHtml(log.client_ip || "-")}</div>
+          <div class="line-2">${message}</div>
+        </li>
+      `;
+    }).join("");
+  }
+
+  function renderSeoArticleOptions(rows) {
+    const list = Array.isArray(rows) ? rows : [];
+    if (!list.length) {
+      articleSelect.innerHTML = '<option value="">暂无SEO草稿，请先到SEO工作台生成</option>';
+      return;
+    }
+    let html = '<option value="">请选择 SEO 草稿</option>';
+    for (let i = 0; i < list.length; i += 1) {
+      const row = list[i] || {};
+      const id = Number(row.id || 0);
+      if (!id) continue;
+      const title = String(row.title || "").replace(/\s+/g, " ").slice(0, 48);
+      const status = String(row.status || "");
+      const game = String(row.game_title || "");
+      const label = "#" + id + " [" + status + "] " + title + (game ? (" (" + game + ")") : "");
+      html += '<option value="' + id + '">' + escapeHtml(label) + "</option>";
+    }
+    articleSelect.innerHTML = html;
+  }
+
+  async function loadSeoArticleOptions() {
+    try {
+      const payload = await apiRequest(API_BASE + "/seo-article-options/?limit=80");
+      renderSeoArticleOptions(Array.isArray(payload.results) ? payload.results : []);
+    } catch (error) {
+      articleSelect.innerHTML = '<option value="">加载失败：' + escapeHtml(error.message || error) + "</option>";
+    }
+  }
+
+  function buildCreatePayload() {
+    const manualId = Number(String(manualArticleId.value || "").trim() || 0);
+    const selectedId = Number(String(articleSelect.value || "").trim() || 0);
+    const seoArticleId = manualId > 0 ? manualId : selectedId;
+    if (!seoArticleId) {
+      throw new Error("请先选择 SEO 草稿，或手工输入 SEO 文章ID");
+    }
+    return {
+      seo_article_id: seoArticleId,
+      publish_now: !!publishNowChk.checked,
+      run_step5: !!runStep5Chk.checked,
+      risk_level: Math.max(1, Math.min(5, Number(riskLevel.value || 3))),
+      reason: String(reasonInput.value || "").trim(),
+      idempotency_key: String(idempotencyKey.value || "").trim() || generateIdempotencyKey(),
+    };
+  }
+
+  async function createPublishRequest() {
+    let payload = null;
+    try {
+      payload = buildCreatePayload();
+    } catch (error) {
+      showMessage(String(error.message || error), "error");
+      return;
+    }
+
+    const createBtn = document.getElementById("createRequestBtn");
+    createBtn.disabled = true;
+    try {
+      const result = await apiRequest(API_BASE + "/publish-requests/", {
+        method: "POST",
+        body: payload,
+      });
+      selectedRequestId = String(result.request_id || "");
+      if (!idempotencyKey.value) idempotencyKey.value = String(payload.idempotency_key || "");
+      showMessage(
+        "创建成功，request_id: " + selectedRequestId + (result._idempotent_reuse ? "（幂等复用）" : ""),
+        "success"
+      );
+      await Promise.all([loadSummary(), loadApprovals(true)]);
+      if (selectedRequestId) {
+        await loadApprovalDetail(selectedRequestId);
+      }
+    } catch (error) {
+      showMessage("创建失败: " + String(error.message || error), "error");
+    } finally {
+      createBtn.disabled = false;
+    }
+  }
+
+  function buildAutoImportPayload() {
+    const categoryIdRaw = Number(String(autoCategoryId.value || "").trim() || 0);
+    const categoryId = Number.isInteger(categoryIdRaw) && categoryIdRaw > 0 ? categoryIdRaw : null;
+    return {
+      play_urls: parseTextList(autoPlayUrls.value),
+      package_ids: parseTextList(autoPackageIds.value),
+      template_key: String(autoTemplateKey.value || "").trim() || "default",
+      category_id: categoryId,
+      publish_status: String(autoPublishStatus.value || "draft").trim() || "draft",
+      overwrite_existing: !!autoOverwriteExisting.checked,
+      limit: Math.max(1, Math.min(100, Number(autoImportLimit.value || 30))),
+    };
+  }
+
+  function buildAutoSeoDailyPayload() {
+    const postsMin = Math.max(1, Math.min(200, Number(autoSeoPostsMin.value || 10)));
+    const postsMax = Math.max(postsMin, Math.min(200, Number(autoSeoPostsMax.value || 20)));
+    const publishStatus = String(autoSeoPublishStatus.value || "published").trim().toLowerCase() === "draft"
+      ? "draft"
+      : "published";
+    return {
+      game_ids: parseIntList(autoSeoGameIds.value),
+      limit_games: Math.max(1, Math.min(100, Number(autoSeoLimitGames.value || 6))),
+      posts_min: postsMin,
+      posts_max: postsMax,
+      publish_status: publishStatus,
+      publish_now: publishStatus === "published",
+      rewrite_low_quality: !!autoSeoRewriteLowQuality.checked,
+      review_threshold: Math.max(1, Math.min(100, Number(autoSeoReviewThreshold.value || 72))),
+      recent_days: Math.max(1, Math.min(120, Number(autoSeoRecentDays.value || 30))),
+    };
+  }
+
+  function buildAutoReviewPayload() {
+    return {
+      game_ids: parseIntList(autoReviewGameIds.value),
+      limit: Math.max(1, Math.min(300, Number(autoReviewLimit.value || 100))),
+      rewrite_low_quality: !!autoReviewRewrite.checked,
+      archive_duplicates: !!autoReviewArchiveDup.checked,
+      review_threshold: Math.max(1, Math.min(100, Number(autoReviewThreshold.value || 72))),
+    };
+  }
+
+  function applyDailyConfigToForm(config) {
+    if (!config || typeof config !== "object") return;
+    dailyCfgEnabled.checked = !!config.is_enabled;
+    dailyCfgHour.value = Math.max(0, Math.min(23, Number(config.daily_hour || 4)));
+    dailyCfgPollSeconds.value = Math.max(60, Math.min(86400, Number(config.poll_seconds || 900)));
+    dailyCfgMaxRunningMinutes.value = Math.max(10, Math.min(1440, Number(config.max_running_minutes || 180)));
+    dailyCfgImportLimit.value = Math.max(1, Math.min(100, Number(config.import_limit || 30)));
+    dailyCfgLimitGames.value = Math.max(1, Math.min(100, Number(config.limit_games || 6)));
+    dailyCfgPostsMin.value = Math.max(1, Math.min(200, Number(config.posts_min || 10)));
+    dailyCfgPostsMax.value = Math.max(
+      Number(dailyCfgPostsMin.value || 10),
+      Math.min(200, Number(config.posts_max || 20))
+    );
+    dailyCfgMaxAttemptsPerGame.value = Math.max(1, Math.min(5, Number(config.max_attempts_per_game || 1)));
+    dailyCfgRewriteLimit.value = Math.max(1, Math.min(5, Number(config.rewrite_limit || 1)));
+    dailyCfgReviewThreshold.value = Math.max(1, Math.min(100, Number(config.review_threshold || 78)));
+    dailyCfgRecentDays.value = Math.max(1, Math.min(120, Number(config.recent_days || 30)));
+    const cfgPublishStatus = String(config.publish_status || "").trim().toLowerCase();
+    if (cfgPublishStatus === "draft" || cfgPublishStatus === "published") {
+      dailyCfgPublishStatus.value = cfgPublishStatus;
+    } else {
+      dailyCfgPublishStatus.value = config.publish_now === false ? "draft" : "published";
+    }
+    dailyCfgActorUsername.value = String(config.actor_username || "");
+  }
+
+  function buildDailyConfigPayload() {
+    const postsMin = Math.max(1, Math.min(200, Number(dailyCfgPostsMin.value || 10)));
+    const postsMax = Math.max(postsMin, Math.min(200, Number(dailyCfgPostsMax.value || 20)));
+    const publishStatus = String(dailyCfgPublishStatus.value || "published").trim().toLowerCase() === "draft"
+      ? "draft"
+      : "published";
+    return {
+      is_enabled: !!dailyCfgEnabled.checked,
+      daily_hour: Math.max(0, Math.min(23, Number(dailyCfgHour.value || 4))),
+      poll_seconds: Math.max(60, Math.min(86400, Number(dailyCfgPollSeconds.value || 900))),
+      max_running_minutes: Math.max(10, Math.min(1440, Number(dailyCfgMaxRunningMinutes.value || 180))),
+      import_limit: Math.max(1, Math.min(100, Number(dailyCfgImportLimit.value || 30))),
+      limit_games: Math.max(1, Math.min(100, Number(dailyCfgLimitGames.value || 6))),
+      posts_min: postsMin,
+      posts_max: postsMax,
+      max_attempts_per_game: Math.max(1, Math.min(5, Number(dailyCfgMaxAttemptsPerGame.value || 1))),
+      rewrite_limit: Math.max(1, Math.min(5, Number(dailyCfgRewriteLimit.value || 1))),
+      review_threshold: Math.max(1, Math.min(100, Number(dailyCfgReviewThreshold.value || 78))),
+      recent_days: Math.max(1, Math.min(120, Number(dailyCfgRecentDays.value || 30))),
+      publish_status: publishStatus,
+      publish_now: publishStatus === "published",
+      actor_username: String(dailyCfgActorUsername.value || "").trim(),
+    };
+  }
+
+  async function loadDailyConfig(showMessageOnSuccess) {
+    const payload = await apiRequest(API_BASE + "/automation/daily-config/");
+    applyDailyConfigToForm(payload);
+    showAutoRobotResult(payload);
+    if (showMessageOnSuccess) {
+      showAutoRobotMessage("每日自动任务配置已加载。", "success");
+    }
+    return payload;
+  }
+
+  async function saveDailyConfig() {
+    showAutoRobotMessage("正在保存每日自动任务配置...", "");
+    return runAutomationAction("dailyCfgSaveBtn", async function () {
+      const payload = buildDailyConfigPayload();
+      const result = await apiRequest(API_BASE + "/automation/daily-config/", {
+        method: "POST",
+        body: payload,
+      });
+      applyDailyConfigToForm(result);
+      showAutoRobotMessage("每日自动任务配置已保存。", "success");
+      return result;
+    });
+  }
+
+  async function runAutoImport() {
+    showAutoRobotMessage("正在执行 Google Play 自动导入...", "");
+    return runAutomationAction("autoImportBtn", async function () {
+      const payload = buildAutoImportPayload();
+      const result = await apiRequest(API_BASE + "/automation/google-play-import/", {
+        method: "POST",
+        body: payload,
+      });
+      await loadSeoArticleOptions();
+      return result;
+    });
+  }
+
+  async function runAutoSeoDaily() {
+    showAutoRobotMessage("正在执行 SEO 每日自动化任务...", "");
+    return runAutomationAction("autoSeoDailyBtn", async function () {
+      const payload = buildAutoSeoDailyPayload();
+      const result = await apiRequest(API_BASE + "/automation/seo-daily-run/", {
+        method: "POST",
+        body: payload,
+      });
+      await loadSeoArticleOptions();
+      return result;
+    });
+  }
+
+  async function runAutoReviewPublished() {
+    showAutoRobotMessage("正在执行已发布文章复审自动化...", "");
+    return runAutomationAction("autoReviewBtn", async function () {
+      const payload = buildAutoReviewPayload();
+      return apiRequest(API_BASE + "/automation/review-published/", {
+        method: "POST",
+        body: payload,
+      });
+    });
+  }
+
+  async function loadSummary() {
+    try {
+      const payload = await apiRequest(API_BASE + "/dashboard/summary/");
+      renderSummary(payload);
+    } catch (error) {
+      trendList.innerHTML = '<div class="empty">趋势加载失败: ' + escapeHtml(error.message || error) + "</div>";
+    }
+  }
+
+  async function loadApprovals(keepSelection) {
+    const params = new URLSearchParams();
+    const status = String(statusFilter.value || "").trim();
+    const q = String(searchInput.value || "").trim();
+    const limitRaw = Number(limitInput.value || 80);
+    const limit = Math.max(1, Math.min(200, Number.isFinite(limitRaw) ? limitRaw : 80));
+    params.set("limit", String(limit));
+    if (status) params.set("status", status);
+    if (q) params.set("q", q);
+
+    try {
+      const payload = await apiRequest(API_BASE + "/approvals/?" + params.toString());
+      const rows = Array.isArray(payload.results) ? payload.results : [];
+      renderApprovals(rows);
+      listMeta.textContent = "最近拉取：" + fmtDate(new Date().toISOString()) + " · 共 " + Number(payload.count || rows.length) + " 条";
+
+      if (!keepSelection) {
+        selectedRequestId = rows.length ? String(rows[0].request_id) : "";
+      } else if (selectedRequestId) {
+        const found = rows.some(item => String(item.request_id) === selectedRequestId);
+        if (!found) selectedRequestId = rows.length ? String(rows[0].request_id) : "";
+      }
+      if (selectedRequestId) {
+        await loadApprovalDetail(selectedRequestId);
+      } else {
+        selectedRequestStatus = "";
+        detailHint.textContent = "当前筛选结果为空。";
+        if (detailHuman) detailHuman.innerHTML = '<div class="empty">当前筛选结果为空。</div>';
+        detailJson.textContent = "{}";
+        renderLogs([]);
+        setActionButtonsEnabled(false);
+      }
+    } catch (error) {
+      approvalsBody.innerHTML = '<tr><td colspan="7" class="empty">加载失败: ' + escapeHtml(error.message || error) + "</td></tr>";
+      listMeta.textContent = "列表加载失败";
+    }
+  }
+
+  async function loadApprovalDetail(requestId) {
+    if (!requestId) {
+      selectedRequestStatus = "";
+      setActionButtonsEnabled(false);
+      return;
+    }
+    try {
+      const [detail, logs] = await Promise.all([
+        apiRequest(API_BASE + "/approvals/" + encodeURIComponent(requestId) + "/"),
+        apiRequest(API_BASE + "/approvals/" + encodeURIComponent(requestId) + "/logs/?limit=100"),
+      ]);
+      selectedRequestId = String(requestId);
+      selectedRequestStatus = normalizeApprovalStatus(detail && detail.status);
+      renderApprovalDetailHuman(detail);
+      detailJson.textContent = toJsonText(detail);
+      detailHint.textContent = "request_id: " + selectedRequestId + " / status: " + (selectedRequestStatus || "-");
+      renderLogs(Array.isArray(logs.results) ? logs.results : []);
+      highlightSelectedRow(selectedRequestId);
+      setActionButtonsEnabled(true);
+    } catch (error) {
+      selectedRequestStatus = "";
+      detailHint.textContent = "详情加载失败";
+      if (detailHuman) {
+        detailHuman.innerHTML = '<div class="empty">详情加载失败：' + escapeHtml(error.message || error) + "</div>";
+      }
+      detailJson.textContent = toJsonText({ request_id: requestId, error: error.message || String(error) });
+      renderLogs([]);
+      setActionButtonsEnabled(false);
+    }
+  }
+
+  async function runAction(action, requestId, forceExecute) {
+    if (!requestId) {
+      showMessage("请先选择一条审批请求", "error");
+      detailHint.textContent = "请先选择一条审批请求";
+      return;
+    }
+    const id = String(requestId);
+    const isSelected = selectedRequestId && selectedRequestId === id;
+    const currentStatus = isSelected ? normalizeApprovalStatus(selectedRequestStatus) : "";
+
+    if (!forceExecute && currentStatus) {
+      if (action === "approve" && !canApproveStatus(currentStatus)) {
+        const msg = "当前状态为 " + currentStatus + "，不能执行通过";
+        showMessage(msg, "error");
+        detailHint.textContent = msg;
+        return;
+      }
+      if (action === "reject" && !canRejectStatus(currentStatus)) {
+        const msg = "当前状态为 " + currentStatus + "，不能执行驳回";
+        showMessage(msg, "error");
+        detailHint.textContent = msg;
+        return;
+      }
+      if (action === "execute" && !canExecuteStatus(currentStatus)) {
+        const msg = "当前状态为 " + currentStatus + "，不能执行发布";
+        showMessage(msg, "error");
+        detailHint.textContent = msg;
+        return;
+      }
+    }
+
+    setActionButtonsEnabled(false);
+    try {
+      if (action === "approve") {
+        const note = window.prompt("审批备注（可留空）:", "");
+        if (note === null) {
+          setActionButtonsEnabled(true);
+          return;
+        }
+        await apiRequest(API_BASE + "/approvals/" + encodeURIComponent(id) + "/approve/", {
+          method: "POST",
+          body: { note: String(note || "") },
+        });
+      } else if (action === "reject") {
+        const note = window.prompt("驳回原因（建议填写）:", "");
+        if (note === null) {
+          setActionButtonsEnabled(true);
+          return;
+        }
+        await apiRequest(API_BASE + "/approvals/" + encodeURIComponent(id) + "/reject/", {
+          method: "POST",
+          body: { note: String(note || "") },
+        });
+      } else if (action === "execute") {
+        const ok = window.confirm(forceExecute ? "确认强制执行该审批动作？" : "确认执行该审批动作？");
+        if (!ok) {
+          setActionButtonsEnabled(true);
+          return;
+        }
+        await apiRequest(API_BASE + "/approvals/" + encodeURIComponent(id) + "/execute/", {
+          method: "POST",
+          body: { force: !!forceExecute },
+        });
+      } else {
+        setActionButtonsEnabled(true);
+        return;
+      }
+
+      await Promise.all([loadSummary(), loadApprovals(false)]);
+      showMessage("操作成功: " + action + " -> " + id, "success");
+    } catch (error) {
+      const msg = String(error.message || error);
+      detailHint.textContent = "操作失败: " + msg;
+      showMessage("操作失败: " + msg, "error");
+      throw error;
+    }
+  }
+
+  function setupAutoRefresh() {
+    if (autoRefreshTimer) {
+      window.clearInterval(autoRefreshTimer);
+      autoRefreshTimer = null;
+    }
+    if (!autoRefreshChk.checked) return;
+    autoRefreshTimer = window.setInterval(function () {
+      Promise.all([loadSummary(), loadApprovals(true), loadDailyOpsHealth(false)]).catch(function () {});
+    }, 15000);
+  }
+
+  function fillDemoForm() {
+    if (!articleSelect.value) {
+      const first = articleSelect.querySelector("option[value]");
+      if (first && first.value) articleSelect.value = first.value;
+    }
+    riskLevel.value = "3";
+    publishNowChk.checked = false;
+    runStep5Chk.checked = true;
+    reasonInput.value = "演示流程：人工创建审批请求";
+    idempotencyKey.value = generateIdempotencyKey();
+    showMessage("演示参数已填充，点击“创建审批请求”即可。", "success");
+  }
+
+  document.getElementById("backDashboardBtn").addEventListener("click", function () {
+    window.location.href = "/admin/dashboard/";
+  });
+  document.getElementById("refreshNowBtn").addEventListener("click", function () {
+    Promise.all([loadSummary(), loadApprovals(true), loadSeoArticleOptions(), loadDailyOpsHealth(true)]);
+  });
+  if (refreshOpsHealthBtn) {
+    refreshOpsHealthBtn.addEventListener("click", function () {
+      loadDailyOpsHealth(true).catch(function () {});
+    });
+  }
+  if (refreshOpsHealthNoProbeBtn) {
+    refreshOpsHealthNoProbeBtn.addEventListener("click", function () {
+      loadDailyOpsHealth(false).catch(function () {});
+    });
+  }
+  document.getElementById("applyFilterBtn").addEventListener("click", function () {
+    loadApprovals(false);
+  });
+  document.getElementById("clearFilterBtn").addEventListener("click", function () {
+    statusFilter.value = "pending";
+    searchInput.value = "";
+    limitInput.value = "80";
+    loadApprovals(false);
+  });
+  document.getElementById("createRequestBtn").addEventListener("click", createPublishRequest);
+  document.getElementById("refreshArticleOptionsBtn").addEventListener("click", loadSeoArticleOptions);
+  document.getElementById("fillDemoBtn").addEventListener("click", fillDemoForm);
+  document.getElementById("autoImportBtn").addEventListener("click", runAutoImport);
+  document.getElementById("autoSeoDailyBtn").addEventListener("click", runAutoSeoDaily);
+  document.getElementById("autoReviewBtn").addEventListener("click", runAutoReviewPublished);
+  document.getElementById("dailyCfgLoadBtn").addEventListener("click", async function () {
+    const btn = document.getElementById("dailyCfgLoadBtn");
+    if (!btn) return;
+    btn.disabled = true;
+    try {
+      await loadDailyConfig(true);
+    } catch (error) {
+      showAutoRobotMessage("读取每日自动任务配置失败：" + String(error.message || error), "error");
+      showAutoRobotResult({ error: String(error.message || error) });
+    } finally {
+      btn.disabled = false;
+    }
+  });
+  document.getElementById("dailyCfgSaveBtn").addEventListener("click", saveDailyConfig);
+  autoRefreshChk.addEventListener("change", setupAutoRefresh);
+
+  approvalsBody.addEventListener("click", async function (event) {
+    const target = event.target && event.target.closest ? event.target.closest("[data-action]") : null;
+    if (!target || !target.dataset) return;
+    const action = target.dataset.action;
+    const requestId = target.dataset.requestId;
+    if (!action || !requestId) return;
+    event.preventDefault();
+
+    target.disabled = true;
+    try {
+      if (action === "detail") {
+        await loadApprovalDetail(requestId);
+      } else if (action === "approve") {
+        await runAction("approve", requestId, false);
+      } else if (action === "reject") {
+        await runAction("reject", requestId, false);
+      } else if (action === "execute") {
+        await runAction("execute", requestId, false);
+      }
+    } catch (error) {
+      const msg = String(error.message || error);
+      detailHint.textContent = "操作失败: " + msg;
+      showMessage("操作失败: " + msg, "error");
+    } finally {
+      target.disabled = false;
+    }
+  });
+
+  approveBtn.addEventListener("click", function () { runAction("approve", selectedRequestId, false).catch(function () {}); });
+  rejectBtn.addEventListener("click", function () { runAction("reject", selectedRequestId, false).catch(function () {}); });
+  executeBtn.addEventListener("click", function () { runAction("execute", selectedRequestId, false).catch(function () {}); });
+  forceExecuteBtn.addEventListener("click", function () { runAction("execute", selectedRequestId, true).catch(function () {}); });
+
+  if (!idempotencyKey.value) {
+    idempotencyKey.value = generateIdempotencyKey();
+  }
+  if (!statusFilter.value) {
+    statusFilter.value = "pending";
+  }
+  setActionButtonsEnabled(false);
+  showAutoRobotResult({});
+  Promise.all([
+    loadSummary(),
+    loadApprovals(false),
+    loadSeoArticleOptions(),
+    loadDailyOpsHealth(true).catch(function (error) {
+      opsHealthMeta.textContent = "运维状态未加载";
+      opsHealthBody.innerHTML = '<tr><td colspan="4" class="empty">运维状态加载失败: ' + escapeHtml(error.message || error) + "</td></tr>";
+      opsHealthJson.textContent = toJsonText({ error: String(error.message || error) });
+      return null;
+    }),
+    loadDailyConfig(false).catch(function (error) {
+      showAutoRobotMessage("每日配置未加载（请先迁移数据库）：" + String(error.message || error), "error");
+      showAutoRobotResult({ error: String(error.message || error) });
+      return null;
+    }),
+  ]).then(setupAutoRefresh);
+})();
+</script>
+</body>
+</html>

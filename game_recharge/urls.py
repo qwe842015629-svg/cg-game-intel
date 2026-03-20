@@ -23,7 +23,9 @@ from .views import (
     welcome,
     admin_dashboard,
     seo_automation_workbench,
+    ops_gateway_workbench,
     seo_api_settings,
+    i18n_tools,
     visual_builder,
 )
 
@@ -35,9 +37,12 @@ urlpatterns = [
     path('debug/fix-admin/', debug_admin, name='debug_admin'),  # 移出 admin/ 路径，避免被 admin.site.urls 捕获
     path('', welcome, name='welcome'),  # 欢迎页面
     path('cms-builder/', visual_builder, name='visual_builder'),
+    path('admin/visual-builder/', visual_builder, name='admin_visual_builder'),
     path('admin/dashboard/', admin_dashboard, name='admin_dashboard'),
     path('admin/seo-automation-workbench/', seo_automation_workbench, name='seo_automation_workbench'),
+    path('admin/ops-gateway-workbench/', ops_gateway_workbench, name='ops_gateway_workbench'),
     path('admin/seo-api-settings/', seo_api_settings, name='seo_api_settings'),
+    path('admin/i18n-tools/', i18n_tools, name='admin_i18n_tools'),
     path('admin/', admin.site.urls),
     # API endpoints
     path('api/', include('main.urls')),  # 轮播图 API
@@ -45,9 +50,11 @@ urlpatterns = [
     path('api/articles/', include('game_article.urls')),
     path('api/customer-service/', include('customer_service.urls')),  # 客服 API
     path('api/footer/', include('footer.urls')),  # 页面底部 API
+    path('api/recharge/', include('orders.urls')),  # 充值/库存 API
     # path('api/product-show/', include('game_product_show.urls')),  # 产品展示页 API
     path('api/game-pages/', include('game_page.urls')),  # 游戏页面 API
     path('api/seo-automation/', include('seo_automation.urls')),  # SEO automation API
+    path('api/ops/v1/', include('ops_gateway.urls')),  # 机器人中间层 API
     path('api/', include('users.urls')),  # 用户API
     # Djoser 用户认证 API
     path('api/auth/', include('djoser.urls')),
