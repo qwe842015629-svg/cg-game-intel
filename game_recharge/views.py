@@ -20,6 +20,8 @@ from game_page.models import GamePage
 from main.i18n_backfill import DEFAULT_BACKFILL_LANGS
 from main.management.commands.backfill_i18n import TASK_INDEX
 from main.models import Banner, HomeLayout
+from ops_gateway.bahamut_ranking import refresh_bahamut_board_rankings, search_bahamut_entries
+from ops_gateway.models import BahamutBoardRankingSnapshot
 from seo_automation.models import CrawlerTask, SeoArticle
 from email_marketing.models import EmailCampaign, EmailSenderConfig
 
@@ -358,12 +360,57 @@ def ops_gateway_workbench(request):
 
 @staff_member_required
 def bahamut_ranking_workbench(request):
-    """巴哈排行榜工作台。"""
+    """巴哈姆特哈拉区排行榜工作台。"""
+    update_result = None
+    if request.method == "POST":
+        update_result = refresh_bahamut_board_rankings(
+            force=True,
+            trigger_source=f"manual:{getattr(request.user, 'username', 'admin')}",
+            target_game_count=200,
+        )
+
+    query = str(request.GET.get("q") or "").strip()
+    entries = search_bahamut_entries(q=query, limit=200)
+    latest_snapshot = (
+        BahamutBoardRankingSnapshot.objects.filter(status__in=["completed", "partial"])
+        .order_by("-snapshot_date", "-id")
+        .first()
+    )
+
+    selected_count = 0
+    new_count = 0
+    rising_count = 0
+    hot_count = 0
+    high_rank_count = 0
+    for entry in entries:
+        if bool(entry.get("selected_for_daily")):
+            selected_count += 1
+        if bool(entry.get("is_new_entry")):
+            new_count += 1
+        if bool(entry.get("is_rank_rising")):
+            rising_count += 1
+        if bool(entry.get("is_hot")):
+            hot_count += 1
+        if bool(entry.get("is_high_rank")):
+            high_rank_count += 1
+
     return render(
         request,
         'admin/bahamut_ranking_workbench.html',
         {
-            'now': timezone.now(),
+            "now": timezone.now(),
+            "update_result": update_result,
+            "latest_snapshot": latest_snapshot,
+            "entries": entries,
+            "query": query,
+            "stats": {
+                "entry_count": len(entries),
+                "selected_count": selected_count,
+                "new_count": new_count,
+                "rising_count": rising_count,
+                "hot_count": hot_count,
+                "high_rank_count": high_rank_count,
+            },
         },
     )
 
