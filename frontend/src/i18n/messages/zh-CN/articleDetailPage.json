@@ -1,0 +1,29 @@
+{
+  "articleDetailPage": {
+    "loading": "加载中...",
+    "back": "返回",
+    "tocTitle": "文章目录",
+    "tocEmpty": "本篇暂无可用目录，建议刷新后重试。",
+    "defaultCategory": "资讯",
+    "authorLabel": "作者：",
+    "defaultAuthor": "官方编辑",
+    "readTimeLabel": "阅读时长：",
+    "defaultReadTime": "约 3 分钟",
+    "hotGamesTitle": "热门游戏",
+    "noHotGames": "暂无热门游戏",
+    "hotGameAlt": "热门游戏",
+    "untitledGame": "未命名游戏",
+    "viewRechargeDetail": "点击查看充值详情",
+    "latestArticlesTitle": "新增文章",
+    "noLatestArticles": "暂无新增文章",
+    "latestArticleAlt": "新增文章",
+    "untitledArticle": "未命名文章",
+    "latestPublished": "最新发布",
+    "close": "关闭",
+    "notFoundTitle": "文章不存在",
+    "notFoundDescription": "抱歉，未找到该文章。",
+    "backToArticles": "返回资讯列表",
+    "imageAlt": "文章图片",
+    "loadFailed": "文章不存在或加载失败"
+  }
+}

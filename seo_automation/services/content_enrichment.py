@@ -22,6 +22,21 @@ TXT_RELATED_LINK_APPLE = "App Store \u641c\u5c0b\u9801"
 TXT_RECHARGE_HINT = "\u9700\u8981\u88dc\u8db3\u8cc7\u6e90\u6642\uff0c\u53ef\u76f4\u63a5\u5728\u672c\u7ad9\u540c\u6b3e\u904a\u6232\u9801\u6bd4\u5c0d\u5132\u503c\u9805\u76ee\u8207\u7d00\u9304\u6d41\u7a0b\uff0c\u64cd\u4f5c\u6703\u66f4\u9806\u3002"
 TXT_INTERNAL_LINK_DEFAULT = "\u76f8\u95dc\u904a\u6232\u8a73\u60c5"
 
+_SUMMARY_URL_RE = re.compile(r"(?i)\b(?:https?://|www\.)\S+")
+_SUMMARY_PREFIX_RE = re.compile(r"(?i)^\s*(?:摘要|summary)\s*[:：\-]\s*")
+_SUMMARY_TIMESTAMP_RE = re.compile(
+    r"\b\d{4}[-/]\d{1,2}[-/]\d{1,2}(?:\s+\d{1,2}:\d{2}(?::\d{2})?)?\b"
+)
+_SUMMARY_BRACKET_NOISE_RE = re.compile(r"[【\[]\s*(?:情報|情报|info|news|新聞|新闻)\s*[】\]]", re.I)
+_SUMMARY_LINK_SECTION_HINT_RE = re.compile(
+    r"(?i)(?:seo-related-links|related game|官方連結|官方链接|google\s*play|app\s*store)"
+)
+_SUMMARY_SOCIAL_HINT_RE = re.compile(r"(?i)\b(?:facebook|fb|discord|twitter|x\.com|youtube)\b")
+_SUMMARY_SOCIAL_PHRASE_RE = re.compile(
+    r"(?i)(?:facebook|fb)\s*(?:粉專|粉丝专页|粉絲專頁|fan\s*page)?"
+)
+_SUMMARY_EMPTY_KEYWORD_RE = re.compile(r"(?i)^(?:摘要|summary)$")
+
 
 def build_media_items(*, image_urls: list[str], game_name: str) -> list[dict[str, str]]:
     """
@@ -98,9 +113,13 @@ def compose_rich_seo_article_html(
         cleaned_body = f"<p>{TXT_EMPTY_BODY}</p>"
 
     first_paragraph = _first_paragraph_text(cleaned_body)
-    summary_candidate = _truncate_text(summary or "", 280)
+    summary_candidate = sanitize_seo_summary_text(summary or "", game_name=safe_game_name, limit=280)
     if not summary_candidate or _is_summary_too_similar(summary_candidate, first_paragraph):
-        summary_candidate = _build_article_summary(cleaned_body, safe_game_name)
+        summary_candidate = sanitize_seo_summary_text(
+            _build_article_summary(cleaned_body, safe_game_name),
+            game_name=safe_game_name,
+            limit=280,
+        )
     summary_text = _truncate_text(summary_candidate, 280)
     if not summary_text:
         summary_text = TXT_DEFAULT_SUMMARY_FMT.format(game=safe_game_name)
@@ -282,9 +301,23 @@ def _strip_existing_related_links_blocks(html: str) -> str:
 
 def build_meta_fields(*, title: str, body_html: str, default_title: str = "") -> dict[str, str]:
     meta_title = (title or default_title or TXT_GAME_GUIDE).strip()[:60]
-    text_content = re.sub(r"<[^>]+>", " ", body_html or "")
-    text_content = re.sub(r"\s+", " ", text_content).strip()
-    meta_description = text_content[:160] if text_content else meta_title[:160]
+    summary_block_match = re.search(
+        r"(?is)<(?:div|section)\b[^>]*class=['\"][^'\"]*seo-summary[^'\"]*['\"][^>]*>(.*?)</(?:div|section)>",
+        body_html or "",
+    )
+    summary_block_text = _clean_plain_text(summary_block_match.group(1) if summary_block_match else "")
+    text_content = _clean_plain_text(body_html or "")
+
+    meta_description = sanitize_seo_summary_text(summary_block_text, limit=160)
+    if not meta_description:
+        meta_description = sanitize_seo_summary_text(text_content, limit=160)
+    if not meta_description:
+        relaxed = _SUMMARY_URL_RE.sub(" ", text_content)
+        relaxed = re.sub(r"\s+", " ", relaxed).strip()
+        meta_description = _truncate_text(relaxed, 160)
+    if not meta_description:
+        meta_description = meta_title[:160]
+
     return {
         "meta_title": meta_title,
         "meta_description": meta_description,
@@ -437,13 +470,81 @@ def _first_paragraph_text(html: str) -> str:
     return _clean_plain_text(html)
 
 
+def _normalize_summary_chunk(value: str) -> str:
+    text = _clean_plain_text(value)
+    if not text:
+        return ""
+    text = _SUMMARY_URL_RE.sub(" ", text)
+    text = _SUMMARY_BRACKET_NOISE_RE.sub(" ", text)
+    text = _SUMMARY_TIMESTAMP_RE.sub(" ", text)
+    text = _SUMMARY_SOCIAL_PHRASE_RE.sub(" ", text)
+    text = _SUMMARY_PREFIX_RE.sub("", text)
+    text = re.sub(r"(?i)\b(?:摘要|summary)\s*[:：]\s*", " ", text)
+    text = re.sub(r"[|｜]+", " ", text)
+    text = re.sub(r"\s+", " ", text).strip(" ,.;:!?，。；：！？-")
+    if _SUMMARY_EMPTY_KEYWORD_RE.fullmatch(text or ""):
+        return ""
+    return text
+
+
+def _looks_like_summary_noise(value: str) -> bool:
+    text = _normalize_summary_chunk(value)
+    if not text:
+        return True
+    if _SUMMARY_LINK_SECTION_HINT_RE.search(text):
+        return True
+    if _SUMMARY_SOCIAL_HINT_RE.search(text) and _SUMMARY_URL_RE.search(str(value or "")):
+        return True
+    if re.search(r"(?i)\b(?:http|www)\b", text):
+        return True
+    if len(re.findall(r"[A-Za-z0-9\u4e00-\u9fff]", text)) < 8:
+        return True
+    return False
+
+
+def sanitize_seo_summary_text(summary: str, *, game_name: str = "", limit: int = 280) -> str:
+    text = _clean_plain_text(summary)
+    if not text:
+        return ""
+
+    chunks = re.split(r"(?<=[。！？!?；;])|[\n\r]+|(?<=\.)\s+", text)
+    seen: set[str] = set()
+    cleaned_chunks: list[str] = []
+
+    for chunk in chunks:
+        normalized_chunk = _normalize_summary_chunk(chunk)
+        if not normalized_chunk:
+            continue
+        if _looks_like_summary_noise(normalized_chunk):
+            continue
+        dedupe_key = re.sub(r"[\s\W_]+", "", normalized_chunk.lower())
+        if not dedupe_key or dedupe_key in seen:
+            continue
+        seen.add(dedupe_key)
+        cleaned_chunks.append(normalized_chunk)
+
+    if not cleaned_chunks:
+        fallback_text = _normalize_summary_chunk(text)
+        if fallback_text and not _looks_like_summary_noise(fallback_text):
+            cleaned_chunks = [fallback_text]
+
+    summary_text = _clean_plain_text(" ".join(cleaned_chunks[:3]))
+    if not summary_text:
+        return ""
+    if game_name and len(summary_text) < 14:
+        summary_text = f"{game_name} 重點整理：{summary_text}"
+    return _truncate_text(summary_text, max(16, int(limit)))
+
+
 def _split_sentences(text: str) -> list[str]:
     chunks = re.split(r"(?<=[。！？!?])|[\n\r]+", str(text or ""))
     results: list[str] = []
     seen: set[str] = set()
     for chunk in chunks:
-        line = _clean_plain_text(chunk)
+        line = _normalize_summary_chunk(chunk)
         if len(line) < 8:
+            continue
+        if _looks_like_summary_noise(line):
             continue
         key = re.sub(r"\s+", "", line)
         if key in seen:
@@ -522,7 +623,7 @@ def _build_article_summary(body_html: str, game_name: str) -> str:
     if focus_sentence:
         parts.append(focus_sentence)
 
-    summary = _clean_plain_text("".join(parts))
+    summary = sanitize_seo_summary_text("".join(parts), game_name=game_name, limit=280)
     return summary or TXT_DEFAULT_SUMMARY_FMT.format(game=game_name)
 
 

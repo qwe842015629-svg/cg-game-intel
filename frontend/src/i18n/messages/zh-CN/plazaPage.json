@@ -1,0 +1,96 @@
+﻿{
+  "plazaPage": {
+    "header": {
+      "title": "广场",
+      "description": "发布动态、同步角色卡与小说作品，浏览他人内容并点赞评论。",
+      "refreshButton": "刷新内容",
+      "complianceNotice": "合规提醒：严禁发布涉黄、涉赌、涉毒、暴恐及其他违法违规内容，违规内容将被移除。"
+    },
+    "composer": {
+      "tabs": {
+        "text": "发布动态",
+        "roleCard": "同步角色卡",
+        "novelWork": "同步小说作品"
+      },
+      "textContentLabel": "动态内容",
+      "textContentPlaceholder": "分享你的最新动态...",
+      "roleSelectLabel": "选择角色卡",
+      "reloadRoles": "重新读取酒馆角色",
+      "roleSelectPlaceholder": "请选择角色",
+      "roleNameLabel": "角色：",
+      "roleGroupLabel": "分组：",
+      "roleDescriptionFallback": "暂无角色简介",
+      "roleNameFallback": "未命名角色",
+      "roleGroupFallback": "未分组",
+      "workSelectLabel": "选择小说作品",
+      "reloadWorks": "刷新作品列表",
+      "workSelectPlaceholder": "请选择作品",
+      "workTitleLabel": "标题：",
+      "workChaptersLabel": "章节：",
+      "workStatusLabel": "状态：",
+      "workSummaryFallback": "暂无简介",
+      "workTitleFallback": "未命名作品",
+      "captionLabel": "附加说明（可选）",
+      "captionPlaceholder": "可补充一句你想公开展示的话...",
+      "publishButton": "发布到广场",
+      "publishingButton": "发布中...",
+      "clearButton": "清空",
+      "publishSuccess": "发布成功。",
+      "autoContent": {
+        "roleCard": "我同步了角色卡：{name}。",
+        "novelWork": "我同步了小说作品：{title}。"
+      }
+    },
+    "feed": {
+      "title": "广场动态",
+      "filters": {
+        "all": "全部",
+        "text": "动态",
+        "roleCard": "角色卡",
+        "novelWork": "小说作品"
+      },
+      "loading": "正在加载广场内容...",
+      "empty": "暂无内容，快来发布第一条动态。",
+      "anonymousUser": "匿名用户",
+      "authorAvatarAlt": "用户头像",
+      "deleteButton": "删除",
+      "roleCardSynced": "已同步角色卡",
+      "roleCardAvatarAlt": "角色头像",
+      "novelWorkSynced": "已同步小说作品",
+      "novelWorkCoverAlt": "作品封面",
+      "novelMeta": "{chapters} 章 · {status}",
+      "noContent": "（无正文）",
+      "likedButton": "已点赞（{count}）",
+      "likeButton": "点赞（{count}）",
+      "commentButton": "评论（{count}）",
+      "noComments": "暂无评论",
+      "commentPlaceholder": "写评论...",
+      "commentSending": "发送中",
+      "commentSend": "发送",
+      "confirmDeletePost": "确认删除这条动态吗？",
+      "confirmDeleteComment": "确认删除这条评论吗？"
+    },
+    "workStatus": {
+      "draft": "创作中",
+      "completed": "已完结"
+    },
+    "common": {
+      "visitor": "访客",
+      "dash": "-"
+    },
+    "errors": {
+      "requestFailed": "请求失败",
+      "feedLoadFailed": "广场内容加载失败",
+      "publishFailed": "发布失败",
+      "deletePostFailed": "删除失败",
+      "likeFailed": "点赞失败",
+      "commentFailed": "评论失败",
+      "deleteCommentFailed": "删除评论失败",
+      "textRequired": "请先填写动态内容。",
+      "roleRequired": "请选择要同步的角色卡。",
+      "workRequired": "请选择要同步的小说作品。",
+      "blockedContent": "内容命中违规词：{term}",
+      "blockedComment": "评论命中违规词：{term}"
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "i18nDemo": {
+    "subtitle": "Démo rapide i18n : changer de langue, conserver le préfixe local de l'URL et conserver avec localStorage.",
+    "languageLabel": "Langue",
+    "currentLocaleLabel": "Paramètres régionaux actuels :",
+    "currentUrlLabel": "URL actuelle :"
+  }
+}

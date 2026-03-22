@@ -1,0 +1,41 @@
+{
+  "authDialog": {
+    "registrationSuccessTitle": "🎉 登録が成功しました!",
+    "activationEmailSent": "アクティベーションメールが送信されました",
+    "nextStepsTitle": "次に何をすればいいでしょうか？",
+    "activationStep1": "メールボックスを開きます: {email}",
+    "activationStep2": "{company} からのアクティベーション電子メールを見つけます。",
+    "activationStep3": "メール内のアクティベーションボタンをクリックします",
+    "activationStep4": "アクティベーション後、すぐにサインインできます",
+    "noEmailTitle": "メールを受信しませんでしたか?",
+    "noEmailDesc": "スパムフォルダを確認するか、数分後にもう一度試してください。",
+    "openEmail": "メールボックスを開く",
+    "close": "近い",
+    "accountLogin": "アカウントログイン",
+    "tabs": {
+      "login": "ログイン",
+      "register": "登録する"
+    },
+    "emailLabel": "電子メール",
+    "passwordLabel": "パスワード",
+    "usernameLabel": "ユーザー名",
+    "confirmPasswordLabel": "パスワードを認証する",
+    "usernamePlaceholder": "あなたのニックネーム",
+    "passwordPlaceholder": "••••••••",
+    "loginButton": "ログイン",
+    "registerButton": "登録する",
+    "loginSuccess": "ログイン成功しました！",
+    "invalidCredentials": "無効な電子メールまたはパスワード",
+    "loginFailed": "ログインに失敗しました。資格情報を確認してください",
+    "passwordMismatch": "パスワードが一致しません",
+    "passwordTooShort": "パスワードは8文字以上である必要があります",
+    "usernameRequired": "ユーザー名を入力してください",
+    "emailRequired": "メールアドレスを入力してください",
+    "passwordRequired": "パスワードを入力してください",
+    "confirmPasswordRequired": "パスワードを確認してください",
+    "fieldUsername": "ユーザー名:",
+    "fieldEmail": "電子メール:",
+    "fieldPassword": "パスワード：",
+    "registerFailed": "登録に失敗しました。もう一度お試しください"
+  }
+}

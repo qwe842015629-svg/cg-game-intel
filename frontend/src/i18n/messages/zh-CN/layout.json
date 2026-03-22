@@ -1,0 +1,29 @@
+{
+  "layout": {
+    "brandTagline": "优质充值服务",
+    "themeScheme": "配色方案",
+    "cursorMode": "鼠标模式",
+    "toggleMobileMenu": "切换移动菜单",
+    "noCategory": "暂无分类",
+    "allNews": "全部资讯",
+    "faqCategory": "常见问题",
+    "noFaqContent": "暂无常见问题内容",
+    "newBadge": "新",
+    "topNews": "热榜讯息",
+    "footerEditorLabel": "站点底部",
+    "cursorSoft": "柔和",
+    "cursorSystem": "系统",
+    "cursorCrosshair": "十字",
+    "cursorNeon": "霓虹",
+    "gameNewsCategory": "游戏资讯",
+    "guideCategory": "攻略教程",
+    "rechargeGuideCategory": "充值指南",
+    "announcementCategory": "活动公告",
+    "allGamesCategory": "全部游戏",
+    "internationalGamesCategory": "国际游戏",
+    "hongKongTaiwanGamesCategory": "港台游戏",
+    "southeastAsiaGamesCategory": "东南亚游戏",
+    "copyright": "版权所有 © {year} {company}",
+    "logoutSuccess": "已退出登录"
+  }
+}

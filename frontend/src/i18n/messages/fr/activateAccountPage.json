@@ -1,0 +1,26 @@
+{
+  "activateAccountPage": {
+    "activatingTitle": "Activation de votre compte...",
+    "activatingDescription": "Veuillez patienter, cela ne prend que quelques secondes.",
+    "successTitle": "Activation réussie !",
+    "successDescription": "Votre compte a été activé. Vous pouvez maintenant vous connecter.",
+    "successNotice": "L'activation du compte est terminée et toutes les fonctionnalités sont désormais disponibles.",
+    "countdownRedirect": "Redirection vers la connexion dans {count} secondes...",
+    "loginNow": "Connectez-vous maintenant",
+    "backHome": "Retour à la maison",
+    "failedTitle": "Échec de l'activation",
+    "invalidOrExpired": "Le lien d'activation est invalide ou a expiré.",
+    "reasonsTitle": "Raisons possibles :",
+    "reasonExpired": "Le lien d'activation a expiré (valable 24 heures).",
+    "reasonUsed": "Le lien d'activation a déjà été utilisé.",
+    "reasonFormat": "Le format du lien est incorrect.",
+    "registerAgain": "Inscrivez-vous à nouveau",
+    "errors": {
+      "invalidLinkFormat": "Le format du lien d'activation n'est pas valide.",
+      "invalidUid": "ID utilisateur invalide.",
+      "invalidToken": "Jeton d'activation invalide ou expiré.",
+      "activateFailedRetry": "L'activation a échoué, veuillez réessayer.",
+      "networkError": "Erreur réseau, veuillez vérifier votre connexion."
+    }
+  }
+}

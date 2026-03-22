@@ -1,0 +1,33 @@
+{
+  "rechargePage": {
+    "badge": "Recharger",
+    "title": "Recharge de jeu",
+    "subtitle": "Choisissez un jeu, remplissez les détails du compte et effectuez le paiement avec un flux clair et rapide.",
+    "selectGameTitle": "Sélectionnez un jeu",
+    "selectGameDesc": "Recherchez et choisissez rapidement",
+    "emptyStateTitle": "Veuillez d'abord sélectionner un jeu",
+    "emptyStateDesc": "Après la sélection, vous pouvez renseigner les détails du compte, le montant et le mode de paiement.",
+    "stepSelectGame": "Choisissez un jeu",
+    "stepFillAccount": "Remplissez les détails du compte",
+    "stepSelectAmountAndPayment": "Sélectionnez le montant et le mode de paiement",
+    "stepConfirmOrder": "Confirmer la commande et terminer la recharge",
+    "reselectGame": "Sélectionner de nouveau",
+    "accountInfoTitle": "Informations sur le compte",
+    "amountTitle": "Montant de recharge",
+    "paymentMethodTitle": "Mode de paiement",
+    "hotBadge": "CHAUD",
+    "bonusDiamonds": "{amount} Diamants",
+    "bonusExtra": "Diamants {amount} bonus",
+    "pendingPaymentNotice": "La recharge est en cours de développement. Une véritable intégration de paiement sera bientôt ajoutée.",
+    "games": {
+      "hok": "Honneur des rois",
+      "pubgm": "PUBG Mobile",
+      "genshin": "GenshinImpact",
+      "wildrift": "League of Legends : Faille sauvage",
+      "cf": "Feux croisés",
+      "dnf": "Donjon et combattant",
+      "hsr": "Honkai : Rail étoilé",
+      "sky": "Ciel : Enfants de la Lumière"
+    }
+  }
+}

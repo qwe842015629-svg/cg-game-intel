@@ -26,6 +26,20 @@
         <!-- 错误提示 -->
         <div v-if="errorMessage" class="mb-6 p-4 bg-red-500/20 border-2 border-red-400 rounded-lg">
           <p class="text-red-300 text-sm">{{ errorMessage }}</p>
+          <button
+            v-if="canResendActivation"
+            type="button"
+            class="mt-3 text-sm text-cyan-300 hover:text-cyan-200 underline disabled:opacity-60"
+            :disabled="resendLoading"
+            @click="handleResendActivation"
+          >
+            <span v-if="resendLoading">正在重发激活邮件...</span>
+            <span v-else>重新发送激活邮件</span>
+          </button>
+        </div>
+
+        <div v-if="infoMessage" class="mb-6 p-4 bg-cyan-500/15 border-2 border-cyan-400 rounded-lg">
+          <p class="text-cyan-100 text-sm">{{ infoMessage }}</p>
         </div>
 
         <!-- 登录表单 -->
@@ -78,9 +92,9 @@
             </router-link>
           </p>
           <p class="text-gray-400 text-sm">
-            <a href="#" class="text-purple-400 hover:text-purple-300">
+            <router-link to="/forgot-password" class="text-purple-400 hover:text-purple-300">
               忘记密码？
-            </a>
+            </router-link>
           </p>
         </div>
       </div>
@@ -91,12 +105,14 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { useAuthStore } from '../stores/auth'
 import client from '../api/client'
 import { useVisualEditor } from '../composables/useVisualEditor'
 
 const { isEditMode, getPageConfig, handleInlineEdit } = useVisualEditor('login_page', '登录页')
 
 const router = useRouter()
+const authStore = useAuthStore()
 
 const form = ref({
   email: '',
@@ -105,22 +121,67 @@ const form = ref({
 
 const loading = ref(false)
 const errorMessage = ref('')
+const infoMessage = ref('')
+const canResendActivation = ref(false)
+const resendLoading = ref(false)
+
+const extractNonFieldErrors = (errors: any): string[] => {
+  if (!errors) return []
+  if (Array.isArray(errors.non_field_errors)) {
+    return errors.non_field_errors.map((item: unknown) => String(item || '').trim()).filter(Boolean)
+  }
+  return []
+}
+
+const detectInactiveError = (errors: any): boolean => {
+  const nonFieldErrors = extractNonFieldErrors(errors)
+  const rawCode = errors?.code
+  const codeValues = Array.isArray(rawCode) ? rawCode : [rawCode]
+  const hasInactiveCode = codeValues
+    .map((item) => String(item || '').trim().toLowerCase())
+    .some((item) => item === 'inactive_account')
+  if (hasInactiveCode) return true
+  return nonFieldErrors.some((message) => /未激活|inactive/i.test(message))
+}
+
+const handleResendActivation = async () => {
+  const email = String(form.value.email || '').trim()
+  if (!email) {
+    errorMessage.value = '请先输入注册邮箱'
+    return
+  }
+
+  resendLoading.value = true
+  infoMessage.value = ''
+  try {
+    await client.post('/auth/users/resend_activation/', { email })
+    infoMessage.value = '激活邮件已重新发送，请检查邮箱和垃圾邮件文件夹。'
+    canResendActivation.value = false
+  } catch (error: any) {
+    const detail = error?.response?.data?.detail
+    errorMessage.value = detail ? String(detail) : '重发激活邮件失败，请稍后重试'
+  } finally {
+    resendLoading.value = false
+  }
+}
 
 const handleLogin = async () => {
   errorMessage.value = ''
+  infoMessage.value = ''
+  canResendActivation.value = false
   loading.value = true
 
   try {
-    const response: any = await client.post('/auth/token/login/', form.value)
-    
-    // 保存 token
-    localStorage.setItem('authToken', response.auth_token)
-    
+    await authStore.login({
+      email: String(form.value.email || '').trim(),
+      password: String(form.value.password || ''),
+    })
     // 跳转到首页
     router.push('/')
   } catch (error: any) {
     if (error.response?.data) {
       const errors = error.response.data
+      canResendActivation.value = detectInactiveError(errors)
       if (errors.non_field_errors) {
         errorMessage.value = errors.non_field_errors.join(', ')
       } else if (errors.detail) {

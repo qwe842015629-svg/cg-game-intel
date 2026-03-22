@@ -1,0 +1,8 @@
+{
+  "userProfile": {
+    "relationships": {
+      "loading": "Loading list...",
+      "empty": "No users yet."
+    }
+  }
+}

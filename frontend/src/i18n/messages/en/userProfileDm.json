@@ -1,0 +1,9 @@
+{
+  "userProfile": {
+    "dm": {
+      "placeholder": "Type a message...",
+      "sending": "Sending...",
+      "send": "Send"
+    }
+  }
+}

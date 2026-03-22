@@ -1,0 +1,32 @@
+{
+  "aboutPage": {
+    "title": "ABOUT",
+    "subtitle": "US",
+    "description": "Learn about our mission, vision, and values.",
+    "heroText": "CYBERCHARGE",
+    "heroSubtext": "Future game recharge experience · Secure · Fast · Reliable",
+    "missionTitle": "Mission",
+    "missionDescription": "Our mission is to provide global players with secure, fast, and reliable game recharge services, so every player can enjoy a seamless experience without regional or payment barriers.",
+    "visionTitle": "Vision",
+    "visionDescription": "To become a leading global game service platform through innovation and excellent service, connecting players everywhere and creating limitless game experiences.",
+    "corePrefix": "CORE",
+    "coreSuffix": "VALUES",
+    "values": {
+      "secureTitle": "Secure & Reliable",
+      "secureDescription": "We always put user safety first and protect every transaction with advanced security technology.",
+      "fastTitle": "Ultra Fast",
+      "fastDescription": "Millisecond-level recharge processing keeps your game experience uninterrupted.",
+      "userTitle": "User First",
+      "userDescription": "We focus on user needs and deliver thoughtful service with personalized experiences."
+    },
+    "teamPrefix": "OUR",
+    "teamSuffix": "TEAM",
+    "cta": {
+      "titlePrefix": "READY",
+      "titleSuffix": "TO GET STARTED?",
+      "description": "Join our gaming community and enjoy secure, fast, and reliable game recharge services.",
+      "recharge": "Start Recharge",
+      "contact": "Contact Us"
+    }
+  }
+}

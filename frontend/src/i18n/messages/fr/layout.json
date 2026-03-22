@@ -1,0 +1,29 @@
+{
+  "layout": {
+    "brandTagline": "Service de recharge premium",
+    "themeScheme": "Thème prédéfini",
+    "cursorMode": "Mode curseur",
+    "toggleMobileMenu": "Basculer le menu mobile",
+    "noCategory": "Aucune catégorie disponible",
+    "allNews": "Toutes les actualités",
+    "faqCategory": "FAQ",
+    "noFaqContent": "Pas encore de contenu FAQ",
+    "newBadge": "NOUVEAU",
+    "topNews": "Principaux signaux",
+    "footerEditorLabel": "Pied de page du site",
+    "cursorSoft": "Doux",
+    "cursorSystem": "Système",
+    "cursorCrosshair": "Réticule",
+    "cursorNeon": "Néon",
+    "gameNewsCategory": "Actualités du jeu",
+    "guideCategory": "Guides",
+    "rechargeGuideCategory": "Guide de recharge",
+    "announcementCategory": "Annonces",
+    "allGamesCategory": "Tous les jeux",
+    "internationalGamesCategory": "Jeux internationaux",
+    "hongKongTaiwanGamesCategory": "Jeux HK/TW",
+    "southeastAsiaGamesCategory": "Jeux d'Asie du Sud-Est",
+    "copyright": "Tous droits réservés © {year} {company}",
+    "logoutSuccess": "Déconnecté avec succès"
+  }
+}

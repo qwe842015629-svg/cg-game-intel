@@ -13,7 +13,9 @@ export function useI18n() {
   // 当前语言
   const locale = computed({
     get: () => languageStore.currentLocale,
-    set: (value) => languageStore.setLocale(value)
+    set: (value) => {
+      void languageStore.setLocale(value)
+    }
   })
   
   // 混合翻译函数

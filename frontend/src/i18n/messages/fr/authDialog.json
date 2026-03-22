@@ -1,0 +1,41 @@
+{
+  "authDialog": {
+    "registrationSuccessTitle": "🎉 Inscription réussie !",
+    "activationEmailSent": "Un email d'activation a été envoyé à",
+    "nextStepsTitle": "Que faire ensuite ?",
+    "activationStep1": "Ouvrez votre boîte mail : {email}",
+    "activationStep2": "Recherchez l'e-mail d'activation de {company}",
+    "activationStep3": "Cliquez sur le bouton d'activation dans l'e-mail",
+    "activationStep4": "Après l'activation, vous pouvez vous connecter immédiatement",
+    "noEmailTitle": "Vous n'avez pas reçu l'e-mail ?",
+    "noEmailDesc": "Veuillez vérifier votre dossier spam ou réessayer dans quelques minutes.",
+    "openEmail": "Ouvrir la boîte aux lettres",
+    "close": "Fermer",
+    "accountLogin": "Connexion au compte",
+    "tabs": {
+      "login": "Se connecter",
+      "register": "Registre"
+    },
+    "emailLabel": "E-mail",
+    "passwordLabel": "Mot de passe",
+    "usernameLabel": "Nom d'utilisateur",
+    "confirmPasswordLabel": "Confirmez le mot de passe",
+    "usernamePlaceholder": "Votre pseudo",
+    "passwordPlaceholder": "••••••••",
+    "loginButton": "Se connecter",
+    "registerButton": "Registre",
+    "loginSuccess": "Connexion réussie !",
+    "invalidCredentials": "Email ou mot de passe invalide",
+    "loginFailed": "La connexion a échoué, veuillez vérifier vos informations d'identification",
+    "passwordMismatch": "Les mots de passe ne correspondent pas",
+    "passwordTooShort": "Le mot de passe doit contenir au moins 8 caractères",
+    "usernameRequired": "Veuillez entrer votre nom d'utilisateur",
+    "emailRequired": "Veuillez entrer votre email",
+    "passwordRequired": "Veuillez entrer votre mot de passe",
+    "confirmPasswordRequired": "Veuillez confirmer votre mot de passe",
+    "fieldUsername": "Nom d'utilisateur:",
+    "fieldEmail": "E-mail:",
+    "fieldPassword": "Mot de passe:",
+    "registerFailed": "L'inscription a échoué, veuillez réessayer"
+  }
+}

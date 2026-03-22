@@ -1,0 +1,58 @@
+{
+  "generatedAt": "2026-02-18T14:56:37.146Z",
+  "policyVersion": "whitelist_blacklist_v3",
+  "indexOriginalCount": 87,
+  "indexRemovedCount": 0,
+  "indexRemainingCount": 87,
+  "retainedByWhitelistCount": 4,
+  "reasonCount": {
+    "erotic": 0,
+    "bl": 0,
+    "unethical": 0,
+    "crime": 0,
+    "violence": 0,
+    "minor_sexual": 0,
+    "harmful_tone": 0,
+    "edge_risk": 0,
+    "copyright_notice": 0
+  },
+  "removed": [],
+  "retainedByWhitelist": [
+    {
+      "id": "54a2eaebc6b3f25f2641ee29503a66b5",
+      "name": "狐妖小红娘",
+      "group": "游戏小说好友",
+      "reasons": [
+        "edge_risk"
+      ]
+    },
+    {
+      "id": "5cb8422fd5d64b7f182332eebd3117df",
+      "name": "李妙真",
+      "group": "",
+      "reasons": [
+        "edge_risk"
+      ]
+    },
+    {
+      "id": "f3bf0b334dbf992a38e34c3f355617ca",
+      "name": "if线",
+      "group": "",
+      "reasons": [
+        "edge_risk"
+      ]
+    },
+    {
+      "id": "1d52b13ee8545414df0f9ab26082b643",
+      "name": "\"星野澪\"",
+      "group": "",
+      "reasons": [
+        "edge_risk"
+      ]
+    }
+  ],
+  "scannedFileCount": 0,
+  "deletedFileCount": 0,
+  "deletedFiles": [],
+  "parseErrors": []
+}

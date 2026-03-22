@@ -1,97 +1,88 @@
-﻿<template>
+<template>
   <div class="min-h-screen flex items-center justify-center py-12 px-4 relative overflow-hidden">
     <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(50%_42%_at_50%_0%,hsl(var(--primary)/0.14),transparent_72%)]"></div>
     <div class="pointer-events-none absolute -top-20 right-[7%] h-60 w-60 rounded-full bg-primary/10 blur-3xl"></div>
     <div class="pointer-events-none absolute -bottom-20 left-[10%] h-64 w-64 rounded-full bg-secondary/10 blur-3xl"></div>
     <div class="relative max-w-md w-full">
-      <!-- 激活中 -->
       <div v-if="activating" class="surface-card p-8 text-center" v-motion-reveal="{ y: 20 }">
         <div class="w-16 h-16 mx-auto rounded-full bg-primary/10 flex items-center justify-center mb-5 animate-pulse">
-          <svg class="w-8 h-8 text-primary animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-          </svg>
+          <RefreshCw class="w-8 h-8 text-primary animate-spin" />
         </div>
-        <h2 class="text-2xl font-bold text-foreground mb-3">正在激活您的账号...</h2>
-        <p class="text-muted-foreground">请稍候，这只需要几秒钟</p>
+        <h2 class="text-2xl font-bold text-foreground mb-3">{{ t('activateAccountPage.activatingTitle') }}</h2>
+        <p class="text-muted-foreground">{{ t('activateAccountPage.activatingDescription') }}</p>
       </div>
 
-      <!-- 激活成功 -->
       <div v-else-if="activationSuccess" class="surface-card p-8 text-center" v-motion-reveal="{ y: 20 }">
         <div class="w-16 h-16 mx-auto rounded-full bg-emerald-500/15 flex items-center justify-center mb-5">
-          <svg class="w-8 h-8 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
-          </svg>
+          <Check class="w-8 h-8 text-emerald-500" />
         </div>
 
-        <h2 class="text-2xl font-bold text-foreground mb-3">激活成功！</h2>
+        <h2 class="text-2xl font-bold text-foreground mb-3">{{ t('activateAccountPage.successTitle') }}</h2>
 
-        <p class="text-muted-foreground mb-5">您的账号已成功激活，现在可以登录使用了</p>
+        <p class="text-muted-foreground mb-5">{{ t('activateAccountPage.successDescription') }}</p>
 
         <div class="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4 mb-5">
           <p class="text-emerald-700 dark:text-emerald-300 text-sm">
-            账号激活完成，您可以使用所有功能。
+            {{ t('activateAccountPage.successNotice') }}
           </p>
         </div>
 
         <div v-if="countdown > 0" class="mb-5">
           <p class="text-muted-foreground text-sm">
-            {{ countdown }} 秒后自动跳转到登录页...
+            {{ t('activateAccountPage.countdownRedirect', { count: countdown }) }}
           </p>
         </div>
 
         <div class="grid grid-cols-2 gap-3">
           <router-link
-            to="/login"
+            :to="localizedPath('/login')"
             v-magnetic="{ strength: 0.16, max: 9 }"
             class="px-4 py-2.5 rounded-lg bg-primary text-primary-foreground font-semibold hover:bg-primary/90 transition-colors text-center"
           >
-            立即登录
+            {{ t('activateAccountPage.loginNow') }}
           </router-link>
           <router-link
-            to="/"
+            :to="localizedPath('/')"
             class="px-4 py-2.5 rounded-lg bg-secondary text-secondary-foreground font-semibold hover:opacity-90 transition-colors text-center"
           >
-            返回首页
+            {{ t('activateAccountPage.backHome') }}
           </router-link>
         </div>
       </div>
 
-      <!-- 激活失败 -->
       <div v-else class="surface-card p-8 text-center" v-motion-reveal="{ y: 20 }">
         <div class="w-16 h-16 mx-auto rounded-full bg-destructive/15 flex items-center justify-center mb-5">
-          <svg class="w-8 h-8 text-destructive" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12" />
-          </svg>
+          <X class="w-8 h-8 text-destructive" />
         </div>
 
-        <h2 class="text-2xl font-bold text-destructive mb-3">激活失败</h2>
+        <h2 class="text-2xl font-bold text-destructive mb-3">{{ t('activateAccountPage.failedTitle') }}</h2>
 
         <p class="text-muted-foreground mb-5">
-          {{ errorMessage || '激活链接无效或已过期' }}
+          {{ errorMessage || t('activateAccountPage.invalidOrExpired') }}
         </p>
 
         <div class="bg-destructive/10 border border-destructive/25 rounded-lg p-4 mb-5 text-left">
           <p class="text-sm text-muted-foreground">
-            可能的原因：
-            <br />• 激活链接已过期（24小时有效期）
-            <br />• 激活链接已被使用
-            <br />• 链接格式不正确
+            {{ t('activateAccountPage.reasonsTitle') }}
+            <br />• {{ t('activateAccountPage.reasonExpired') }}
+            <br />• {{ t('activateAccountPage.reasonUsed') }}
+            <br />• {{ t('activateAccountPage.reasonFormat') }}
           </p>
         </div>
 
         <div class="grid grid-cols-2 gap-3">
           <router-link
-            to="/register"
+            :to="localizedPath('/register')"
             v-magnetic="{ strength: 0.16, max: 9 }"
             class="px-4 py-2.5 rounded-lg bg-primary text-primary-foreground font-semibold hover:bg-primary/90 transition-colors text-center"
           >
-            重新注册
+            {{ t('activateAccountPage.registerAgain') }}
           </router-link>
           <router-link
-            to="/"
+            :to="localizedPath('/')"
             class="px-4 py-2.5 rounded-lg bg-secondary text-secondary-foreground font-semibold hover:opacity-90 transition-colors text-center"
           >
-            返回首页
+            {{ t('activateAccountPage.backHome') }}
           </router-link>
         </div>
       </div>
@@ -100,12 +91,17 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { onBeforeUnmount, onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
+import { Check, RefreshCw, X } from 'lucide-vue-next'
 import client from '../api/client'
+import { withLocalePrefix } from '../i18n/locale-routing'
+import { normalizeLocaleCode } from '../i18n/locale-utils'
 
 const route = useRoute()
 const router = useRouter()
+const { t, locale } = useI18n()
 
 const activating = ref(true)
 const activationSuccess = ref(false)
@@ -114,25 +110,25 @@ const countdown = ref(5)
 
 let countdownTimer: number | null = null
 
+const localizedPath = (path: string): string => withLocalePrefix(path, normalizeLocaleCode(locale.value))
+
 const activateAccount = async () => {
   const { uid, token } = route.params
 
   if (!uid || !token) {
     activating.value = false
-    errorMessage.value = '激活链接格式不正确'
+    errorMessage.value = t('activateAccountPage.errors.invalidLinkFormat')
     return
   }
 
   try {
     await client.post('/auth/users/activation/', {
-      uid: uid,
-      token: token
+      uid,
+      token,
     })
 
     activationSuccess.value = true
     activating.value = false
-
-    // 开始倒计时
     startCountdown()
   } catch (error: any) {
     activating.value = false
@@ -142,32 +138,38 @@ const activateAccount = async () => {
       if (errors.detail) {
         errorMessage.value = errors.detail
       } else if (errors.uid) {
-        errorMessage.value = '用户ID无效'
+        errorMessage.value = t('activateAccountPage.errors.invalidUid')
       } else if (errors.token) {
-        errorMessage.value = '激活令牌无效或已过期'
+        errorMessage.value = t('activateAccountPage.errors.invalidToken')
       } else {
-        errorMessage.value = '激活失败，请重试'
+        errorMessage.value = t('activateAccountPage.errors.activateFailedRetry')
       }
     } else {
-      errorMessage.value = '网络错误，请检查您的网络连接'
+      errorMessage.value = t('activateAccountPage.errors.networkError')
     }
   }
 }
 
 const startCountdown = () => {
   countdownTimer = window.setInterval(() => {
-    countdown.value--
+    countdown.value -= 1
     if (countdown.value <= 0) {
       if (countdownTimer) {
         clearInterval(countdownTimer)
       }
-      router.push('/login')
+      router.push(localizedPath('/login'))
     }
   }, 1000)
 }
 
 onMounted(() => {
   activateAccount()
+})
+
+onBeforeUnmount(() => {
+  if (countdownTimer) {
+    clearInterval(countdownTimer)
+  }
 })
 </script>
 

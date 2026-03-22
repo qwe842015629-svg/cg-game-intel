@@ -1,0 +1,29 @@
+{
+  "layout": {
+    "brandTagline": "プレミアムリチャージサービス",
+    "themeScheme": "テーマのプリセット",
+    "cursorMode": "カーソルモード",
+    "toggleMobileMenu": "モバイルメニューの切り替え",
+    "noCategory": "利用可能なカテゴリがありません",
+    "allNews": "すべてのニュース",
+    "faqCategory": "よくある質問",
+    "noFaqContent": "FAQコンテンツはまだありません",
+    "newBadge": "新しい",
+    "topNews": "トップシグナル",
+    "footerEditorLabel": "サイトフッター",
+    "cursorSoft": "柔らかい",
+    "cursorSystem": "システム",
+    "cursorCrosshair": "十字線",
+    "cursorNeon": "ネオン",
+    "gameNewsCategory": "ゲームニュース",
+    "guideCategory": "ガイド",
+    "rechargeGuideCategory": "リチャージガイド",
+    "announcementCategory": "お知らせ",
+    "allGamesCategory": "すべてのゲーム",
+    "internationalGamesCategory": "国際競技大会",
+    "hongKongTaiwanGamesCategory": "香港/台湾のゲーム",
+    "southeastAsiaGamesCategory": "東南アジア競技大会",
+    "copyright": "無断複写・転載を禁じます © {year} {company}",
+    "logoutSuccess": "正常にログアウトされました"
+  }
+}

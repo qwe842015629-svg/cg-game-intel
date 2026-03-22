@@ -57,6 +57,19 @@
     .modal h3 { margin: 0 0 10px; font-size: 18px; }
     .modal .grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
     .modal textarea { width: 100%; min-height: 260px; border: 1px solid #dbe5f4; border-radius: 8px; padding: 10px; font-size: 13px; font-family: Consolas, monospace; line-height: 1.5; resize: vertical; }
+    .html-editor-wrap { border: 1px solid #dbe5f4; border-radius: 10px; overflow: hidden; background: #fff; }
+    .html-editor-toolbar { display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #e7edf7; background: #f7faff; padding: 8px 10px; flex-wrap: wrap; }
+    .mode-btn { border: 1px solid #cddcf4; border-radius: 999px; background: #fff; color: #335d92; font-size: 12px; padding: 4px 10px; cursor: pointer; }
+    .mode-btn.active { border-color: #2f80ed; background: #2f80ed; color: #fff; }
+    .html-tool-group { display: flex; align-items: center; gap: 6px; }
+    .tool-btn { border: 1px solid #cddcf4; border-radius: 6px; background: #fff; color: #335d92; font-size: 12px; padding: 4px 9px; cursor: pointer; }
+    .tool-btn:disabled { opacity: .55; cursor: not-allowed; }
+    .html-editor-tip { color: #6b7a90; font-size: 12px; }
+    .html-visual-editor { min-height: 320px; max-height: 520px; overflow: auto; padding: 12px; outline: none; line-height: 1.7; font-size: 14px; color: #1f2d3d; }
+    .html-visual-editor.hidden { display: none; }
+    .html-visual-editor:focus { box-shadow: inset 0 0 0 2px rgba(47, 128, 237, 0.2); }
+    .html-source-editor { display: none; border: 0 !important; border-radius: 0 !important; min-height: 320px !important; max-height: 520px; font-family: Consolas, monospace; }
+    .html-source-editor.active { display: block; }
     .modal-actions { margin-top: 10px; display: flex; gap: 8px; justify-content: flex-end; }
     .table-card { margin-bottom: 12px; }
     .table-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 8px; }
@@ -178,7 +191,24 @@
       <div class="field"><label for="editMetaTitle">Meta Title</label><input id="editMetaTitle" type="text"></div>
       <div class="field span-2"><label for="editMetaDescription">Meta Description</label><input id="editMetaDescription" type="text"></div>
       <div class="field span-2"><label for="editTags">标签（逗号分隔）</label><input id="editTags" type="text"></div>
-      <div class="field span-2"><label for="editBodyHtml">正文HTML</label><textarea id="editBodyHtml"></textarea></div>
+      <div class="field span-2">
+        <label for="editBodyHtml">正文HTML</label>
+        <div class="html-editor-wrap">
+          <div class="html-editor-toolbar">
+            <div class="html-tool-group">
+              <button class="tool-btn" id="toolH2Btn" type="button">H2</button>
+              <button class="tool-btn" id="toolBoldBtn" type="button">加粗</button>
+              <button class="tool-btn" id="toolListBtn" type="button">列表</button>
+              <button class="tool-btn" id="toolImageBtn" type="button">插图</button>
+            </div>
+            <button class="mode-btn active" id="visualModeBtn" type="button">可视化编辑</button>
+            <button class="mode-btn" id="sourceModeBtn" type="button">HTML源码</button>
+            <span class="html-editor-tip">可视化模式可直接修改内容；源码模式可精确编辑标签。</span>
+          </div>
+          <div id="editBodyVisual" class="html-visual-editor" contenteditable="true"></div>
+          <textarea id="editBodyHtml" class="html-source-editor"></textarea>
+        </div>
+      </div>
     </div>
     <div class="modal-actions">
       <button class="btn ghost" id="cancelEditDraftBtn" type="button">取消</button>
@@ -206,7 +236,14 @@
   const editMetaTitleInput = document.getElementById("editMetaTitle");
   const editMetaDescriptionInput = document.getElementById("editMetaDescription");
   const editTagsInput = document.getElementById("editTags");
+  const editBodyVisualInput = document.getElementById("editBodyVisual");
   const editBodyHtmlInput = document.getElementById("editBodyHtml");
+  const visualModeBtn = document.getElementById("visualModeBtn");
+  const sourceModeBtn = document.getElementById("sourceModeBtn");
+  const toolH2Btn = document.getElementById("toolH2Btn");
+  const toolBoldBtn = document.getElementById("toolBoldBtn");
+  const toolListBtn = document.getElementById("toolListBtn");
+  const toolImageBtn = document.getElementById("toolImageBtn");
   const saveEditDraftBtn = document.getElementById("saveEditDraftBtn");
   const cancelEditDraftBtn = document.getElementById("cancelEditDraftBtn");
 
@@ -221,6 +258,15 @@
   let currentTaskId = null;
   let rawJsonVisible = false;
   let editingArticleId = null;
+  let editBodyMode = "visual";
+  const DEFAULT_REQUEST_TIMEOUT_MS = 180000;
+  const STEP_TIMEOUT_MS = {
+    1: 120000,
+    2: 180000,
+    3: 180000,
+    4: 240000,
+    5: 360000,
+  };
 
   function getCsrfToken() {
     const match = document.cookie.match(/(?:^|; )csrftoken=([^;]+)/);
@@ -229,6 +275,16 @@
 
   function toJsonText(value) {
     try { return JSON.stringify(value, null, 2); } catch (e) { return String(value); }
+  }
+
+  function getStepTimeoutMs(stopAfterStep) {
+    const step = Number(stopAfterStep || 5);
+    return STEP_TIMEOUT_MS[step] || DEFAULT_REQUEST_TIMEOUT_MS;
+  }
+
+  function buildTimeoutMessage(timeoutMs) {
+    const seconds = Math.max(1, Math.round(Number(timeoutMs || 0) / 1000));
+    return `请求超时（${seconds}秒）。任务可能仍在后台继续运行，请点击“刷新任务/文章”查看进度。`;
   }
 
   function normalizeList(payload) {
@@ -256,6 +312,66 @@
     rawJsonVisible = !!visible;
     resultJson.style.display = rawJsonVisible ? "block" : "none";
     toggleRawBtn.textContent = rawJsonVisible ? "收起原始JSON" : "展开原始JSON";
+  }
+
+  function syncVisualFromSource() {
+    const html = String(editBodyHtmlInput.value || "");
+    editBodyVisualInput.innerHTML = html.trim() ? html : "<p><br></p>";
+  }
+
+  function syncSourceFromVisual() {
+    editBodyHtmlInput.value = String(editBodyVisualInput.innerHTML || "");
+  }
+
+  function setBodyEditorMode(mode) {
+    editBodyMode = mode === "source" ? "source" : "visual";
+    const visualActive = editBodyMode === "visual";
+    editBodyVisualInput.classList.toggle("hidden", !visualActive);
+    editBodyHtmlInput.classList.toggle("active", !visualActive);
+    visualModeBtn.classList.toggle("active", visualActive);
+    sourceModeBtn.classList.toggle("active", !visualActive);
+    toolH2Btn.disabled = !visualActive;
+    toolBoldBtn.disabled = !visualActive;
+    toolListBtn.disabled = !visualActive;
+    toolImageBtn.disabled = !visualActive;
+  }
+
+  function escapeAttribute(value) {
+    return String(value || "").replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  }
+
+  function execVisualCommand(command, commandValue) {
+    if (editBodyMode !== "visual") return;
+    editBodyVisualInput.focus();
+    document.execCommand(command, false, commandValue || null);
+    syncSourceFromVisual();
+  }
+
+  function applyHeadingH2() {
+    if (editBodyMode !== "visual") return;
+    editBodyVisualInput.focus();
+    let applied = false;
+    try { applied = document.execCommand("formatBlock", false, "H2"); } catch (e) { applied = false; }
+    if (!applied) {
+      try { document.execCommand("formatBlock", false, "<h2>"); } catch (e) {}
+    }
+    syncSourceFromVisual();
+  }
+
+  function insertImageByUrl() {
+    if (editBodyMode !== "visual") return;
+    const url = window.prompt("请输入图片URL（http/https 或站内相对路径）");
+    const normalized = String(url || "").trim();
+    if (!normalized) return;
+    const safeUrl = escapeAttribute(normalized);
+    const imageHtml = `<p><img src="${safeUrl}" alt="" loading="lazy"></p>`;
+    editBodyVisualInput.focus();
+    let inserted = false;
+    try { inserted = document.execCommand("insertHTML", false, imageHtml); } catch (e) { inserted = false; }
+    if (!inserted) {
+      editBodyVisualInput.innerHTML = String(editBodyVisualInput.innerHTML || "") + imageHtml;
+    }
+    syncSourceFromVisual();
   }
 
   function renderResult(payload) {
@@ -384,7 +500,7 @@
     const cfg = options || {};
     const method = (cfg.method || "GET").toUpperCase();
     const headers = Object.assign({}, cfg.headers || {});
-    const timeoutMs = Number(cfg.timeoutMs || 45000);
+    const timeoutMs = Number(cfg.timeoutMs || DEFAULT_REQUEST_TIMEOUT_MS);
     if (method !== "GET") {
       headers["X-CSRFToken"] = getCsrfToken();
       headers["Content-Type"] = "application/json";
@@ -403,7 +519,7 @@
       });
     } catch (error) {
       if (error && error.name === "AbortError") {
-        throw new Error(`请求超时（${Math.round(timeoutMs / 1000)}秒），请重试`);
+        throw new Error(buildTimeoutMessage(timeoutMs));
       }
       throw error;
     } finally {
@@ -500,9 +616,14 @@
   async function runNewTask(stopAfterStep) {
     setRunStatus("running");
     try {
+      const step = Number(stopAfterStep || 5);
       const payload = collectTaskPayload();
-      payload.stop_after_step = Number(stopAfterStep || 5);
-      const result = await apiRequest("/api/seo-automation/tasks/run/", { method: "POST", body: payload });
+      payload.stop_after_step = step;
+      const result = await apiRequest("/api/seo-automation/tasks/run/", {
+        method: "POST",
+        body: payload,
+        timeoutMs: getStepTimeoutMs(step),
+      });
       if (result.task_id) updateCurrentTask(result.task_id);
       renderResult(result);
       renderStageBoard(result);
@@ -522,9 +643,14 @@
     }
     setRunStatus("running");
     try {
+      const step = Number(stopAfterStep || 5);
       const payload = collectTaskPayload();
-      payload.stop_after_step = Number(stopAfterStep || 5);
-      const result = await apiRequest(`/api/seo-automation/tasks/${currentTaskId}/run/`, { method: "POST", body: payload });
+      payload.stop_after_step = step;
+      const result = await apiRequest(`/api/seo-automation/tasks/${currentTaskId}/run/`, {
+        method: "POST",
+        body: payload,
+        timeoutMs: getStepTimeoutMs(step),
+      });
       renderResult(result);
       renderStageBoard(result);
       setRunStatus(result.status || "completed");
@@ -674,6 +800,8 @@
       editMetaDescriptionInput.value = String(row.meta_description || "");
       editTagsInput.value = Array.isArray(row.tags) ? row.tags.join(", ") : "";
       editBodyHtmlInput.value = String(row.body_html || "");
+      syncVisualFromSource();
+      setBodyEditorMode("visual");
       editDraftModal.classList.add("open");
     } catch (error) {
       renderResult({ action: "edit_draft", article_id: articleId, error: error.message || String(error) });
@@ -685,6 +813,7 @@
     if (!editingArticleId) return;
     saveEditDraftBtn.disabled = true;
     try {
+      if (editBodyMode === "visual") syncSourceFromVisual();
       const payload = {
         title: String(editTitleInput.value || "").trim(),
         meta_title: String(editMetaTitleInput.value || "").trim(),
@@ -839,6 +968,24 @@
   window.goBack = function () { window.location.href = "/admin/dashboard/"; };
 
   toggleRawBtn.addEventListener("click", () => setRawJsonVisible(!rawJsonVisible));
+  toolH2Btn.addEventListener("click", applyHeadingH2);
+  toolBoldBtn.addEventListener("click", () => execVisualCommand("bold"));
+  toolListBtn.addEventListener("click", () => execVisualCommand("insertUnorderedList"));
+  toolImageBtn.addEventListener("click", insertImageByUrl);
+  visualModeBtn.addEventListener("click", () => {
+    syncVisualFromSource();
+    setBodyEditorMode("visual");
+  });
+  sourceModeBtn.addEventListener("click", () => {
+    syncSourceFromVisual();
+    setBodyEditorMode("source");
+  });
+  editBodyVisualInput.addEventListener("input", () => {
+    if (editBodyMode === "visual") syncSourceFromVisual();
+  });
+  editBodyHtmlInput.addEventListener("input", () => {
+    if (editBodyMode === "source") syncVisualFromSource();
+  });
   saveEditDraftBtn.addEventListener("click", saveEditDraft);
   cancelEditDraftBtn.addEventListener("click", closeEditDraftModal);
   editDraftModal.addEventListener("click", (event) => {
@@ -848,6 +995,7 @@
   updateCurrentTask(null);
   renderStageBoard({});
   setRawJsonVisible(false);
+  setBodyEditorMode("visual");
   bindAdminTabLinks();
   Promise.all([loadTasks(), loadArticles()]);
 })();

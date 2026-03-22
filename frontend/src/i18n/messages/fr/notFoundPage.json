@@ -1,0 +1,9 @@
+{
+  "notFoundPage": {
+    "title": "Page introuvable",
+    "description": "La page que vous avez visitée a peut-être été déplacée ou supprimée. Essayez de revenir à une page connue.",
+    "backHome": "Retour à la maison",
+    "toArticles": "Parcourir les articles",
+    "toRecharge": "Aller à Recharger"
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "gameDetailPage": {
+    "breadcrumbs": {
+      "home": "Accueil",
+      "games": "Jeux"
+    },
+    "actions": {
+      "backToGames": "Retour aux jeux",
+      "contactRecharge": "Contacter le support pour recharger",
+      "contactConsult": "Contacter le support",
+      "share": "Partager"
+    },
+    "tags": {
+      "hot": "Populaire",
+      "recommended": "Recommand?"
+    },
+    "meta": {
+      "developer": "D?veloppeur : ",
+      "region": "R?gion : ",
+      "platform": "Plateforme : ",
+      "server": "Serveur : ",
+      "unknownDeveloper": "Inconnu",
+      "unknownPlatform": "Inconnu",
+      "allServers": "Tous",
+      "untitledGame": "Jeu sans titre"
+    },
+    "viewingCount": "personnes consultent ce jeu",
+    "tabs": {
+      "details": "D?tails du jeu",
+      "topup": "Guide de recharge"
+    },
+    "empty": {
+      "details": "Aucune description d?taill?e disponible pour le moment",
+      "topup": "Veuillez contacter le support pour les instructions de recharge"
+    },
+    "region": {
+      "global": "International"
+    },
+    "serviceGuarantee": {
+      "title": "Garantie de service",
+      "official": {
+        "title": "Canaux officiels",
+        "desc": "Toutes les recharges sont trait?es via des canaux officiels"
+      },
+      "fast": {
+        "title": "Livraison rapide",
+        "desc": "Les commandes sont g?n?ralement finalis?es en 1 ? 10 minutes"
+      },
+      "support": {
+        "title": "Support 24h/24 et 7j/7",
+        "desc": "Le support en ligne est disponible ? tout moment"
+      }
+    },
+    "contactCard": {
+      "title": "Vous ne trouvez pas l?article dont vous avez besoin ?",
+      "desc": "Si votre article de recharge n?est pas list?, contactez directement notre support en ligne."
+    },
+    "announcements": {
+      "title": "Derni?res annonces",
+      "item1": "[Avis] Maintenance syst?me le 4 f?vrier",
+      "item2": "[?v?nement] Promotion de recharge du Nouvel An chinois en cours",
+      "item3": "[Rappel] Ne faites pas confiance aux comptes de support non officiels"
+    },
+    "content": {
+      "imageAlt": "image"
+    },
+    "errors": {
+      "loadFailed": "Impossible de charger les d?tails du jeu, veuillez r?essayer plus tard"
+    },
+    "bannerAlt": "Banni?re"
+  }
+}

@@ -58,6 +58,10 @@ class SeoArticleAdmin(admin.ModelAdmin):
     raw_id_fields = ["game", "task", "published_article", "created_by"]
     ordering = ["-created_at"]
 
+    class Media:
+        css = {"all": ("admin/css/uai_editor_bridge_v2.css",)}
+        js = ("admin/js/uai_editor_bridge_v2.js",)
+
 
 @admin.register(LLMApiSetting)
 class LLMApiSettingAdmin(admin.ModelAdmin):

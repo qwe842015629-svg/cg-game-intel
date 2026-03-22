@@ -1,0 +1,8 @@
+{
+  "i18nDemo": {
+    "subtitle": "i18n quick demo: switch language, keep URL locale prefix, and persist with localStorage.",
+    "languageLabel": "Language",
+    "currentLocaleLabel": "Current locale:",
+    "currentUrlLabel": "Current URL:"
+  }
+}

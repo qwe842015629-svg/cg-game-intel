@@ -1,6 +1,16 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
-from .models import HomeLayout, Banner, SiteConfig, MediaAsset
+from .models import (
+    HomeLayout,
+    Banner,
+    SiteConfig,
+    MediaAsset,
+    NovelDraft,
+    NovelWork,
+    PlazaPost,
+    PlazaLike,
+    PlazaComment,
+)
 from .media_library import upsert_media_asset
 
 # Register your models here.
@@ -115,3 +125,43 @@ class BannerAdmin(admin.ModelAdmin):
         css = {
             'all': ('admin/css/media_picker.css',)
         }
+
+
+@admin.register(NovelDraft)
+class NovelDraftAdmin(admin.ModelAdmin):
+    list_display = ('id', 'title', 'owner_key', 'user', 'updated_at')
+    search_fields = ('title', 'owner_key', 'client_id')
+    readonly_fields = ('owner_key', 'user', 'client_id', 'created_at', 'updated_at')
+    list_filter = ('updated_at',)
+
+
+@admin.register(NovelWork)
+class NovelWorkAdmin(admin.ModelAdmin):
+    list_display = ('id', 'title', 'owner_key', 'user', 'updated_at')
+    search_fields = ('title', 'summary', 'owner_key', 'client_id')
+    readonly_fields = ('owner_key', 'user', 'client_id', 'created_at', 'updated_at')
+    list_filter = ('updated_at',)
+
+
+@admin.register(PlazaPost)
+class PlazaPostAdmin(admin.ModelAdmin):
+    list_display = ('id', 'post_type', 'author_name', 'owner_key', 'like_count', 'comment_count', 'created_at')
+    search_fields = ('author_name', 'content', 'owner_key', 'source_ref')
+    readonly_fields = ('owner_key', 'user', 'client_id', 'created_at', 'updated_at')
+    list_filter = ('post_type', 'created_at')
+
+
+@admin.register(PlazaComment)
+class PlazaCommentAdmin(admin.ModelAdmin):
+    list_display = ('id', 'post', 'author_name', 'owner_key', 'created_at')
+    search_fields = ('author_name', 'content', 'owner_key')
+    readonly_fields = ('owner_key', 'user', 'client_id', 'created_at', 'updated_at')
+    list_filter = ('created_at',)
+
+
+@admin.register(PlazaLike)
+class PlazaLikeAdmin(admin.ModelAdmin):
+    list_display = ('id', 'post', 'owner_key', 'created_at')
+    search_fields = ('owner_key',)
+    readonly_fields = ('owner_key', 'user', 'client_id', 'created_at')
+    list_filter = ('created_at',)

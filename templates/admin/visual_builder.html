@@ -516,7 +516,15 @@
         let historyIndex = -1;
         const iframe = document.getElementById('preview-iframe');
         const inspectorPanel = document.getElementById('inspector-panel');
+        const frontendOrigin = "{{ frontend_origin|escapejs }}";
         let pageSections = []; // 存储当前页面的可编辑板块
+
+        function buildPreviewUrl(path) {
+            const normalizedPath = path || '/';
+            const url = new URL(normalizedPath, `${frontendOrigin}/`);
+            url.searchParams.set('edit_mode', 'true');
+            return url.toString();
+        }
 
         // 左侧标签切换
         document.querySelectorAll('.sidebar-tab').forEach(tab => {
@@ -599,8 +607,7 @@
         // 页面切换
         document.getElementById('page-selector').addEventListener('change', function() {
             const path = this.value;
-            const newUrl = `http://localhost:5176${path}${path.includes('?') ? '&' : '?'}edit_mode=true`;
-            iframe.src = newUrl;
+            iframe.src = buildPreviewUrl(path);
             
             // 清空当前页面的动态板块
             pageSections = [];
@@ -1429,5 +1436,3 @@
     </script>
 </body>
 </html>
-
-

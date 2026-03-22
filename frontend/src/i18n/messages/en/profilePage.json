@@ -1,0 +1,84 @@
+{
+  "profilePage": {
+    "title": "Profile Center",
+    "description": "Edit your profile and review your AI content such as novels and character cards.",
+    "auth": {
+      "title": "Not Signed In",
+      "description": "Please sign in first to manage your profile and AI content.",
+      "loginRegister": "Sign In / Register"
+    },
+    "avatar": {
+      "alt": "User avatar",
+      "upload": "Upload avatar",
+      "remove": "Remove",
+      "invalidType": "Avatar only supports jpg/png/webp/gif formats.",
+      "tooLarge": "Avatar must be smaller than 5MB."
+    },
+    "form": {
+      "displayName": "Display Name",
+      "gender": "Gender",
+      "genderPlaceholder": "e.g. Male / Female / Non-binary / Private",
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "phone": "Phone",
+      "visibility": "AI Content Visibility",
+      "visibilityPrivate": "Private",
+      "visibilityMembers": "Members only",
+      "visibilityPublic": "Public",
+      "bio": "Bio",
+      "bioPlaceholder": "Tell us about yourself (up to 500 characters)",
+      "sandboxEnabled": "Enable user sandbox isolation",
+      "sandboxNamespace": "Sandbox namespace: {namespace}",
+      "isolationMode": "Isolation mode: {mode}",
+      "save": "Save Profile",
+      "saving": "Saving...",
+      "refresh": "Refresh Data",
+      "toNovel": "Go to Novel Studio",
+      "toPlaza": "Go to Plaza"
+    },
+    "stats": {
+      "novelDrafts": "Novel drafts",
+      "novelWorks": "Novel works",
+      "roleCards": "Character cards",
+      "aiContentTotal": "Total AI content"
+    },
+    "novels": {
+      "title": "Novel History",
+      "scopeHint": "Only content under the current signed-in account is shown (user isolation enabled).",
+      "empty": "No novel drafts or works yet.",
+      "draftsTitle": "Drafts",
+      "worksTitle": "Works",
+      "draftTitleFallback": "Draft #{id}",
+      "draftMeta": "State keys: {count} | Updated: {updatedAt}",
+      "workTitleFallback": "Work #{id}",
+      "summaryEmpty": "No summary",
+      "workMeta": "Chapters: {chapters} | Character images: {images} | Status: {status} | Updated: {updatedAt}",
+      "statusCompleted": "Completed",
+      "statusOngoing": "Ongoing",
+      "statusUnknown": "Unknown"
+    },
+    "roleCards": {
+      "title": "Generated Character Cards",
+      "empty": "No character card records.",
+      "avatarAlt": "Character avatar",
+      "meta": "Group: {group} | Gender: {gender}",
+      "descEmpty": "No description",
+      "updatedAt": "Updated {updatedAt}"
+    },
+    "sandbox": {
+      "title": "User Sandbox and Security Isolation",
+      "ownerScope": "Current owner_scope: {ownerScope}",
+      "namespace": "Sandbox namespace: {namespace}",
+      "policies": "Policies: {policies}",
+      "description": "Note: AI content in Profile is isolated by the current signed-in user only and does not read other users' data."
+    },
+    "messages": {
+      "saveFailed": "Save failed",
+      "loadFailed": "Failed to load profile data",
+      "profileSaved": "Profile saved"
+    },
+    "common": {
+      "dash": "-"
+    }
+  }
+}

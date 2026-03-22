@@ -125,6 +125,11 @@ class GooglePlayScraper:
                 title_tag = soup.find(attrs={'itemprop': 'name'})
                 if title_tag:
                     title = title_tag.get_text(strip=True)
+            if not title:
+                og_title = soup.find('meta', attrs={'property': 'og:title'})
+                if og_title and og_title.get('content'):
+                    title = og_title.get('content').strip()
+                    title = re.sub(r'\s*-\s*Google Play.*$', '', title, flags=re.IGNORECASE)
 
             # 2. 图标
             icon_url = ''
@@ -160,9 +165,33 @@ class GooglePlayScraper:
 
             # 4. 简介
             description = ''
-            desc_div = soup.find(attrs={'itemprop': 'description'}) or soup.find(attrs={'data-g-id': 'description'})
-            if desc_div:
-                description = desc_div.get_text(strip=True)[:300]
+
+            # 页面里常见两个描述节点：itemprop 可能存在但为空，优先取 data-g-id。
+            desc_candidates = [
+                soup.find(attrs={'data-g-id': 'description'}),
+                soup.find(attrs={'itemprop': 'description'}),
+            ]
+            for node in desc_candidates:
+                if not node:
+                    continue
+                text = node.get_text(' ', strip=True)
+                if text:
+                    description = text
+                    break
+
+            # 兜底：若正文描述仍为空，至少用 meta 描述保证“导入配齐”可用。
+            if not description:
+                for attrs in (
+                    {'property': 'og:description'},
+                    {'name': 'description'},
+                ):
+                    meta_desc = soup.find('meta', attrs=attrs)
+                    if meta_desc and meta_desc.get('content'):
+                        description = meta_desc.get('content').strip()
+                        if description:
+                            break
+
+            description = re.sub(r'\s+', ' ', description).strip()[:300]
 
             return {
                 'title': title,

@@ -1,0 +1,33 @@
+﻿{
+  "rechargePage": {
+    "badge": "Recharge",
+    "title": "游戏充值",
+    "subtitle": "选择游戏、填写账号并完成支付，流程清晰、快速到账。",
+    "selectGameTitle": "选择游戏",
+    "selectGameDesc": "支持搜索并快速选择",
+    "emptyStateTitle": "请先选择游戏",
+    "emptyStateDesc": "选择后即可填写账号、金额与付款方式。",
+    "stepSelectGame": "选择游戏",
+    "stepFillAccount": "填写账号信息",
+    "stepSelectAmountAndPayment": "选择金额与支付方式",
+    "stepConfirmOrder": "确认订单并完成充值",
+    "reselectGame": "重新选择",
+    "accountInfoTitle": "账号信息",
+    "amountTitle": "充值金额",
+    "paymentMethodTitle": "支付方式",
+    "hotBadge": "热门",
+    "bonusDiamonds": "{amount} 钻石",
+    "bonusExtra": "送 {amount} 钻石",
+    "pendingPaymentNotice": "充值功能开发中，后续将接入真实支付流程。",
+    "games": {
+      "hok": "王者荣耀",
+      "pubgm": "和平精英",
+      "genshin": "原神",
+      "wildrift": "英雄联盟手游",
+      "cf": "穿越火线",
+      "dnf": "地下城与勇士",
+      "hsr": "崩坏：星穹铁道",
+      "sky": "光遇"
+    }
+  }
+}

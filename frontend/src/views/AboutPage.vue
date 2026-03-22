@@ -9,17 +9,17 @@
             class="text-cyber-neon-green"
             :contenteditable="isEditMode"
             @blur="handleInlineEdit($event, 'title')"
-          >{{ getPageConfig('title', 'ABOUT') }}</span> 
+          >{{ getPageConfig('title', t('aboutPage.title')) }}</span> 
           <span
             :contenteditable="isEditMode"
             @blur="handleInlineEdit($event, 'subtitle')"
-          >{{ getPageConfig('subtitle', 'US') }}</span>
+          >{{ getPageConfig('subtitle', t('aboutPage.subtitle')) }}</span>
         </h1>
         <p 
           class="text-xl text-cyber-neon-blue max-w-2xl mx-auto"
           :contenteditable="isEditMode"
           @blur="handleInlineEdit($event, 'description')"
-        >{{ getPageConfig('description', '了解我们的使命、愿景和价值观') }}</p>
+        >{{ getPageConfig('description', t('aboutPage.description')) }}</p>
       </div>
 
       <!-- Hero Section -->
@@ -32,14 +32,14 @@
               :contenteditable="isEditMode"
               @blur="handleInlineEdit($event, 'hero_text')"
             >
-              {{ getPageConfig('hero_text', 'CYBERCHARGE') }}
+              {{ getPageConfig('hero_text', t('aboutPage.heroText')) }}
             </div>
             <p 
               class="text-2xl text-cyber-neon-blue max-w-3xl mx-auto leading-relaxed"
               :contenteditable="isEditMode"
               @blur="handleInlineEdit($event, 'hero_subtext')"
             >
-              {{ getPageConfig('hero_subtext', '未来游戏充值体验 · 安全 · 快速 · 可靠') }}
+              {{ getPageConfig('hero_subtext', t('aboutPage.heroSubtext')) }}
             </p>
           </div>
         </div>
@@ -53,14 +53,11 @@
           <div class="absolute inset-0 bg-gradient-to-br from-cyber-neon-green/5 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 clip-corner"></div>
           <div class="relative">
             <div class="w-16 h-16 rounded-2xl bg-cyber-neon-green/20 flex items-center justify-center mb-6">
-              <svg class="w-8 h-8 text-cyber-neon-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-              </svg>
+              <Zap class="w-8 h-8 text-cyber-neon-green" />
             </div>
-            <h2 class="text-3xl font-black text-cyber-neon-green mb-4 drop-shadow-glow-green">使命</h2>
+            <h2 class="text-3xl font-black text-cyber-neon-green mb-4 drop-shadow-glow-green">{{ t('aboutPage.missionTitle') }}</h2>
             <p class="text-cyber-neon-blue text-lg leading-relaxed">
-              我们的使命是为全球游戏玩家提供最安全、最快捷、最可靠的游戏充值服务，
-              让每一位玩家都能享受到无缝的游戏体验，不受地域和支付方式的限制。
+              {{ t('aboutPage.missionDescription') }}
             </p>
           </div>
         </div>
@@ -70,15 +67,11 @@
           <div class="absolute inset-0 bg-gradient-to-br from-cyber-neon-pink/5 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 clip-corner"></div>
           <div class="relative">
             <div class="w-16 h-16 rounded-2xl bg-cyber-neon-pink/20 flex items-center justify-center mb-6">
-              <svg class="w-8 h-8 text-cyber-neon-pink" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-              </svg>
+              <Eye class="w-8 h-8 text-cyber-neon-pink" />
             </div>
-            <h2 class="text-3xl font-black text-cyber-neon-pink mb-4 drop-shadow-glow-pink">愿景</h2>
+            <h2 class="text-3xl font-black text-cyber-neon-pink mb-4 drop-shadow-glow-pink">{{ t('aboutPage.visionTitle') }}</h2>
             <p class="text-cyber-neon-blue text-lg leading-relaxed">
-              成为全球领先的游戏服务平台，通过技术创新和卓越服务，
-              连接世界各地的玩家与游戏世界，创造无限可能的游戏体验。
+              {{ t('aboutPage.visionDescription') }}
             </p>
           </div>
         </div>
@@ -87,20 +80,18 @@
       <!-- Values -->
       <div class="mb-20">
         <h2 class="text-4xl font-black text-center mb-16 text-white">
-          <span class="text-cyber-neon-blue">CORE</span> VALUES
+          <span class="text-cyber-neon-blue">{{ t('aboutPage.corePrefix') }}</span> {{ t('aboutPage.coreSuffix') }}
         </h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <div class="group relative rounded-2xl bg-cyber-dark/60 border border-cyber-neon-blue/20 clip-corner p-8 hover:border-cyber-neon-blue/50 transition-all duration-300">
             <div class="absolute inset-0 bg-gradient-to-br from-cyber-neon-blue/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 clip-corner"></div>
             <div class="relative">
               <div class="w-12 h-12 rounded-xl bg-cyber-neon-blue/20 flex items-center justify-center mb-4">
-                <svg class="w-6 h-6 text-cyber-neon-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                </svg>
+                <ShieldCheck class="w-6 h-6 text-cyber-neon-blue" />
               </div>
-              <h3 class="text-xl font-bold text-cyber-neon-blue mb-3">安全可靠</h3>
+              <h3 class="text-xl font-bold text-cyber-neon-blue mb-3">{{ t('aboutPage.values.secureTitle') }}</h3>
               <p class="text-cyber-neon-blue">
-                我们始终将用户的安全放在首位，采用最先进的安全技术保护每一笔交易。
+                {{ t('aboutPage.values.secureDescription') }}
               </p>
             </div>
           </div>
@@ -109,13 +100,11 @@
             <div class="absolute inset-0 bg-gradient-to-br from-cyber-neon-green/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 clip-corner"></div>
             <div class="relative">
               <div class="w-12 h-12 rounded-xl bg-cyber-neon-green/20 flex items-center justify-center mb-4">
-                <svg class="w-6 h-6 text-cyber-neon-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                </svg>
+                <Rocket class="w-6 h-6 text-cyber-neon-green" />
               </div>
-              <h3 class="text-xl font-bold text-cyber-neon-green mb-3">极速体验</h3>
+              <h3 class="text-xl font-bold text-cyber-neon-green mb-3">{{ t('aboutPage.values.fastTitle') }}</h3>
               <p class="text-cyber-neon-blue">
-                提供毫秒级的充值服务，让您的游戏体验永不断线。
+                {{ t('aboutPage.values.fastDescription') }}
               </p>
             </div>
           </div>
@@ -124,13 +113,11 @@
             <div class="absolute inset-0 bg-gradient-to-br from-cyber-neon-pink/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 clip-corner"></div>
             <div class="relative">
               <div class="w-12 h-12 rounded-xl bg-cyber-neon-pink/20 flex items-center justify-center mb-4">
-                <svg class="w-6 h-6 text-cyber-neon-pink" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                </svg>
+                <Heart class="w-6 h-6 text-cyber-neon-pink" />
               </div>
-              <h3 class="text-xl font-bold text-cyber-neon-pink mb-3">用户至上</h3>
+              <h3 class="text-xl font-bold text-cyber-neon-pink mb-3">{{ t('aboutPage.values.userTitle') }}</h3>
               <p class="text-cyber-neon-blue">
-                始终以用户需求为中心，提供贴心的客户服务和个性化的体验。
+                {{ t('aboutPage.values.userDescription') }}
               </p>
             </div>
           </div>
@@ -140,7 +127,7 @@
       <!-- Team -->
       <div class="mb-20">
         <h2 class="text-4xl font-black text-center mb-16 text-white">
-          <span class="text-cyber-neon-green">OUR</span> TEAM
+          <span class="text-cyber-neon-green">{{ t('aboutPage.teamPrefix') }}</span> {{ t('aboutPage.teamSuffix') }}
         </h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div class="group relative rounded-2xl bg-cyber-dark/60 border border-cyber-neon-blue/20 clip-corner p-6 text-center hover:border-cyber-neon-blue/50 transition-all duration-300">
@@ -192,20 +179,20 @@
       <!-- Contact CTA -->
       <div class="text-center">
         <h2 class="text-4xl font-black mb-6 text-white">
-          <span class="text-cyber-neon-pink">READY</span> TO GET STARTED?
+          <span class="text-cyber-neon-pink">{{ t('aboutPage.cta.titlePrefix') }}</span> {{ t('aboutPage.cta.titleSuffix') }}
         </h2>
         <p class="text-xl text-cyber-neon-blue mb-8 max-w-2xl mx-auto">
-          加入我们的游戏社区，享受安全、快速、可靠的游戏充值服务
+          {{ t('aboutPage.cta.description') }}
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <RouterLink to="/recharge">
+          <RouterLink :to="localizedPath('/recharge')">
             <button class="px-8 py-4 rounded-xl font-bold text-lg tracking-wide uppercase bg-gradient-to-r from-cyber-neon-green to-cyber-neon-blue text-cyber-black hover:shadow-neon-green transition-all duration-300 transform hover:-translate-y-1 clip-corner">
-              开始充值
+              {{ t('aboutPage.cta.recharge') }}
             </button>
           </RouterLink>
-          <RouterLink to="/contact">
+          <RouterLink :to="localizedPath('/contact')">
             <button class="px-8 py-4 rounded-xl font-bold text-lg tracking-wide uppercase border-2 border-cyber-neon-pink text-cyber-neon-pink hover:bg-cyber-neon-pink hover:text-cyber-black hover:shadow-neon-pink transition-all duration-300 clip-corner">
-              联系我们
+              {{ t('aboutPage.cta.contact') }}
             </button>
           </RouterLink>
         </div>
@@ -215,8 +202,15 @@
 </template>
 
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n'
+import { Eye, Heart, Rocket, ShieldCheck, Zap } from 'lucide-vue-next'
 import { useVisualEditor } from '../composables/useVisualEditor'
+import { withLocalePrefix } from '../i18n/locale-routing'
+import { normalizeLocaleCode } from '../i18n/locale-utils'
+
+const { t, locale } = useI18n()
 const { isEditMode, getPageConfig, handleInlineEdit } = useVisualEditor('about_page', '关于我们页')
+const localizedPath = (path: string): string => withLocalePrefix(path, normalizeLocaleCode(locale.value))
 </script>
 
 <style scoped>

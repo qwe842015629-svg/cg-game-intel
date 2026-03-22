@@ -1,0 +1,31 @@
+{
+  "seo": {
+    "defaultDescription": "Professional game recharge and news platform with multilingual experience.",
+    "defaultKeywords": "game recharge,game news,topup,multilingual website",
+    "routeTitles": {
+      "default": "Page",
+      "home": "Home",
+      "games": "Games",
+      "gameDetail": "Game Detail",
+      "articles": "Articles",
+      "articleDetail": "Article Detail",
+      "profile": "Profile",
+      "customerService": "Customer Service",
+      "about": "About",
+      "contact": "Contact",
+      "recharge": "Recharge Center",
+      "rechargeGuide": "Recharge Guide",
+      "search": "Search Results",
+      "translationDemo": "Translation Demo",
+      "i18nDemo": "I18n Demo",
+      "register": "Register",
+      "login": "Login",
+      "activate": "Account Activation",
+      "notFound": "Page Not Found",
+      "cgWiki": "CG Wiki",
+      "tavern": "Tavern",
+      "novelStory": "Novel Story",
+      "plaza": "Plaza"
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "seo": {
+    "defaultDescription": "다국어 경험을 갖춘 전문 게임 재충전 및 뉴스 플랫폼입니다.",
+    "defaultKeywords": "게임충전,게임뉴스,충전,다국어사이트",
+    "routeTitles": {
+      "default": "페이지",
+      "home": "집",
+      "games": "계략",
+      "gameDetail": "게임 세부정보",
+      "articles": "조항",
+      "articleDetail": "기사 세부정보",
+      "profile": "윤곽",
+      "customerService": "고객 서비스",
+      "about": "에 대한",
+      "contact": "연락하다",
+      "recharge": "충전소",
+      "rechargeGuide": "재충전 가이드",
+      "search": "검색결과",
+      "translationDemo": "번역 데모",
+      "i18nDemo": "I18n 데모",
+      "register": "등록하다",
+      "login": "로그인",
+      "activate": "계정 활성화",
+      "notFound": "페이지를 찾을 수 없음",
+      "cgWiki": "CG 위키",
+      "tavern": "선술집",
+      "novelStory": "소설 이야기",
+      "plaza": "큰 광장"
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "authDialog": {
+    "registrationSuccessTitle": "🎉 등록이 완료되었습니다!",
+    "activationEmailSent": "활성화 이메일이 다음 주소로 전송되었습니다.",
+    "nextStepsTitle": "다음에 무엇을 해야 할까요?",
+    "activationStep1": "편지함을 열어보세요: {email}",
+    "activationStep2": "{company}에서 보낸 활성화 이메일을 찾으세요.",
+    "activationStep3": "이메일에 있는 활성화 버튼을 클릭하세요",
+    "activationStep4": "활성화 후 바로 로그인이 가능합니다",
+    "noEmailTitle": "이메일을 받지 못하셨나요?",
+    "noEmailDesc": "스팸 폴더를 확인하거나 몇 분 후에 다시 시도해 주세요.",
+    "openEmail": "우편함 열기",
+    "close": "닫다",
+    "accountLogin": "계정 로그인",
+    "tabs": {
+      "login": "로그인",
+      "register": "등록하다"
+    },
+    "emailLabel": "이메일",
+    "passwordLabel": "비밀번호",
+    "usernameLabel": "사용자 이름",
+    "confirmPasswordLabel": "비밀번호 확인",
+    "usernamePlaceholder": "당신의 닉네임",
+    "passwordPlaceholder": "••••••••",
+    "loginButton": "로그인",
+    "registerButton": "등록하다",
+    "loginSuccess": "로그인 성공!",
+    "invalidCredentials": "잘못된 이메일 또는 비밀번호",
+    "loginFailed": "로그인에 실패했습니다. 자격 증명을 확인하세요.",
+    "passwordMismatch": "비밀번호가 일치하지 않습니다.",
+    "passwordTooShort": "비밀번호는 8자 이상이어야 합니다.",
+    "usernameRequired": "사용자 이름을 입력하세요",
+    "emailRequired": "이메일을 입력해주세요",
+    "passwordRequired": "비밀번호를 입력해주세요",
+    "confirmPasswordRequired": "비밀번호를 확인해 주세요",
+    "fieldUsername": "사용자 이름:",
+    "fieldEmail": "이메일:",
+    "fieldPassword": "비밀번호:",
+    "registerFailed": "등록에 실패했습니다. 다시 시도해 주세요."
+  }
+}

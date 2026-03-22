@@ -1,4 +1,5 @@
 ﻿from django.db import models
+from django.db.models import F
 from django.contrib.auth.models import User
 from django.utils.text import slugify
 import uuid
@@ -7,8 +8,10 @@ import uuid
 class GamePageCategory(models.Model):
     """游戏分类"""
     name = models.CharField(max_length=100, verbose_name='分类名称')
+    name_i18n = models.JSONField(default=dict, blank=True, verbose_name='分类名称多语言')
     slug = models.SlugField(max_length=100, unique=True, blank=True, null=True, verbose_name='分类别名')
     description = models.TextField(blank=True, verbose_name='分类描述')
+    description_i18n = models.JSONField(default=dict, blank=True, verbose_name='分类描述多语言')
     sort_order = models.IntegerField(default=0, verbose_name='排序')
     is_active = models.BooleanField(default=True, verbose_name='是否启用')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='创建时间')
@@ -38,6 +41,7 @@ class GamePage(models.Model):
 
     # 1. 基础信息
     title = models.CharField(max_length=200, verbose_name='游戏名称')
+    title_i18n = models.JSONField(default=dict, blank=True, verbose_name='游戏名称多语言')
     title_tw = models.CharField(max_length=200, blank=True, verbose_name='游戏名称(繁体)')
     slug = models.SlugField(max_length=200, unique=True, blank=True, null=True, verbose_name='URL别名')
     category = models.ForeignKey(
@@ -56,18 +60,23 @@ class GamePage(models.Model):
     # 3. 游戏特性/参数
     developer = models.CharField(max_length=100, blank=True, verbose_name='开发商')
     platform = models.CharField(max_length=100, default='Android / iOS', verbose_name='支持平台')
+    platform_i18n = models.JSONField(default=dict, blank=True, verbose_name='支持平台多语言')
     regions = models.CharField(max_length=200, blank=True, default='港台服', verbose_name='支持区服')
+    regions_i18n = models.JSONField(default=dict, blank=True, verbose_name='支持区服多语言')
     server_name = models.CharField(max_length=100, blank=True, verbose_name='服务器')
     google_play_id = models.CharField(max_length=200, blank=True, verbose_name='Google Play ID')
     
     # 4. 富文本内容
     description = models.TextField(blank=True, verbose_name='简短介绍')
+    description_i18n = models.JSONField(default=dict, blank=True, verbose_name='简短介绍多语言')
     description_tw = models.TextField(blank=True, verbose_name='简短介绍(繁体)')
     
     content = models.TextField(blank=True, verbose_name='游戏详情')
+    content_i18n = models.JSONField(default=dict, blank=True, verbose_name='游戏详情多语言')
     content_tw = models.TextField(blank=True, verbose_name='游戏详情(繁体)')
     
     topup_info = models.TextField(blank=True, verbose_name='充值说明')
+    topup_info_i18n = models.JSONField(default=dict, blank=True, verbose_name='充值说明多语言')
     topup_info_tw = models.TextField(blank=True, verbose_name='充值说明(繁体)')
     
     # 5. SEO 设置
@@ -93,6 +102,12 @@ class GamePage(models.Model):
         verbose_name = '游戏页面'
         verbose_name_plural = '游戏页面管理'
         ordering = ['sort_order', '-published_at', '-created_at']
+        indexes = [
+            models.Index(fields=['sort_order', 'published_at', 'created_at'], name='gp_sort_pub_created_idx'),
+            models.Index(fields=['status', 'published_at'], name='gp_status_pub_idx'),
+            models.Index(fields=['category', 'sort_order'], name='gp_category_sort_idx'),
+            models.Index(fields=['is_hot', 'view_count'], name='gp_hot_view_idx'),
+        ]
 
     def __str__(self):
         return self.title
@@ -111,6 +126,11 @@ class GamePage(models.Model):
             self.seo_description = f"MEME提供{self.title}手游代储服务，安全秒到账。{self.description[:100]}"
             
         super().save(*args, **kwargs)
+
+    def increase_view_count(self):
+        """原子递增浏览量并同步当前实例字段。"""
+        GamePage.objects.filter(pk=self.pk).update(view_count=F('view_count') + 1)
+        self.refresh_from_db(fields=['view_count'])
 
 
 class GamePageTemplate(models.Model):

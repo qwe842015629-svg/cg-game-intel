@@ -1,0 +1,8 @@
+{
+  "userProfile": {
+    "relationships": {
+      "loading": "正在加载名单...",
+      "empty": "暂无用户。"
+    }
+  }
+}

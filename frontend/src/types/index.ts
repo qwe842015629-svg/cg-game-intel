@@ -54,10 +54,16 @@ export interface Article {
 
 // 用户相关类型
 export interface User {
-  id: string
+  id: number | string
   name: string
+  username?: string
   email: string
   avatar?: string
+  gender?: string
+  bio?: string
+  phone?: string
+  sandboxEnabled?: boolean
+  aiContentVisibility?: 'private' | 'members' | 'public' | string
 }
 
 export interface LoginCredentials {

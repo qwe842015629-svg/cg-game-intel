@@ -4,6 +4,11 @@
   const SELECT_ID = "topup-template-select";
   const BTN_LOAD_ID = "topup-template-load-btn";
   const BTN_SAVE_ID = "topup-template-save-btn";
+  const DEFAULT_TEMPLATE_KEY = "default";
+
+  const state = {
+    autoApplied: false,
+  };
 
   function getAdminBasePath() {
     const marker = "/game_page/gamepage/";
@@ -29,6 +34,15 @@
     return document.getElementById(id);
   }
 
+  function getFieldText(field) {
+    if (!field || typeof field.value !== "string") return "";
+    return field.value.trim();
+  }
+
+  function isEmptyField(field) {
+    return !getFieldText(field);
+  }
+
   function setFieldValue(field, value) {
     if (!field) return;
     field.value = value || "";
@@ -51,12 +65,13 @@
       .replace(/[^a-z0-9_-]/g, "-")
       .replace(/-+/g, "-")
       .replace(/^-|-$/g, "");
-    return key || "default";
+    return key || DEFAULT_TEMPLATE_KEY;
   }
 
   async function fetchTemplateList() {
     const select = document.getElementById(SELECT_ID);
-    if (!select) return;
+    if (!select) return [];
+
     select.innerHTML = `<option value="">Loading...</option>`;
     setStatus("Loading templates...", "#666");
 
@@ -72,7 +87,7 @@
       if (!items.length) {
         select.innerHTML = `<option value="">No template</option>`;
         setStatus("No template yet", "#666");
-        return;
+        return [];
       }
 
       select.innerHTML = items
@@ -81,27 +96,46 @@
           return `<option value="${key}">${key}</option>`;
         })
         .join("");
+
+      const hasDefault = items.some((item) => String(item.key || "").trim() === DEFAULT_TEMPLATE_KEY);
+      if (hasDefault) {
+        select.value = DEFAULT_TEMPLATE_KEY;
+      } else if (items[0] && items[0].key) {
+        select.value = String(items[0].key);
+      }
+
       setStatus(`Loaded ${items.length} templates`, "#1f7a1f");
+      return items;
     } catch (error) {
       console.error("template list error:", error);
       select.innerHTML = `<option value="">Load failed</option>`;
       setStatus(`Load failed: ${error.message}`, "#c0392b");
+      return [];
     }
   }
 
-  async function loadTemplate() {
+  async function applyTemplateByKey(rawKey, options) {
+    const opts = options || {};
+    const onlyFillEmpty = Boolean(opts.onlyFillEmpty);
+    const silent = Boolean(opts.silent);
+
     const select = document.getElementById(SELECT_ID);
     const topupInfo = getField("id_topup_info");
     const topupInfoTw = getField("id_topup_info_tw");
-    if (!select || !topupInfo || !topupInfoTw) return;
-
-    const key = String(select.value || "").trim();
-    if (!key) {
-      setStatus("Please select a template first", "#c0392b");
-      return;
+    if (!topupInfo || !topupInfoTw) {
+      return { applied: false, reason: "fields_not_found" };
     }
 
-    setStatus(`Loading template: ${key} ...`, "#666");
+    let key = normalizeKey(rawKey || (select ? select.value : ""));
+    if (!key) key = DEFAULT_TEMPLATE_KEY;
+
+    const bothNonEmpty = !isEmptyField(topupInfo) && !isEmptyField(topupInfoTw);
+    if (onlyFillEmpty && bothNonEmpty) {
+      if (!silent) setStatus("Topup fields already filled, skipped", "#666");
+      return { applied: false, reason: "already_filled", key };
+    }
+
+    if (!silent) setStatus(`Loading template: ${key} ...`, "#666");
     try {
       const resp = await fetch(`${endpoint("load")}?key=${encodeURIComponent(key)}`, {
         credentials: "same-origin",
@@ -110,12 +144,56 @@
       const data = await resp.json();
       if (!resp.ok) throw new Error(data.error || `HTTP ${resp.status}`);
 
-      setFieldValue(topupInfo, data.topup_info || "");
-      setFieldValue(topupInfoTw, data.topup_info_tw || "");
-      setStatus(`Template applied: ${key}`, "#1f7a1f");
+      const nextCn = String(data.topup_info || "");
+      const nextTw = String(data.topup_info_tw || "");
+
+      if (onlyFillEmpty) {
+        if (isEmptyField(topupInfo) && nextCn.trim()) setFieldValue(topupInfo, nextCn);
+        if (isEmptyField(topupInfoTw) && nextTw.trim()) setFieldValue(topupInfoTw, nextTw || nextCn);
+      } else {
+        setFieldValue(topupInfo, nextCn);
+        setFieldValue(topupInfoTw, nextTw);
+      }
+
+      if (select) select.value = key;
+      if (!silent) setStatus(`Template applied: ${key}`, "#1f7a1f");
+      return { applied: true, key, data };
     } catch (error) {
       console.error("template load error:", error);
-      setStatus(`Apply failed: ${error.message}`, "#c0392b");
+      if (!silent) setStatus(`Apply failed: ${error.message}`, "#c0392b");
+      return { applied: false, reason: "request_failed", key, error };
+    }
+  }
+
+  async function loadTemplate() {
+    const select = document.getElementById(SELECT_ID);
+    const key = String((select && select.value) || "").trim();
+    if (!key) {
+      setStatus("Please select a template first", "#c0392b");
+      return;
+    }
+    await applyTemplateByKey(key, { onlyFillEmpty: false, silent: false });
+  }
+
+  async function maybeApplyDefaultTemplate() {
+    if (state.autoApplied) return;
+
+    const topupInfo = getField("id_topup_info");
+    const topupInfoTw = getField("id_topup_info_tw");
+    if (!topupInfo || !topupInfoTw) return;
+
+    if (!isEmptyField(topupInfo) && !isEmptyField(topupInfoTw)) {
+      state.autoApplied = true;
+      return;
+    }
+
+    state.autoApplied = true;
+    const result = await applyTemplateByKey(DEFAULT_TEMPLATE_KEY, {
+      onlyFillEmpty: true,
+      silent: true,
+    });
+    if (result.applied) {
+      setStatus(`Template applied: ${result.key}`, "#1f7a1f");
     }
   }
 
@@ -125,7 +203,7 @@
     const select = document.getElementById(SELECT_ID);
     if (!topupInfo || !topupInfoTw || !select) return;
 
-    const initial = select.value || "default";
+    const initial = select.value || DEFAULT_TEMPLATE_KEY;
     const inputKey = window.prompt("Template key", initial);
     if (inputKey === null) return;
     const key = normalizeKey(inputKey);
@@ -166,6 +244,13 @@
     }
   }
 
+  function exposePublicApi() {
+    window.gpcApplyTopupTemplate = function (key, options) {
+      const opts = Object.assign({ onlyFillEmpty: false, silent: false }, options || {});
+      return applyTemplateByKey(key || DEFAULT_TEMPLATE_KEY, opts);
+    };
+  }
+
   function createToolbar() {
     const topupInfo = getField("id_topup_info");
     const topupInfoTw = getField("id_topup_info_tw");
@@ -204,10 +289,11 @@
     if (loadBtn) loadBtn.addEventListener("click", loadTemplate);
     if (saveBtn) saveBtn.addEventListener("click", saveTemplate);
 
-    fetchTemplateList();
+    fetchTemplateList().then(() => maybeApplyDefaultTemplate());
   }
 
   function init() {
+    exposePublicApi();
     createToolbar();
   }
 

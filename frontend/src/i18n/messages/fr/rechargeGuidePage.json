@@ -1,0 +1,48 @@
+{
+  "rechargeGuidePage": {
+    "badge": "Guide officiel",
+    "title": "Guide de commande Panxing Global Mobile Game",
+    "subtitle": "Pour vous aider ? recharger plus rapidement, nous avons pr?par? deux canaux officiels. Suivez les ?tapes de la page et le support traitera votre commande rapidement selon les informations fournies.",
+    "method1": {
+      "title": "M?thode 1 : Compte officiel WeChat (Recommand?)",
+      "desc": "Id?al pour une consultation rapide, compl?ter les d?tails de commande et suivre la progression en temps r?el.",
+      "qrAlt": "QR code WeChat Panxing Global Mobile Game",
+      "step1": "Ouvrez WeChat puis appuyez sur le bouton scanner en haut ? droite.",
+      "step2": "Scannez le QR code puis suivez le compte officiel \"Panxing Global Mobile Game\".",
+      "step3": "Envoyez les d?tails : nom du jeu + serveur + ID du personnage + pack de recharge.",
+      "step4": "Payez selon les instructions du support, envoyez la preuve de paiement, puis attendez la confirmation."
+    },
+    "method2": {
+      "title": "M?thode 2 : S?questre via boutique Xianyu",
+      "desc": "Convient aux utilisateurs qui pr?f?rent une transaction garantie via la plateforme Xianyu.",
+      "qrAlt": "Carte QR de la boutique Xianyu Panxing Global Mobile Game",
+      "step1": "Enregistrez d?abord l?image de la carte boutique dans votre album.",
+      "step2": "Ouvrez Xianyu et scannez le QR code.",
+      "step3": "Entrez dans la boutique, choisissez l?article correspondant puis passez la commande.",
+      "step4": "Ajoutez la note : jeu/serveur/ID personnage/pack de recharge."
+    },
+    "orderDetails": {
+      "title": "D?tails de commande et notes de traitement",
+      "templateTitle": "Mod?le de commande standard",
+      "templateLine1": "Nom du jeu :",
+      "templateLine2": "Serveur/R?gion :",
+      "templateLine3": "ID personnage/UID :",
+      "templateLine4": "Pack de recharge :",
+      "templateLine5": "Contact (optionnel) :",
+      "deliveryTitle": "Livraison et apr?s-vente",
+      "deliveryLine1": "Traitement habituel sous 5 ? 30 minutes ; en heure de pointe, une file d?attente peut se former.",
+      "deliveryLine2": "En cas de retard, fournissez la capture de commande et les infos du personnage pour un traitement prioritaire.",
+      "deliveryLine3": "Apr?s finalisation, v?rifiez d?s que possible l?historique de recharge en jeu."
+    },
+    "security": {
+      "title": "Rappel de s?curit?",
+      "item1": "Fiez-vous uniquement aux QR codes officiels et aux informations de boutique affich?s sur cette page.",
+      "item2": "N?envoyez pas d?argent ? des comptes inconnus et ne partagez jamais vos codes de v?rification ou mots de passe.",
+      "item3": "En cas d?anomalie, contactez imm?diatement le support en ligne pour v?rification."
+    },
+    "actions": {
+      "contactSupport": "Contacter le support en ligne",
+      "backHome": "Retour ? l?accueil"
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "customerServicePage": {
+    "pageTitle": "Kundendienstzentrum",
+    "pageDescription": "Erreichen Sie uns über Online-Chat, soziale Kanäle oder FAQ-Support.",
+    "faqTitle": "Häufig gestellte Fragen",
+    "startChat": "Chat starten",
+    "buttonFallback": "Jetzt kontaktieren",
+    "close": "Schließen",
+    "loading": "Laden...",
+    "qrDefaultTitle": "QR-Code",
+    "qrDefaultTip": "Bitte scannen Sie mit WeChat, um fortzufahren.",
+    "loadErrorLog": "Kundendienstdaten konnten nicht geladen werden:"
+  }
+}

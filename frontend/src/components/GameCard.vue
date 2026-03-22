@@ -38,7 +38,7 @@
            ⭐ {{ gameRating }}
          </span>
          <span class="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-bold group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300">
-           {{ $t('rechargeNow') || '立即充值' }}
+           {{ $t('immediateRecharge') }}
          </span>
       </div>
     </div>

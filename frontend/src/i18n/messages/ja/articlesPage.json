@@ -1,0 +1,28 @@
+{
+  "articlesPage": {
+    "allNews": "すべてのニュース",
+    "loading": "読み込み中...",
+    "retry": "リトライ",
+    "share": "共有",
+    "shareTo": "{channel} に共有",
+    "emptyByCategory": "「{category}」には記事がありません",
+    "emptyAll": "利用できる記事はありません",
+    "viewAll": "すべての記事を見る",
+    "copyForWechat": "リンクがコピーされました。 WeChat に貼り付けて共有します。",
+    "copyForXiaohongshu": "リンクがコピーされました。小紅書に貼り付けて共有します。",
+    "copyForInstagram": "リンクがコピーされました。 Instagramに貼り付けて共有します。",
+    "localShareFallback": "現在の URL はローカル/プライベートであるため、ソーシャル プラットフォームにコンテンツを事前入力できません。手動共有のためにリンクがコピーされました。",
+    "shareTitle": "{title} - ゲームニュース",
+    "categoryDescription": "カテゴリの最新アップデートとガイド: {category}。",
+    "loadFailed": "記事の読み込みに失敗しました。後でもう一度試してください。",
+    "channels": {
+      "facebook": "フェイスブック",
+      "twitter": "X / ツイッター",
+      "line": "ライン",
+      "wechat": "微信",
+      "xiaohongshu": "小紅書",
+      "whatsapp": "ワッツアップ",
+      "instagram": "インスタグラム"
+    }
+  }
+}

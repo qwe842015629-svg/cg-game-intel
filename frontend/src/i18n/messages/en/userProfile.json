@@ -1,0 +1,68 @@
+{
+  "userProfile": {
+    "loading": "Loading user homepage...",
+    "avatarAlt": "User avatar",
+    "bioEmpty": "This user has not added a bio yet.",
+    "updatedAt": "Updated at {time}",
+    "counts": {
+      "followers": "{count} followers",
+      "following": "{count} following"
+    },
+    "actions": {
+      "retry": "Retry",
+      "follow": "Follow",
+      "following": "Following",
+      "directMessage": "Direct Message",
+      "close": "Close"
+    },
+    "relationships": {
+      "followingEntry": "People I Follow",
+      "followersEntry": "Followers",
+      "followingCountText": "Following count: {count}",
+      "followersCountText": "Follower count: {count}",
+      "listPlaceholder": "List entry is reserved. Full list can be shown after dedicated list APIs are connected."
+    },
+    "globalVisibility": {
+      "title": "Global Privacy",
+      "description": "Set the default visibility scope for AI content under your account."
+    },
+    "visibility": {
+      "public": "Public",
+      "followers": "Followers",
+      "private": "Private"
+    },
+    "novels": {
+      "title": "Novels",
+      "empty": "No visible novels yet.",
+      "untitled": "Untitled work",
+      "summaryEmpty": "No summary."
+    },
+    "characters": {
+      "title": "Character Cards",
+      "empty": "No visible character cards yet.",
+      "avatarAlt": "Character avatar",
+      "untitled": "Untitled character",
+      "descriptionEmpty": "No description."
+    },
+    "errors": {
+      "invalidUserId": "Invalid user id.",
+      "loadFailed": "Failed to load user homepage.",
+      "followFailed": "Failed to update follow state.",
+      "dmFailed": "Failed to start direct message.",
+      "globalVisibilityFailed": "Failed to save global visibility.",
+      "itemVisibilityFailed": "Failed to save item visibility."
+    },
+    "toast": {
+      "loginRequired": "Please sign in first.",
+      "followed": "Followed.",
+      "unfollowed": "Unfollowed.",
+      "needFollowBeforeChat": "Follow this user before starting chat",
+      "dmStarted": "Direct message thread created.",
+      "globalVisibilitySaved": "Global visibility saved.",
+      "itemVisibilitySaved": "Visibility updated."
+    },
+    "common": {
+      "dash": "-"
+    }
+  }
+}

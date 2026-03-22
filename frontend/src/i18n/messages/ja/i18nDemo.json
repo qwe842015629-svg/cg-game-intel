@@ -1,0 +1,8 @@
+{
+  "i18nDemo": {
+    "subtitle": "i18n のクイック デモ: 言語を切り替え、URL ロケール プレフィックスを保持し、localStorage で永続化します。",
+    "languageLabel": "言語",
+    "currentLocaleLabel": "現在のロケール:",
+    "currentUrlLabel": "現在の URL:"
+  }
+}

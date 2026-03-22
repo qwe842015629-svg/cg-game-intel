@@ -1,0 +1,513 @@
+﻿{% extends "admin/base_site.html" %}
+
+{% block extrastyle %}
+{{ block.super }}
+<style>
+  .cs-console {
+    display: grid !important;
+    grid-template-columns: minmax(520px, 38fr) minmax(0, 62fr) !important;
+    column-gap: 36px !important;
+    row-gap: 16px;
+    min-height: 72vh;
+  }
+  .cs-panel {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .cs-panel-header {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    padding: 12px;
+    border-bottom: 1px solid #f1f5f9;
+    background: #fafcff;
+  }
+  .cs-panel-body {
+    padding: 12px;
+  }
+  .cs-search {
+    flex: 1;
+    min-width: 0;
+  }
+  .cs-search input,
+  .cs-search select,
+  .cs-compose textarea {
+    width: 100%;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    padding: 8px 10px;
+    font-size: 13px;
+  }
+  .cs-session-list {
+    max-height: calc(72vh - 64px);
+    overflow: auto;
+  }
+  .cs-session-item {
+    border-bottom: 1px solid #f1f5f9;
+    padding: 10px 12px;
+    cursor: pointer;
+    transition: background-color 0.15s;
+  }
+  .cs-session-item:hover {
+    background: #f8fafc;
+  }
+  .cs-session-item.active {
+    background: #ecfeff;
+  }
+  .cs-session-title {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .cs-session-sub {
+    margin-top: 4px;
+    color: #64748b;
+    font-size: 12px;
+  }
+  .cs-badge {
+    border-radius: 999px;
+    padding: 1px 8px;
+    font-size: 11px;
+    line-height: 18px;
+  }
+  .cs-badge-ai { background: #e0f2fe; color: #0369a1; }
+  .cs-badge-human { background: #dcfce7; color: #166534; }
+  .cs-badge-closed { background: #f1f5f9; color: #334155; }
+  .cs-main {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    min-height: 72vh;
+  }
+  .cs-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 12px;
+    align-items: center;
+    font-size: 13px;
+    color: #334155;
+  }
+  .cs-actions {
+    margin-left: auto;
+    display: flex;
+    gap: 8px;
+  }
+  .cs-btn {
+    border: 1px solid #cbd5e1;
+    background: #fff;
+    border-radius: 8px;
+    padding: 6px 10px;
+    font-size: 12px;
+    cursor: pointer;
+  }
+  .cs-btn.primary {
+    background: #0ea5e9;
+    border-color: #0284c7;
+    color: #fff;
+  }
+  .cs-btn.danger {
+    border-color: #ef4444;
+    color: #ef4444;
+  }
+  .cs-message-list {
+    padding: 12px;
+    overflow-y: auto;
+    background: #f8fafc;
+  }
+  .cs-msg {
+    max-width: 72%;
+    margin-bottom: 10px;
+    padding: 8px 10px;
+    border-radius: 10px;
+    font-size: 13px;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+  .cs-msg.user { margin-right: auto; background: #ffffff; border: 1px solid #e2e8f0; }
+  .cs-msg.ai { margin-left: auto; background: #cffafe; border: 1px solid #67e8f9; }
+  .cs-msg.agent { margin-left: auto; background: #dcfce7; border: 1px solid #86efac; }
+  .cs-msg.system { margin: 0 auto 10px; background: #f1f5f9; border: 1px dashed #cbd5e1; text-align: center; }
+  .cs-msg-meta { margin-top: 4px; font-size: 11px; color: #64748b; }
+  .cs-compose {
+    border-top: 1px solid #e2e8f0;
+    background: #fff;
+    padding: 10px 12px;
+  }
+  .cs-compose-actions {
+    margin-top: 8px;
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+  }
+  .cs-empty {
+    padding: 30px 16px;
+    color: #64748b;
+    text-align: center;
+  }
+  .cs-console > .cs-panel:first-child > .cs-panel-header {
+    display: grid;
+    grid-template-columns: minmax(160px, 1fr) 200px auto;
+    gap: 8px;
+    align-items: center;
+  }
+  .cs-console > .cs-panel:first-child > .cs-panel-header .cs-search {
+    min-width: 0;
+  }
+  .cs-console > .cs-panel:first-child > .cs-panel-header #statusFilter {
+    min-width: 200px;
+    width: 100%;
+    height: 38px;
+    line-height: 20px;
+    padding: 8px 30px 8px 12px;
+  }
+  .cs-console > .cs-panel:first-child > .cs-panel-header .cs-search[style] {
+    max-width: 200px !important;
+  }
+  @media (max-width: 1500px) {
+    .cs-console {
+      grid-template-columns: minmax(460px, 36fr) minmax(0, 64fr) !important;
+      column-gap: 24px !important;
+    }
+  }
+  @media (max-width: 1200px) {
+    .cs-console {
+      grid-template-columns: minmax(380px, 35fr) minmax(0, 65fr) !important;
+      column-gap: 16px !important;
+    }
+    .cs-console > .cs-panel:first-child > .cs-panel-header {
+      grid-template-columns: minmax(120px, 1fr) 176px auto;
+    }
+    .cs-console > .cs-panel:first-child > .cs-panel-header #statusFilter {
+      min-width: 176px;
+    }
+    .cs-console > .cs-panel:first-child > .cs-panel-header .cs-search[style] {
+      max-width: 176px !important;
+    }
+  }
+  @media (max-width: 980px) {
+    .cs-console {
+      grid-template-columns: 1fr !important;
+      column-gap: 12px !important;
+      row-gap: 12px;
+    }
+  }
+  @media (max-width: 480px) {
+    .cs-console > .cs-panel:first-child > .cs-panel-header {
+      grid-template-columns: 1fr;
+    }
+    .cs-console > .cs-panel:first-child > .cs-panel-header #statusFilter {
+      min-width: 0;
+      width: 100%;
+    }
+    .cs-console > .cs-panel:first-child > .cs-panel-header .cs-search[style] {
+      max-width: none !important;
+    }
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="cs-console">
+  <div class="cs-panel">
+    <div class="cs-panel-header">
+      <div class="cs-search"><input id="sessionSearch" type="text" placeholder="搜索访客/消息"></div>
+      <div class="cs-search">
+        <select id="statusFilter">
+          <option value="">全部状态</option>
+          <option value="ai">AI接待</option>
+          <option value="human">人工接待</option>
+          <option value="closed">已关闭</option>
+        </select>
+      </div>
+      <button class="cs-btn" id="refreshSessions">刷新</button>
+    </div>
+    <div id="sessionList" class="cs-session-list"></div>
+  </div>
+
+  <div class="cs-panel cs-main">
+    <div class="cs-panel-header">
+      <div id="sessionMeta" class="cs-meta">请选择左侧会话</div>
+      <div class="cs-actions">
+        <button class="cs-btn" id="btnAssign">接单</button>
+        <button class="cs-btn" id="btnSetAi">切AI</button>
+        <button class="cs-btn danger" id="btnClose">关闭</button>
+      </div>
+    </div>
+    <div id="messageList" class="cs-message-list"><div class="cs-empty">等待选择会话</div></div>
+    <div class="cs-compose">
+      <textarea id="replyInput" rows="3" placeholder="输入回复内容..."></textarea>
+      <div class="cs-compose-actions">
+        <button class="cs-btn primary" id="btnReply">发送回复</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(() => {
+  const API_BASE = "{{ chat_api_base|escapejs }}";
+  const CSRF_TOKEN = "{{ csrf_token }}";
+  const state = {
+    sessions: [],
+    currentSessionId: new URLSearchParams(window.location.search).get("session") || "",
+    pollTimer: null,
+  };
+
+  const $ = (id) => document.getElementById(id);
+  function normalizeUiLabels() {
+    const statusFilter = $("statusFilter");
+    if (statusFilter) {
+      const labelMap = {
+        "": "全部状态",
+        ai: "AI接待",
+        human: "人工接待",
+        closed: "已关闭",
+      };
+      Array.from(statusFilter.options || []).forEach((option) => {
+        if (Object.prototype.hasOwnProperty.call(labelMap, option.value)) {
+          option.text = labelMap[option.value];
+        }
+      });
+    }
+
+    const searchInput = $("sessionSearch");
+    if (searchInput) searchInput.placeholder = "搜索访客/消息";
+    const refreshBtn = $("refreshSessions");
+    if (refreshBtn) refreshBtn.textContent = "刷新";
+    const assignBtn = $("btnAssign");
+    if (assignBtn) assignBtn.textContent = "接单";
+    const setAiBtn = $("btnSetAi");
+    if (setAiBtn) setAiBtn.textContent = "切AI";
+    const closeBtn = $("btnClose");
+    if (closeBtn) closeBtn.textContent = "关闭";
+    const replyInput = $("replyInput");
+    if (replyInput) replyInput.placeholder = "输入回复内容...";
+    const replyBtn = $("btnReply");
+    if (replyBtn) replyBtn.textContent = "发送回复";
+  }
+
+  function applyConsoleLayout() {
+    const consoleRoot = document.querySelector(".cs-console");
+    if (!consoleRoot) return;
+
+    let columns = "minmax(520px, 38fr) minmax(0, 62fr)";
+    let gap = "36px";
+
+    if (window.innerWidth <= 980) {
+      columns = "1fr";
+      gap = "12px";
+    } else if (window.innerWidth <= 1200) {
+      columns = "minmax(380px, 35fr) minmax(0, 65fr)";
+      gap = "16px";
+    } else if (window.innerWidth <= 1500) {
+      columns = "minmax(460px, 36fr) minmax(0, 64fr)";
+      gap = "24px";
+    }
+
+    consoleRoot.style.display = "grid";
+    consoleRoot.style.gridTemplateColumns = columns;
+    consoleRoot.style.columnGap = gap;
+    consoleRoot.style.rowGap = "16px";
+  }
+
+  function applyToolbarLayout() {
+    const toolbar = document.querySelector(".cs-console > .cs-panel:first-child > .cs-panel-header");
+    const status = $("statusFilter");
+    if (!toolbar || !status) return;
+
+    const compact = window.innerWidth <= 1200;
+    const filterWidth = compact ? "176px" : "200px";
+    toolbar.style.display = "grid";
+    toolbar.style.gridTemplateColumns = `minmax(120px, 1fr) ${filterWidth} auto`;
+    toolbar.style.gap = "8px";
+    toolbar.style.alignItems = "center";
+
+    status.style.minWidth = filterWidth;
+    status.style.width = "100%";
+    status.style.height = "38px";
+    status.style.padding = "8px 30px 8px 12px";
+  }
+
+  function applyLayoutPreset() {
+    applyConsoleLayout();
+    applyToolbarLayout();
+  }
+  const statusBadge = (status) => {
+    if (status === "human") return '<span class="cs-badge cs-badge-human">人工</span>';
+    if (status === "closed") return '<span class="cs-badge cs-badge-closed">已关闭</span>';
+    return '<span class="cs-badge cs-badge-ai">AI</span>';
+  };
+
+  async function request(url, options = {}) {
+    const response = await fetch(url, {
+      credentials: "same-origin",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRFToken": CSRF_TOKEN,
+        ...(options.headers || {}),
+      },
+      ...options,
+    });
+    if (!response.ok) {
+      const body = await response.text();
+      throw new Error(body || `HTTP ${response.status}`);
+    }
+    return response.json();
+  }
+
+  function renderSessionList() {
+    const container = $("sessionList");
+    if (!state.sessions.length) {
+      container.innerHTML = '<div class="cs-empty">暂无会话</div>';
+      return;
+    }
+    container.innerHTML = state.sessions
+      .map((item) => {
+        const activeClass = String(item.session_id) === String(state.currentSessionId) ? "active" : "";
+        const waiting = item.unread_user_count > 0 ? ` · 待处理 ${item.unread_user_count}` : "";
+        return `
+          <div class="cs-session-item ${activeClass}" data-id="${item.session_id}">
+            <div class="cs-session-title">
+              <span>${item.visitor_name || "匿名用户"}</span>
+              ${statusBadge(item.status)}
+            </div>
+            <div class="cs-session-sub">${item.last_message_preview || "暂无消息"}</div>
+            <div class="cs-session-sub">${item.last_message_at || item.updated_at || ""}${waiting}</div>
+          </div>
+        `;
+      })
+      .join("");
+    container.querySelectorAll(".cs-session-item").forEach((el) => {
+      el.addEventListener("click", () => openSession(el.dataset.id));
+    });
+  }
+
+  function renderSessionMeta(session) {
+    const meta = $("sessionMeta");
+    if (!session) {
+      meta.textContent = "请选择左侧会话";
+      return;
+    }
+    meta.innerHTML = `
+      <span><strong>访客:</strong> ${session.visitor_name || "匿名用户"}</span>
+      <span><strong>联系方式:</strong> ${session.visitor_contact || "-"}</span>
+      <span><strong>状态:</strong> ${session.status_display || session.status}</span>
+      <span><strong>客服:</strong> ${session.assigned_agent_name || "-"}</span>
+    `;
+  }
+
+  function renderMessages(messages) {
+    const container = $("messageList");
+    if (!messages.length) {
+      container.innerHTML = '<div class="cs-empty">暂无消息</div>';
+      return;
+    }
+    container.innerHTML = messages
+      .map((msg) => `
+        <div class="cs-msg ${msg.sender_type}">
+          ${msg.content}
+          <div class="cs-msg-meta">${msg.sender_name || msg.sender_type} · ${msg.created_at || ""}</div>
+        </div>
+      `)
+      .join("");
+    container.scrollTop = container.scrollHeight;
+  }
+
+  async function loadSessions() {
+    const query = new URLSearchParams();
+    const q = $("sessionSearch").value.trim();
+    const status = $("statusFilter").value;
+    if (q) query.set("q", q);
+    if (status) query.set("status", status);
+    const data = await request(`${API_BASE}/sessions/?${query.toString()}`);
+    state.sessions = data.results || [];
+    renderSessionList();
+    if (!state.currentSessionId && state.sessions.length) {
+      state.currentSessionId = state.sessions[0].session_id;
+    }
+    if (state.currentSessionId) {
+      await loadSessionDetail(state.currentSessionId);
+    }
+  }
+
+  async function loadSessionDetail(sessionId) {
+    if (!sessionId) return;
+    const data = await request(`${API_BASE}/sessions/${sessionId}/`);
+    state.currentSessionId = sessionId;
+    renderSessionList();
+    renderSessionMeta(data);
+    renderMessages(data.messages || []);
+  }
+
+  async function openSession(sessionId) {
+    if (!sessionId) return;
+    await loadSessionDetail(sessionId);
+  }
+
+  async function assignSession() {
+    if (!state.currentSessionId) return;
+    await request(`${API_BASE}/sessions/${state.currentSessionId}/assign/`, { method: "POST", body: "{}" });
+    await loadSessions();
+  }
+
+  async function closeSession() {
+    if (!state.currentSessionId) return;
+    await request(`${API_BASE}/sessions/${state.currentSessionId}/close/`, { method: "POST", body: "{}" });
+    await loadSessions();
+  }
+
+  async function setAiMode() {
+    if (!state.currentSessionId) return;
+    await request(`${API_BASE}/sessions/${state.currentSessionId}/status/`, {
+      method: "POST",
+      body: JSON.stringify({ status: "ai" }),
+    });
+    await loadSessions();
+  }
+
+  async function replySession() {
+    if (!state.currentSessionId) return;
+    const content = $("replyInput").value.trim();
+    if (!content) return;
+    await request(`${API_BASE}/sessions/${state.currentSessionId}/reply/`, {
+      method: "POST",
+      body: JSON.stringify({ content }),
+    });
+    $("replyInput").value = "";
+    await loadSessionDetail(state.currentSessionId);
+    await loadSessions();
+  }
+
+  function bindEvents() {
+    $("refreshSessions").addEventListener("click", () => loadSessions().catch(console.error));
+    $("sessionSearch").addEventListener("keydown", (event) => {
+      if (event.key === "Enter") loadSessions().catch(console.error);
+    });
+    $("statusFilter").addEventListener("change", () => loadSessions().catch(console.error));
+    $("btnAssign").addEventListener("click", () => assignSession().catch(console.error));
+    $("btnClose").addEventListener("click", () => closeSession().catch(console.error));
+    $("btnSetAi").addEventListener("click", () => setAiMode().catch(console.error));
+    $("btnReply").addEventListener("click", () => replySession().catch(console.error));
+  }
+
+  async function boot() {
+    normalizeUiLabels();
+    applyLayoutPreset();
+    window.addEventListener("resize", applyLayoutPreset);
+    bindEvents();
+    await loadSessions();
+    if (state.pollTimer) clearInterval(state.pollTimer);
+    state.pollTimer = setInterval(() => {
+      loadSessions().catch(console.error);
+    }, 5000);
+  }
+
+  boot().catch((error) => console.error(error));
+})();
+</script>
+{% endblock %}
+

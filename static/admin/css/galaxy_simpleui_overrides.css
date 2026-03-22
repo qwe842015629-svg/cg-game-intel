@@ -1,0 +1,84 @@
+﻿:root {
+  --su-galaxy-bg: #edf3fb;
+  --su-galaxy-border: #d8e4f7;
+  --su-galaxy-ink: #0f172a;
+  --su-galaxy-muted: #60708a;
+  --su-galaxy-accent: #2563eb;
+  --su-galaxy-accent-2: #0ea5e9;
+}
+
+body {
+  background:
+    radial-gradient(circle at 9% 0%, color-mix(in srgb, var(--su-galaxy-accent-2) 10%, transparent) 0%, transparent 34%),
+    radial-gradient(circle at 92% 2%, color-mix(in srgb, #10b981 10%, transparent) 0%, transparent 34%),
+    var(--su-galaxy-bg);
+}
+
+#main .logo-wrap {
+  border-bottom: 1px solid color-mix(in srgb, var(--su-galaxy-border) 75%, #ffffff 25%);
+  background: linear-gradient(120deg, #f8fbff, #eef5ff);
+}
+
+#main .logo-wrap .left span {
+  color: var(--su-galaxy-ink);
+  font-weight: 700;
+}
+
+#main .menu,
+#main .el-aside.menu {
+  background: color-mix(in srgb, #ffffff 80%, #eef5ff 20%);
+  border-right: 1px solid var(--su-galaxy-border);
+}
+
+#main .el-menu {
+  background: transparent;
+  border-right: none;
+}
+
+#main .el-menu-item,
+#main .el-submenu__title {
+  border-radius: 10px;
+  margin: 3px 8px;
+  color: #344861;
+}
+
+#main .el-menu-item.is-active,
+#main .el-menu-item:hover,
+#main .el-submenu__title:hover {
+  color: #0f172a;
+  background: color-mix(in srgb, var(--su-galaxy-accent) 12%, #ffffff 88%);
+}
+
+#main .navbar {
+  background: color-mix(in srgb, #ffffff 86%, #edf4ff 14%);
+  border-bottom: 1px solid var(--su-galaxy-border);
+  box-shadow: 0 16px 30px -28px rgba(15, 23, 42, 0.5);
+}
+
+#main .el-main {
+  background: transparent;
+}
+
+#main .el-tabs--border-card,
+#main .el-tabs--border-card > .el-tabs__header {
+  border-color: var(--su-galaxy-border);
+  background: color-mix(in srgb, #ffffff 90%, #eff5ff 10%);
+}
+
+#main .el-tabs--border-card > .el-tabs__content {
+  background: #f8fbff;
+}
+
+#main .el-tabs__item.is-active {
+  color: var(--su-galaxy-accent);
+  font-weight: 700;
+}
+
+#main .el-button {
+  border-radius: 10px;
+  border-color: color-mix(in srgb, var(--su-galaxy-border) 85%, #ffffff 15%);
+}
+
+#main iframe {
+  border-radius: 12px;
+}

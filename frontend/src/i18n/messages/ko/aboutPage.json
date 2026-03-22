@@ -1,0 +1,32 @@
+{
+  "aboutPage": {
+    "title": "에 대한",
+    "subtitle": "우리를",
+    "description": "우리의 사명, 비전, 가치에 대해 알아보세요.",
+    "heroText": "사이버 차지",
+    "heroSubtext": "미래형 게임 재충전 경험 · 보안 · 신속 · 신뢰성",
+    "missionTitle": "사명",
+    "missionDescription": "우리의 임무는 글로벌 플레이어에게 안전하고 빠르며 안정적인 게임 재충전 서비스를 제공하여 모든 플레이어가 지역 또는 결제 장벽 없이 원활한 경험을 즐길 수 있도록 하는 것입니다.",
+    "visionTitle": "비전",
+    "visionDescription": "혁신과 우수한 서비스를 통해 글로벌 게임 서비스 플랫폼을 선도하고, 모든 곳의 플레이어를 연결하며, 무한한 게임 경험을 창출합니다.",
+    "corePrefix": "핵심",
+    "coreSuffix": "가치",
+    "values": {
+      "secureTitle": "보안 및 신뢰성",
+      "secureDescription": "우리는 항상 사용자의 안전을 최우선으로 생각하며 첨단 보안 기술로 모든 거래를 보호합니다.",
+      "fastTitle": "초고속",
+      "fastDescription": "밀리초 수준의 재충전 처리로 게임 경험이 중단되지 않습니다.",
+      "userTitle": "사용자 우선",
+      "userDescription": "우리는 사용자 요구에 중점을 두고 개인화된 경험을 통해 사려 깊은 서비스를 제공합니다."
+    },
+    "teamPrefix": "우리의",
+    "teamSuffix": "팀",
+    "cta": {
+      "titlePrefix": "준비가 된",
+      "titleSuffix": "시작하려면?",
+      "description": "게임 커뮤니티에 참여하여 안전하고 빠르며 안정적인 게임 충전 서비스를 즐겨보세요.",
+      "recharge": "재충전 시작",
+      "contact": "문의하기"
+    }
+  }
+}

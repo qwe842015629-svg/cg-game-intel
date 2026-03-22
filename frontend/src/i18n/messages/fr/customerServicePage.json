@@ -1,0 +1,14 @@
+{
+  "customerServicePage": {
+    "pageTitle": "Centre de service client",
+    "pageDescription": "Contactez-nous via le chat en ligne, les réseaux sociaux ou l'assistance FAQ.",
+    "faqTitle": "Foire aux questions",
+    "startChat": "Démarrer le chat",
+    "buttonFallback": "Contactez maintenant",
+    "close": "Fermer",
+    "loading": "Chargement...",
+    "qrDefaultTitle": "Code QR",
+    "qrDefaultTip": "Veuillez scanner avec WeChat pour continuer.",
+    "loadErrorLog": "Échec du chargement des données du service client :"
+  }
+}

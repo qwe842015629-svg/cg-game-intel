@@ -1,0 +1,36 @@
+﻿{
+  "cgWikiPage": {
+    "header": {
+      "rankMonitor": "Global Ranking Monitor",
+      "updating": "Updating manually...",
+      "update": "Manual Update"
+    },
+    "sidebar": {
+      "marketHeat": "Market Heat Distribution",
+      "wikiDirect": "Game Wiki Direct",
+      "newsFeed": "Intel Feed"
+    },
+    "regions": {
+      "cn": "China",
+      "us": "US",
+      "jp": "Japan",
+      "hk": "Hong Kong",
+      "tw": "Taiwan",
+      "sea": "Southeast Asia"
+    },
+    "common": {
+      "viewDetails": "View Details",
+      "globalHot": "Global Hot",
+      "unknownAuthor": "Unknown",
+      "untitledNews": "Untitled News",
+      "wikiFeedFallback": "Wiki Update"
+    },
+    "footer": {
+      "dataSourceAppleStore": "Data source: Apple Store"
+    },
+    "errors": {
+      "networkUnstable": "Network unstable. Showing cached local data.",
+      "loadFailed": "Unable to load data. Please check your network."
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "authDialog": {
+    "registrationSuccessTitle": "🎉 Registration Successful!",
+    "activationEmailSent": "An activation email has been sent to",
+    "nextStepsTitle": "What to do next?",
+    "activationStep1": "Open your mailbox: {email}",
+    "activationStep2": "Find the activation email from {company}",
+    "activationStep3": "Click the activation button in the email",
+    "activationStep4": "After activation, you can sign in immediately",
+    "noEmailTitle": "Didn't receive the email?",
+    "noEmailDesc": "Please check your spam folder or try again in a few minutes.",
+    "openEmail": "Open Mailbox",
+    "close": "Close",
+    "accountLogin": "Account Login",
+    "tabs": {
+      "login": "Login",
+      "register": "Register"
+    },
+    "emailLabel": "Email",
+    "passwordLabel": "Password",
+    "usernameLabel": "Username",
+    "confirmPasswordLabel": "Confirm Password",
+    "usernamePlaceholder": "Your nickname",
+    "passwordPlaceholder": "••••••••",
+    "loginButton": "Login",
+    "registerButton": "Register",
+    "loginSuccess": "Login successful!",
+    "invalidCredentials": "Invalid email or password",
+    "loginFailed": "Login failed, please check your credentials",
+    "passwordMismatch": "Passwords do not match",
+    "passwordTooShort": "Password must be at least 8 characters",
+    "usernameRequired": "Please enter your username",
+    "emailRequired": "Please enter your email",
+    "passwordRequired": "Please enter your password",
+    "confirmPasswordRequired": "Please confirm your password",
+    "fieldUsername": "Username: ",
+    "fieldEmail": "Email: ",
+    "fieldPassword": "Password: ",
+    "registerFailed": "Registration failed, please try again"
+  }
+}

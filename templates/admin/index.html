@@ -1,5 +1,14 @@
 {% extends "admin/index.html" %}
+{% load static %}
 
-{% block extrahead %}
+{% block head %}
 {{ block.super }}
+<link rel="stylesheet" href="{% static 'admin/css/galaxy_simpleui_overrides.css' %}">
+<link rel="stylesheet" href="{% static 'admin/css/galaxy_admin_floating_chat.css' %}">
+{% endblock %}
+
+{% block script %}
+{{ block.super }}
+<script src="{% static 'admin/js/galaxy_simpleui_i18n.js' %}?v=20260221_email_menu_fix"></script>
+<script src="{% static 'admin/js/galaxy_admin_floating_chat.js' %}"></script>
 {% endblock %}

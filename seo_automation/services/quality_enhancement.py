@@ -95,8 +95,45 @@ _TEXT_WATERMARK_URL_HINTS = (
     "comment",
     "avatar",
     "sticker",
+    "thumbnail",
+    "thumb",
+    "banner",
+    "promo",
+    "promotion",
+    "event",
+    "news",
+    "forum",
+    "giftcode",
+    "gift-code",
+    "redeem",
+    "tier-list",
+    "tips",
+    "guide",
+    "walkthrough",
+    "fb",
+    "facebook",
+    "instagram",
+    "tiktok",
+    "youtube",
+    "discord",
+    "telegram",
+    "twitter",
+    "xhs",
+    "xiaohongshu",
+    "weibo",
     "ourplay",
     "攻略",
+    "\u79ae\u5305\u78bc",
+    "\u793c\u5305\u7801",
+    "\u514c\u63db\u78bc",
+    "\u5151\u6362\u7801",
+    "\u6d3b\u52d5",
+    "\u6d3b\u52a8",
+    "\u516c\u544a",
+    "\u60c5\u5831",
+    "\u60c5\u62a5",
+    "\u6559\u5b78",
+    "\u6559\u7a0b",
     "de-games",
     "degames",
 )
@@ -123,6 +160,62 @@ _GAMING_DOMAIN_HINTS = (
     "mihoyo",
     "hoyoverse",
     "epicgames",
+)
+
+_RELEVANCE_GENERIC_TOKENS = {
+    "game",
+    "games",
+    "gaming",
+    "mobile",
+    "android",
+    "ios",
+    "guide",
+    "tips",
+    "tier",
+    "list",
+    "wiki",
+    "news",
+    "event",
+    "events",
+    "official",
+    "art",
+    "wallpaper",
+    "key",
+    "visual",
+    "cg",
+    "screenshot",
+    "image",
+    "images",
+    "video",
+    "2024",
+    "2025",
+    "2026",
+}
+
+_CROSS_GAME_HINTS = (
+    "genshin",
+    "honkai",
+    "starrail",
+    "star rail",
+    "wuthering",
+    "wuwa",
+    "azurlane",
+    "azur lane",
+    "arknights",
+    "nikke",
+    "pubg",
+    "freefire",
+    "codm",
+    "valorant",
+    "lol",
+    "wild rift",
+    "fortnite",
+    "apex",
+    "clash",
+    "royale",
+    "brawlstars",
+    "fifa",
+    "eafc",
 )
 
 
@@ -211,8 +304,9 @@ def run_step5_quality_enhancement(
     ordered_candidates = sorted(
         validated_candidates,
         key=lambda item: (
-            float(item.get("quality_score") or 0.0),
             float(item.get("score") or 0.0),
+            float(item.get("relevance_score") or 0.0),
+            float(item.get("quality_score") or 0.0),
         ),
         reverse=True,
     )
@@ -959,6 +1053,12 @@ def _ensure_question_answer_pairs(body_html: str, game_name: str) -> str:
 
 
 
+def repair_article_section_completeness(*, body_html: str, game_name: str) -> str:
+    # Backward-compatible entry point used by older seo_automation views.
+    _ = game_name
+    return str(body_html or "")
+
+
 def _ensure_on_site_recharge_guidance(body_html: str, game_name: str) -> str:
     html = str(body_html or "")
     plain = _strip_tags(html)
@@ -1166,13 +1266,14 @@ def _filter_quality_image_candidates(
             candidate=item,
             game_name=game_name,
         )
-        if source != "seed" and relevance_score < 0.24:
+        min_relevance = 0.34 if source == "seed" else 0.42
+        if relevance_score < min_relevance:
             rejected_irrelevant += 1
             continue
 
         quality_metrics = _estimate_image_quality_metrics(image_bytes)
         quality_score = float(quality_metrics.get("quality_score") or 0.0)
-        final_score = (relevance_score * 0.62) + (quality_score * 0.38)
+        final_score = (relevance_score * 0.72) + (quality_score * 0.28)
 
         scored.append(
             {
@@ -1217,6 +1318,8 @@ def _filter_quality_image_candidates(
         "rejected_non_image": rejected_non_image,
         "rejected_irrelevant": rejected_irrelevant,
         "rejected_duplicate": rejected_duplicate,
+        "min_relevance_non_seed": 0.42,
+        "min_relevance_seed": 0.34,
         "ocr_backend": ocr_backend,
         "top_score": round(top_score, 4),
     }
@@ -1297,40 +1400,91 @@ def _url_dedupe_key(url: str) -> str:
 
 def _score_candidate_relevance(*, candidate: dict[str, Any], game_name: str) -> float:
     source = str(candidate.get("source") or "").strip().lower()
-    if source == "seed":
-        return 0.95
 
     url = str(candidate.get("url") or "").strip().lower()
     title = str(candidate.get("title") or "").strip().lower()
     heading = str(candidate.get("heading") or "").strip().lower()
+    query = str(candidate.get("query") or "").strip().lower()
     host = _host_from_url(url)
-    text = " ".join([title, url, heading])
+    title_url_text = " ".join([title, url])
+    context_text = " ".join([title_url_text, query])
     score = 0.0
 
-    game_tokens = _tokenize_for_match(game_name)
-    hit_count = sum(1 for token in game_tokens[:8] if token and token in text)
-    if hit_count > 0:
-        score += min(0.55, 0.18 * hit_count + 0.18)
+    game_tokens = [
+        token
+        for token in _tokenize_for_match(game_name)[:10]
+        if token and token not in _RELEVANCE_GENERIC_TOKENS
+    ]
+    strong_hits = sum(1 for token in game_tokens if token in title_url_text)
+    context_hits = sum(1 for token in game_tokens if token in context_text)
+    if strong_hits > 0:
+        score += min(0.62, (0.22 + (0.16 * strong_hits)))
+    elif context_hits > 0:
+        score += min(0.16, 0.05 * context_hits)
+        score -= 0.16
     else:
-        score -= 0.2
+        score -= 0.28
 
-    heading_hits = sum(1 for token in _tokenize_for_match(heading)[:6] if token and token in text)
-    if heading_hits > 0:
-        score += min(0.2, 0.05 * heading_hits)
+    heading_tokens = [
+        token
+        for token in _tokenize_for_match(heading)[:8]
+        if token and token not in _RELEVANCE_GENERIC_TOKENS
+    ]
+    if heading_tokens:
+        heading_hits = sum(1 for token in heading_tokens if token in title_url_text)
+        if heading_hits > 0:
+            score += min(0.16, 0.06 * heading_hits)
+        else:
+            score -= 0.08
+
+    query_tokens = [
+        token
+        for token in _tokenize_for_match(query)[:12]
+        if token and token not in _RELEVANCE_GENERIC_TOKENS
+    ]
+    if query_tokens:
+        query_focus_tokens = [token for token in query_tokens if token not in game_tokens]
+        if query_focus_tokens:
+            query_hits = sum(1 for token in query_focus_tokens if token in title_url_text)
+            if query_hits > 0:
+                score += min(0.1, 0.03 * query_hits)
+            else:
+                score -= 0.07
+
+    if source == "seed":
+        score += 0.08 if strong_hits > 0 else -0.03
 
     if any(hint in host for hint in _GAMING_DOMAIN_HINTS):
-        score += 0.18
+        score += 0.14
     if any(hint in host for hint in _NON_GAME_DOMAIN_HINTS):
-        score -= 0.3
+        score -= 0.32
 
-    if any(noise in text for noise in ("portrait", "fashion", "makeup", "model", "street style")):
-        score -= 0.25
-    if any(noise in text for noise in ("icon", "logo", "avatar", "emoji", "sticker")):
+    if any(noise in context_text for noise in ("portrait", "fashion", "makeup", "model", "street style")):
+        score -= 0.28
+    if any(
+        noise in context_text
+        for noise in ("icon", "logo", "avatar", "emoji", "sticker", "thumbnail", "thumb")
+    ):
+        score -= 0.28
+    if any(
+        noise in context_text
+        for noise in ("gift code", "giftcode", "redeem", "coupon", "promo", "promotion", "tier list")
+    ):
         score -= 0.2
-    if any(word in text for word in ("wallpaper", "official art", "key visual", "screenshot", "cg")):
-        score += 0.12
+    if any(
+        word in context_text
+        for word in ("wallpaper", "official art", "key visual", "screenshot", "cg", "splash art", "character art")
+    ):
+        score += 0.1
 
-    return max(0.0, min(1.0, score + 0.3))
+    lowered_game_name = str(game_name or "").lower()
+    if strong_hits <= 0 and any(
+        hint in context_text and hint not in lowered_game_name
+        for hint in _CROSS_GAME_HINTS
+    ):
+        score -= 0.24
+
+    return max(0.0, min(1.0, score + 0.24))
 
 
 def _estimate_image_quality_metrics(image_bytes: bytes) -> dict[str, float | int]:
@@ -1465,28 +1619,58 @@ def _reject_image_by_text_or_watermark(*, image_bytes: bytes, image_url: str) ->
     ocr_text = _extract_text_with_ocr(image_bytes)
     ocr_chars = len(re.findall(r"[A-Za-z0-9\u4e00-\u9fff]", ocr_text))
     ocr_lower = str(ocr_text or "").lower()
-    if ocr_chars >= 8 and any(token in ocr_lower for token in ("copyright", "watermark", "logo", "games", "de games", "\u4ee3\u5132", "\u653b\u7565")):
+    if ocr_chars >= 6 and re.search(
+        r"(https?://|www\.|@[a-z0-9_]{2,}|facebook|instagram|youtube|tiktok|discord|telegram|weibo|xiaohongshu|fb)",
+        ocr_lower,
+    ):
+        return True, "ocr_promotional_overlay"
+    if ocr_chars >= 8 and any(
+        token in ocr_lower
+        for token in (
+            "copyright",
+            "all rights reserved",
+            "watermark",
+            "logo",
+            "de games",
+            "gift code",
+            "giftcode",
+            "redeem code",
+            "tier list",
+            "\u4ee3\u5132",
+            "\u793c\u5305\u7801",
+            "\u79ae\u5305\u78bc",
+            "\u5151\u6362\u7801",
+            "\u514c\u63db\u78bc",
+            "\u653b\u7565",
+            "\u7c89\u7d72\u5718",
+            "\u7c89\u4e1d\u56e2",
+            "\u95dc\u6ce8",
+            "\u5173\u6ce8",
+            "\u8a02\u95b1",
+            "\u8ba2\u9605",
+        )
+    ):
         return True, "ocr_watermark_keyword"
-    if ocr_chars >= 14:
+    if ocr_chars >= 12:
         return True, "ocr_text_density"
 
     dark_ratio, bright_ratio = _estimate_luma_extremes(image_bytes)
-    if bright_ratio >= 0.88 and dark_ratio >= 0.00003:
+    if bright_ratio >= 0.84 and dark_ratio >= 0.003:
         return True, "high_contrast_text_like"
 
     heuristic_score = _estimate_text_overlay_score(image_bytes)
-    if heuristic_score >= 0.34:
+    if heuristic_score >= 0.3:
         return True, "heuristic_text_overlay"
 
     corner_logo_score = _estimate_corner_logo_risk(image_bytes)
-    if corner_logo_score >= 0.31:
+    if corner_logo_score >= 0.27:
         return True, "corner_logo_overlay"
 
     bottom_banner_score = _estimate_bottom_banner_risk(image_bytes)
-    if bottom_banner_score >= 0.12:
+    if bottom_banner_score >= 0.11:
         return True, "bottom_banner_overlay"
 
-    if heuristic_score >= 0.2 and (corner_logo_score >= 0.17 or bottom_banner_score >= 0.08):
+    if heuristic_score >= 0.17 and (corner_logo_score >= 0.15 or bottom_banner_score >= 0.06):
         return True, "overlay_combo"
 
     return False, "ok"

@@ -2,7 +2,7 @@
   <div v-if="loading" class="min-h-screen py-20 flex items-center justify-center">
     <div class="text-center">
       <div class="inline-block animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-primary"></div>
-      <p class="text-muted-foreground mt-4">加载中...</p>
+      <p class="text-muted-foreground mt-4">{{ t('articleDetailPage.loading') }}</p>
     </div>
   </div>
 
@@ -13,16 +13,14 @@
         v-magnetic="{ strength: 0.16, max: 10 }"
         class="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg border border-border bg-card text-foreground hover:bg-muted transition-colors"
       >
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-        </svg>
-        返回
+        <ArrowLeft class="w-4 h-4" />
+        {{ t('articleDetailPage.back') }}
       </button>
 
       <div class="article-layout mt-6">
         <aside class="article-sidebar article-sidebar-left">
           <div class="sidebar-sticky surface-card p-4">
-            <div class="sidebar-title">文章目录</div>
+            <div class="sidebar-title">{{ t('articleDetailPage.tocTitle') }}</div>
             <nav class="toc-nav">
               <a
                 v-for="item in tocItems"
@@ -37,7 +35,7 @@
               >
                 {{ item.text }}
               </a>
-              <p v-if="tocItems.length === 0" class="toc-empty">本篇暂无可用目录，建议刷新后重试。</p>
+              <p v-if="tocItems.length === 0" class="toc-empty">{{ t('articleDetailPage.tocEmpty') }}</p>
             </nav>
           </div>
         </aside>
@@ -45,7 +43,7 @@
         <article class="surface-card article-main overflow-hidden" v-motion-reveal="{ y: 22 }">
           <div class="p-6 md:p-8 border-b border-border">
             <div class="inline-flex items-center px-2.5 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold mb-4">
-              {{ article.category || '资讯' }}
+              {{ article.category || t('articleDetailPage.defaultCategory') }}
             </div>
 
             <h1 class="text-3xl md:text-4xl font-bold text-foreground leading-tight mb-5">
@@ -53,25 +51,28 @@
             </h1>
 
             <div class="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
-              <span>作者：{{ article.author || '官方编辑' }}</span>
-              <span>{{ article.date }}</span>
-              <span>阅读时长：{{ article.readTime || '约 3 分钟' }}</span>
+              <span>{{ t('articleDetailPage.authorLabel') }}{{ article.author || t('articleDetailPage.defaultAuthor') }}</span>
+              <span>{{ formatArticleDate(article.date) }}</span>
+              <span>{{ t('articleDetailPage.readTimeLabel') }}{{ article.readTime || t('articleDetailPage.defaultReadTime') }}</span>
             </div>
           </div>
 
-          <div v-if="heroImageSrc" class="aspect-[16/5.8] bg-muted">
+          <div v-if="heroImageSrc" class="hero-media-wrapper bg-muted">
             <img
               :src="heroImageSrc"
               :alt="article.title"
               class="w-full h-full object-cover"
+              referrerpolicy="no-referrer"
               @error="handleHeroImageError"
             />
           </div>
 
           <div class="p-6 md:p-8">
             <div
+              ref="articleContentRef"
               class="article-content text-foreground/90 leading-8 text-[15px] md:text-base"
               v-html="renderedArticleHtml"
+              @click="handleArticleContentClick"
             ></div>
 
             <div v-if="article.tags && article.tags.length > 0" class="mt-8 flex flex-wrap gap-2">
@@ -89,37 +90,37 @@
         <aside class="article-sidebar article-sidebar-right">
           <div class="sidebar-sticky sidebar-stack">
             <section class="surface-card p-4">
-              <h3 class="sidebar-title">热门游戏</h3>
-              <div v-if="sidebarLoading && hotGames.length === 0" class="sidebar-loading">加载中...</div>
-              <div v-else-if="hotGames.length === 0" class="sidebar-empty">暂无热门游戏</div>
+              <h3 class="sidebar-title">{{ t('articleDetailPage.hotGamesTitle') }}</h3>
+              <div v-if="sidebarLoading && hotGames.length === 0" class="sidebar-loading">{{ t('articleDetailPage.loading') }}</div>
+              <div v-else-if="hotGames.length === 0" class="sidebar-empty">{{ t('articleDetailPage.noHotGames') }}</div>
               <RouterLink
                 v-for="game in hotGames"
                 :key="`hot-${game.id}`"
-                :to="`/games/${game.id}`"
+                :to="localizedPath(`/games/${game.id}`)"
                 class="sidebar-list-item"
               >
-                <img :src="resolveGameThumb(game)" :alt="game.name || '热门游戏'" class="sidebar-thumb" @error="handleSidebarImageError" />
+                <img :src="resolveGameThumb(game)" :alt="game.name || t('articleDetailPage.hotGameAlt')" class="sidebar-thumb" referrerpolicy="no-referrer" @error="handleSidebarImageError" />
                 <div class="sidebar-item-copy">
-                  <p class="sidebar-item-title">{{ game.name || game.title || '未命名游戏' }}</p>
-                  <p class="sidebar-item-sub">点击查看充值详情</p>
+                  <p class="sidebar-item-title">{{ game.name || game.title || t('articleDetailPage.untitledGame') }}</p>
+                  <p class="sidebar-item-sub">{{ t('articleDetailPage.viewRechargeDetail') }}</p>
                 </div>
               </RouterLink>
             </section>
 
             <section class="surface-card p-4">
-              <h3 class="sidebar-title">新增文章</h3>
-              <div v-if="sidebarLoading && latestArticles.length === 0" class="sidebar-loading">加载中...</div>
-              <div v-else-if="latestArticles.length === 0" class="sidebar-empty">暂无新增文章</div>
+              <h3 class="sidebar-title">{{ t('articleDetailPage.latestArticlesTitle') }}</h3>
+              <div v-if="sidebarLoading && latestArticles.length === 0" class="sidebar-loading">{{ t('articleDetailPage.loading') }}</div>
+              <div v-else-if="latestArticles.length === 0" class="sidebar-empty">{{ t('articleDetailPage.noLatestArticles') }}</div>
               <RouterLink
                 v-for="item in latestArticles"
                 :key="`latest-${item.id}`"
-                :to="`/articles/${item.id}`"
+                :to="localizedPath(`/articles/${item.id}`)"
                 class="sidebar-list-item"
               >
-                <img :src="resolveArticleThumb(item)" :alt="item.title || '新增文章'" class="sidebar-thumb" @error="handleSidebarImageError" />
+                <img :src="resolveArticleThumb(item)" :alt="item.title || t('articleDetailPage.latestArticleAlt')" class="sidebar-thumb" referrerpolicy="no-referrer" @error="handleSidebarImageError" />
                 <div class="sidebar-item-copy">
-                  <p class="sidebar-item-title">{{ item.title || '未命名文章' }}</p>
-                  <p class="sidebar-item-sub">{{ item.date || '最新发布' }}</p>
+                  <p class="sidebar-item-title">{{ item.title || t('articleDetailPage.untitledArticle') }}</p>
+                  <p class="sidebar-item-sub">{{ item.date ? formatArticleDate(item.date) : t('articleDetailPage.latestPublished') }}</p>
                 </div>
               </RouterLink>
             </section>
@@ -127,18 +128,39 @@
         </aside>
       </div>
     </div>
+
+    <Teleport to="body">
+      <div
+        v-if="previewImageVisible"
+        class="image-preview-overlay"
+        @click="closeImagePreview"
+      >
+        <div class="image-preview-panel" @click.stop>
+          <button class="image-preview-close" type="button" @click="closeImagePreview">
+            {{ t('articleDetailPage.close') }}
+          </button>
+          <img
+            :src="previewImageSrc"
+            :alt="previewImageAlt"
+            class="image-preview-image"
+            referrerpolicy="no-referrer"
+          />
+          <p v-if="previewImageAlt" class="image-preview-caption">{{ previewImageAlt }}</p>
+        </div>
+      </div>
+    </Teleport>
   </div>
 
   <div v-else class="min-h-screen py-20 flex items-center justify-center">
     <div class="text-center surface-card px-8 py-10 max-w-md">
       <div class="text-4xl font-bold text-foreground mb-3">404</div>
-      <h2 class="text-xl font-semibold text-foreground mb-2">文章不存在</h2>
-      <p class="text-muted-foreground mb-6">{{ error || '抱歉，未找到该文章。' }}</p>
+      <h2 class="text-xl font-semibold text-foreground mb-2">{{ t('articleDetailPage.notFoundTitle') }}</h2>
+      <p class="text-muted-foreground mb-6">{{ error || t('articleDetailPage.notFoundDescription') }}</p>
       <RouterLink
-        to="/articles"
+        :to="localizedPath('/articles')"
         class="inline-flex items-center justify-center px-5 py-2.5 rounded-lg bg-primary text-primary-foreground font-semibold hover:bg-primary/90 transition-colors"
       >
-        返回资讯列表
+        {{ t('articleDetailPage.backToArticles') }}
       </RouterLink>
     </div>
   </div>
@@ -147,9 +169,14 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, watch, nextTick } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
+import { ArrowLeft } from 'lucide-vue-next'
 import { getArticleDetail, getArticles } from '../api/articles'
 import { getHotGames } from '../api/games'
 import type { Article, RechargeGame } from '../types'
+import { withLocalePrefix } from '../i18n/locale-routing'
+import { normalizeLocaleCode } from '../i18n/locale-utils'
+import { formatDateByLocale } from '../utils/intl'
 
 interface TocItem {
   id: string
@@ -159,6 +186,7 @@ interface TocItem {
 
 const route = useRoute()
 const router = useRouter()
+const { t, locale } = useI18n()
 
 const article = ref<Article | null>(null)
 const loading = ref(true)
@@ -171,6 +199,11 @@ const hotGames = ref<RechargeGame[]>([])
 const latestArticles = ref<Article[]>([])
 const heroImageSrc = ref('')
 const heroImageFallbackQueue = ref<string[]>([])
+const articleContentRef = ref<HTMLElement | null>(null)
+const previewImageVisible = ref(false)
+const previewImageSrc = ref('')
+const previewImageAlt = ref('')
+const bodyOverflowBeforePreview = ref('')
 
 let headingObserver: IntersectionObserver | null = null
 
@@ -178,6 +211,8 @@ const normalizeBaseUrl = (value: string) => value.replace(/\/+$/, '')
 const BACKEND_ORIGIN = normalizeBaseUrl(
   (import.meta.env.VITE_BACKEND_TARGET as string | undefined)?.trim() || 'http://127.0.0.1:8000'
 )
+const localizedPath = (path: string): string => withLocalePrefix(path, normalizeLocaleCode(locale.value))
+const formatArticleDate = (value: unknown): string => formatDateByLocale(value, locale.value)
 
 const escapeHtml = (value: string): string =>
   value
@@ -267,6 +302,130 @@ const handleSidebarImageError = (event: Event) => {
   if (!img) return
   img.style.display = 'none'
   img.onerror = null
+}
+
+const closeImagePreview = () => {
+  previewImageVisible.value = false
+  previewImageSrc.value = ''
+  previewImageAlt.value = ''
+  if (typeof document !== 'undefined') {
+    document.body.style.overflow = bodyOverflowBeforePreview.value
+  }
+}
+
+const openImagePreview = (src: string, alt = '') => {
+  const normalized = normalizeImageUrl(src)
+  if (!normalized) return
+  if (typeof document !== 'undefined' && !previewImageVisible.value) {
+    bodyOverflowBeforePreview.value = document.body.style.overflow || ''
+    document.body.style.overflow = 'hidden'
+  }
+  previewImageSrc.value = normalized
+  previewImageAlt.value = alt
+  previewImageVisible.value = true
+}
+
+const handleArticleContentClick = (event: MouseEvent) => {
+  const container = articleContentRef.value
+  if (!container) return
+  const target = event.target as HTMLElement | null
+  if (!target) return
+  const img = target.closest('img') as HTMLImageElement | null
+  if (!img || !container.contains(img)) return
+  const src = img.currentSrc || img.src || img.getAttribute('src') || ''
+  if (!src) return
+  openImagePreview(src, img.alt || article.value?.title || t('articleDetailPage.imageAlt'))
+}
+
+const stripHtml = (value: string): string =>
+  String(value || '')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+
+const stripHtmlToReadableText = (value: string): string =>
+  String(value || '')
+    .replace(/<\s*br\s*\/?>/gi, '\n')
+    .replace(/<\/(p|div|section|article|li|ul|ol|h1|h2|h3|h4|h5|h6|tr|table)>/gi, '\n')
+    .replace(/<li[^>]*>/gi, '- ')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/&nbsp;/gi, ' ')
+    .replace(/&amp;/gi, '&')
+    .replace(/&lt;/gi, '<')
+    .replace(/&gt;/gi, '>')
+    .replace(/\r/g, '\n')
+    .replace(/[ \t]+\n/g, '\n')
+    .replace(/\n{3,}/g, '\n\n')
+    .replace(/[ \t]{2,}/g, ' ')
+    .trim()
+
+const normalizeParagraphKey = (value: string): string =>
+  String(value || '')
+    .toLowerCase()
+    .replace(/\s+/g, ' ')
+    .trim()
+
+const isMeaningfulRenderedHtml = (html: string): boolean => {
+  const normalized = String(html || '').trim()
+  if (!normalized) return false
+  const plain = stripHtmlToReadableText(normalized)
+  if (plain.length >= 48) return true
+  const hasSemanticBlock = /<(p|h[1-6]|ul|ol|table|figure|img|blockquote|pre)\b/i.test(normalized)
+  return hasSemanticBlock && plain.length >= 16
+}
+
+const buildPlainTextFallbackHtml = (record: Article | null): string => {
+  if (!record) return ''
+  const extended = record as Article & { summary?: string }
+  const bodyText = stripHtmlToReadableText(extended.content || '')
+  const summaryText = stripHtmlToReadableText(extended.excerpt || extended.summary || '')
+
+  const paragraphs = bodyText
+    .split(/\n{2,}/)
+    .map((item) => item.replace(/\s+/g, ' ').trim())
+    .filter(Boolean)
+
+  if (paragraphs.length === 0 && bodyText) {
+    paragraphs.push(bodyText)
+  }
+
+  if (summaryText) {
+    const seen = new Set(paragraphs.map((item) => normalizeParagraphKey(item)))
+    const summaryKey = normalizeParagraphKey(summaryText)
+    if (summaryKey && !seen.has(summaryKey)) {
+      paragraphs.unshift(summaryText)
+    }
+  }
+
+  if (paragraphs.length === 0) return ''
+  return paragraphs.map((item) => `<p>${escapeHtml(item)}</p>`).join('')
+}
+
+const upsertMetaTag = (name: string, content: string) => {
+  if (typeof document === 'undefined') return
+  const selector = `meta[name="${name}"]`
+  const existing = document.head.querySelector(selector) as HTMLMetaElement | null
+  const target = existing ?? document.createElement('meta')
+  target.setAttribute('name', name)
+  target.setAttribute('content', content)
+  if (!existing) document.head.appendChild(target)
+}
+
+const syncArticleSeo = (record: Article | null) => {
+  if (typeof document === 'undefined') return
+  const siteName = t('siteName')
+  if (!record) {
+    const title = t('articleDetailPage.notFoundTitle')
+    document.title = `${title} | ${siteName}`
+    upsertMetaTag('description', t('articleDetailPage.notFoundDescription'))
+    return
+  }
+  document.title = `${record.title} | ${siteName}`
+  const description =
+    stripHtml(record.excerpt || '') ||
+    stripHtml(record.content || '').slice(0, 160) ||
+    t('articleDetailPage.notFoundDescription')
+  upsertMetaTag('description', description)
 }
 
 const stopHeadingObserver = () => {
@@ -370,6 +529,10 @@ const buildRenderedArticle = (raw: unknown): { html: string; toc: TocItem[] } =>
         el.setAttribute('target', '_blank')
         el.setAttribute('rel', 'noopener noreferrer nofollow')
       }
+
+      if (el.tagName.toLowerCase() === 'img') {
+        el.setAttribute('referrerpolicy', 'no-referrer')
+      }
     })
 
     const figures = root.querySelectorAll('.seo-media-gallery figure')
@@ -448,7 +611,7 @@ const buildRenderedArticle = (raw: unknown): { html: string; toc: TocItem[] } =>
 
     return { html: root.innerHTML, toc }
   } catch (err) {
-    console.error('鏂囩珷 HTML 娓呮礂澶辫触锛屽凡闄嶇骇涓虹函鏂囨湰娓叉煋:', err)
+    console.error('Failed to sanitize article HTML, downgraded to plain-text rendering:', err)
     return { html: escapeHtml(rawText).replace(/\n/g, '<br />'), toc: [] }
   }
 }
@@ -488,15 +651,28 @@ const loadArticle = async () => {
     const id = Array.isArray(rawId) ? rawId[0] : String(rawId || '')
     article.value = await getArticleDetail(id)
     const rendered = buildRenderedArticle(article.value?.content)
-    renderedArticleHtml.value = rendered.html
-    tocItems.value = rendered.toc
-    activeHeadingId.value = rendered.toc[0]?.id || ''
-    resetHeroImageByCandidates(rendered.html)
+    let finalHtml = rendered.html
+    let finalToc = rendered.toc
+
+    if (!isMeaningfulRenderedHtml(finalHtml)) {
+      const fallbackHtml = buildPlainTextFallbackHtml(article.value)
+      if (fallbackHtml) {
+        console.warn(`Article ${id} rendered content is too short after sanitize, fallback to plain text`)
+        finalHtml = fallbackHtml
+        finalToc = []
+      }
+    }
+
+    renderedArticleHtml.value = finalHtml
+    tocItems.value = finalToc
+    activeHeadingId.value = finalToc[0]?.id || ''
+    resetHeroImageByCandidates(finalHtml)
     await setupHeadingObserver()
     await loadSidebarData()
+    syncArticleSeo(article.value)
   } catch (err: any) {
-    console.error('鍔犺浇鏂囩珷澶辫触:', err)
-    error.value = '鏂囩珷涓嶅瓨鍦ㄦ垨鍔犺浇澶辫触'
+    console.error('Failed to load article:', err)
+    error.value = t('articleDetailPage.loadFailed')
     article.value = null
     renderedArticleHtml.value = ''
     tocItems.value = []
@@ -505,6 +681,7 @@ const loadArticle = async () => {
     heroImageSrc.value = ''
     heroImageFallbackQueue.value = []
     stopHeadingObserver()
+    syncArticleSeo(null)
   } finally {
     loading.value = false
   }
@@ -513,7 +690,15 @@ const loadArticle = async () => {
 watch(
   () => route.params.id,
   () => {
+    closeImagePreview()
     loadArticle()
+  }
+)
+
+watch(
+  () => locale.value,
+  () => {
+    syncArticleSeo(article.value)
   }
 )
 
@@ -521,14 +706,23 @@ const handleWindowScroll = () => {
   updateActiveHeadingByPosition()
 }
 
+const handleWindowKeydown = (event: KeyboardEvent) => {
+  if (event.key === 'Escape' && previewImageVisible.value) {
+    closeImagePreview()
+  }
+}
+
 onMounted(() => {
   loadArticle()
   window.addEventListener('scroll', handleWindowScroll, { passive: true })
+  window.addEventListener('keydown', handleWindowKeydown)
 })
 
 onUnmounted(() => {
+  closeImagePreview()
   stopHeadingObserver()
   window.removeEventListener('scroll', handleWindowScroll)
+  window.removeEventListener('keydown', handleWindowKeydown)
 })
 </script>
 
@@ -546,6 +740,14 @@ onUnmounted(() => {
 
 .article-main {
   min-width: 0;
+}
+
+.hero-media-wrapper {
+  width: 100%;
+  aspect-ratio: 16 / 6;
+  max-height: min(42vh, 360px);
+  overflow: hidden;
+  border-bottom: 1px solid hsl(var(--border));
 }
 
 .sidebar-sticky {
@@ -668,6 +870,13 @@ onUnmounted(() => {
   margin-top: 0.2rem;
 }
 
+@media (max-width: 767px) {
+  .hero-media-wrapper {
+    aspect-ratio: 16 / 8;
+    max-height: 220px;
+  }
+}
+
 @media (min-width: 1280px) {
   .article-layout {
     grid-template-columns: 250px minmax(0, 1fr) 280px;
@@ -766,6 +975,7 @@ onUnmounted(() => {
   height: auto;
   border-radius: 0.7rem;
   margin: 0.9rem 0;
+  cursor: zoom-in;
 }
 
 .article-content :deep(blockquote) {
@@ -882,6 +1092,57 @@ onUnmounted(() => {
   margin-top: 1rem;
   padding-top: 0.65rem;
   border-top: 1px dashed hsl(var(--border));
+}
+
+.image-preview-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  background: rgb(9 12 20 / 85%);
+  backdrop-filter: blur(2px);
+}
+
+.image-preview-panel {
+  width: min(96vw, 1240px);
+  max-height: 92vh;
+  position: relative;
+}
+
+.image-preview-image {
+  width: 100%;
+  max-height: 92vh;
+  object-fit: contain;
+  border-radius: 0.7rem;
+  background: rgb(15 23 42);
+  box-shadow: 0 22px 56px rgb(0 0 0 / 50%);
+}
+
+.image-preview-close {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  z-index: 1;
+  border: 1px solid rgb(255 255 255 / 20%);
+  border-radius: 999px;
+  background: rgb(16 20 30 / 78%);
+  color: #fff;
+  font-size: 0.82rem;
+  line-height: 1;
+  padding: 0.42rem 0.72rem;
+}
+
+.image-preview-close:hover {
+  background: rgb(30 38 54 / 92%);
+}
+
+.image-preview-caption {
+  margin-top: 0.55rem;
+  text-align: center;
+  font-size: 0.84rem;
+  color: rgb(232 236 242 / 92%);
 }
 </style>
 

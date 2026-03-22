@@ -1,0 +1,28 @@
+{
+  "articlesPage": {
+    "allNews": "所有资讯",
+    "loading": "加载中...",
+    "retry": "重试",
+    "share": "分享",
+    "shareTo": "分享到 {channel}",
+    "emptyByCategory": "「{category}」分类下暂无文章",
+    "emptyAll": "暂无文章",
+    "viewAll": "查看全部文章",
+    "copyForWechat": "链接已复制，请在微信里粘贴分享",
+    "copyForXiaohongshu": "链接已复制，请在小红书里粘贴分享",
+    "copyForInstagram": "链接已复制，请在 Instagram 里粘贴分享",
+    "localShareFallback": "当前是本地或内网地址，平台无法自动带出内容；已复制链接可手动粘贴分享",
+    "shareTitle": "{title} - GAME资讯",
+    "categoryDescription": "{category} 分类最新资讯与攻略更新。",
+    "loadFailed": "加载文章失败，请稍后再试",
+    "channels": {
+      "facebook": "Facebook",
+      "twitter": "X / Twitter",
+      "line": "LINE",
+      "wechat": "微信",
+      "xiaohongshu": "小红书",
+      "whatsapp": "WhatsApp",
+      "instagram": "Instagram"
+    }
+  }
+}

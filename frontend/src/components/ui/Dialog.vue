@@ -2,16 +2,19 @@
   <Teleport to="body">
     <Transition name="dialog">
       <div
-        v-if="modelValue"
-        class="fixed inset-0 z-50 flex items-center justify-center"
+        v-if="props.modelValue"
+        :class="[
+          'fixed inset-0 z-50 flex items-center justify-center',
+          props.modal ? '' : 'pointer-events-none',
+        ]"
         @click="handleBackdropClick"
       >
         <!-- Backdrop -->
-        <div class="absolute inset-0 bg-black/80" />
+        <div v-if="props.modal" class="absolute inset-0 ui-dialog-backdrop" />
         
         <!-- Dialog Content -->
         <div
-          class="relative z-50 w-full max-w-lg bg-card border border-border rounded-lg shadow-lg p-6 m-4"
+          :class="['relative z-50 w-full max-w-lg p-6 m-4 ui-dialog-panel pointer-events-auto', props.panelClass]"
           @click.stop
         >
           <slot />
@@ -24,15 +27,23 @@
 <script setup lang="ts">
 interface Props {
   modelValue: boolean
+  panelClass?: string
+  modal?: boolean
+  closeOnBackdrop?: boolean
 }
 
-defineProps<Props>()
+const props = withDefaults(defineProps<Props>(), {
+  panelClass: '',
+  modal: true,
+  closeOnBackdrop: true,
+})
 
 const emit = defineEmits<{
   'update:modelValue': [value: boolean]
 }>()
 
 const handleBackdropClick = () => {
+  if (!props.modal || !props.closeOnBackdrop) return
   emit('update:modelValue', false)
 }
 </script>

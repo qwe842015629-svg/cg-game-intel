@@ -1,0 +1,84 @@
+{
+  "profilePage": {
+    "title": "Centre de profil",
+    "description": "Modifiez votre profil et examinez le contenu de votre IA tel que les romans et les cartes de personnage.",
+    "auth": {
+      "title": "Non connecté",
+      "description": "Veuillez d'abord vous connecter pour gérer votre profil et le contenu de l'IA.",
+      "loginRegister": "Se connecter / S'inscrire"
+    },
+    "avatar": {
+      "alt": "Avatar de l'utilisateur",
+      "upload": "Télécharger un avatar",
+      "remove": "Retirer",
+      "invalidType": "Avatar ne prend en charge que les formats jpg/png/webp/gif.",
+      "tooLarge": "L'avatar doit être inférieur à 5 Mo."
+    },
+    "form": {
+      "displayName": "Nom d'affichage",
+      "gender": "Genre",
+      "genderPlaceholder": "par ex. Homme / Femme / Non binaire / Privé",
+      "firstName": "Prénom",
+      "lastName": "Nom de famille",
+      "phone": "Téléphone",
+      "visibility": "Visibilité du contenu IA",
+      "visibilityPrivate": "Privé",
+      "visibilityMembers": "Membres seulement",
+      "visibilityPublic": "Publique",
+      "bio": "Biographie",
+      "bioPlaceholder": "Parlez-nous de vous (jusqu'à 500 caractères)",
+      "sandboxEnabled": "Activer l'isolation du bac à sable des utilisateurs",
+      "sandboxNamespace": "Espace de noms du bac à sable : {namespace}",
+      "isolationMode": "Mode d'isolement : {mode}",
+      "save": "Enregistrer le profil",
+      "saving": "Économie...",
+      "refresh": "Actualiser les données",
+      "toNovel": "Aller à Novel Studio",
+      "toPlaza": "Aller à la Place"
+    },
+    "stats": {
+      "novelDrafts": "Brouillons de romans",
+      "novelWorks": "Œuvres romanes",
+      "roleCards": "Cartes de personnages",
+      "aiContentTotal": "Contenu total de l'IA"
+    },
+    "novels": {
+      "title": "Histoire du roman",
+      "scopeHint": "Seul le contenu du compte actuellement connecté est affiché (isolation de l'utilisateur activée).",
+      "empty": "Pas encore de brouillons ou de travaux de roman.",
+      "draftsTitle": "Brouillons",
+      "worksTitle": "Travaux",
+      "draftTitleFallback": "Brouillon n°{id}",
+      "draftMeta": "Clés d'état : {count} | Mise à jour : {updatedAt}",
+      "workTitleFallback": "Travail #{id}",
+      "summaryEmpty": "Pas de résumé",
+      "workMeta": "Chapitres : {chapters} | Images de personnages : {images} | Statut : {status} | Mise à jour : {updatedAt}",
+      "statusCompleted": "Complété",
+      "statusOngoing": "En cours",
+      "statusUnknown": "Inconnu"
+    },
+    "roleCards": {
+      "title": "Cartes de personnage générées",
+      "empty": "Aucun enregistrement de carte de personnage.",
+      "avatarAlt": "Avatar du personnage",
+      "meta": "Groupe : {group} | Sexe : {gender}",
+      "descEmpty": "Pas de description",
+      "updatedAt": "{updatedAt} mis à jour"
+    },
+    "sandbox": {
+      "title": "Sandbox utilisateur et isolation de sécurité",
+      "ownerScope": "Portée_du propriétaire actuel : {ownerScope}",
+      "namespace": "Espace de noms du bac à sable : {namespace}",
+      "policies": "Politiques : {policies}",
+      "description": "Remarque : le contenu IA dans le profil est isolé uniquement par l'utilisateur actuellement connecté et ne lit pas les données des autres utilisateurs."
+    },
+    "messages": {
+      "saveFailed": "Échec de l'enregistrement",
+      "loadFailed": "Échec du chargement des données de profil",
+      "profileSaved": "Profil enregistré"
+    },
+    "common": {
+      "dash": "-"
+    }
+  }
+}

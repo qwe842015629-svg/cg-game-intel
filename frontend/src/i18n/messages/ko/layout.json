@@ -1,0 +1,29 @@
+{
+  "layout": {
+    "brandTagline": "프리미엄 충전 서비스",
+    "themeScheme": "테마 프리셋",
+    "cursorMode": "커서 모드",
+    "toggleMobileMenu": "모바일 메뉴 전환",
+    "noCategory": "사용 가능한 카테고리가 없습니다.",
+    "allNews": "모든 뉴스",
+    "faqCategory": "FAQ",
+    "noFaqContent": "아직 FAQ 콘텐츠가 없습니다.",
+    "newBadge": "새로운",
+    "topNews": "주요 신호",
+    "footerEditorLabel": "사이트 바닥글",
+    "cursorSoft": "부드러운",
+    "cursorSystem": "체계",
+    "cursorCrosshair": "십자선",
+    "cursorNeon": "네온",
+    "gameNewsCategory": "게임 뉴스",
+    "guideCategory": "가이드",
+    "rechargeGuideCategory": "재충전 가이드",
+    "announcementCategory": "공지사항",
+    "allGamesCategory": "모든 게임",
+    "internationalGamesCategory": "국제 게임",
+    "hongKongTaiwanGamesCategory": "홍콩/대만 게임",
+    "southeastAsiaGamesCategory": "동남아시아 게임",
+    "copyright": "모든 권리 보유 © {year} {company}",
+    "logoutSuccess": "성공적으로 로그아웃되었습니다"
+  }
+}

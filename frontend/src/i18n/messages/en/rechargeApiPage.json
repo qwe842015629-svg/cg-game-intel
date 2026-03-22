@@ -1,0 +1,151 @@
+{
+  "rechargeApiPage": {
+    "badge": "CypherGameBuy",
+    "title": "CypherGameBuy Product Inventory",
+    "subtitle": "Displaying CypherGameBuy product inventory and variation availability from backend snapshot.",
+    "snapshotMissingHint": "If snapshot is missing, run: {command}",
+    "stats": {
+      "providers": "Providers",
+      "products": "Products",
+      "inStock": "In Stock",
+      "outOfStock": "Out Of Stock",
+      "unknown": "Unknown"
+    },
+    "progress": {
+      "label": "Scan Progress: {scanned} / {expected} ({percent}%)",
+      "complete": "Complete",
+      "runningPartial": "Running / Partial"
+    },
+    "filters": {
+      "search": "Search",
+      "searchPlaceholder": "product id or name",
+      "provider": "Provider",
+      "allProviders": "All Providers",
+      "inventoryStatus": "Inventory Status",
+      "inventoryAll": "All",
+      "pageSize": "Page Size"
+    },
+    "actions": {
+      "loading": "Loading...",
+      "applyFilters": "Apply Filters",
+      "reset": "Reset",
+      "prev": "Prev",
+      "next": "Next",
+      "expandAll": "Expand All",
+      "collapseAll": "Collapse All",
+      "recharge": "Recharge"
+    },
+    "snapshotLabel": "Snapshot",
+    "health": {
+      "snapshotAge": "Age: {age}",
+      "autoRefreshIn": "Auto refresh in {seconds}s",
+      "syncStatus": "Sync status: {status} (duration: {duration})",
+      "lastError": "Last sync error: {error}",
+      "delayFresh": "Fresh",
+      "delayDelayed": "Delayed",
+      "delayStale": "Stale",
+      "delayUnknown": "Unknown",
+      "syncRunning": "Running",
+      "syncCompleted": "Completed",
+      "syncFailed": "Failed",
+      "syncSkippedLocked": "Skipped (lock)",
+      "syncUnknown": "Unknown"
+    },
+    "list": {
+      "totalMatched": "Total matched products: {total}",
+      "page": "Page {page} / {total}",
+      "mergedPages": "4 pages merged per view",
+      "loading": "Loading inventory snapshot...",
+      "empty": "No products found."
+    },
+    "categories": {
+      "game": "Games",
+      "software": "Software",
+      "giftCard": "Gift Cards",
+      "empty": "No products in this category.",
+      "expand": "Expand",
+      "collapse": "Collapse"
+    },
+    "inventoryStatus": {
+      "inStock": "In Stock",
+      "outOfStock": "Out Of Stock",
+      "unknown": "Unknown"
+    },
+    "product": {
+      "provider": "Provider",
+      "available": "Available",
+      "totalVariations": "Total Variations",
+      "orderSupported": "Order Supported",
+      "balanceProduct": "Balance Product",
+      "listStatus": "List Status",
+      "fields": "Fields",
+      "yes": "Yes",
+      "no": "No"
+    },
+    "errors": {
+      "loadSnapshotFailed": "Load inventory snapshot failed"
+    }
+  },
+  "rechargeApiProductPage": {
+    "backToInventory": "Back to Inventory",
+    "defaultTitle": "Product Recharge",
+    "providerLabel": "Provider",
+    "productIdLabel": "Product ID",
+    "loadingDetail": "Loading product detail...",
+    "metrics": {
+      "orderSupported": "Order Supported",
+      "balanceProduct": "Balance Product",
+      "availableVariations": "Available Variations",
+      "totalVariations": "Total Variations",
+      "yes": "Yes",
+      "no": "No"
+    },
+    "sections": {
+      "selectDenomination": "Select Denomination",
+      "accountInfo": "Account / Character Info",
+      "rechargeAmount": "Recharge Amount"
+    },
+    "hints": {
+      "noSellableVariations": "No sellable variations are currently available for this product."
+    },
+    "form": {
+      "pleaseSelect": "Please select",
+      "rechargeAmountPlaceholder": "Please enter recharge amount"
+    },
+    "actions": {
+      "submitting": "Submitting...",
+      "createOrder": "Create Recharge Order",
+      "startWechatPay": "Pay with WeChat and Create Order",
+      "refreshOrderStatus": "Refresh Order Status",
+      "checkPayStatus": "Check Payment Status",
+      "clearPaySession": "Clear Payment Session"
+    },
+    "payment": {
+      "title": "WeChat Payment Order: {orderNo}",
+      "hint": "Please scan the QR code with WeChat. The recharge order will be submitted automatically after payment succeeds.",
+      "qrAlt": "WeChat payment QR code",
+      "codeUrl": "Payment URL",
+      "checking": "Checking...",
+      "statusLine": "Payment Status: {status}",
+      "status": {
+        "success": "Paid",
+        "notpay": "Pending",
+        "userpaying": "Paying",
+        "closed": "Closed",
+        "payerror": "Payment Failed",
+        "revoked": "Revoked",
+        "refund": "Refunded",
+        "unknown": "Unknown"
+      }
+    },
+    "order": {
+      "title": "Order: {orderNo}",
+      "statusLine": "Status: {status} / External: {externalStatus}"
+    },
+    "errors": {
+      "createOrderFailed": "Create order failed",
+      "missingIdentifiers": "Missing provider_uuid or product_id.",
+      "wechatPayNotCompleted": "Payment is not completed yet. Please try again later."
+    }
+  }
+}

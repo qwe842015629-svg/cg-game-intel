@@ -1,0 +1,26 @@
+{
+  "activateAccountPage": {
+    "activatingTitle": "正在激活您的账号...",
+    "activatingDescription": "请稍候，这只需要几秒钟。",
+    "successTitle": "激活成功！",
+    "successDescription": "您的账号已成功激活，现在可以登录使用了。",
+    "successNotice": "账号激活完成，您可以使用所有功能。",
+    "countdownRedirect": "{count} 秒后自动跳转到登录页...",
+    "loginNow": "立即登录",
+    "backHome": "返回首页",
+    "failedTitle": "激活失败",
+    "invalidOrExpired": "激活链接无效或已过期。",
+    "reasonsTitle": "可能的原因：",
+    "reasonExpired": "激活链接已过期（24小时有效期）。",
+    "reasonUsed": "激活链接已被使用。",
+    "reasonFormat": "链接格式不正确。",
+    "registerAgain": "重新注册",
+    "errors": {
+      "invalidLinkFormat": "激活链接格式不正确",
+      "invalidUid": "用户ID无效",
+      "invalidToken": "激活令牌无效或已过期",
+      "activateFailedRetry": "激活失败，请重试",
+      "networkError": "网络错误，请检查您的网络连接"
+    }
+  }
+}

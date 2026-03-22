@@ -1,0 +1,14 @@
+{
+  "customerServicePage": {
+    "pageTitle": "客服中心",
+    "pageDescription": "通过在线客服、社交渠道或 FAQ 快速获得帮助。",
+    "faqTitle": "常见问题",
+    "startChat": "开始对话",
+    "buttonFallback": "立即联系",
+    "close": "关闭",
+    "loading": "加载中...",
+    "qrDefaultTitle": "二维码",
+    "qrDefaultTip": "请使用微信扫码查看",
+    "loadErrorLog": "加载客服数据失败:"
+  }
+}

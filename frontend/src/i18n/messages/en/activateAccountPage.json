@@ -1,0 +1,26 @@
+{
+  "activateAccountPage": {
+    "activatingTitle": "Activating your account...",
+    "activatingDescription": "Please wait, this only takes a few seconds.",
+    "successTitle": "Activation Successful!",
+    "successDescription": "Your account has been activated. You can now sign in.",
+    "successNotice": "Account activation is complete and all features are now available.",
+    "countdownRedirect": "Redirecting to login in {count} seconds...",
+    "loginNow": "Sign In Now",
+    "backHome": "Back Home",
+    "failedTitle": "Activation Failed",
+    "invalidOrExpired": "The activation link is invalid or expired.",
+    "reasonsTitle": "Possible reasons:",
+    "reasonExpired": "The activation link has expired (valid for 24 hours).",
+    "reasonUsed": "The activation link has already been used.",
+    "reasonFormat": "The link format is incorrect.",
+    "registerAgain": "Register Again",
+    "errors": {
+      "invalidLinkFormat": "The activation link format is invalid.",
+      "invalidUid": "Invalid user ID.",
+      "invalidToken": "Invalid or expired activation token.",
+      "activateFailedRetry": "Activation failed, please try again.",
+      "networkError": "Network error, please check your connection."
+    }
+  }
+}

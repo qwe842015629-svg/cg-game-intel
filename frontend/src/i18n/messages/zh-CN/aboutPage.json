@@ -1,0 +1,32 @@
+{
+  "aboutPage": {
+    "title": "关于",
+    "subtitle": "我们",
+    "description": "了解我们的使命、愿景和价值观",
+    "heroText": "CYBERCHARGE",
+    "heroSubtext": "未来游戏充值体验 · 安全 · 快速 · 可靠",
+    "missionTitle": "使命",
+    "missionDescription": "我们的使命是为全球游戏玩家提供最安全、最快捷、最可靠的游戏充值服务，让每一位玩家都能享受到无缝的游戏体验，不受地域和支付方式的限制。",
+    "visionTitle": "愿景",
+    "visionDescription": "成为全球领先的游戏服务平台，通过技术创新和卓越服务，连接世界各地的玩家与游戏世界，创造无限可能的游戏体验。",
+    "corePrefix": "核心",
+    "coreSuffix": "价值观",
+    "values": {
+      "secureTitle": "安全可靠",
+      "secureDescription": "我们始终将用户的安全放在首位，采用最先进的安全技术保护每一笔交易。",
+      "fastTitle": "极速体验",
+      "fastDescription": "提供毫秒级的充值服务，让您的游戏体验永不断线。",
+      "userTitle": "用户至上",
+      "userDescription": "始终以用户需求为中心，提供贴心的客户服务和个性化的体验。"
+    },
+    "teamPrefix": "我们的",
+    "teamSuffix": "团队",
+    "cta": {
+      "titlePrefix": "准备好",
+      "titleSuffix": "开始了吗？",
+      "description": "加入我们的游戏社区，享受安全、快速、可靠的游戏充值服务",
+      "recharge": "开始充值",
+      "contact": "联系我们"
+    }
+  }
+}

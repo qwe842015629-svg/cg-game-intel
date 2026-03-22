@@ -1,0 +1,61 @@
+CypherGameBuy Usage Policy
+
+Last Updated: February 22, 2026
+Effective Date: February 22, 2026
+
+Welcome to CypherGameBuy!
+CypherGameBuy is your AI companion that can answer questions, provide suggestions, and help with creative work. To ensure a safe, respectful, and beneficial experience for everyone, please follow this policy.
+If your content may violate this policy, CypherGameBuy may show a warning during conversation. If you disagree, you can submit negative feedback in the dialog so we can improve.
+
+I. Platform Expectations
+1) Follow applicable laws, regulations, and platform rules.
+2) Use civil, respectful, and appropriate language. Avoid offensive, discriminatory, aggressive, or vulgar expressions.
+3) Ask clearly and specifically. Ambiguous prompts can reduce answer quality.
+4) Understand AI limitations: generated content may be inaccurate. Verify important information, especially in medical, legal, financial, investment, insurance, food safety, and nutrition contexts.
+5) Respect privacy and data security. Do not input or share sensitive personal data or unauthorized information.
+6) Share feedback and suggestions to help improve product quality and user experience.
+7) Review AI-generated content before sharing, avoid harmful or non-compliant output, and clearly label it as AI-generated where appropriate.
+
+II. Prohibited and Unwelcome Conduct
+(1) National and public security violations, including but not limited to:
+- Opposing constitutional principles, inciting secession, subversion, terrorism, extremism, or social unrest.
+- Damaging national interests, ethnic unity, public order, or public safety.
+- Defamation, insult, or unlawful infringement of others' lawful rights.
+
+(2) Illegal and criminal activities, including but not limited to:
+- Fraud, pyramid schemes, smuggling, money laundering, or other crimes.
+- Pornography, gambling, drugs, violent crime, terrorism, or criminal instruction.
+- Illegal marketing/sales of restricted or prohibited goods or services (e.g., firearms, explosives, controlled knives, illegal wildlife trade, prohibited medical products/services, counterfeit or unsafe goods, tobacco where prohibited).
+
+(3) Harm to minors, including but not limited to:
+- Sexual content involving minors, exploitation, grooming, or abuse.
+- Content that harms minors' physical/mental health, values, rights, safety, or normal study/rest.
+- Organizing harmful online activities targeting minors.
+
+(4) Dangerous self-harm or violent behavior, including but not limited to:
+- Encouraging self-harm, suicide, abuse, or dangerous challenges.
+- Graphic, bloody, or shocking violence intended to cause distress.
+
+(5) Infringement and dishonesty, including but not limited to:
+- Violating rights to name, portrait, voice, reputation, privacy, personal data, or other lawful rights.
+- Intellectual property infringement (copyright, trademark, patent, trade secrets, etc.).
+- Spreading false or misleading information, fake engagement, or impersonation.
+- Providing fake registration information or pretending to be government/media/organizations/individuals.
+- Presenting AI output as fully original human work to commit academic or professional misconduct.
+
+(6) Content against public morality, including but not limited to:
+- Sexual insinuation, vulgarity, humiliation, hate, discrimination, harassment, or provocation.
+- Extreme materialism, unhealthy values, privacy exposure, doxxing, and abusive fandom behavior.
+- Animal abuse or illegal capture/trade content.
+
+(7) Platform abuse, including but not limited to:
+- Using unauthorized plugins, scripts, or third-party tools to interfere with platform operation.
+- Attacking platform or network security.
+- Forcing model bypasses (e.g., ignoring safety/policy/rules), abusive repetitive generation, or other malicious resource abuse.
+
+III. Supplementary Provisions
+This policy takes effect on the date shown at the top and may be updated as the platform evolves.
+If you find content or accounts that may violate this policy, report it in product feedback or contact us at:
+qwe842015629@gmail.com
+Thank you for helping us build a safe, useful, and friendly AI community.
+

@@ -1,0 +1,68 @@
+{
+  "userProfile": {
+    "loading": "正在加载用户主页...",
+    "avatarAlt": "用户头像",
+    "bioEmpty": "这个人还没有写简介。",
+    "updatedAt": "更新于 {time}",
+    "counts": {
+      "followers": "粉丝 {count}",
+      "following": "关注 {count}"
+    },
+    "actions": {
+      "retry": "重试",
+      "follow": "关注",
+      "following": "已关注",
+      "directMessage": "私信聊天",
+      "close": "关闭"
+    },
+    "relationships": {
+      "followingEntry": "我关注的人",
+      "followersEntry": "关注我的人",
+      "followingCountText": "当前关注人数：{count}",
+      "followersCountText": "当前粉丝人数：{count}",
+      "listPlaceholder": "列表入口已预留，可在接入独立列表 API 后展示完整名单。"
+    },
+    "globalVisibility": {
+      "title": "全局隐私设置",
+      "description": "控制你账号下 AI 内容的默认可见范围。"
+    },
+    "visibility": {
+      "public": "公开",
+      "followers": "关注的人可见",
+      "private": "仅自己可见"
+    },
+    "novels": {
+      "title": "小说作品",
+      "empty": "暂无可展示的小说作品。",
+      "untitled": "未命名作品",
+      "summaryEmpty": "暂无作品摘要。"
+    },
+    "characters": {
+      "title": "角色卡",
+      "empty": "暂无可展示的角色卡。",
+      "avatarAlt": "角色头像",
+      "untitled": "未命名角色",
+      "descriptionEmpty": "暂无角色描述。"
+    },
+    "errors": {
+      "invalidUserId": "用户 ID 不合法。",
+      "loadFailed": "加载用户主页失败。",
+      "followFailed": "关注操作失败。",
+      "dmFailed": "发起私信失败。",
+      "globalVisibilityFailed": "保存全局隐私失败。",
+      "itemVisibilityFailed": "保存内容可见性失败。"
+    },
+    "toast": {
+      "loginRequired": "请先登录后继续操作。",
+      "followed": "已关注该用户。",
+      "unfollowed": "已取消关注。",
+      "needFollowBeforeChat": "需关注后才能发起聊天",
+      "dmStarted": "已创建私信会话。",
+      "globalVisibilitySaved": "全局隐私设置已保存。",
+      "itemVisibilitySaved": "内容可见性已更新。"
+    },
+    "common": {
+      "dash": "-"
+    }
+  }
+}

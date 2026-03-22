@@ -1,0 +1,72 @@
+{
+  "gameDetailPage": {
+    "breadcrumbs": {
+      "home": "Home",
+      "games": "Games"
+    },
+    "actions": {
+      "backToGames": "Back to Games",
+      "contactRecharge": "Contact Support for Top-up",
+      "contactConsult": "Contact Support",
+      "share": "Share"
+    },
+    "tags": {
+      "hot": "Hot",
+      "recommended": "Recommended"
+    },
+    "meta": {
+      "developer": "Developer: ",
+      "region": "Region: ",
+      "platform": "Platform: ",
+      "server": "Server: ",
+      "unknownDeveloper": "Unknown",
+      "unknownPlatform": "Unknown",
+      "allServers": "All",
+      "untitledGame": "Untitled Game"
+    },
+    "viewingCount": "people are viewing this game",
+    "tabs": {
+      "details": "Game Details",
+      "topup": "Top-up Guide"
+    },
+    "empty": {
+      "details": "No detailed description available yet",
+      "topup": "Please contact support for top-up instructions"
+    },
+    "region": {
+      "global": "International"
+    },
+    "serviceGuarantee": {
+      "title": "Service Guarantee",
+      "official": {
+        "title": "Official Channels",
+        "desc": "All top-ups are processed via official channels"
+      },
+      "fast": {
+        "title": "Fast Delivery",
+        "desc": "Orders are usually completed within 1-10 minutes"
+      },
+      "support": {
+        "title": "24/7 Support",
+        "desc": "Online support is available around the clock"
+      }
+    },
+    "contactCard": {
+      "title": "Cannot find the item you need?",
+      "desc": "If your top-up item is not listed, contact our online support directly."
+    },
+    "announcements": {
+      "title": "Latest Announcements",
+      "item1": "[Notice] System maintenance on Feb 4",
+      "item2": "[Event] Spring Festival top-up promotion is live",
+      "item3": "[Reminder] Do not trust unofficial support accounts"
+    },
+    "content": {
+      "imageAlt": "image"
+    },
+    "errors": {
+      "loadFailed": "Failed to load game details, please try again later"
+    },
+    "bannerAlt": "Banner"
+  }
+}

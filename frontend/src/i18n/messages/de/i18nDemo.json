@@ -1,0 +1,8 @@
+{
+  "i18nDemo": {
+    "subtitle": "i18n-Kurzdemo: Sprache wechseln, URL-Gebietsschema-Präfix beibehalten und bei localStorage bleiben.",
+    "languageLabel": "Sprache",
+    "currentLocaleLabel": "Aktueller Standort:",
+    "currentUrlLabel": "Aktuelle URL:"
+  }
+}

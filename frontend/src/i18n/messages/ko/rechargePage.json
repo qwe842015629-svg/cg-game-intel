@@ -1,0 +1,33 @@
+{
+  "rechargePage": {
+    "badge": "재충전",
+    "title": "게임 재충전",
+    "subtitle": "게임을 선택하고, 계정 정보를 입력하고, 명확하고 빠른 흐름으로 결제를 완료하세요.",
+    "selectGameTitle": "게임 선택",
+    "selectGameDesc": "빠르게 검색하고 선택하세요",
+    "emptyStateTitle": "먼저 게임을 선택해주세요",
+    "emptyStateDesc": "선택 후 계좌정보, 금액, 결제수단을 입력하시면 됩니다.",
+    "stepSelectGame": "게임을 선택하세요",
+    "stepFillAccount": "계정 세부정보를 입력하세요.",
+    "stepSelectAmountAndPayment": "금액 및 결제수단 선택",
+    "stepConfirmOrder": "주문 확인 및 충전 완료",
+    "reselectGame": "재선택",
+    "accountInfoTitle": "계정 정보",
+    "amountTitle": "충전금액",
+    "paymentMethodTitle": "결제 방법",
+    "hotBadge": "더운",
+    "bonusDiamonds": "{amount} 다이아몬드",
+    "bonusExtra": "보너스 {amount} 다이아몬드",
+    "pendingPaymentNotice": "재충전이 개발 중입니다. 실제 결제 통합도 곧 추가될 예정입니다.",
+    "games": {
+      "hok": "왕의 명예",
+      "pubgm": "PUBG 모바일",
+      "genshin": "원신 임팩트",
+      "wildrift": "리그 오브 레전드: 와일드 리프트",
+      "cf": "십자 포화",
+      "dnf": "던전 앤 파이터",
+      "hsr": "Honkai: 스타 레일",
+      "sky": "스카이: 빛의 아이들"
+    }
+  }
+}

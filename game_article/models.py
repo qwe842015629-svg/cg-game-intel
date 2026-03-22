@@ -6,7 +6,9 @@ from game_page.models import GamePage
 class ArticleCategory(models.Model):
     """文章分类"""
     name = models.CharField(max_length=100, verbose_name='分类名称')
+    name_i18n = models.JSONField(default=dict, blank=True, verbose_name='分类名称多语言')
     description = models.TextField(blank=True, verbose_name='分类描述')
+    description_i18n = models.JSONField(default=dict, blank=True, verbose_name='分类描述多语言')
     sort_order = models.IntegerField(default=0, verbose_name='排序')
     is_active = models.BooleanField(default=True, verbose_name='是否启用')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='创建时间')
@@ -30,6 +32,7 @@ class Article(models.Model):
     ]
 
     title = models.CharField(max_length=200, verbose_name='文章标题')
+    title_i18n = models.JSONField(default=dict, blank=True, verbose_name='文章标题多语言')
     slug = models.SlugField(max_length=200, unique=True, blank=True, null=True, verbose_name='URL别名')
     category = models.ForeignKey(
         ArticleCategory,
@@ -54,12 +57,17 @@ class Article(models.Model):
         verbose_name='作者'
     )
     author_name = models.CharField(max_length=100, default='游戏小编', verbose_name='作者名称')
+    author_name_i18n = models.JSONField(default=dict, blank=True, verbose_name='作者名称多语言')
     tags = models.ManyToManyField('ArticleTag', related_name='articles', blank=True, verbose_name='标签')
     cover_image = models.ImageField(upload_to='articles/', null=True, blank=True, verbose_name='封面图')
     excerpt = models.TextField(max_length=500, blank=True, default='', verbose_name='摘要')
+    excerpt_i18n = models.JSONField(default=dict, blank=True, verbose_name='摘要多语言')
     summary = models.TextField(max_length=500, blank=True, default='', verbose_name='摘要')
+    summary_i18n = models.JSONField(default=dict, blank=True, verbose_name='摘要补充多语言')
     content = models.TextField(verbose_name='文章内容')
+    content_i18n = models.JSONField(default=dict, blank=True, verbose_name='文章内容多语言')
     read_time = models.CharField(max_length=20, default='5分钟', verbose_name='阅读时间')
+    read_time_i18n = models.JSONField(default=dict, blank=True, verbose_name='阅读时间多语言')
     
     # SEO优化字段
     meta_title = models.CharField(max_length=200, blank=True, verbose_name='SEO标题')
@@ -98,6 +106,7 @@ class Article(models.Model):
 class ArticleTag(models.Model):
     """文章标签"""
     name = models.CharField(max_length=50, unique=True, verbose_name='标签名称')
+    name_i18n = models.JSONField(default=dict, blank=True, verbose_name='标签名称多语言')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='创建时间')
 
     class Meta:

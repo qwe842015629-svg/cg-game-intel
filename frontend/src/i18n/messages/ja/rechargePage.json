@@ -1,0 +1,33 @@
+{
+  "rechargePage": {
+    "badge": "リチャージ",
+    "title": "ゲームリチャージ",
+    "subtitle": "ゲームを選択し、アカウントの詳細を入力し、明確かつ迅速な流れで支払いを完了してください。",
+    "selectGameTitle": "ゲームを選択",
+    "selectGameDesc": "すばやく検索して選択",
+    "emptyStateTitle": "最初にゲームを選択してください",
+    "emptyStateDesc": "選択後、アカウントの詳細、金額、支払い方法を入力できます。",
+    "stepSelectGame": "ゲームを選択してください",
+    "stepFillAccount": "アカウントの詳細を入力します",
+    "stepSelectAmountAndPayment": "金額とお支払い方法を選択してください",
+    "stepConfirmOrder": "注文を確認してチャージを完了する",
+    "reselectGame": "再選択",
+    "accountInfoTitle": "アカウント情報",
+    "amountTitle": "リチャージ金額",
+    "paymentMethodTitle": "支払方法",
+    "hotBadge": "熱い",
+    "bonusDiamonds": "{amount} ダイヤモンド",
+    "bonusExtra": "ボーナス {amount} ダイヤモンド",
+    "pendingPaymentNotice": "リチャージは開発中です。リアルペイメントの統合は近々追加される予定です。",
+    "games": {
+      "hok": "王の名誉",
+      "pubgm": "PUBGモバイル",
+      "genshin": "原神",
+      "wildrift": "リーグ・オブ・レジェンド: ワイルドリフト",
+      "cf": "クロスファイア",
+      "dnf": "ダンジョン&ファイター",
+      "hsr": "本海：スターレール",
+      "sky": "Sky 〜光の子たち〜"
+    }
+  }
+}

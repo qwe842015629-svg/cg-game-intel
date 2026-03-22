@@ -7,7 +7,7 @@ import {
   type ThemeCursorMode,
 } from '../theme/presets'
 
-type ThemeMode = 'light' | 'dark'
+type ThemeMode = 'light'
 
 const THEME_MODE_KEY = 'theme_mode'
 const THEME_PRESET_KEY = 'theme_preset'
@@ -51,9 +51,10 @@ export const useThemeStore = defineStore('theme', () => {
 
   const presetOptions = computed(() => THEME_PRESETS)
 
-  const applyThemeMode = (mode: ThemeMode) => {
+  const applyThemeMode = (_mode: ThemeMode) => {
     if (typeof document === 'undefined') return
-    document.documentElement.classList.toggle('dark', mode === 'dark')
+    const root = document.documentElement
+    root.classList.remove('dark')
   }
 
   const applyCursorMode = (mode: ThemeCursorMode) => {
@@ -85,7 +86,7 @@ export const useThemeStore = defineStore('theme', () => {
   }
 
   const toggleTheme = () => {
-    theme.value = theme.value === 'light' ? 'dark' : 'light'
+    theme.value = 'light'
   }
 
   const setPreset = (presetId: string) => {
@@ -169,17 +170,10 @@ export const useThemeStore = defineStore('theme', () => {
   )
 
   const init = () => {
-    const savedTheme = localStorage.getItem(THEME_MODE_KEY) as ThemeMode | null
     const savedPreset = localStorage.getItem(THEME_PRESET_KEY)
     const savedCursorMode = localStorage.getItem(THEME_CURSOR_KEY) as ThemeCursorMode | null
 
-    if (savedTheme && ['light', 'dark'].includes(savedTheme)) {
-      theme.value = savedTheme
-    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      theme.value = 'dark'
-    } else {
-      theme.value = 'light'
-    }
+    theme.value = 'light'
 
     if (savedPreset && THEME_PRESET_MAP[savedPreset]) {
       applyPreset(savedPreset)

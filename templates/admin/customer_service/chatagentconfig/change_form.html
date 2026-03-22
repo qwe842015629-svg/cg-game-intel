@@ -1,0 +1,133 @@
+{% extends "admin/change_form.html" %}
+
+{% block after_related_objects %}
+{{ block.super }}
+<fieldset class="module aligned">
+  <h2>外部AI连接测试</h2>
+  <div class="form-row">
+    <div>
+      <button type="button" class="button" id="js-chat-ai-test-btn">测试连接</button>
+      <span id="js-chat-ai-test-status" style="margin-left: 8px; color: #64748b;">未测试</span>
+    </div>
+  </div>
+  <div class="form-row">
+    <div style="width: 100%;">
+      <pre id="js-chat-ai-test-result" style="margin: 0; min-height: 72px; padding: 10px; border-radius: 6px; border: 1px dashed #cbd5e1; background: #f8fafc; white-space: pre-wrap;">{}</pre>
+    </div>
+  </div>
+</fieldset>
+
+<script>
+(function () {
+  const endpoint = "/api/customer-service/admin/chat/config/test/";
+  const btn = document.getElementById("js-chat-ai-test-btn");
+  const statusEl = document.getElementById("js-chat-ai-test-status");
+  const resultEl = document.getElementById("js-chat-ai-test-result");
+
+  if (!btn || !statusEl || !resultEl) {
+    return;
+  }
+
+  const getValue = (id) => {
+    const el = document.getElementById(id);
+    return el ? String(el.value || "").trim() : "";
+  };
+
+  const getChecked = (id) => {
+    const el = document.getElementById(id);
+    return !!(el && el.checked);
+  };
+
+  const getCsrfToken = () => {
+    const el = document.querySelector("input[name='csrfmiddlewaretoken']");
+    return el ? String(el.value || "") : "";
+  };
+
+  const writeResult = (value) => {
+    try {
+      resultEl.textContent = JSON.stringify(value || {}, null, 2);
+    } catch (error) {
+      resultEl.textContent = String(value || "");
+    }
+  };
+
+  const setStatus = (text, type) => {
+    statusEl.textContent = text || "";
+    if (type === "ok") {
+      statusEl.style.color = "#15803d";
+      return;
+    }
+    if (type === "error") {
+      statusEl.style.color = "#b91c1c";
+      return;
+    }
+    statusEl.style.color = "#64748b";
+  };
+
+  const collectPayload = () => {
+    const timeoutValue = Number(getValue("id_request_timeout") || 15);
+    const rawHeaders = getValue("id_api_extra_headers");
+    let parsedHeaders = {};
+    if (rawHeaders) {
+      try {
+        parsedHeaders = JSON.parse(rawHeaders);
+      } catch (error) {
+        throw new Error("额外请求头不是合法 JSON，请先修正后再测试。");
+      }
+      if (parsedHeaders === null || typeof parsedHeaders !== "object" || Array.isArray(parsedHeaders)) {
+        throw new Error("额外请求头必须是 JSON 对象，例如：{\"X-Test\":\"1\"}");
+      }
+    }
+
+    return {
+      enable_external_ai: getChecked("id_enable_external_ai"),
+      api_endpoint: getValue("id_api_endpoint"),
+      api_model: getValue("id_api_model"),
+      api_token: getValue("id_api_token"),
+      api_extra_headers: parsedHeaders,
+      request_timeout: Number.isFinite(timeoutValue) ? timeoutValue : 15,
+      system_prompt: getValue("id_system_prompt"),
+    };
+  };
+
+  const onTest = async () => {
+    setStatus("测试中...", "");
+    btn.disabled = true;
+    try {
+      const payload = collectPayload();
+      const response = await fetch(endpoint, {
+        method: "POST",
+        credentials: "same-origin",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRFToken": getCsrfToken(),
+        },
+        body: JSON.stringify(payload),
+      });
+      const text = await response.text();
+      let data = {};
+      try {
+        data = text ? JSON.parse(text) : {};
+      } catch (error) {
+        data = { raw: text };
+      }
+      writeResult(data);
+      if (!response.ok) {
+        const message = data.error || data.detail || data.message || ("HTTP " + response.status);
+        throw new Error(message);
+      }
+      setStatus("测试成功：连接可用", "ok");
+    } catch (error) {
+      setStatus("测试失败：连接不可用", "error");
+      if (!resultEl.textContent || resultEl.textContent === "{}") {
+        writeResult({ error: error && error.message ? error.message : String(error) });
+      }
+    } finally {
+      btn.disabled = false;
+    }
+  };
+
+  btn.addEventListener("click", onTest);
+})();
+</script>
+{% endblock %}

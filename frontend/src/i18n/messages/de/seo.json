@@ -1,0 +1,31 @@
+{
+  "seo": {
+    "defaultDescription": "Professionelle Spielauflade- und Nachrichtenplattform mit mehrsprachiger Erfahrung.",
+    "defaultKeywords": "Spielaufladung, Spielnachrichten, Aufladung, mehrsprachige Website",
+    "routeTitles": {
+      "default": "Seite",
+      "home": "Heim",
+      "games": "Spiele",
+      "gameDetail": "Spieldetails",
+      "articles": "Artikel",
+      "articleDetail": "Artikeldetail",
+      "profile": "Profil",
+      "customerService": "Kundendienst",
+      "about": "Um",
+      "contact": "Kontakt",
+      "recharge": "Aufladezentrum",
+      "rechargeGuide": "Aufladeanleitung",
+      "search": "Suchergebnisse",
+      "translationDemo": "Übersetzungsdemo",
+      "i18nDemo": "I18n-Demo",
+      "register": "Registrieren",
+      "login": "Login",
+      "activate": "Kontoaktivierung",
+      "notFound": "Seite nicht gefunden",
+      "cgWiki": "CG-Wiki",
+      "tavern": "Taverne",
+      "novelStory": "Romangeschichte",
+      "plaza": "Plaza"
+    }
+  }
+}

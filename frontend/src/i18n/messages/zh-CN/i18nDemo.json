@@ -1,0 +1,8 @@
+{
+  "i18nDemo": {
+    "subtitle": "i18n 快速演示：切换语言、保持 URL 语言前缀、并持久化到 localStorage。",
+    "languageLabel": "语言",
+    "currentLocaleLabel": "当前语言：",
+    "currentUrlLabel": "当前 URL："
+  }
+}

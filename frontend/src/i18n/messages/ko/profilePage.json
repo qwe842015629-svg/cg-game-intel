@@ -1,0 +1,84 @@
+{
+  "profilePage": {
+    "title": "프로필 센터",
+    "description": "프로필을 편집하고 소설, 캐릭터 카드 등 AI 콘텐츠를 검토해보세요.",
+    "auth": {
+      "title": "로그인되지 않음",
+      "description": "프로필 및 AI 콘텐츠를 관리하려면 먼저 로그인하세요.",
+      "loginRegister": "로그인 / 등록"
+    },
+    "avatar": {
+      "alt": "사용자 아바타",
+      "upload": "아바타 업로드",
+      "remove": "제거하다",
+      "invalidType": "아바타는 jpg/png/webp/gif 형식만 지원합니다.",
+      "tooLarge": "아바타는 5MB보다 작아야 합니다."
+    },
+    "form": {
+      "displayName": "표시 이름",
+      "gender": "성별",
+      "genderPlaceholder": "예를 들어 남성 / 여성 / 논바이너리 / 비공개",
+      "firstName": "이름",
+      "lastName": "성",
+      "phone": "핸드폰",
+      "visibility": "AI 콘텐츠 가시성",
+      "visibilityPrivate": "사적인",
+      "visibilityMembers": "회원 전용",
+      "visibilityPublic": "공공의",
+      "bio": "바이오",
+      "bioPlaceholder": "자기소개(최대 500자)",
+      "sandboxEnabled": "사용자 샌드박스 격리 활성화",
+      "sandboxNamespace": "샌드박스 네임스페이스: {namespace}",
+      "isolationMode": "격리 모드: {mode}",
+      "save": "프로필 저장",
+      "saving": "절약...",
+      "refresh": "데이터 새로 고침",
+      "toNovel": "노벨 스튜디오로 이동",
+      "toPlaza": "플라자로 이동"
+    },
+    "stats": {
+      "novelDrafts": "소설 초안",
+      "novelWorks": "소설 작품",
+      "roleCards": "캐릭터 카드",
+      "aiContentTotal": "총 AI 콘텐츠"
+    },
+    "novels": {
+      "title": "소설의 역사",
+      "scopeHint": "현재 로그인된 계정의 콘텐츠만 표시됩니다(사용자 격리 활성화).",
+      "empty": "아직 소설 초안이나 작품이 없습니다.",
+      "draftsTitle": "체커",
+      "worksTitle": "공장",
+      "draftTitleFallback": "초안 #{id}",
+      "draftMeta": "상태 키: {count} | 업데이트됨: {updatedAt}",
+      "workTitleFallback": "직장 #{id}",
+      "summaryEmpty": "요약 없음",
+      "workMeta": "장: {chapters} | 캐릭터 이미지: {images} | 상태: {status} | 업데이트됨: {updatedAt}",
+      "statusCompleted": "완전한",
+      "statusOngoing": "전진",
+      "statusUnknown": "알려지지 않은"
+    },
+    "roleCards": {
+      "title": "생성된 캐릭터 카드",
+      "empty": "캐릭터 카드 기록이 없습니다.",
+      "avatarAlt": "캐릭터 아바타",
+      "meta": "그룹: {group} | 성별: {gender}",
+      "descEmpty": "설명 없음",
+      "updatedAt": "{updatedAt} 업데이트됨"
+    },
+    "sandbox": {
+      "title": "사용자 샌드박스 및 보안 격리",
+      "ownerScope": "현재 소유자_범위: {ownerScope}",
+      "namespace": "샌드박스 네임스페이스: {namespace}",
+      "policies": "정책: {policies}",
+      "description": "참고: 프로필의 AI 콘텐츠는 현재 로그인한 사용자에게만 격리되며 다른 사용자의 데이터는 읽지 않습니다."
+    },
+    "messages": {
+      "saveFailed": "저장 실패",
+      "loadFailed": "프로필 데이터를 로드하지 못했습니다.",
+      "profileSaved": "프로필이 저장되었습니다"
+    },
+    "common": {
+      "dash": "-"
+    }
+  }
+}

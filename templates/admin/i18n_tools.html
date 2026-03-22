@@ -1,0 +1,108 @@
+﻿{% extends "admin/base_site.html" %}
+{% load static %}
+
+{% block extrahead %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'admin/css/i18n_tools.css' %}?v=20260222-ui">
+{% endblock %}
+
+{% block content %}
+<style>
+  .i18n-tools-page{max-width:1020px;margin:22px auto;display:grid;gap:14px}
+  .i18n-hero{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;border:1px solid #d8e6fa;border-radius:16px;padding:18px;background:linear-gradient(135deg,#fff,#f3f8ff)}
+  .i18n-hero h1{margin:0 0 6px;font-size:30px;font-weight:800}
+  .i18n-hero p{margin:0;color:#5e718f}
+  .i18n-card{border:1px solid #d8e6fa;border-radius:14px;background:#fff;padding:16px;box-shadow:0 10px 24px -22px rgba(15,23,42,.55)}
+  .i18n-grid{display:grid;grid-template-columns:1.9fr 1fr;gap:14px}
+  .i18n-field{display:grid;gap:6px}
+  .i18n-field label{font-size:13px;font-weight:700;color:#24415f}
+  .i18n-field input,.i18n-field select{height:42px;border:1px solid #d8e6fa;border-radius:10px;padding:0 12px}
+  .i18n-actions{margin-top:12px;display:flex;gap:10px;flex-wrap:wrap}
+  .i18n-btn{border:1px solid transparent;border-radius:10px;padding:9px 14px;font-size:13px;font-weight:700;cursor:pointer}
+  .i18n-btn--primary{color:#fff;background:linear-gradient(125deg,#2563eb,#0ea5e9)}
+  .i18n-btn--secondary{color:#1d4f8c;border-color:#bfd5f7;background:#f3f8ff}
+  .i18n-btn--danger{color:#fff;background:linear-gradient(130deg,#ef4444,#d94848)}
+  .i18n-version{display:inline-flex;align-items:center;margin-left:8px;padding:2px 8px;border-radius:999px;border:1px solid #bfd5f7;background:#eff6ff;color:#1e4677;font-size:12px;font-weight:700;vertical-align:middle}
+  @media (max-width:920px){.i18n-hero{grid-template-columns:1fr}.i18n-grid{grid-template-columns:1fr}}
+</style>
+<div class="i18n-tools-page">
+    <section class="i18n-hero">
+        <div>
+            <h1>多语言翻译工具<span class="i18n-version">UI v20260222</span></h1>
+            <p>用于检查和回填动态内容的 i18n 字段，支持按模块执行与结果追踪。</p>
+        </div>
+        <div class="i18n-meta">
+            <span class="i18n-meta__label">默认语言集</span>
+            <code>{{ default_langs }}</code>
+        </div>
+    </section>
+
+    <section class="i18n-card">
+        <form method="post" class="i18n-form">
+            {% csrf_token %}
+            <div class="i18n-grid">
+                <div class="i18n-field i18n-field--wide">
+                    <label for="langs">语言列表</label>
+                    <input
+                        id="langs"
+                        name="langs"
+                        type="text"
+                        value="{{ selected_langs }}"
+                        placeholder="en,ja,ko,th,vi,zh-cn,zh-tw,fr,de"
+                    />
+                    <p class="i18n-hint">使用逗号分隔，支持别名（如 <code>zh-cn</code> / <code>zh-tw</code>）。</p>
+                </div>
+
+                <div class="i18n-field">
+                    <label for="targets">执行模块</label>
+                    <select id="targets" name="targets">
+                        {% for opt in target_options %}
+                        <option value="{{ opt }}" {% if opt == selected_targets %}selected{% endif %}>{{ opt }}</option>
+                        {% endfor %}
+                    </select>
+                    <p class="i18n-hint">线上建议按模块分批执行，降低请求超时风险。</p>
+                </div>
+            </div>
+
+            <div class="i18n-actions">
+                <button type="submit" name="action" value="report" class="i18n-btn i18n-btn--primary">检查翻译缺失</button>
+                <button type="submit" name="action" value="backfill" class="i18n-btn i18n-btn--secondary">补齐缺失翻译</button>
+                <button
+                    type="submit"
+                    name="action"
+                    value="overwrite"
+                    class="i18n-btn i18n-btn--danger"
+                    {% if not is_superuser %}disabled title="仅超级管理员可执行覆盖重翻译"{% endif %}
+                >
+                    覆盖重翻译
+                </button>
+            </div>
+        </form>
+    </section>
+
+    {% if result %}
+    <section class="i18n-card i18n-card--result">
+        <div class="i18n-result-head">
+            <h2>执行结果</h2>
+            <div class="i18n-result-meta">
+                <span class="i18n-pill i18n-pill--{{ result_level }}">
+                    {% if result_level == "success" %}成功{% elif result_level == "error" %}失败{% else %}信息{% endif %}
+                </span>
+                {% if duration is not None %}
+                <span class="i18n-duration">耗时 {{ duration }}s</span>
+                {% endif %}
+            </div>
+        </div>
+        <pre class="i18n-result-log">{{ result }}</pre>
+    </section>
+    {% endif %}
+
+    <section class="i18n-note">
+        <h3>说明</h3>
+        <ol>
+            <li>后台新增/编辑内容时，系统会自动回填缺失语言。</li>
+            <li>批量导入（bulk_create/bulk_update/SQL）后，请手动点击一次“补齐缺失翻译”。</li>
+        </ol>
+    </section>
+</div>
+{% endblock %}

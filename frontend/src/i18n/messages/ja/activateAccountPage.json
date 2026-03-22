@@ -1,0 +1,26 @@
+{
+  "activateAccountPage": {
+    "activatingTitle": "アカウントを有効にしています...",
+    "activatingDescription": "お待ちください。これには数秒しかかかりません。",
+    "successTitle": "アクティベーションに成功しました!",
+    "successDescription": "あなたのアカウントは有効化されました。これでサインインできるようになりました。",
+    "successNotice": "アカウントのアクティベーションが完了し、すべての機能が利用できるようになりました。",
+    "countdownRedirect": "{count} 秒後にログインにリダイレクトします...",
+    "loginNow": "今すぐサインイン",
+    "backHome": "ホームに戻る",
+    "failedTitle": "アクティベーションに失敗しました",
+    "invalidOrExpired": "アクティベーションリンクが無効か期限切れです。",
+    "reasonsTitle": "考えられる理由:",
+    "reasonExpired": "アクティベーション リンクの有効期限が切れています (24 時間有効)。",
+    "reasonUsed": "アクティベーション リンクはすでに使用されています。",
+    "reasonFormat": "リンクの形式が間違っています。",
+    "registerAgain": "再登録",
+    "errors": {
+      "invalidLinkFormat": "アクティベーションリンクの形式が無効です。",
+      "invalidUid": "無効なユーザーIDです。",
+      "invalidToken": "アクティベーション トークンが無効または期限切れです。",
+      "activateFailedRetry": "アクティベーションに失敗しました。もう一度お試しください。",
+      "networkError": "ネットワーク エラー。接続を確認してください。"
+    }
+  }
+}

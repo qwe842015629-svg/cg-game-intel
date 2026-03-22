@@ -1,0 +1,84 @@
+{
+  "profilePage": {
+    "title": "プロフィールセンター",
+    "description": "プロフィールを編集し、小説やキャラクターカードなどの AI コンテンツを確認します。",
+    "auth": {
+      "title": "サインインしていません",
+      "description": "プロフィールと AI コンテンツを管理するには、まずサインインしてください。",
+      "loginRegister": "サインイン/登録"
+    },
+    "avatar": {
+      "alt": "ユーザーのアバター",
+      "upload": "アバターをアップロードする",
+      "remove": "取り除く",
+      "invalidType": "アバターは jpg/png/webp/gif 形式のみをサポートします。",
+      "tooLarge": "アバターは 5MB 未満である必要があります。"
+    },
+    "form": {
+      "displayName": "表示名",
+      "gender": "性別",
+      "genderPlaceholder": "例えば男性 / 女性 / ノンバイナリー / 非公開",
+      "firstName": "ファーストネーム",
+      "lastName": "苗字",
+      "phone": "電話",
+      "visibility": "AI コンテンツの可視性",
+      "visibilityPrivate": "プライベート",
+      "visibilityMembers": "会員限定",
+      "visibilityPublic": "公共",
+      "bio": "バイオ",
+      "bioPlaceholder": "あなた自身について教えてください (最大 500 文字)",
+      "sandboxEnabled": "ユーザーのサンドボックス分離を有効にする",
+      "sandboxNamespace": "サンドボックス名前空間: {namespace}",
+      "isolationMode": "分離モード: {mode}",
+      "save": "プロファイルの保存",
+      "saving": "保存中...",
+      "refresh": "データを更新する",
+      "toNovel": "ノベルスタジオに行く",
+      "toPlaza": "プラザへ行く"
+    },
+    "stats": {
+      "novelDrafts": "小説の草稿",
+      "novelWorks": "小説作品",
+      "roleCards": "キャラクターカード",
+      "aiContentTotal": "AI コンテンツの合計"
+    },
+    "novels": {
+      "title": "小説の歴史",
+      "scopeHint": "現在サインインしているアカウントのコンテンツのみが表示されます (ユーザー分離が有効)。",
+      "empty": "まだ小説の草案や作品はありません。",
+      "draftsTitle": "下書き",
+      "worksTitle": "作品",
+      "draftTitleFallback": "ドラフト #{id}",
+      "draftMeta": "状態キー: {count} |更新日: {updatedAt}",
+      "workTitleFallback": "作品 #{id}",
+      "summaryEmpty": "要約なし",
+      "workMeta": "章: {chapters} |キャラクターイメージ: {images} |ステータス: {status} |更新日: {updatedAt}",
+      "statusCompleted": "完了しました",
+      "statusOngoing": "進行中",
+      "statusUnknown": "未知"
+    },
+    "roleCards": {
+      "title": "生成されたキャラクターカード",
+      "empty": "キャラクターカードの記録はありません。",
+      "avatarAlt": "キャラクターアバター",
+      "meta": "グループ: {group} |性別: {gender}",
+      "descEmpty": "説明なし",
+      "updatedAt": "{updatedAt} を更新しました"
+    },
+    "sandbox": {
+      "title": "ユーザーサンドボックスとセキュリティ分離",
+      "ownerScope": "現在の所有者の範囲: {ownerScope}",
+      "namespace": "サンドボックス名前空間: {namespace}",
+      "policies": "ポリシー: {policies}",
+      "description": "注: プロファイル内の AI コンテンツは、現在サインインしているユーザーによってのみ分離され、他のユーザーのデータは読み取られません。"
+    },
+    "messages": {
+      "saveFailed": "保存に失敗しました",
+      "loadFailed": "プロファイルデータの読み込みに失敗しました",
+      "profileSaved": "プロファイルが保存されました"
+    },
+    "common": {
+      "dash": "-"
+    }
+  }
+}

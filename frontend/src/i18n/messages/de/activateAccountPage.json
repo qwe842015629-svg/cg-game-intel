@@ -1,0 +1,26 @@
+{
+  "activateAccountPage": {
+    "activatingTitle": "Aktivieren Sie Ihr Konto...",
+    "activatingDescription": "Bitte warten Sie, der Vorgang dauert nur wenige Sekunden.",
+    "successTitle": "Aktivierung erfolgreich!",
+    "successDescription": "Ihr Konto wurde aktiviert. Sie können sich jetzt anmelden.",
+    "successNotice": "Die Kontoaktivierung ist abgeschlossen und alle Funktionen sind jetzt verfügbar.",
+    "countdownRedirect": "Weiterleitung zur Anmeldung in {count} Sekunden ...",
+    "loginNow": "Melden Sie sich jetzt an",
+    "backHome": "Zurück nach Hause",
+    "failedTitle": "Aktivierung fehlgeschlagen",
+    "invalidOrExpired": "Der Aktivierungslink ist ungültig oder abgelaufen.",
+    "reasonsTitle": "Mögliche Gründe:",
+    "reasonExpired": "Der Aktivierungslink ist abgelaufen (gültig für 24 Stunden).",
+    "reasonUsed": "Der Aktivierungslink wurde bereits verwendet.",
+    "reasonFormat": "Das Linkformat ist falsch.",
+    "registerAgain": "Registrieren Sie sich erneut",
+    "errors": {
+      "invalidLinkFormat": "Das Format des Aktivierungslinks ist ungültig.",
+      "invalidUid": "Ungültige Benutzer-ID.",
+      "invalidToken": "Ungültiges oder abgelaufenes Aktivierungstoken.",
+      "activateFailedRetry": "Die Aktivierung ist fehlgeschlagen. Bitte versuchen Sie es erneut.",
+      "networkError": "Netzwerkfehler, bitte überprüfen Sie Ihre Verbindung."
+    }
+  }
+}

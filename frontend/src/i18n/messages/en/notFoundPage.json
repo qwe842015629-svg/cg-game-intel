@@ -1,0 +1,9 @@
+{
+  "notFoundPage": {
+    "title": "Page Not Found",
+    "description": "The page you visited may have been moved or removed. Try going back to a known page.",
+    "backHome": "Back Home",
+    "toArticles": "Browse Articles",
+    "toRecharge": "Go to Recharge"
+  }
+}

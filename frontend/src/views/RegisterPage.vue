@@ -84,9 +84,7 @@
       <!-- 注册成功 - 待激活提示 -->
       <div v-else class="surface-card p-7 text-center" v-motion-reveal="{ y: 24 }">
         <div class="w-16 h-16 mx-auto rounded-full bg-primary/10 flex items-center justify-center mb-5">
-          <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
-          </svg>
+          <Check class="w-8 h-8 text-primary" />
         </div>
 
         <h2 class="text-2xl font-bold text-foreground mb-3">注册成功！</h2>
@@ -134,6 +132,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { Check } from 'lucide-vue-next'
 import client from '../api/client'
 
 const form = ref({
@@ -176,8 +175,12 @@ const handleRegister = async () => {
         errorMessage.value = '邮箱：' + errors.email.join(', ')
       } else if (errors.password) {
         errorMessage.value = '密码：' + errors.password.join(', ')
+      } else if (errors.non_field_errors) {
+        errorMessage.value = errors.non_field_errors.join(', ')
+      } else if (errors.detail) {
+        errorMessage.value = typeof errors.detail === 'string' ? errors.detail : JSON.stringify(errors.detail)
       } else {
-        errorMessage.value = '注册失败，请稍后重试'
+        errorMessage.value = typeof errors === 'string' ? errors : JSON.stringify(errors)
       }
     } else {
       errorMessage.value = '网络错误，请检查您的网络连接'

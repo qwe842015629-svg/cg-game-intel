@@ -1,0 +1,9 @@
+{
+  "notFoundPage": {
+    "title": "Seite nicht gefunden",
+    "description": "Die von Ihnen besuchte Seite wurde möglicherweise verschoben oder entfernt. Versuchen Sie, zu einer bekannten Seite zurückzukehren.",
+    "backHome": "Zurück nach Hause",
+    "toArticles": "Artikel durchsuchen",
+    "toRecharge": "Gehen Sie zu „Aufladen“."
+  }
+}

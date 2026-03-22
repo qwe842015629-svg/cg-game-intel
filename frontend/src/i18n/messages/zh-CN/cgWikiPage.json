@@ -1,0 +1,36 @@
+﻿{
+  "cgWikiPage": {
+    "header": {
+      "rankMonitor": "全球榜单监控",
+      "updating": "手动数据更新中...",
+      "update": "手动数据更新"
+    },
+    "sidebar": {
+      "marketHeat": "市场热度分布",
+      "wikiDirect": "游戏Wiki直达",
+      "newsFeed": "情报速递"
+    },
+    "regions": {
+      "cn": "中国区",
+      "us": "美国区",
+      "jp": "日本区",
+      "hk": "香港区",
+      "tw": "台湾区",
+      "sea": "东南亚"
+    },
+    "common": {
+      "viewDetails": "查看详情",
+      "globalHot": "全球热门",
+      "unknownAuthor": "未知",
+      "untitledNews": "未命名资讯",
+      "wikiFeedFallback": "Wiki 动态"
+    },
+    "footer": {
+      "dataSourceAppleStore": "数据来源Apple Store"
+    },
+    "errors": {
+      "networkUnstable": "网络连接不稳定，当前显示本地缓存数据。",
+      "loadFailed": "无法加载数据，请检查网络。"
+    }
+  }
+}

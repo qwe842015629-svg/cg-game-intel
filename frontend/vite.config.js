@@ -14,6 +14,43 @@ export default defineConfig(({ mode }) => {
         '@': fileURLToPath(new URL('./src', import.meta.url))
       }
     },
+    build: {
+      rollupOptions: {
+        output: {
+          manualChunks(id) {
+            const normalizedId = String(id || '').replace(/\\/g, '/')
+
+            if (normalizedId.includes('/src/i18n/messages/')) {
+              const localeMatch = normalizedId.match(/\/src\/i18n\/messages\/([^/]+)\//)
+              const localeCode = localeMatch?.[1]
+              if (localeCode) {
+                return `i18n-messages-${localeCode}`
+              }
+              return 'i18n-messages'
+            }
+
+            if (normalizedId.includes('/src/i18n/locales.ts')) {
+              return 'i18n-core'
+            }
+
+            if (normalizedId.includes('/node_modules/')) {
+              if (normalizedId.includes('/axios/')) {
+                return 'network'
+              }
+
+              if (
+                normalizedId.includes('/lucide-vue-next/') ||
+                normalizedId.includes('/simple-icons/')
+              ) {
+                return 'icons'
+              }
+
+              return 'vendor'
+            }
+          },
+        },
+      },
+    },
     server: {
       port: 5176,
       proxy: {

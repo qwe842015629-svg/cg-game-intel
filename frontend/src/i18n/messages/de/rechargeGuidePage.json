@@ -1,0 +1,48 @@
+{
+  "rechargeGuidePage": {
+    "badge": "Offizieller Leitfaden",
+    "title": "Panxing Global Mobile Game Bestellanleitung",
+    "subtitle": "Damit Sie schneller aufladen k?nnen, haben wir zwei offizielle Bestellkan?le vorbereitet. Folgen Sie den Schritten auf der Seite, und der Support bearbeitet Ihre Bestellung schnell anhand Ihrer Angaben.",
+    "method1": {
+      "title": "Methode 1: WeChat-Offizieller Account (Empfohlen)",
+      "desc": "Ideal f?r schnelle Beratung, Erg?nzung von Bestelldetails und Echtzeit-Fortschrittsverfolgung.",
+      "qrAlt": "Panxing Global Mobile Game WeChat QR-Code",
+      "step1": "?ffnen Sie WeChat und tippen Sie oben rechts auf den Scan-Button.",
+      "step2": "Scannen Sie den QR-Code und folgen Sie dem offiziellen Account \"Panxing Global Mobile Game\".",
+      "step3": "Senden Sie die Bestelldetails: Spielname + Server + Rollen-ID + Aufladepaket.",
+      "step4": "Bezahlen Sie nach Anweisung des Supports, senden Sie den Zahlungsnachweis und warten Sie auf die Best?tigung."
+    },
+    "method2": {
+      "title": "Methode 2: Xianyu-Shop mit Treuhand",
+      "desc": "Geeignet f?r Nutzer, die eine plattformgesicherte Zahlung ?ber Xianyu bevorzugen.",
+      "qrAlt": "Panxing Global Mobile Game Xianyu-Shop-QR-Karte",
+      "step1": "Speichern Sie zuerst das Shop-Kartenbild in Ihrem Album.",
+      "step2": "?ffnen Sie Xianyu und scannen Sie den QR-Code.",
+      "step3": "Rufen Sie den Shop auf, w?hlen Sie den entsprechenden Artikel und bestellen Sie.",
+      "step4": "Bestellnotiz erg?nzen: Spiel/Server/Rollen-ID/Aufladepaket."
+    },
+    "orderDetails": {
+      "title": "Bestelldetails und Bearbeitungshinweise",
+      "templateTitle": "Standard-Bestellvorlage",
+      "templateLine1": "Spielname:",
+      "templateLine2": "Server/Region:",
+      "templateLine3": "Rollen-ID/UID:",
+      "templateLine4": "Aufladepaket:",
+      "templateLine5": "Kontakt (optional):",
+      "deliveryTitle": "Lieferung und After-Sales",
+      "deliveryLine1": "In der Regel innerhalb von 5 bis 30 Minuten bearbeitet; zu Sto?zeiten kann es Warteschlangen geben.",
+      "deliveryLine2": "Bei Verz?gerung senden Sie bitte Bestell-Screenshot und Rolleninfos f?r priorisierte Pr?fung.",
+      "deliveryLine3": "?berpr?fen Sie nach Abschluss zeitnah den Ingame-Aufladeverlauf."
+    },
+    "security": {
+      "title": "Sicherheitshinweise",
+      "item1": "Vertrauen Sie nur den auf dieser Seite angezeigten offiziellen QR-Codes und Shop-Informationen.",
+      "item2": "?berweisen Sie kein Geld an unbekannte Konten und teilen Sie niemals Verifizierungscodes oder Passw?rter.",
+      "item3": "Bei Auff?lligkeiten kontaktieren Sie sofort den Online-Support zur Verifizierung."
+    },
+    "actions": {
+      "contactSupport": "Online-Support kontaktieren",
+      "backHome": "Zur Startseite"
+    }
+  }
+}

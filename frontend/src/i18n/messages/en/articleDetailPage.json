@@ -1,0 +1,29 @@
+{
+  "articleDetailPage": {
+    "loading": "Loading...",
+    "back": "Back",
+    "tocTitle": "Table of Contents",
+    "tocEmpty": "No usable table of contents found for this article. Try refreshing.",
+    "defaultCategory": "News",
+    "authorLabel": "Author: ",
+    "defaultAuthor": "Official Editor",
+    "readTimeLabel": "Read Time: ",
+    "defaultReadTime": "about 3 min",
+    "hotGamesTitle": "Hot Games",
+    "noHotGames": "No hot games yet",
+    "hotGameAlt": "Hot game",
+    "untitledGame": "Untitled game",
+    "viewRechargeDetail": "View recharge details",
+    "latestArticlesTitle": "Latest Articles",
+    "noLatestArticles": "No latest articles",
+    "latestArticleAlt": "Latest article",
+    "untitledArticle": "Untitled article",
+    "latestPublished": "Recently published",
+    "close": "Close",
+    "notFoundTitle": "Article Not Found",
+    "notFoundDescription": "Sorry, this article could not be found.",
+    "backToArticles": "Back to Articles",
+    "imageAlt": "Article image",
+    "loadFailed": "Article not found or failed to load"
+  }
+}

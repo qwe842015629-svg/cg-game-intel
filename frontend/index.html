@@ -1,10 +1,129 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
   <head>
     <meta charset="UTF-8">
     <link rel="icon" href="/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>游戏充值网站</title>
+    <!-- PRE_RENDER_SEO_START -->
+    <meta
+      name="description"
+      content="Professional game recharge and news platform with multilingual experience."
+      data-i18n-seo-meta="true"
+    >
+    <meta
+      name="keywords"
+      content="game recharge,game news,topup,multilingual website"
+      data-i18n-seo-meta="true"
+    >
+    <link
+      rel="canonical"
+      href="https://www.cyphergamebuy.com/"
+      data-i18n-seo-link="true"
+    >
+    <link
+      rel="alternate"
+      hreflang="en"
+      href="https://www.cyphergamebuy.com/en"
+      data-i18n-seo-link="true"
+    >
+    <link
+      rel="alternate"
+      hreflang="zh-Hans"
+      href="https://www.cyphergamebuy.com/zh-CN"
+      data-i18n-seo-link="true"
+    >
+    <link
+      rel="alternate"
+      hreflang="zh-Hant"
+      href="https://www.cyphergamebuy.com/zh-TW"
+      data-i18n-seo-link="true"
+    >
+    <link
+      rel="alternate"
+      hreflang="ja"
+      href="https://www.cyphergamebuy.com/ja"
+      data-i18n-seo-link="true"
+    >
+    <link
+      rel="alternate"
+      hreflang="ko"
+      href="https://www.cyphergamebuy.com/ko"
+      data-i18n-seo-link="true"
+    >
+    <link
+      rel="alternate"
+      hreflang="fr"
+      href="https://www.cyphergamebuy.com/fr"
+      data-i18n-seo-link="true"
+    >
+    <link
+      rel="alternate"
+      hreflang="de"
+      href="https://www.cyphergamebuy.com/de"
+      data-i18n-seo-link="true"
+    >
+    <link
+      rel="alternate"
+      hreflang="th"
+      href="https://www.cyphergamebuy.com/th"
+      data-i18n-seo-link="true"
+    >
+    <link
+      rel="alternate"
+      hreflang="vi"
+      href="https://www.cyphergamebuy.com/vi"
+      data-i18n-seo-link="true"
+    >
+    <link
+      rel="alternate"
+      hreflang="x-default"
+      href="https://www.cyphergamebuy.com/"
+      data-i18n-seo-link="true"
+    >
+    <!-- PRE_RENDER_SEO_END -->
+    <script>
+      // Defer analytics bootstrap to idle/user interaction to avoid blocking first paint.
+      (function () {
+        const GA_ID = 'G-C6198LC1GN';
+        let initialized = false;
+        const interactionEvents = ['pointerdown', 'keydown', 'touchstart', 'scroll'];
+
+        const cleanup = () => {
+          interactionEvents.forEach((eventName) => {
+            window.removeEventListener(eventName, bootstrap, { passive: true });
+          });
+        };
+
+        const bootstrap = () => {
+          if (initialized) return;
+          initialized = true;
+          cleanup();
+
+          window.dataLayer = window.dataLayer || [];
+          window.gtag = function () {
+            window.dataLayer.push(arguments);
+          };
+          window.gtag('js', new Date());
+          window.gtag('config', GA_ID, { send_page_view: false });
+
+          const script = document.createElement('script');
+          script.async = true;
+          script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`;
+          document.head.appendChild(script);
+        };
+
+        interactionEvents.forEach((eventName) => {
+          window.addEventListener(eventName, bootstrap, { passive: true, once: true });
+        });
+
+        if ('requestIdleCallback' in window) {
+          window.requestIdleCallback(bootstrap, { timeout: 5000 });
+        } else {
+          window.setTimeout(bootstrap, 5000);
+        }
+      })();
+    </script>
+    <title>CYPHER GAME BUY</title>
   </head>
   <body>
     <div id="app"></div>

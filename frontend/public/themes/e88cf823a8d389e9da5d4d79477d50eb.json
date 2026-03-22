@@ -1,0 +1,8 @@
+{
+  "id": "e88cf823a8d389e9da5d4d79477d50eb",
+  "name": "Light_suger_2.0",
+  "css": "* {\n--black30a: rgb(255 255 255 / 75%);\n--black70a: rgb(255 0 0 / 20%);\n--grey10: rgb(255 174 120);\n--grey30a: rgb(255 254 213 / 30%);\n}",
+  "description": "Imported from Light_suger_2.0.json",
+  "author": "Unknown",
+  "version": "1.0"
+}

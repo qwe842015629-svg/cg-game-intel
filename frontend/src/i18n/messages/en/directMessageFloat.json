@@ -1,0 +1,20 @@
+{
+  "directMessageFloat": {
+    "title": "Direct Messages",
+    "open": "Open direct messages",
+    "close": "Close",
+    "refresh": "Refresh",
+    "loading": "Loading...",
+    "emptyThreads": "No conversations yet",
+    "emptyMessages": "No messages yet",
+    "unknownUser": "Unknown user",
+    "noMessage": "No messages",
+    "placeholder": "Type a message, press Enter to send",
+    "send": "Send",
+    "sending": "Sending...",
+    "unreadCount": "{count} unread",
+    "loadFailed": "Failed to load conversations",
+    "messageLoadFailed": "Failed to load messages",
+    "sendFailed": "Failed to send"
+  }
+}

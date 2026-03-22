@@ -1,0 +1,31 @@
+{
+  "seo": {
+    "defaultDescription": "多言語体験を備えたプロフェッショナルなゲーム リチャージとニュース プラットフォーム。",
+    "defaultKeywords": "ゲームリチャージ、ゲームニュース、トップアップ、多言語ウェブサイト",
+    "routeTitles": {
+      "default": "ページ",
+      "home": "家",
+      "games": "ゲーム",
+      "gameDetail": "ゲーム詳細",
+      "articles": "記事",
+      "articleDetail": "記事の詳細",
+      "profile": "プロフィール",
+      "customerService": "顧客サービス",
+      "about": "について",
+      "contact": "接触",
+      "recharge": "リチャージセンター",
+      "rechargeGuide": "リチャージガイド",
+      "search": "検索結果",
+      "translationDemo": "翻訳デモ",
+      "i18nDemo": "I18n デモ",
+      "register": "登録する",
+      "login": "ログイン",
+      "activate": "アカウントのアクティベーション",
+      "notFound": "ページが見つかりません",
+      "cgWiki": "CGウィキ",
+      "tavern": "居酒屋",
+      "novelStory": "小説の物語",
+      "plaza": "プラザ"
+    }
+  }
+}

@@ -1,0 +1,48 @@
+﻿{
+  "rechargeGuidePage": {
+    "badge": "Official Guide",
+    "title": "Panxing Global Mobile Game Order Guide",
+    "subtitle": "To help you recharge faster, we prepared two official ordering channels. Submit details by following the page steps, and support will process your order quickly based on the info you provide.",
+    "method1": {
+      "title": "Method 1: WeChat Official Account (Recommended)",
+      "desc": "Best for quick consultation, adding order details, and real-time progress tracking.",
+      "qrAlt": "Panxing Global Mobile Game WeChat QR code",
+      "step1": "Open WeChat and tap the scan button in the top-right corner.",
+      "step2": "Scan the QR code and follow the official account \"Panxing Global Mobile Game\".",
+      "step3": "Send order details: game name + server + role ID + recharge package.",
+      "step4": "Pay as instructed by support, send payment screenshot, and wait for credit confirmation."
+    },
+    "method2": {
+      "title": "Method 2: Xianyu Store Escrow",
+      "desc": "Suitable for users who prefer platform-guaranteed payment through Xianyu.",
+      "qrAlt": "Panxing Global Mobile Game Xianyu store QR card",
+      "step1": "Save the store card image to your album first.",
+      "step2": "Open Xianyu and scan the QR code.",
+      "step3": "Enter the store, select the corresponding item, and place the order.",
+      "step4": "Add order note: game/server/role ID/recharge package."
+    },
+    "orderDetails": {
+      "title": "Order Details and Processing Notes",
+      "templateTitle": "Standard Order Template",
+      "templateLine1": "Game Name:",
+      "templateLine2": "Server/Region:",
+      "templateLine3": "Role ID/UID:",
+      "templateLine4": "Recharge Package:",
+      "templateLine5": "Contact Info (optional):",
+      "deliveryTitle": "Delivery and After-sales",
+      "deliveryLine1": "Usually processed within 5-30 minutes; peak periods may queue.",
+      "deliveryLine2": "If delayed, provide order screenshot and role details for priority review.",
+      "deliveryLine3": "After completion, verify the in-game credit record as soon as possible."
+    },
+    "security": {
+      "title": "Security Reminder",
+      "item1": "Only trust the official QR codes and store info shown on this page.",
+      "item2": "Do not transfer money to unknown accounts and never share verification codes or passwords.",
+      "item3": "If anything looks abnormal, contact online support immediately for verification."
+    },
+    "actions": {
+      "contactSupport": "Contact Online Support",
+      "backHome": "Back to Home"
+    }
+  }
+}

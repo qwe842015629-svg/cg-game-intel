@@ -1,0 +1,15 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /api-auth/
+Disallow: /debug/
+Disallow: /*/profile
+Disallow: /*/register
+Disallow: /*/login
+Disallow: /*/activate/
+Disallow: /*/search
+Disallow: /404
+Disallow: /*/404
+
+Sitemap: https://www.cyphergamebuy.com/sitemap.xml

@@ -1,0 +1,32 @@
+{
+  "aboutPage": {
+    "title": "À PROPOS",
+    "subtitle": "NOUS",
+    "description": "Découvrez notre mission, notre vision et nos valeurs.",
+    "heroText": "CYBERCHARGE",
+    "heroSubtext": "Expérience de recharge de jeu future · Sécurisé · Rapide · Fiable",
+    "missionTitle": "Mission",
+    "missionDescription": "Notre mission est de fournir aux acteurs mondiaux des services de recharge de jeux sécurisés, rapides et fiables, afin que chaque joueur puisse profiter d'une expérience fluide sans barrières régionales ou de paiement.",
+    "visionTitle": "Vision",
+    "visionDescription": "Devenir une plateforme mondiale de services de jeux de premier plan grâce à l’innovation et à un excellent service, en connectant les joueurs du monde entier et en créant des expériences de jeu illimitées.",
+    "corePrefix": "CŒUR",
+    "coreSuffix": "VALEURS",
+    "values": {
+      "secureTitle": "Sécurisé et fiable",
+      "secureDescription": "Nous accordons toujours la priorité à la sécurité des utilisateurs et protégeons chaque transaction avec une technologie de sécurité avancée.",
+      "fastTitle": "Ultra rapide",
+      "fastDescription": "Le traitement de recharge au niveau de la milliseconde maintient votre expérience de jeu ininterrompue.",
+      "userTitle": "L'utilisateur d'abord",
+      "userDescription": "Nous nous concentrons sur les besoins des utilisateurs et fournissons un service attentionné avec des expériences personnalisées."
+    },
+    "teamPrefix": "NOTRE",
+    "teamSuffix": "ÉQUIPE",
+    "cta": {
+      "titlePrefix": "PRÊT",
+      "titleSuffix": "POUR COMMENCER ?",
+      "description": "Rejoignez notre communauté de joueurs et profitez de services de recharge de jeux sécurisés, rapides et fiables.",
+      "recharge": "Démarrer la recharge",
+      "contact": "Contactez-nous"
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "directMessageFloat": {
+    "title": "私信会话",
+    "open": "打开私信",
+    "close": "关闭",
+    "refresh": "刷新",
+    "loading": "加载中...",
+    "emptyThreads": "暂无会话",
+    "emptyMessages": "暂无消息",
+    "unknownUser": "未知用户",
+    "noMessage": "暂无消息",
+    "placeholder": "输入消息，回车发送",
+    "send": "发送",
+    "sending": "发送中...",
+    "unreadCount": "未读 {count}",
+    "loadFailed": "会话加载失败",
+    "messageLoadFailed": "消息加载失败",
+    "sendFailed": "发送失败"
+  }
+}

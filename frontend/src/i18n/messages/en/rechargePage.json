@@ -1,0 +1,33 @@
+﻿{
+  "rechargePage": {
+    "badge": "Recharge",
+    "title": "Game Recharge",
+    "subtitle": "Choose a game, fill in account details, and complete payment with a clear, fast flow.",
+    "selectGameTitle": "Select Game",
+    "selectGameDesc": "Search and choose quickly",
+    "emptyStateTitle": "Please select a game first",
+    "emptyStateDesc": "After selecting, you can fill in account details, amount, and payment method.",
+    "stepSelectGame": "Choose a game",
+    "stepFillAccount": "Fill in account details",
+    "stepSelectAmountAndPayment": "Select amount and payment method",
+    "stepConfirmOrder": "Confirm order and finish recharge",
+    "reselectGame": "Reselect",
+    "accountInfoTitle": "Account Info",
+    "amountTitle": "Recharge Amount",
+    "paymentMethodTitle": "Payment Method",
+    "hotBadge": "HOT",
+    "bonusDiamonds": "{amount} Diamonds",
+    "bonusExtra": "Bonus {amount} Diamonds",
+    "pendingPaymentNotice": "Recharge is under development. Real payment integration will be added soon.",
+    "games": {
+      "hok": "Honor of Kings",
+      "pubgm": "PUBG Mobile",
+      "genshin": "Genshin Impact",
+      "wildrift": "League of Legends: Wild Rift",
+      "cf": "CrossFire",
+      "dnf": "Dungeon & Fighter",
+      "hsr": "Honkai: Star Rail",
+      "sky": "Sky: Children of the Light"
+    }
+  }
+}

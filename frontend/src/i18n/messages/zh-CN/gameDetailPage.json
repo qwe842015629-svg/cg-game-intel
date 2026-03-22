@@ -1,0 +1,72 @@
+{
+  "gameDetailPage": {
+    "breadcrumbs": {
+      "home": "首页",
+      "games": "游戏列表"
+    },
+    "actions": {
+      "backToGames": "返回游戏列表",
+      "contactRecharge": "联系客服充值",
+      "contactConsult": "联系客服咨询",
+      "share": "分享"
+    },
+    "tags": {
+      "hot": "热门",
+      "recommended": "推荐"
+    },
+    "meta": {
+      "developer": "开发商: ",
+      "region": "地区: ",
+      "platform": "平台: ",
+      "server": "服务器: ",
+      "unknownDeveloper": "未知",
+      "unknownPlatform": "未知",
+      "allServers": "全部",
+      "untitledGame": "未命名游戏"
+    },
+    "viewingCount": "人正在浏览此游戏",
+    "tabs": {
+      "details": "游戏详情",
+      "topup": "充值说明"
+    },
+    "empty": {
+      "details": "暂无详细介绍",
+      "topup": "请联系客服获取充值说明"
+    },
+    "region": {
+      "global": "国际游戏"
+    },
+    "serviceGuarantee": {
+      "title": "服务保障",
+      "official": {
+        "title": "官方渠道",
+        "desc": "所有充值均为正规官方渠道"
+      },
+      "fast": {
+        "title": "极速到账",
+        "desc": "下单后平均 1-10 分钟内完成"
+      },
+      "support": {
+        "title": "24/7 客服",
+        "desc": "全天候在线为您服务"
+      }
+    },
+    "contactCard": {
+      "title": "找不到想要的商品？",
+      "desc": "如果您需要的充值项目不在列表中，请直接联系我们的在线客服咨询。"
+    },
+    "announcements": {
+      "title": "最新公告",
+      "item1": "[公告] 2月4日 系统维护通知",
+      "item2": "[活动] 新春充值优惠活动开启",
+      "item3": "[提醒] 请勿相信非官方客服账号"
+    },
+    "content": {
+      "imageAlt": "图片"
+    },
+    "errors": {
+      "loadFailed": "加载游戏详情失败，请稍后重试"
+    },
+    "bannerAlt": "Banner"
+  }
+}

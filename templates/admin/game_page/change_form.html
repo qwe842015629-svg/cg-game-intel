@@ -1,6 +1,20 @@
 {% extends "admin/change_form.html" %}
 {% load i18n admin_urls static %}
 
-{% block content %}
+{% block extrastyle %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'admin/css/editor_admin.css' %}">
+{% endblock %}
+
+{% block form_top %}
+<div class="admin-editor-hero">
+    <div class="admin-editor-hero__title">游戏页面编辑器</div>
+    <p class="admin-editor-hero__desc">支持简繁双语内容编辑、Google Play 快速导入与图标/Banner 实时预览。</p>
+    <div class="admin-editor-hero__chips">
+        <span class="admin-editor-chip">Google Play 导入</span>
+        <span class="admin-editor-chip">Markdown/HTML</span>
+        <span class="admin-editor-chip">图片即时预览</span>
+    </div>
+</div>
 {{ block.super }}
 {% endblock %}

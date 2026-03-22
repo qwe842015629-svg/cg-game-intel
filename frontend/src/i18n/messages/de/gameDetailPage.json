@@ -1,0 +1,72 @@
+{
+  "gameDetailPage": {
+    "breadcrumbs": {
+      "home": "Startseite",
+      "games": "Spiele"
+    },
+    "actions": {
+      "backToGames": "Zur?ck zu den Spielen",
+      "contactRecharge": "Support f?r Aufladung kontaktieren",
+      "contactConsult": "Support kontaktieren",
+      "share": "Teilen"
+    },
+    "tags": {
+      "hot": "Beliebt",
+      "recommended": "Empfohlen"
+    },
+    "meta": {
+      "developer": "Entwickler: ",
+      "region": "Region: ",
+      "platform": "Plattform: ",
+      "server": "Server: ",
+      "unknownDeveloper": "Unbekannt",
+      "unknownPlatform": "Unbekannt",
+      "allServers": "Alle",
+      "untitledGame": "Unbenanntes Spiel"
+    },
+    "viewingCount": "Personen sehen sich dieses Spiel gerade an",
+    "tabs": {
+      "details": "Spieldetails",
+      "topup": "Aufladeanleitung"
+    },
+    "empty": {
+      "details": "Noch keine detaillierte Beschreibung verf?gbar",
+      "topup": "Bitte kontaktieren Sie den Support f?r Anweisungen zur Aufladung"
+    },
+    "region": {
+      "global": "International"
+    },
+    "serviceGuarantee": {
+      "title": "Servicegarantie",
+      "official": {
+        "title": "Offizielle Kan?le",
+        "desc": "Alle Aufladungen werden ?ber offizielle Kan?le abgewickelt"
+      },
+      "fast": {
+        "title": "Schnelle Lieferung",
+        "desc": "Bestellungen werden in der Regel innerhalb von 1 bis 10 Minuten abgeschlossen"
+      },
+      "support": {
+        "title": "24/7-Support",
+        "desc": "Online-Support ist rund um die Uhr verf?gbar"
+      }
+    },
+    "contactCard": {
+      "title": "Sie finden den gew?nschten Artikel nicht?",
+      "desc": "Wenn Ihr Aufladeartikel nicht gelistet ist, kontaktieren Sie direkt unseren Online-Support."
+    },
+    "announcements": {
+      "title": "Neueste Ank?ndigungen",
+      "item1": "[Hinweis] Systemwartung am 4. Februar",
+      "item2": "[Event] Fr?hlingsfest-Aufladeaktion ist live",
+      "item3": "[Erinnerung] Vertrauen Sie keinen inoffiziellen Supportkonten"
+    },
+    "content": {
+      "imageAlt": "Bild"
+    },
+    "errors": {
+      "loadFailed": "Spieldetails konnten nicht geladen werden. Bitte versuchen Sie es sp?ter erneut"
+    },
+    "bannerAlt": "Banner"
+  }
+}

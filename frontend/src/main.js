@@ -1,9 +1,10 @@
-﻿import { createApp } from 'vue'
+import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import App from './App.vue'
 import router from './router'
 import i18nPlugin from './plugins/i18n'
-import { i18n } from './i18n/vue-i18n.config'
+import { ensureLocaleMessages, i18n } from './i18n/vue-i18n.config'
+import { resolveInitialLocale } from './i18n/locale-utils'
 import { motionRevealDirective } from './directives/motionReveal'
 import { magneticHoverDirective } from './directives/magneticHover'
 import { tiltSpotlightDirective } from './directives/tiltSpotlight'
@@ -23,4 +24,10 @@ app.directive('motion-reveal', motionRevealDirective)
 app.directive('magnetic', magneticHoverDirective)
 app.directive('tilt', tiltSpotlightDirective)
 
-app.mount('#app')
+const bootstrap = async () => {
+  await ensureLocaleMessages(resolveInitialLocale())
+  await router.isReady()
+  app.mount('#app')
+}
+
+void bootstrap()

@@ -1,0 +1,9 @@
+{
+  "userProfile": {
+    "dm": {
+      "placeholder": "输入消息...",
+      "sending": "发送中...",
+      "send": "发送"
+    }
+  }
+}

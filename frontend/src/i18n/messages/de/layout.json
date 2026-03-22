@@ -1,0 +1,29 @@
+{
+  "layout": {
+    "brandTagline": "Premium-Aufladeservice",
+    "themeScheme": "Themenvoreinstellung",
+    "cursorMode": "Cursormodus",
+    "toggleMobileMenu": "Mobilmenü umschalten",
+    "noCategory": "Keine Kategorien verfügbar",
+    "allNews": "Alle Neuigkeiten",
+    "faqCategory": "FAQ",
+    "noFaqContent": "Noch kein FAQ-Inhalt",
+    "newBadge": "NEU",
+    "topNews": "Top-Signale",
+    "footerEditorLabel": "Site-Fußzeile",
+    "cursorSoft": "Weich",
+    "cursorSystem": "System",
+    "cursorCrosshair": "Fadenkreuz",
+    "cursorNeon": "Neon",
+    "gameNewsCategory": "Spielnachrichten",
+    "guideCategory": "Führer",
+    "rechargeGuideCategory": "Aufladeanleitung",
+    "announcementCategory": "Ankündigungen",
+    "allGamesCategory": "Alle Spiele",
+    "internationalGamesCategory": "Internationale Spiele",
+    "hongKongTaiwanGamesCategory": "HK/TW-Spiele",
+    "southeastAsiaGamesCategory": "Südostasienspiele",
+    "copyright": "Alle Rechte vorbehalten © {year} {company}",
+    "logoutSuccess": "Erfolgreich abgemeldet"
+  }
+}

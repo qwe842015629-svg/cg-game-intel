@@ -1,25 +1,38 @@
-﻿<template>
-  <div class="min-h-screen bg-gray-50 text-gray-900">
-    <section class="border-b border-gray-200 bg-white">
-      <div class="mx-auto max-w-[1500px] px-4 pb-8 pt-12 md:px-6">
-        <span class="inline-flex rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-[11px] tracking-wider text-blue-600 font-semibold">
-          CG GAME INTEL ENGINE V2
-        </span>
-        <div class="mt-4 flex flex-wrap items-end justify-between gap-3">
-          <div>
-            <h1 class="text-3xl font-black tracking-tight md:text-5xl text-gray-900">CG 游戏百事通</h1>
-            <p class="mt-3 max-w-3xl text-sm leading-relaxed text-gray-500 md:text-base">
-              聚合全球榜单、开服情报、热门攻略和 Wiki 雷达，支持 CN/US/JP 榜单切换并自动标记「全球热门」。
-            </p>
-          </div>
-          <span class="text-xs text-gray-400">数据更新：{{ lastUpdated || "未同步" }}</span>
+﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿<template>
+  <div class="wiki-galaxy min-h-screen bg-white text-slate-900 pb-20">
+    <!-- Header Section -->
+    <header class="wiki-galaxy-header bg-white border-b border-slate-200 sticky top-0 z-30 shadow-sm/50 backdrop-blur-md bg-white/90">
+      <div class="mx-auto max-w-[1600px] px-4 h-16 flex items-center justify-between">
+        <div class="flex items-center gap-4">
+           <div class="flex items-center gap-2">
+             <span class="h-8 w-8 rounded-lg bg-blue-600 flex items-center justify-center text-white font-black italic text-lg shadow-blue-200 shadow-lg">CG</span>
+             <h1 class="text-xl font-black tracking-tight text-slate-900">GAME INTEL <span class="text-blue-600">HUB</span></h1>
+           </div>
+           <div class="hidden md:flex h-6 w-px bg-slate-200 mx-2"></div>
+           <div class="hidden md:flex items-center gap-2 bg-slate-100/50 p-1 rounded-lg">
+             <span class="px-4 py-1.5 text-sm font-bold bg-white text-blue-600 shadow-sm ring-1 ring-black/5 rounded-md flex items-center gap-2">
+               <BarChart3 class="w-4 h-4" />
+               {{ t("cgWikiPage.header.rankMonitor") }}
+             </span>
+              <button 
+                @click="triggerUpdate" 
+                class="px-3 py-1.5 text-xs font-bold bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 rounded-md shadow-sm transition-colors flex items-center gap-1.5 disabled:opacity-50 disabled:cursor-not-allowed"
+                :disabled="isUpdating"
+              >
+               <RefreshCw class="w-3.5 h-3.5" :class="{'animate-spin': isUpdating}" />
+                {{ isUpdating ? t("cgWikiPage.header.updating") : t("cgWikiPage.header.update") }}
+              </button>
+           </div>
+        </div>
+        <div class="text-xs font-mono text-slate-400">
+          SYNC: {{ lastUpdated || "WAITING..." }}
         </div>
       </div>
-    </section>
+    </header>
 
-    <!-- Top Horizontal Ticker (Marquee) -->
-    <div class="border-b border-gray-200 bg-white overflow-hidden relative group shadow-sm z-10">
-      <div class="mx-auto max-w-[1600px] px-4 md:px-6">
+    <!-- Marquee Section -->
+    <div class="wiki-galaxy-ticker border-b border-slate-200 bg-white overflow-hidden relative group shadow-sm z-20">
+      <div class="mx-auto max-w-[1600px] px-4">
         <div class="flex items-center gap-2 py-2 marquee-horizontal-wrapper overflow-hidden" :class="{ 'paused': isMarqueePaused }" @mouseenter="isMarqueePaused = true" @mouseleave="isMarqueePaused = false">
           <div class="flex items-center gap-8 whitespace-nowrap marquee-horizontal-content">
              <a 
@@ -28,7 +41,7 @@
                :href="item.link" 
                target="_blank" 
                rel="noopener noreferrer"
-               class="flex items-center gap-2 hover:opacity-80 transition-opacity text-sm text-gray-600 hover:text-blue-600"
+               class="flex items-center gap-2 hover:opacity-80 transition-opacity text-sm text-slate-600 hover:text-blue-600"
              >
                <span 
                  class="px-1.5 py-0.5 rounded text-[10px] font-bold uppercase"
@@ -43,204 +56,175 @@
       </div>
     </div>
 
-    <main class="mx-auto grid max-w-[1600px] grid-cols-1 gap-6 px-4 py-6 md:px-6 xl:grid-cols-[300px_minmax(0,1fr)_340px] h-[calc(100vh-220px)] min-h-[750px]">
-      <aside class="space-y-6 flex flex-col h-full overflow-hidden">
-        <section class="panel-card p-5 flex-shrink-0">
-          <div class="flex items-center justify-between">
-            <h2 class="text-base font-bold text-gray-800">市场晴雨表</h2>
-            <span class="text-[11px] text-gray-400">海外手游热度分布</span>
+    <main class="wiki-galaxy-main mx-auto max-w-[1600px] grid grid-cols-1 xl:grid-cols-[340px_1fr] gap-8 px-4 py-8 items-start">
+      
+      <!-- Left Sidebar -->
+      <aside class="space-y-6 xl:sticky xl:top-24">
+        <!-- Market Heat -->
+        <section class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm">
+          <div class="flex items-center justify-between mb-4">
+            <h2 class="text-sm font-bold text-slate-800 flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse"></span>
+              {{ t("cgWikiPage.sidebar.marketHeat") }}
+            </h2>
           </div>
-          <div class="mt-4 flex justify-center">
+          <div class="flex justify-center mb-4">
             <div class="gauge-ring" :style="marketGaugeStyle">
-              <div class="gauge-center">
-                <p class="text-[10px] uppercase tracking-wider text-gray-400">Heat</p>
-                <p class="text-xl font-black text-gray-800">{{ totalHeatScore }}</p>
+              <div class="gauge-center flex-col">
+                <p class="text-[10px] uppercase text-slate-400 font-bold">HEAT INDEX</p>
+                <p class="text-2xl font-black text-slate-800">{{ totalHeatScore }}</p>
               </div>
             </div>
           </div>
-          <ul class="mt-4 space-y-2">
-            <li v-for="slice in marketHeat" :key="slice.region" class="heat-row" :style="{ borderColor: `${slice.color}66` }">
-              <div class="flex items-center gap-2">
-                <span class="h-2.5 w-2.5 rounded-full" :style="{ backgroundColor: slice.color }"></span>
-                <span class="text-xs text-gray-600">{{ slice.label }}</span>
-              </div>
-              <span class="text-xs font-semibold text-gray-800">{{ slice.percent.toFixed(1) }}%</span>
-            </li>
-          </ul>
+          <div class="grid grid-cols-2 gap-2">
+             <div v-for="slice in marketHeat" :key="slice.region" class="flex items-center justify-between p-2 rounded-lg bg-slate-50 border border-slate-100">
+               <div class="flex items-center gap-1.5">
+                 <span class="w-2 h-2 rounded-full" :style="{ background: slice.color }"></span>
+                 <span class="text-xs text-slate-600 font-medium">{{ slice.label }}</span>
+               </div>
+               <span class="text-xs font-bold text-slate-800">{{ slice.percent.toFixed(0) }}%</span>
+             </div>
+          </div>
         </section>
 
-        <section class="panel-card p-5 flex-1 flex flex-col min-h-0">
-          <div class="flex items-center justify-between mb-4">
-            <h2 class="text-base font-bold text-gray-800">开服时间轴</h2>
-            <span class="text-[11px] text-gray-400">纵向卡片流</span>
-          </div>
-          <div class="relative flex-1 overflow-auto pr-1 timeline-scroll">
-            <div class="absolute bottom-1 left-[9px] top-1 w-px bg-gray-200"></div>
-            <article v-for="item in timelineReleases" :key="item.id" class="timeline-item group hover:border-blue-300 hover:bg-blue-50/30 transition-colors">
-              <span class="timeline-dot"></span>
-              <img :src="item.thumbnail || defaultCover" :alt="item.title" class="h-10 w-10 rounded-lg border border-gray-200 bg-gray-100 object-cover" @error="onImageError" />
-              <div class="min-w-0 flex-1">
-                <h3 class="truncate text-sm font-semibold text-gray-800 group-hover:text-blue-600">{{ item.title }}</h3>
-                <p class="mt-1 truncate text-[11px] text-gray-500">{{ item.genre }} · {{ item.publisher || "未知发行商" }}</p>
-                <p class="mt-1 text-[10px] text-blue-500 font-medium">{{ formatRelease(item.release_date) }} · {{ releasePhase(item.release_date) }}</p>
-              </div>
-              <button type="button" class="mini-btn" @click="openLink(item.game_url)">详情</button>
-            </article>
-          </div>
+        <!-- Wiki Console -->
+        <section class="game-console-frame p-3 rounded-[20px] bg-slate-800 shadow-xl border-b-4 border-r-4 border-slate-900 relative">
+           <!-- Screen Bezel -->
+           <div class="bg-[#0f172a] rounded-[12px] p-3 shadow-inner border border-slate-700 relative overflow-hidden">
+             
+             <!-- Screen Glare/Reflection -->
+             <div class="absolute top-0 right-0 w-full h-full bg-gradient-to-bl from-white/5 to-transparent pointer-events-none z-10 rounded-[12px]"></div>
+             
+             <!-- Header / Status Bar -->
+             <div class="flex items-center justify-between mb-2 px-1">
+                <div class="flex gap-1.5">
+                   <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
+                   <span class="w-2 h-2 rounded-full bg-yellow-500"></span>
+                </div>
+                <span class="text-[11px] font-mono text-emerald-300 font-bold tracking-wide">WIKI_NET_LINK <span class="ml-1 font-black text-emerald-200">{{ t("cgWikiPage.sidebar.wikiDirect") }}</span></span>
+             </div>
+
+             <!-- CRT Screen Content -->
+             <div class="bg-[#030b15] rounded-md h-[160px] overflow-hidden relative border border-emerald-500/30 shadow-[inset_0_0_14px_rgba(0,0,0,0.75)]">
+                <!-- Scanline Effect -->
+                <div class="absolute inset-0 z-20 pointer-events-none bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.12)_50%),linear-gradient(90deg,rgba(255,0,0,0.03),rgba(0,255,0,0.015),rgba(0,0,255,0.03))] bg-[length:100%_4px,3px_100%]"></div>
+                
+                <!-- Scrolling Content -->
+                <div class="wiki-scroll-container h-full">
+                   <div class="wiki-scroll-content space-y-2 p-2">
+                      <!-- Duplicated list for infinite scroll -->
+                      <a v-for="(wiki, i) in [...famousWikis, ...famousWikis]" :key="i" :href="wiki.url" target="_blank" class="flex items-center justify-between group hover:bg-emerald-500/20 p-1.5 rounded border border-emerald-500/15 hover:border-emerald-300/70 transition-all cursor-pointer">
+                         <div class="flex flex-col">
+                            <span class="text-base font-black text-emerald-300 font-mono group-hover:text-emerald-100 drop-shadow-[0_0_6px_rgba(16,185,129,0.45)]">>> {{ wiki.name }}</span>
+                            <span class="text-xs text-emerald-200/90 font-mono uppercase">{{ wiki.desc }}</span>
+                         </div>
+                         <span class="text-xs text-emerald-200 opacity-80 group-hover:opacity-100 font-mono font-bold">[GO]</span>
+                      </a>
+                   </div>
+                </div>
+             </div>
+
+             <!-- Console Controls Decoration -->
+             <div class="mt-2 flex justify-between items-center px-2">
+                <div class="flex gap-1">
+                   <div class="w-8 h-2 bg-slate-700 rounded-full"></div>
+                   <div class="w-2 h-2 bg-slate-700 rounded-full"></div>
+                </div>
+                <div class="text-[9px] font-black text-slate-600 font-mono">GAME_BOY_WIKI</div>
+             </div>
+           </div>
+        </section>
+
+        <!-- News Feed -->
+        <section class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden flex flex-col max-h-[600px]">
+           <div class="p-4 border-b border-slate-100 bg-slate-50/50 flex justify-between items-center">
+             <h2 class="text-sm font-bold text-slate-800">{{ t("cgWikiPage.sidebar.newsFeed") }}</h2>
+             <span class="text-[10px] px-1.5 py-0.5 bg-blue-100 text-blue-600 rounded font-bold">LIVE</span>
+           </div>
+           <div class="overflow-y-auto custom-scrollbar p-2 space-y-1">
+              <a v-for="(item, idx) in strategies" :key="idx" :href="item.link" target="_blank" class="block p-2 rounded-lg hover:bg-slate-50 transition-colors group">
+                 <div class="flex items-start justify-between gap-2">
+                    <span class="text-xs font-medium text-slate-700 leading-snug group-hover:text-blue-600">{{ item.title }}</span>
+                 </div>
+                 <div class="mt-1.5 flex items-center justify-between">
+                    <span class="text-[10px] text-slate-400">{{ item.source }} · {{ formatFeedTime(item.time) }}</span>
+                 </div>
+              </a>
+           </div>
         </section>
       </aside>
 
-      <section class="panel-card p-5 md:p-6 flex flex-col h-full overflow-hidden">
-        <div class="flex flex-wrap items-center justify-between gap-3 mb-4 flex-shrink-0">
-          <div class="flex items-center gap-2">
-            <h2 class="text-lg font-black md:text-xl text-gray-900">全球榜单竞技场</h2>
+      <!-- Main Content Area -->
+      <section class="min-w-0 space-y-6">
+         
+         <!-- Region Select -->
+         <div class="bg-white rounded-2xl border border-slate-200 p-1 shadow-sm flex flex-wrap gap-1 sticky top-20 z-20">
             <button 
-              type="button" 
-              class="p-1 hover:bg-gray-100 rounded-full transition-colors"
-              @click="loadData"
-              title="手动更新榜单"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400 hover:text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-              </svg>
-            </button>
-          </div>
-          <div class="tab-wrap">
-            <button
-              v-for="region in rankingRegions"
+              v-for="region in rankingRegions" 
               :key="region"
-              type="button"
-              class="tab-btn"
-              :class="{ active: activeRankingRegion === region }"
               @click="activeRankingRegion = region"
+              class="flex-1 px-4 py-3 rounded-xl text-sm font-bold transition-all relative overflow-hidden group"
+              :class="activeRankingRegion === region ? 'bg-blue-50 text-blue-600 shadow-inner' : 'text-slate-500 hover:bg-slate-50 hover:text-slate-700'"
             >
-              {{ regionLabelMap[region] }}
+              <span class="relative z-10">{{ regionLabel(region) }}</span>
+              <span v-if="activeRankingRegion === region" class="absolute bottom-0 left-0 w-full h-0.5 bg-blue-500"></span>
             </button>
-          </div>
-        </div>
+         </div>
 
-        <article v-if="topGame" class="top-spotlight mb-5 flex-shrink-0" :style="spotlightStyle">
-          <div class="absolute inset-0 bg-white/90 backdrop-blur-sm"></div>
-          <div class="relative z-10 flex flex-col gap-3 p-5 md:flex-row md:items-end md:justify-between">
-            <div>
-              <p class="text-xs uppercase tracking-[0.2em] text-blue-600 font-bold">Top 1 Featured</p>
-              <h3 class="mt-2 text-2xl font-black md:text-3xl text-gray-900">{{ topGame.title }}</h3>
-              <p class="mt-1 text-sm text-gray-500">{{ topGame.author || "未知发行商" }}</p>
-              <div class="mt-3 flex flex-wrap items-center gap-2">
-                <span class="badge-rank">#{{ topGame.rank }}</span>
-                <span v-if="topGame.global_hot" class="badge-global">全球热门</span>
-              </div>
+         <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+            <!-- Top 1 Highlight -->
+            <div v-if="topGame" class="p-6 md:p-8 bg-slate-50 border-b border-slate-100 group cursor-pointer hover:bg-slate-100 transition-colors" @click="openLink(topGame.url)">
+               <div class="flex items-end justify-between gap-4">
+                  <div class="min-w-0">
+                     <div class="flex items-center gap-2 mb-2">
+                        <span class="px-2 py-0.5 bg-yellow-400 text-yellow-900 text-xs font-black rounded shadow-lg shadow-yellow-400/20">TOP 1</span>
+                        <span class="px-2 py-0.5 bg-slate-100 text-slate-700 text-xs font-bold rounded">Featured</span>
+                     </div>
+                     <h2 class="text-2xl md:text-3xl font-black text-slate-900 mb-1 truncate">{{ topGame.title }}</h2>
+                     <p class="text-slate-500 text-sm font-medium truncate">{{ topGame.author }}</p>
+                  </div>
+                  <button class="hidden md:flex items-center gap-2 px-4 py-2 bg-slate-900 text-white rounded-lg font-bold hover:bg-slate-700 transition-colors">
+                     {{ t("cgWikiPage.common.viewDetails") }}
+                     <ArrowRight class="w-4 h-4" />
+                  </button>
+               </div>
             </div>
-            <div class="flex items-center gap-3">
-              <img :src="topGame.icon || defaultCover" :alt="topGame.title" class="h-16 w-16 rounded-2xl border border-gray-200 object-cover shadow-md" @error="onImageError" />
-              <button type="button" class="mini-btn text-blue-600 border-blue-200 hover:bg-blue-50" @click="openLink(topGame.url)">查看详情</button>
-            </div>
-          </div>
-        </article>
 
-        <div :key="activeRankingRegion" class="flex-1 overflow-y-auto pr-2 custom-scrollbar relative min-h-0">
-          <TransitionGroup name="rank-stagger" tag="div" class="space-y-3">
-            <article
-              v-for="(game, index) in currentRanking"
-              :key="`${activeRankingRegion}-${game.id}-${game.rank}`"
-              class="rank-row group"
-              :class="{ 'rank-row-top3': game.rank <= 3 }"
-              :style="{ '--stagger-delay': `${Math.min(index * 20, 1000)}ms`, '--from-x': index % 2 === 0 ? '-26px' : '26px' }"
-            >
-              <div class="rank-no" :class="{ top: game.rank <= 3 }">{{ game.rank }}</div>
-              <img :src="game.icon || defaultCover" :alt="game.title" loading="lazy" class="h-10 w-10 rounded-lg border border-gray-200 bg-gray-50 object-cover group-hover:scale-105 transition-transform" @error="onImageError" />
-              <div class="min-w-0 flex-1">
-                <h4 class="truncate text-sm font-semibold text-gray-800 group-hover:text-blue-600 transition-colors">{{ game.title }}</h4>
-                <p class="truncate text-[11px] text-gray-500">{{ game.author || "未知" }}</p>
-              </div>
-              <span v-if="game.global_hot" class="global-tag">全球热门</span>
-              <button type="button" class="mini-btn" @click="openLink(game.url)">跳转</button>
-            </article>
-          </TransitionGroup>
-        </div>
+            <!-- Ranking List (Infinite Scroll) -->
+            <div class="divide-y divide-slate-100">
+               <article v-for="(game, idx) in currentRanking" :key="game.id" class="p-4 hover:bg-slate-50 transition-colors flex items-center gap-4 group">
+                  <div class="w-12 text-center flex-shrink-0">
+                     <span class="text-xl font-black italic" :class="idx < 3 ? 'text-blue-500' : 'text-slate-300'">#{{ game.rank }}</span>
+                  </div>
+                  <img :src="game.icon || defaultCover" class="h-14 w-14 rounded-xl shadow-sm border border-slate-200 object-cover bg-white" loading="lazy" @error="onImageError">
+                  <div class="flex-1 min-w-0">
+                     <h3 class="text-base font-bold text-slate-800 group-hover:text-blue-600 transition-colors truncate">{{ game.title }}</h3>
+                     <p class="text-xs text-slate-500 mt-0.5 truncate">{{ game.author }}</p>
+                     <div class="mt-1.5 flex gap-2">
+                        <span v-if="game.global_hot" class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[10px] font-bold bg-green-50 text-green-600 border border-green-100">
+                          <Flame class="w-3 h-3" />
+                          {{ t("cgWikiPage.common.globalHot") }}
+                        </span>
+                     </div>
+                  </div>
+                  <button @click="openLink(game.url)" class="px-3 py-1.5 rounded-lg bg-slate-50 text-slate-600 text-xs font-bold hover:bg-blue-50 hover:text-blue-600 transition-colors border border-slate-200">
+                     Go
+                  </button>
+               </article>
+            </div>
+            <div class="px-4 py-3 border-t border-slate-100 text-right text-xs text-slate-400">
+              {{ t("cgWikiPage.footer.dataSourceAppleStore") }}
+            </div>
+         </div>
+
       </section>
 
-      <aside class="space-y-6 flex flex-col h-full overflow-hidden">
-        <section class="panel-card p-5 flex-1 flex flex-col min-h-0 overflow-hidden">
-          <div class="flex items-center justify-between mb-4 flex-shrink-0">
-            <h2 class="text-base font-bold text-gray-800">海内外游戏热榜</h2>
-            <div class="flex items-center gap-2">
-               <span class="text-[10px] text-gray-400">实时滚动</span>
-               <button 
-                 type="button" 
-                 class="p-1 hover:bg-gray-100 rounded-full transition-colors"
-                 @click="loadData"
-                 title="手动更新情报"
-               >
-                 <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 text-gray-400 hover:text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                 </svg>
-               </button>
-            </div>
-          </div>
-          
-          <div class="flex-1 overflow-y-auto pr-1 custom-scrollbar space-y-2 min-h-0">
-              <a
-                v-for="(item, idx) in strategies"
-                :key="`list-${idx}`"
-                :href="item.link"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="block group/item border-b border-gray-100 pb-2 last:border-0 hover:bg-gray-50 p-2 rounded-md transition-colors"
-              >
-                <div class="flex flex-col gap-1.5">
-                  <div class="flex items-center justify-between">
-                     <span 
-                       class="px-1.5 py-0.5 rounded-[4px] text-[10px] font-bold shadow-sm"
-                       :class="sourceColorMap[item.source] || sourceColorMap['default']"
-                     >
-                       {{ item.source }}
-                     </span>
-                     <span class="text-[10px] text-gray-400 font-mono">{{ item.time.substring(5) }}</span>
-                  </div>
-                  <h3 class="text-[13px] leading-snug font-medium text-gray-700 group-hover/item:text-blue-600 transition-colors line-clamp-2">
-                      {{ item.title }}
-                  </h3>
-                  <div class="flex justify-end mt-0.5 opacity-0 group-hover/item:opacity-100 transition-opacity">
-                    <span class="text-[10px] text-blue-500 flex items-center gap-0.5 cursor-pointer hover:underline">
-                      阅读原文 
-                      <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-                      </svg>
-                    </span>
-                  </div>
-                </div>
-              </a>
-          </div>
-        </section>
-
-        <section class="panel-card p-0 h-[200px] flex-shrink-0 flex flex-col overflow-hidden bg-gray-900 border-gray-800">
-          <div class="flex items-center justify-between px-4 py-2 bg-gray-800 border-b border-gray-700">
-            <h2 class="text-xs font-bold text-gray-300 font-mono">TERMINAL > WIKI_LOG</h2>
-            <span class="text-[10px] text-gray-500 animate-pulse">● LIVE</span>
-          </div>
-          <div class="terminal-screen flex-1">
-            <p v-for="(line, idx) in terminalLines" :key="`term-${idx}-${line.link}`" class="terminal-line">
-              <span class="terminal-time">[{{ formatTerminalTime(line.time) }}]</span>
-              <a :href="line.link" target="_blank" rel="noopener noreferrer" class="hover:underline hover:text-white transition-colors">{{ line.title }}</a>
-            </p>
-            <p v-if="terminalLines.length === 0" class="terminal-line text-gray-600">[WAITING] Connecting to Wiki feed...</p>
-            <p class="terminal-cursor">_</p>
-          </div>
-        </section>
-      </aside>
     </main>
 
-    <div v-if="isLoading" class="fixed inset-0 z-40 grid place-items-center bg-white/80 backdrop-blur-sm">
-      <div class="rounded-xl border border-gray-200 bg-white shadow-xl px-5 py-4 text-center">
-        <div class="loader-spin mx-auto"></div>
-        <p class="mt-3 text-xs text-gray-500">情报引擎加载中...</p>
-      </div>
-    </div>
-
-    <div v-if="loadError && !isLoading" class="mx-auto max-w-[1500px] px-4 pb-6 md:px-6">
-      <div class="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-600">
-        {{ loadError }}
+    <div v-if="isLoading" class="fixed inset-0 z-50 flex items-center justify-center bg-white/80 backdrop-blur-sm">
+      <div class="bg-white p-6 rounded-2xl shadow-xl border border-slate-100 flex flex-col items-center">
+        <div class="loader-spin mb-3"></div>
+        <span class="text-xs font-bold text-slate-500 tracking-wider">LOADING DATA...</span>
       </div>
     </div>
   </div>
@@ -248,8 +232,10 @@
 
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref, watch } from "vue"
-import { useLanguageStore } from "../stores/language"
+import { ArrowRight, BarChart3, Flame, RefreshCw } from "lucide-vue-next"
+import { useI18n } from "../composables/useI18n"
 
+const { t, locale } = useI18n()
 type RankingRegion = "CN" | "US" | "JP" | "HK" | "TW" | "SEA"
 
 interface RankingGame {
@@ -261,16 +247,6 @@ interface RankingGame {
   url: string
   global_hot: boolean
   global_hot_regions: string[]
-}
-
-interface ReleaseGame {
-  id: string
-  title: string
-  thumbnail: string
-  genre: string
-  publisher?: string
-  release_date: string
-  game_url: string
 }
 
 interface StrategyFeedItem {
@@ -294,37 +270,30 @@ interface WikiFeedItem {
 interface HubPayload {
   last_updated: string
   rankings: Record<RankingRegion, RankingGame[]>
-  new_releases: ReleaseGame[]
   strategies: StrategyFeedItem[]
   wiki_radar: WikiFeedItem[]
 }
 
-interface LegacyRawGame {
-  id: string
-  title: string
-  thumbnail?: string
-  icon?: string
-  game_url?: string
-  genre?: string
-  publisher?: string
+interface NewReleaseFeedItem {
+  id?: string
+  title?: string
+  url?: string
+  link?: string
+  source?: string
+  platform?: string
+  region?: string
+  status?: string
   release_date?: string
 }
 
-interface LegacyPayload {
-  last_updated: string
-  hot_games?: LegacyRawGame[]
-  new_releases?: Record<string, LegacyRawGame[]>
-}
-
-const languageStore = useLanguageStore()
 const rankingRegions: RankingRegion[] = ["CN", "US", "JP", "HK", "TW", "SEA"]
-const regionLabelMap: Record<RankingRegion, string> = { 
-  CN: "中国区", 
-  US: "美国区", 
-  JP: "日本区",
-  HK: "香港区",
-  TW: "台湾区",
-  SEA: "东南亚"
+const regionLabelKeyMap: Record<RankingRegion, string> = {
+  CN: "cgWikiPage.regions.cn",
+  US: "cgWikiPage.regions.us",
+  JP: "cgWikiPage.regions.jp",
+  HK: "cgWikiPage.regions.hk",
+  TW: "cgWikiPage.regions.tw",
+  SEA: "cgWikiPage.regions.sea",
 }
 const colorMap: Record<RankingRegion, string> = { 
   CN: "#22d3ee", 
@@ -336,53 +305,37 @@ const colorMap: Record<RankingRegion, string> = {
 }
 
 const sourceColorMap: Record<string, string> = {
-  "巴哈姆特": "tag-emerald",
-  "机核网": "tag-red",
-  "触乐": "tag-amber",
-  "爱玩网": "tag-rose",
+  "IGN中国": "tag-red",
+  "机核": "tag-amber",
   "游研社": "tag-indigo",
-  "4Gamers": "tag-green",
-  "Yahoo电竞": "tag-purple",
-  "DoNews游戏": "tag-blue",
+  "3DM": "tag-blue",
   "游民星空": "tag-orange",
+  "巴哈姆特": "tag-emerald",
   "default": "tag-slate"
 }
 
 const defaultCover = "https://placehold.co/96x96/0f172a/94a3b8?text=GAME"
 
-const keywordWeights: Record<string, number> = {
-  "tier list": 4,
-  meta: 3,
-  build: 3,
-  guide: 2,
-  best: 1,
-  reroll: 2,
-  codes: 1,
-}
-
-const genreAliasMap: Record<string, string> = {
-  "Role Playing": "角色扮演",
-  RolePlaying: "角色扮演",
-  Action: "动作",
-  Adventure: "冒险",
-  Strategy: "策略",
-  Casual: "休闲",
-  Shooter: "射击",
-}
-
-const titleAliasById: Record<string, string> = {
-  "com.miHoYo.GenshinImpact": "原神",
-  "com.blizzard.diablo.immortal": "暗黑破坏神：不朽",
-  "com.levelinfinite.sgameGlobal": "王者荣耀国际服",
-}
+const famousWikis = [
+  { name: "Fandom", url: "https://www.fandom.com/", desc: "全球最大维基平台" },
+  { name: "BWiki", url: "https://wiki.biligame.com/", desc: "B站游戏WIKI" },
+  { name: "灰机Wiki", url: "https://www.huijiwiki.com/", desc: "硬核数据资料库" },
+  { name: "萌娘百科", url: "https://zh.moegirl.org.cn/", desc: "万物皆可萌" },
+  { name: "Liquipedia", url: "https://liquipedia.net/", desc: "电竞赛事百科" },
+  { name: "Fextralife", url: "https://fextralife.com/", desc: "魂系/RPG百科" },
+  { name: "Bulbapedia", url: "https://bulbapedia.bulbagarden.net/", desc: "宝可梦百科" },
+  { name: "UESP", url: "https://en.uesp.net/", desc: "上古卷轴百科" },
+  { name: "NGA", url: "https://bbs.nga.cn/", desc: "精英玩家论坛" },
+  { name: "巴哈姆特", url: "https://forum.gamer.com.tw/", desc: "华人最大ACG社群" },
+]
 
 const rankings = ref<Record<RankingRegion, RankingGame[]>>({ CN: [], US: [], JP: [], HK: [], TW: [], SEA: [] })
-const newReleases = ref<ReleaseGame[]>([])
 const strategies = ref<StrategyFeedItem[]>([])
 const wikiRadar = ref<WikiFeedItem[]>([])
 const activeRankingRegion = ref<RankingRegion>("CN")
 const lastUpdated = ref("")
 const isLoading = ref(true)
+const isUpdating = ref(false)
 const isMarqueePaused = ref(false)
 const loadError = ref("")
 const terminalLines = ref<WikiFeedItem[]>([])
@@ -390,17 +343,18 @@ const terminalPointer = ref(0)
 let terminalTimer: ReturnType<typeof setInterval> | null = null
 
 const rankingTotal = computed(() => rankingRegions.reduce((sum, region) => sum + (rankings.value[region]?.length || 0), 0))
-const highValueCount = computed(() => strategies.value.filter((item) => item.is_high_value).length)
 const currentRanking = computed(() => rankings.value[activeRankingRegion.value] || [])
 const topGame = computed(() => currentRanking.value[0] || null)
-const timelineReleases = computed(() =>
-  [...newReleases.value].sort((a, b) => parseDate(b.release_date).getTime() - parseDate(a.release_date).getTime()).slice(0, 12)
-)
+const regionLabel = (region: RankingRegion): string => {
+  // Ensure reactivity when locale switches.
+  void locale.value
+  return t(regionLabelKeyMap[region])
+}
 
 const marketHeat = computed(() => {
   const raw = rankingRegions.map((region) => {
     const score = (rankings.value[region] || []).reduce((sum, game) => sum + Math.max(16 - game.rank, 1) + (game.global_hot ? 6 : 0), 0)
-    return { region, label: regionLabelMap[region], score, percent: 0, color: colorMap[region] }
+    return { region, label: regionLabel(region), score, percent: 0, color: colorMap[region] }
   })
   const total = raw.reduce((sum, row) => sum + row.score, 0)
   if (total <= 0) return raw
@@ -420,49 +374,37 @@ const marketGaugeStyle = computed(() => {
   return { background: `conic-gradient(${parts.join(", ")})` }
 })
 
-const spotlightStyle = computed(() => {
-  if (!topGame.value) return {}
-  return {
-    backgroundImage: `linear-gradient(120deg, rgba(255, 255, 255, 0.95), rgba(243, 244, 246, 0.85)), url(${topGame.value.icon || defaultCover})`,
-    backgroundPosition: "center",
-    backgroundSize: "cover",
-  }
-})
-
-const parseDate = (value: string): Date => {
-  if (!value) return new Date(0)
-  const normalized = value.includes(" ") ? value.replace(" ", "T") : value
-  const date = new Date(normalized)
-  return Number.isNaN(date.getTime()) ? new Date(0) : date
-}
-
-const formatRelease = (value: string): string => {
-  const date = parseDate(value)
-  return date.getTime() ? date.toLocaleDateString("zh-CN", { month: "2-digit", day: "2-digit" }) : "日期待定"
+const parseDate = (dateStr: string): Date => {
+  if (!dateStr) return new Date()
+  let safeStr = dateStr.replace(/-/g, "/") 
+  let d = new Date(safeStr)
+  if (!isNaN(d.getTime())) return d
+  d = new Date(dateStr)
+  if (!isNaN(d.getTime())) return d
+  return new Date()
 }
 
 const formatFeedTime = (value: string): string => {
-  const date = parseDate(value)
-  return date.getTime()
-    ? date.toLocaleString("zh-CN", { month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", hour12: false })
-    : "刚刚"
+  if (!value) return ""
+  try {
+    const date = new Date(value)
+    if (isNaN(date.getTime())) return value
+    const month = (date.getMonth() + 1).toString().padStart(2, "0")
+    const day = date.getDate().toString().padStart(2, "0")
+    const hours = date.getHours().toString().padStart(2, "0")
+    const minutes = date.getMinutes().toString().padStart(2, "0")
+    return `${month}/${day} ${hours}:${minutes}`
+  } catch (e) {
+    return value
+  }
 }
 
 const formatTerminalTime = (value: string): string => {
   const date = parseDate(value)
+  const localeCode = String(locale.value || "en-US")
   return date.getTime()
-    ? date.toLocaleTimeString("zh-CN", { hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false })
+    ? date.toLocaleTimeString(localeCode, { hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false })
     : "00:00:00"
-}
-
-const releasePhase = (value: string): string => {
-  const d = parseDate(value)
-  if (!d.getTime()) return "持续更新"
-  const diff = Math.floor((Date.now() - d.getTime()) / (24 * 60 * 60 * 1000))
-  if (diff < 0) return `预计 ${Math.abs(diff)} 天后开服`
-  if (diff <= 3) return "新服冲榜期"
-  if (diff <= 10) return "活跃窗口"
-  return "稳定运营"
 }
 
 const inferTitleFromId = (id: string): string => {
@@ -471,18 +413,7 @@ const inferTitleFromId = (id: string): string => {
 }
 
 const normalizeTitle = (id: string, title: string): string => {
-  if (titleAliasById[id]) return titleAliasById[id]
   return title || inferTitleFromId(id)
-}
-
-const normalizeGenre = (genre: string): string => {
-  if (!genre) return "综合"
-  return genreAliasMap[genre] || genre
-}
-
-const keywordWeight = (text: string): number => {
-  const lower = text.toLowerCase()
-  return Object.entries(keywordWeights).reduce((sum, [key, weight]) => (lower.includes(key) ? sum + weight : sum), 0)
 }
 
 const normalizeRankingEntry = (entry: any, rank: number): RankingGame => ({
@@ -490,7 +421,7 @@ const normalizeRankingEntry = (entry: any, rank: number): RankingGame => ({
   rank: Number(entry?.rank || rank),
   title: normalizeTitle(String(entry?.id || ""), String(entry?.title || "")),
   icon: String(entry?.icon || ""),
-  author: String(entry?.author || entry?.artist || "未知"),
+  author: String(entry?.author || entry?.artist || t("cgWikiPage.common.unknownAuthor")),
   url: String(entry?.url || entry?.link || ""),
   global_hot: Boolean(entry?.global_hot),
   global_hot_regions: Array.isArray(entry?.global_hot_regions) ? entry.global_hot_regions : [],
@@ -520,6 +451,97 @@ const applyGlobalHot = (raw: Record<RankingRegion, RankingGame[]>): Record<Ranki
 }
 
 const normalizeHubPayload = (payload: any): HubPayload => {
+  const normalizeStrategyRow = (row: any): StrategyFeedItem | null => {
+    const title = String(row?.title || row?.name || "").trim()
+    if (!title) return null
+    const link = String(row?.link || row?.url || "").trim()
+    const source = String(row?.source || row?.platform || row?.region || "Feed").trim()
+    const time = String(row?.time || row?.published || row?.release_date || payload?.last_updated || "")
+    return {
+      title,
+      link: link || "#",
+      is_high_value: Boolean(row?.is_high_value),
+      weight_score: Number(row?.weight_score || 0),
+      time,
+      source,
+      source_icon: String(row?.source_icon || ""),
+      image: String(row?.image || row?.icon || ""),
+    }
+  }
+
+  const normalizeWikiRadarRow = (row: any): WikiFeedItem | null => {
+    const title = String(row?.title || "").trim()
+    if (!title) return null
+    return {
+      title,
+      link: String(row?.link || row?.url || "#").trim() || "#",
+      time: String(row?.time || row?.published || payload?.last_updated || ""),
+      source: String(row?.source || "Wiki").trim() || "Wiki",
+    }
+  }
+
+  const dedupeStrategies = (items: StrategyFeedItem[]): StrategyFeedItem[] => {
+    const seen = new Set<string>()
+    const output: StrategyFeedItem[] = []
+    for (const item of items) {
+      const key = `${item.title}|${item.link}|${item.source}`.toLowerCase()
+      if (!key.trim() || seen.has(key)) continue
+      seen.add(key)
+      output.push(item)
+    }
+    return output
+  }
+
+  const rawStrategies = (payload?.strategies || payload?.news_feed || payload?.intel_feed || [])
+    .map(normalizeStrategyRow)
+    .filter(Boolean) as StrategyFeedItem[]
+
+  const releaseFallback = (payload?.new_releases || [])
+    .map((row: NewReleaseFeedItem) =>
+      normalizeStrategyRow({
+        title: row?.status ? `${String(row.title || "").trim()} · ${String(row.status).trim()}` : row?.title,
+        link: row?.url || row?.link || "",
+        source: row?.source || row?.platform || row?.region || "Release",
+        time: row?.release_date || payload?.last_updated || "",
+        image: row?.icon || "",
+      })
+    )
+    .filter(Boolean) as StrategyFeedItem[]
+
+  const wikiRadarFallback = (payload?.wiki_radar || [])
+    .map((row: any) =>
+      normalizeStrategyRow({
+        title: row?.title,
+        link: row?.link || row?.url || "",
+        source: row?.source || "Wiki",
+        time: row?.time || payload?.last_updated || "",
+      })
+    )
+    .filter(Boolean) as StrategyFeedItem[]
+
+  const strategyCandidates = rawStrategies.length
+    ? rawStrategies
+    : releaseFallback.length
+      ? releaseFallback
+      : wikiRadarFallback
+
+  const normalizedStrategies = dedupeStrategies(strategyCandidates)
+    .sort((a, b) => parseDate(b.time).getTime() - parseDate(a.time).getTime())
+    .slice(0, 80)
+
+  const normalizedWikiRadar = (payload?.wiki_radar || [])
+    .map(normalizeWikiRadarRow)
+    .filter(Boolean) as WikiFeedItem[]
+
+  const wikiRadarWithFallback = normalizedWikiRadar.length
+    ? normalizedWikiRadar
+    : releaseFallback.slice(0, 12).map((item) => ({
+        title: item.title,
+        link: item.link,
+        time: item.time,
+        source: item.source,
+      }))
+
   const rawRankings = {} as Record<RankingRegion, RankingGame[]>
   rankingRegions.forEach(region => {
     rawRankings[region] = (payload?.rankings?.[region] || []).map((row: any, idx: number) => normalizeRankingEntry(row, idx + 1))
@@ -528,93 +550,13 @@ const normalizeHubPayload = (payload: any): HubPayload => {
   return {
     last_updated: String(payload?.last_updated || ""),
     rankings: applyGlobalHot(rawRankings),
-    new_releases: (payload?.new_releases || []).map((row: any, idx: number) => ({
-      id: String(row?.id || `release-${idx + 1}`),
-      title: normalizeTitle(String(row?.id || ""), String(row?.title || "")),
-      thumbnail: String(row?.thumbnail || row?.icon || ""),
-      genre: normalizeGenre(String(row?.genre || "Game")),
-      publisher: String(row?.publisher || ""),
-      release_date: String(row?.release_date || ""),
-      game_url: String(row?.game_url || row?.url || ""),
-    })),
-    strategies: (payload?.strategies || []).map((row: any) => {
-      const score = Number(row?.weight_score || keywordWeight(String(row?.title || "")))
-      return {
-        title: String(row?.title || "未命名攻略"),
-        link: String(row?.link || "#"),
-        is_high_value: Boolean(row?.is_high_value ?? score >= 3),
-        weight_score: score,
-        time: String(row?.time || ""),
-        source: String(row?.source || "Feed"),
-        source_icon: String(row?.source_icon || ""),
-        image: String(row?.image || "")
-      }
-    }),
-    wiki_radar: (payload?.wiki_radar || []).map((row: any) => ({
-      title: String(row?.title || "Wiki 动态"),
-      link: String(row?.link || "#"),
-      time: String(row?.time || ""),
-      source: String(row?.source || "Wiki"),
-    })),
+    strategies: normalizedStrategies,
+    wiki_radar: wikiRadarWithFallback,
   }
-}
-
-const convertLegacyToHub = (legacy: LegacyPayload): HubPayload => {
-  // Legacy mapping (approximate)
-  const map: Partial<Record<RankingRegion, string>> = { CN: "hktw", US: "us", JP: "sea", HK: "hktw", TW: "hktw", SEA: "sea" }
-  const rankingRaw = {} as Record<RankingRegion, RankingGame[]>
-  
-  rankingRegions.forEach((region) => {
-    const legacyKey = map[region]
-    const list = legacyKey ? (legacy?.new_releases?.[legacyKey] || []) : []
-    rankingRaw[region] = list.slice(0, 15).map((game, idx) =>
-      normalizeRankingEntry(
-        {
-          id: game.id,
-          rank: idx + 1,
-          title: game.title,
-          icon: game.icon || game.thumbnail,
-          author: game.publisher || "未知",
-          url: game.game_url,
-          genre: game.genre || "Game",
-        },
-        idx + 1
-      )
-    )
-  })
-
-  const mergedReleases = [
-    ...(legacy?.new_releases?.hktw || []),
-    ...(legacy?.new_releases?.us || []),
-    ...(legacy?.new_releases?.sea || []),
-  ]
-
-  const legacyStrategies: StrategyFeedItem[] = (legacy?.hot_games || []).slice(0, 16).map((game) => {
-    const gameTitle = normalizeTitle(String(game.id || ""), String(game.title || ""))
-    const title = `${gameTitle || "Game"} Tier List Build Guide`
-    const score = keywordWeight(title)
-    return {
-      title,
-      link: `https://www.google.com/search?q=${encodeURIComponent((gameTitle || "game") + " Tier List Build Guide")}`,
-      is_high_value: score >= 3,
-      weight_score: score,
-      time: legacy.last_updated || new Date().toISOString(),
-      source: "LegacyHub",
-    }
-  })
-
-  return normalizeHubPayload({
-    last_updated: legacy.last_updated,
-    rankings: rankingRaw,
-    new_releases: mergedReleases,
-    strategies: legacyStrategies,
-    wiki_radar: legacyStrategies.slice(0, 8).map((row) => ({ title: `Wiki Mirror: ${row.title}`, link: row.link, time: row.time, source: "LegacyFallback" })),
-  })
 }
 
 const applyPayload = (payload: HubPayload): void => {
   rankings.value = payload.rankings || { CN: [], US: [], JP: [], HK: [], TW: [], SEA: [] }
-  newReleases.value = payload.new_releases || []
   strategies.value = payload.strategies || []
   wikiRadar.value = payload.wiki_radar || []
   lastUpdated.value = formatFeedTime(payload.last_updated)
@@ -647,34 +589,79 @@ const openLink = (url: string): void => {
   window.open(url, "_blank", "noopener,noreferrer")
 }
 
+const triggerUpdate = async (): Promise<void> => {
+  if (isUpdating.value) return
+  isUpdating.value = true
+  
+  try {
+    // 尝试调用后端更新接口
+    // 注意：这里假设后端已在 main/urls.py 中添加了 'wiki-update/' 路由
+    // 如果没有，或者跨域失败，这个请求会出错
+    let apiUrl = "/api/wiki-update/"
+    if (!window.location.hostname.includes("localhost")) {
+        // 生产环境可能需要完整路径或不同处理，暂时保持相对路径
+    }
+    
+    const response = await fetch(apiUrl)
+    
+    if (response.ok) {
+       // 更新成功后，重新加载数据
+       // 等待一小会儿确保文件写入完成
+       await new Promise(r => setTimeout(r, 1000))
+       await loadData()
+    } else {
+       console.warn("API update failed, trying fallback reload")
+       // 如果API调用失败（例如没有后端支持），至少重新加载数据
+       await loadData()
+    }
+  } catch (e) {
+    console.error("Update failed", e)
+    // 出错也尝试重载
+    await loadData()
+  } finally {
+    isUpdating.value = false
+  }
+}
+
 const loadData = async (): Promise<void> => {
   isLoading.value = true
   loadError.value = ""
   try {
-    const response = await fetch("/data/game_hub.json", { cache: "no-store" })
-    if (response.ok) {
-      applyPayload(normalizeHubPayload(await response.json()))
-    } else {
-      throw new Error(`game_hub.json: ${response.status}`)
+    loadError.value = ""
+    isLoading.value = true
+    const timestamp = new Date().getTime()
+    const remoteCandidates = [
+      `https://raw.githubusercontent.com/qwe842015629-svg/cg-game-intel/master/frontend/public/data/game_hub.json?t=${timestamp}`,
+      `https://raw.githubusercontent.com/qwe842015629-svg/cypher-frontend/main/frontend/public/data/game_hub.json?t=${timestamp}`,
+      `https://raw.githubusercontent.com/qwe842015629-svg/cypher-frontend/main/public/data/game_hub.json?t=${timestamp}`,
+    ]
+    const candidates = [`/data/game_hub.json?t=${timestamp}`, ...remoteCandidates]
+
+    let loaded = false
+    let lastError: unknown = null
+    for (const dataUrl of candidates) {
+      try {
+        const response = await fetch(dataUrl, { cache: "no-store" })
+        if (!response.ok) throw new Error(`Status ${response.status}`)
+        const data = await response.json()
+        applyPayload(normalizeHubPayload(data))
+        loaded = true
+        break
+      } catch (error) {
+        lastError = error
+      }
     }
+
+    if (!loaded) throw lastError || new Error("All wiki feed sources failed")
   } catch (error) {
-    console.warn("game_hub.json 加载失败，尝试回退到 games_sync.json", error)
-    try {
-      const response = await fetch("/data/games_sync.json", { cache: "no-store" })
-      if (!response.ok) throw new Error(`games_sync.json: ${response.status}`)
-      applyPayload(convertLegacyToHub((await response.json()) as LegacyPayload))
-      loadError.value = "当前显示的是兼容回退数据（games_sync.json）。"
-    } catch (fallbackError) {
-      console.error("CG 游戏百事通数据加载失败", fallbackError)
-      loadError.value = "数据加载失败，请稍后刷新或检查同步任务。"
-    }
+    console.warn("Failed to load wiki hub data from all sources", error)
+    loadError.value = t("cgWikiPage.errors.loadFailed")
   } finally {
     isLoading.value = false
   }
 }
 
-onMounted(() => {
-  if (languageStore.currentLocale !== "zh-CN") languageStore.setLocale("zh-CN")
+onMounted(async () => {
   void loadData()
 })
 
@@ -684,41 +671,76 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-.cg-hub-bg {
-  /* Removed dark gradients */
+.wiki-galaxy {
+  background:
+    radial-gradient(circle at 7% 0%, color-mix(in srgb, var(--primary-color) 15%, transparent) 0%, transparent 30%),
+    radial-gradient(circle at 95% 4%, color-mix(in srgb, #22c55e 14%, transparent) 0%, transparent 30%),
+    linear-gradient(180deg, #f8fbff 0%, #f5f9ff 100%);
 }
 
-.hero-metric {
-  border: 1px solid rgba(226, 232, 240, 1);
+.wiki-galaxy-header {
+  background:
+    radial-gradient(circle at 0% 0%, color-mix(in srgb, var(--primary-color) 14%, transparent) 0%, transparent 52%),
+    linear-gradient(180deg, color-mix(in srgb, #ffffff 90%, #f4f8ff 10%) 0%, #ffffff 100%) !important;
+  border-bottom-color: #d6e3f4 !important;
+  box-shadow: 0 16px 32px -30px rgba(15, 23, 42, 0.35);
+}
+
+.wiki-galaxy-ticker {
+  border-color: #d9e5f4 !important;
+  background: linear-gradient(180deg, #ffffff 0%, #f7fbff 100%) !important;
+}
+
+.wiki-galaxy-main {
+  max-width: 1600px;
+}
+
+.wiki-galaxy :deep(section.bg-white),
+.wiki-galaxy :deep(div.bg-white.rounded-2xl),
+.wiki-galaxy :deep(.bg-white.rounded-2xl.border) {
+  border-color: #d4e2f4 !important;
+  background:
+    radial-gradient(120% 90% at 0% -14%, color-mix(in srgb, var(--primary-color) 9%, transparent) 0%, transparent 56%),
+    linear-gradient(160deg, #ffffff 0%, #f7fbff 100%) !important;
+  box-shadow: 0 20px 38px -30px rgba(15, 23, 42, 0.28) !important;
+}
+
+.wiki-galaxy :deep(button) {
   border-radius: 12px;
-  padding: 10px 12px;
-  background: #fff;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  border: 1px solid #d0def0;
+  background: linear-gradient(180deg, #ffffff 0%, #f3f8ff 100%);
+  color: #0f172a;
+  font-weight: 600;
+  box-shadow: 0 10px 22px -20px rgba(15, 23, 42, 0.38);
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
 }
 
-.metric-label {
-  font-size: 11px;
-  color: #64748b;
+.wiki-galaxy :deep(button:hover:not(:disabled)) {
+  transform: translateY(-1px);
+  border-color: #8fd3ff;
+  box-shadow: 0 16px 28px -20px rgba(3, 105, 161, 0.38);
 }
 
-.metric-value {
-  margin-top: 4px;
-  font-size: 1.35rem;
-  line-height: 1.2;
-  font-weight: 800;
-  color: #1e293b;
+.wiki-galaxy :deep(button.bg-slate-900),
+.wiki-galaxy :deep(button.bg-blue-600) {
+  background: linear-gradient(180deg, #22b1f0 0%, #0284c7 100%) !important;
+  border-color: transparent !important;
+  color: #ffffff !important;
 }
 
-.panel-card {
-  border: 1px solid #e2e8f0;
-  border-radius: 16px;
-  background: #fff;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+.wiki-galaxy :deep(article) {
+  border-radius: 14px;
 }
 
-.panel-glass {
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(10px);
+.wiki-galaxy :deep(.text-slate-500),
+.wiki-galaxy :deep(.text-slate-600) {
+  color: #55657d !important;
+}
+
+.wiki-galaxy :deep(.text-slate-700),
+.wiki-galaxy :deep(.text-slate-800),
+.wiki-galaxy :deep(.text-slate-900) {
+  color: #0f172a !important;
 }
 
 .gauge-ring {
@@ -739,216 +761,23 @@ onUnmounted(() => {
   border: 1px solid #e2e8f0;
 }
 
-.heat-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border: 1px solid #f1f5f9;
-  border-radius: 10px;
-  padding: 8px 10px;
-  background: #f8fafc;
-}
-
-.timeline-scroll::-webkit-scrollbar {
+.custom-scrollbar::-webkit-scrollbar {
   width: 6px;
 }
 
-.timeline-scroll::-webkit-scrollbar-thumb {
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 999px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
   background: #cbd5e1;
   border-radius: 999px;
+  border: 1px solid #fff;
 }
 
-.timeline-item {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
-  padding: 10px 10px 10px 22px;
-  background: #fff;
-  transition: all 0.2s ease;
-}
-
-.timeline-dot {
-  position: absolute;
-  left: 6px;
-  top: 50%;
-  width: 8px;
-  height: 8px;
-  margin-top: -4px;
-  border-radius: 999px;
-  background: #3b82f6;
-  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2);
-}
-
-.tab-wrap {
-  display: inline-flex;
-  gap: 6px;
-  padding: 4px;
-  border-radius: 999px;
-  border: 1px solid #e2e8f0;
-  background: #f1f5f9;
-}
-
-.tab-btn {
-  border-radius: 999px;
-  border: 1px solid transparent;
-  padding: 5px 12px;
-  font-size: 12px;
-  color: #64748b;
-  transition: all 0.2s ease;
-}
-
-.tab-btn.active {
-  color: #2563eb;
-  border-color: #bfdbfe;
-  background: #eff6ff;
-  font-weight: 600;
-}
-
-.top-spotlight {
-  position: relative;
-  overflow: hidden;
-  border-radius: 16px;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-}
-
-.badge-rank {
-  border-radius: 999px;
-  border: 1px solid rgba(59, 130, 246, 0.3);
-  background: rgba(59, 130, 246, 0.1);
-  color: #2563eb;
-  font-size: 11px;
-  font-weight: 700;
-  padding: 2px 9px;
-  backdrop-filter: blur(4px);
-}
-
-.badge-global,
-.global-tag {
-  border-radius: 999px;
-  border: 1px solid #bbf7d0;
-  background: #f0fdf4;
-  color: #16a34a;
-  font-size: 11px;
-  font-weight: 700;
-  padding: 2px 9px;
-}
-
-.rank-row {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  border: 1px solid #f1f5f9;
-  border-radius: 12px;
-  padding: 9px 10px;
-  background: #fff;
-  transition: all 0.2s ease;
-}
-
-.rank-row-top3 {
-  border-color: #bfdbfe;
-  background: #eff6ff;
-}
-
-.rank-no {
-  width: 28px;
-  text-align: center;
-  font-family: "JetBrains Mono", "Courier New", monospace;
-  font-size: 13px;
-  font-weight: 800;
-  color: #94a3b8;
-}
-
-.rank-no.top {
-  color: #3b82f6;
-}
-
-.mini-btn {
-  border-radius: 8px;
-  border: 1px solid #e2e8f0;
-  background: #fff;
-  color: #64748b;
-  font-size: 10px;
-  font-weight: 600;
-  padding: 4px 8px;
-  transition: all 0.2s ease;
-}
-
-.mini-btn:hover {
-  border-color: #93c5fd;
-  color: #2563eb;
-  background: #eff6ff;
-}
-
-.rank-stagger-enter-active {
-  transition: opacity 0.45s ease, transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
-  transition-delay: var(--stagger-delay, 0ms);
-}
-
-.rank-stagger-enter-from {
-  opacity: 0;
-  transform: translate3d(var(--from-x, 24px), 18px, 0) scale(0.96);
-}
-
-.strategy-waterfall {
-  column-count: 2;
-  column-gap: 10px;
-}
-
-.strategy-card {
-  display: inline-block;
-  width: 100%;
-  margin-bottom: 10px;
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
-  padding: 10px;
-  background: #fff;
-  break-inside: avoid;
-}
-
-.strategy-high {
-  border-color: #d8b4fe;
-  box-shadow: 0 0 0 1px #e9d5ff;
-}
-
-.terminal-card {
-  /* Keep terminal somewhat dark/techy but cleaner */
-}
-
-.terminal-screen {
-  /* border: 1px solid #333; */
-  /* background: #111; */
-  /* padding: 12px; */
-  /* overflow: auto; */
-  font-family: "Courier New", Courier, monospace;
-}
-
-.terminal-line {
-  display: flex;
-  gap: 8px;
-  font-size: 11px;
-  line-height: 1.45;
-  color: #d1d5db; /* Light gray text on dark terminal */
-}
-
-.terminal-time {
-  color: #67e8f9;
-  flex-shrink: 0;
-}
-
-.terminal-cursor {
-  margin-top: 6px;
-  color: #4ade80;
-  animation: terminal-caret 0.95s step-end infinite;
-}
-
-@keyframes terminal-caret {
-  50% {
-    opacity: 0;
-  }
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
 }
 
 .loader-spin {
@@ -985,7 +814,7 @@ onUnmounted(() => {
 
 .marquee-horizontal-content {
   display: inline-flex;
-  animation: scroll-left 240s linear infinite;
+  animation: scroll-left 360s linear infinite;
   padding-left: 100%;
 }
 
@@ -998,28 +827,16 @@ onUnmounted(() => {
   100% { transform: translateX(-100%); }
 }
 
-@media (max-width: 1440px) {
-  .strategy-waterfall {
-    column-count: 1;
-  }
+.wiki-scroll-content {
+  animation: scroll-vertical 20s linear infinite;
 }
 
-.custom-scrollbar::-webkit-scrollbar {
-  width: 6px;
+@keyframes scroll-vertical {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-50%); }
 }
 
-.custom-scrollbar::-webkit-scrollbar-track {
-  background: #f1f5f9;
-  border-radius: 999px;
-}
-
-.custom-scrollbar::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
-  border-radius: 999px;
-  border: 1px solid #fff;
-}
-
-.custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+.wiki-scroll-container:hover .wiki-scroll-content {
+  animation-play-state: paused;
 }
 </style>

@@ -1,0 +1,32 @@
+{
+  "aboutPage": {
+    "title": "UM",
+    "subtitle": "UNS",
+    "description": "Erfahren Sie mehr über unsere Mission, Vision und Werte.",
+    "heroText": "CYBERCHARGE",
+    "heroSubtext": "Zukünftiges Spiel-Aufladeerlebnis · Sicher · Schnell · Zuverlässig",
+    "missionTitle": "Mission",
+    "missionDescription": "Unsere Mission ist es, globalen Spielern sichere, schnelle und zuverlässige Dienste zum Aufladen von Spielen zu bieten, damit jeder Spieler ein nahtloses Erlebnis ohne regionale oder Zahlungsbarrieren genießen kann.",
+    "visionTitle": "Vision",
+    "visionDescription": "Durch Innovation und exzellenten Service eine führende globale Spiele-Service-Plattform zu werden, Spieler überall zu verbinden und grenzenlose Spielerlebnisse zu schaffen.",
+    "corePrefix": "KERN",
+    "coreSuffix": "WERTE",
+    "values": {
+      "secureTitle": "Sicher und zuverlässig",
+      "secureDescription": "Für uns steht die Benutzersicherheit immer an erster Stelle und wir schützen jede Transaktion mit fortschrittlicher Sicherheitstechnologie.",
+      "fastTitle": "Ultraschnell",
+      "fastDescription": "Die Aufladeverarbeitung im Millisekundenbereich sorgt dafür, dass Ihr Spielerlebnis unterbrechungsfrei bleibt.",
+      "userTitle": "Benutzer zuerst",
+      "userDescription": "Wir konzentrieren uns auf die Bedürfnisse der Benutzer und bieten durchdachten Service mit personalisierten Erlebnissen."
+    },
+    "teamPrefix": "UNSER",
+    "teamSuffix": "TEAM",
+    "cta": {
+      "titlePrefix": "BEREIT",
+      "titleSuffix": "Um anzufangen?",
+      "description": "Treten Sie unserer Gaming-Community bei und genießen Sie sichere, schnelle und zuverlässige Dienste zum Aufladen von Spielen.",
+      "recharge": "Starten Sie den Aufladevorgang",
+      "contact": "Kontaktieren Sie uns"
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "articleDetailPage": {
+    "loading": "Chargement...",
+    "back": "Retour",
+    "tocTitle": "Table des mati?res",
+    "tocEmpty": "Aucune table des mati?res exploitable trouv?e pour cet article. Essayez de rafra?chir la page.",
+    "defaultCategory": "Actualit?s",
+    "authorLabel": "Auteur : ",
+    "defaultAuthor": "R?daction officielle",
+    "readTimeLabel": "Temps de lecture : ",
+    "defaultReadTime": "environ 3 min",
+    "hotGamesTitle": "Jeux populaires",
+    "noHotGames": "Aucun jeu populaire pour le moment",
+    "hotGameAlt": "Jeu populaire",
+    "untitledGame": "Jeu sans titre",
+    "viewRechargeDetail": "Voir les d?tails de recharge",
+    "latestArticlesTitle": "Derniers articles",
+    "noLatestArticles": "Aucun article r?cent",
+    "latestArticleAlt": "Dernier article",
+    "untitledArticle": "Article sans titre",
+    "latestPublished": "Publi? r?cemment",
+    "close": "Fermer",
+    "notFoundTitle": "Article introuvable",
+    "notFoundDescription": "D?sol?, cet article est introuvable.",
+    "backToArticles": "Retour aux articles",
+    "imageAlt": "Image de l?article",
+    "loadFailed": "Article introuvable ou ?chec du chargement"
+  }
+}

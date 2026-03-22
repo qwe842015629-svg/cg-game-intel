@@ -1,0 +1,14 @@
+{
+  "customerServicePage": {
+    "pageTitle": "カスタマーサービスセンター",
+    "pageDescription": "オンライン チャット、ソーシャル チャネル、または FAQ サポートを通じてご連絡ください。",
+    "faqTitle": "よくある質問",
+    "startChat": "チャットを開始する",
+    "buttonFallback": "今すぐ連絡する",
+    "close": "近い",
+    "loading": "読み込み中...",
+    "qrDefaultTitle": "QRコード",
+    "qrDefaultTip": "続行するには、WeChat でスキャンしてください。",
+    "loadErrorLog": "顧客サービス データのロードに失敗しました:"
+  }
+}

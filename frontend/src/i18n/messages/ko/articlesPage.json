@@ -1,0 +1,28 @@
+{
+  "articlesPage": {
+    "allNews": "모든 뉴스",
+    "loading": "로드 중...",
+    "retry": "다시 해 보다",
+    "share": "공유하다",
+    "shareTo": "{channel}에 공유",
+    "emptyByCategory": "\"{category}\"에 기사가 없습니다.",
+    "emptyAll": "사용 가능한 기사가 없습니다.",
+    "viewAll": "모든 기사 보기",
+    "copyForWechat": "링크가 복사되었습니다. 공유하려면 WeChat에 붙여넣으세요.",
+    "copyForXiaohongshu": "링크가 복사되었습니다. 공유하려면 Xiaohongshu에 붙여넣으세요.",
+    "copyForInstagram": "링크가 복사되었습니다. 공유하려면 Instagram에 붙여넣으세요.",
+    "localShareFallback": "현재 URL은 로컬/비공개이므로 소셜 플랫폼의 콘텐츠를 미리 채울 수 없습니다. 수동 공유를 위해 링크가 복사되었습니다.",
+    "shareTitle": "{title} - 게임 뉴스",
+    "categoryDescription": "카테고리의 최신 업데이트 및 가이드: {category}.",
+    "loadFailed": "기사를 로드하지 못했습니다. 나중에 다시 시도해 주세요.",
+    "channels": {
+      "facebook": "페이스북",
+      "twitter": "엑스 / 트위터",
+      "line": "선",
+      "wechat": "위챗",
+      "xiaohongshu": "샤오홍슈",
+      "whatsapp": "왓츠앱",
+      "instagram": "인스타그램"
+    }
+  }
+}

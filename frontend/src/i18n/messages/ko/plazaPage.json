@@ -1,0 +1,96 @@
+﻿{
+  "plazaPage": {
+    "header": {
+      "title": "Plaza",
+      "description": "Share updates, sync role cards and novel works, browse posts, and interact with likes/comments.",
+      "refreshButton": "Refresh",
+      "complianceNotice": "Compliance reminder: Illegal, violent, pornographic, gambling, drug-related, terrorist, and other prohibited content is strictly forbidden. Violations may be removed."
+    },
+    "composer": {
+      "tabs": {
+        "text": "Post Update",
+        "roleCard": "Sync Role Card",
+        "novelWork": "Sync Novel Work"
+      },
+      "textContentLabel": "Post Content",
+      "textContentPlaceholder": "Share what is happening...",
+      "roleSelectLabel": "Choose a Role Card",
+      "reloadRoles": "Reload Tavern Roles",
+      "roleSelectPlaceholder": "Please choose a role",
+      "roleNameLabel": "Role:",
+      "roleGroupLabel": "Group:",
+      "roleDescriptionFallback": "No role description yet.",
+      "roleNameFallback": "Unnamed role",
+      "roleGroupFallback": "Ungrouped",
+      "workSelectLabel": "Choose a Novel Work",
+      "reloadWorks": "Refresh Work List",
+      "workSelectPlaceholder": "Please choose a work",
+      "workTitleLabel": "Title:",
+      "workChaptersLabel": "Chapters:",
+      "workStatusLabel": "Status:",
+      "workSummaryFallback": "No summary yet.",
+      "workTitleFallback": "Untitled work",
+      "captionLabel": "Extra Caption (Optional)",
+      "captionPlaceholder": "Add one line to introduce this sync...",
+      "publishButton": "Publish to Plaza",
+      "publishingButton": "Publishing...",
+      "clearButton": "Clear",
+      "publishSuccess": "Published successfully.",
+      "autoContent": {
+        "roleCard": "I synced a role card: {name}.",
+        "novelWork": "I synced a novel work: {title}."
+      }
+    },
+    "feed": {
+      "title": "Plaza Feed",
+      "filters": {
+        "all": "All",
+        "text": "Updates",
+        "roleCard": "Role Cards",
+        "novelWork": "Novel Works"
+      },
+      "loading": "Loading plaza content...",
+      "empty": "No posts yet. Be the first to publish.",
+      "anonymousUser": "Anonymous user",
+      "authorAvatarAlt": "author avatar",
+      "deleteButton": "Delete",
+      "roleCardSynced": "Synced Role Card",
+      "roleCardAvatarAlt": "role avatar",
+      "novelWorkSynced": "Synced Novel Work",
+      "novelWorkCoverAlt": "work cover",
+      "novelMeta": "{chapters} chapters · {status}",
+      "noContent": "(No content)",
+      "likedButton": "Liked ({count})",
+      "likeButton": "Like ({count})",
+      "commentButton": "Comments ({count})",
+      "noComments": "No comments yet",
+      "commentPlaceholder": "Write a comment...",
+      "commentSending": "Sending",
+      "commentSend": "Send",
+      "confirmDeletePost": "Delete this post?",
+      "confirmDeleteComment": "Delete this comment?"
+    },
+    "workStatus": {
+      "draft": "In progress",
+      "completed": "Completed"
+    },
+    "common": {
+      "visitor": "Visitor",
+      "dash": "-"
+    },
+    "errors": {
+      "requestFailed": "Request failed",
+      "feedLoadFailed": "Failed to load plaza content",
+      "publishFailed": "Failed to publish",
+      "deletePostFailed": "Failed to delete post",
+      "likeFailed": "Failed to like",
+      "commentFailed": "Failed to comment",
+      "deleteCommentFailed": "Failed to delete comment",
+      "textRequired": "Please enter post content first.",
+      "roleRequired": "Please choose a role card to sync.",
+      "workRequired": "Please choose a novel work to sync.",
+      "blockedContent": "Content hit a blocked term: {term}",
+      "blockedComment": "Comment hit a blocked term: {term}"
+    }
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "profilePage": {
+    "title": "个人中心",
+    "description": "编辑资料并查看你的小说/角色卡等 AI 内容",
+    "auth": {
+      "title": "未登录",
+      "description": "请先登录后再管理个人资料与 AI 内容",
+      "loginRegister": "登录 / 注册"
+    },
+    "avatar": {
+      "alt": "用户头像",
+      "upload": "上传头像",
+      "remove": "移除",
+      "invalidType": "头像仅支持 jpg/png/webp/gif 格式。",
+      "tooLarge": "头像不能超过 5MB。"
+    },
+    "form": {
+      "displayName": "显示名称",
+      "gender": "性别",
+      "genderPlaceholder": "例如：男 / 女 / 非二元 / 保密",
+      "firstName": "姓",
+      "lastName": "名",
+      "phone": "手机号",
+      "visibility": "AI 内容可见范围",
+      "visibilityPrivate": "仅自己可见",
+      "visibilityMembers": "登录用户可见",
+      "visibilityPublic": "公开",
+      "bio": "个人介绍",
+      "bioPlaceholder": "介绍一下你自己（最多 500 字）",
+      "sandboxEnabled": "启用用户沙箱隔离",
+      "sandboxNamespace": "沙箱命名空间：{namespace}",
+      "isolationMode": "隔离模式：{mode}",
+      "save": "保存资料",
+      "saving": "保存中...",
+      "refresh": "刷新数据",
+      "toNovel": "进入小说创作",
+      "toPlaza": "进入广场"
+    },
+    "stats": {
+      "novelDrafts": "小说草稿",
+      "novelWorks": "小说作品",
+      "roleCards": "角色卡",
+      "aiContentTotal": "AI 内容总数"
+    },
+    "novels": {
+      "title": "过往小说剧本",
+      "scopeHint": "仅展示当前登录账号名下内容（已启用用户隔离）",
+      "empty": "暂无小说草稿或作品",
+      "draftsTitle": "草稿",
+      "worksTitle": "作品",
+      "draftTitleFallback": "草稿 #{id}",
+      "draftMeta": "状态键数量：{count} | 更新时间：{updatedAt}",
+      "workTitleFallback": "作品 #{id}",
+      "summaryEmpty": "暂无摘要",
+      "workMeta": "章节：{chapters} | 角色图：{images} | 状态：{status} | 更新时间：{updatedAt}",
+      "statusCompleted": "已完结",
+      "statusOngoing": "连载中",
+      "statusUnknown": "未知"
+    },
+    "roleCards": {
+      "title": "生成角色卡",
+      "empty": "暂无角色卡记录",
+      "avatarAlt": "角色头像",
+      "meta": "分组：{group} | 性别：{gender}",
+      "descEmpty": "暂无描述",
+      "updatedAt": "更新于 {updatedAt}"
+    },
+    "sandbox": {
+      "title": "用户沙箱与安全隔离",
+      "ownerScope": "当前 owner_scope：{ownerScope}",
+      "namespace": "沙箱命名空间：{namespace}",
+      "policies": "策略：{policies}",
+      "description": "说明：个人页 AI 内容查询仅按当前登录用户隔离，不读取他人数据。"
+    },
+    "messages": {
+      "saveFailed": "保存失败",
+      "loadFailed": "加载个人数据失败",
+      "profileSaved": "资料已保存"
+    },
+    "common": {
+      "dash": "-"
+    }
+  }
+}

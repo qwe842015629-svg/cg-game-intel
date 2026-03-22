@@ -1,0 +1,33 @@
+{
+  "rechargePage": {
+    "badge": "Aufladen",
+    "title": "Spiel aufladen",
+    "subtitle": "Wählen Sie ein Spiel aus, geben Sie die Kontodaten ein und schließen Sie die Zahlung mit einem klaren und schnellen Ablauf ab.",
+    "selectGameTitle": "Wählen Sie Spiel",
+    "selectGameDesc": "Schnell suchen und auswählen",
+    "emptyStateTitle": "Bitte wählen Sie zunächst ein Spiel aus",
+    "emptyStateDesc": "Nach der Auswahl können Sie Kontodaten, Betrag und Zahlungsmethode eingeben.",
+    "stepSelectGame": "Wählen Sie ein Spiel",
+    "stepFillAccount": "Geben Sie die Kontodaten ein",
+    "stepSelectAmountAndPayment": "Betrag und Zahlungsart auswählen",
+    "stepConfirmOrder": "Bestätigen Sie die Bestellung und beenden Sie den Ladevorgang",
+    "reselectGame": "Neu auswählen",
+    "accountInfoTitle": "Kontoinformationen",
+    "amountTitle": "Aufladebetrag",
+    "paymentMethodTitle": "Zahlungsmethode",
+    "hotBadge": "HEISS",
+    "bonusDiamonds": "{amount} Diamanten",
+    "bonusExtra": "Bonus {amount} Diamanten",
+    "pendingPaymentNotice": "Aufladen ist in der Entwicklung. Eine echte Zahlungsintegration wird in Kürze hinzugefügt.",
+    "games": {
+      "hok": "Ehre der Könige",
+      "pubgm": "PUBG Mobile",
+      "genshin": "Genshin Impact",
+      "wildrift": "League of Legends: Wild Rift",
+      "cf": "CrossFire",
+      "dnf": "Dungeon & Kämpfer",
+      "hsr": "Honkai: Star Rail",
+      "sky": "Himmel: Kinder des Lichts"
+    }
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "profilePage": {
+    "title": "Profilcenter",
+    "description": "Bearbeiten Sie Ihr Profil und überprüfen Sie Ihre KI-Inhalte wie Romane und Charakterkarten.",
+    "auth": {
+      "title": "Nicht angemeldet",
+      "description": "Bitte melden Sie sich zuerst an, um Ihr Profil und Ihre KI-Inhalte zu verwalten.",
+      "loginRegister": "Anmelden / Registrieren"
+    },
+    "avatar": {
+      "alt": "Benutzer-Avatar",
+      "upload": "Avatar hochladen",
+      "remove": "Entfernen",
+      "invalidType": "Avatar unterstützt nur die Formate jpg/png/webp/gif.",
+      "tooLarge": "Der Avatar muss kleiner als 5 MB sein."
+    },
+    "form": {
+      "displayName": "Anzeigename",
+      "gender": "Geschlecht",
+      "genderPlaceholder": "z.B. Männlich / Weiblich / Nicht-binär / Privat",
+      "firstName": "Vorname",
+      "lastName": "Nachname",
+      "phone": "Telefon",
+      "visibility": "Sichtbarkeit von KI-Inhalten",
+      "visibilityPrivate": "Privat",
+      "visibilityMembers": "Nur für Mitglieder",
+      "visibilityPublic": "Öffentlich",
+      "bio": "Bio",
+      "bioPlaceholder": "Erzählen Sie uns etwas über sich (bis zu 500 Zeichen)",
+      "sandboxEnabled": "Aktivieren Sie die Benutzer-Sandbox-Isolation",
+      "sandboxNamespace": "Sandbox-Namespace: {namespace}",
+      "isolationMode": "Isolationsmodus: {mode}",
+      "save": "Profil speichern",
+      "saving": "Sparen...",
+      "refresh": "Daten aktualisieren",
+      "toNovel": "Gehen Sie zu Novel Studio",
+      "toPlaza": "Gehen Sie zur Plaza"
+    },
+    "stats": {
+      "novelDrafts": "Romanentwürfe",
+      "novelWorks": "Romanwerke",
+      "roleCards": "Charakterkarten",
+      "aiContentTotal": "Gesamter KI-Inhalt"
+    },
+    "novels": {
+      "title": "Romangeschichte",
+      "scopeHint": "Es werden nur Inhalte unter dem aktuell angemeldeten Konto angezeigt (Benutzerisolation aktiviert).",
+      "empty": "Noch keine Romanentwürfe oder Werke.",
+      "draftsTitle": "Entwürfe",
+      "worksTitle": "Funktioniert",
+      "draftTitleFallback": "Entwurf #{id}",
+      "draftMeta": "Statusschlüssel: {count} | Aktualisiert: {updatedAt}",
+      "workTitleFallback": "Arbeit #{id}",
+      "summaryEmpty": "Keine Zusammenfassung",
+      "workMeta": "Kapitel: {chapters} | Zeichenbilder: {images} | Status: {status} | Aktualisiert: {updatedAt}",
+      "statusCompleted": "Vollendet",
+      "statusOngoing": "Laufend",
+      "statusUnknown": "Unbekannt"
+    },
+    "roleCards": {
+      "title": "Generierte Charakterkarten",
+      "empty": "Keine Charakterkartenaufzeichnungen.",
+      "avatarAlt": "Charakter-Avatar",
+      "meta": "Gruppe: {group} | Geschlecht: {gender}",
+      "descEmpty": "Keine Beschreibung",
+      "updatedAt": "{updatedAt} aktualisiert"
+    },
+    "sandbox": {
+      "title": "Benutzer-Sandbox und Sicherheitsisolierung",
+      "ownerScope": "Aktueller Eigentümerbereich: {ownerScope}",
+      "namespace": "Sandbox-Namespace: {namespace}",
+      "policies": "Richtlinien: {policies}",
+      "description": "Hinweis: KI-Inhalte im Profil werden nur vom aktuell angemeldeten Benutzer isoliert und lesen nicht die Daten anderer Benutzer."
+    },
+    "messages": {
+      "saveFailed": "Speichern fehlgeschlagen",
+      "loadFailed": "Profildaten konnten nicht geladen werden",
+      "profileSaved": "Profil gespeichert"
+    },
+    "common": {
+      "dash": "-"
+    }
+  }
+}

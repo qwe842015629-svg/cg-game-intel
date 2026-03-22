@@ -9,7 +9,16 @@ class UserProfileInline(admin.StackedInline):
     can_delete = False
     verbose_name = '用户资料'
     verbose_name_plural = '用户资料'
-    fields = ('phone', 'avatar', 'balance', 'points', 'vip_level')
+    fields = (
+        'display_name',
+        ('gender', 'phone'),
+        'bio',
+        'avatar',
+        ('sandbox_enabled', 'ai_content_visibility', 'ai_isolation_mode'),
+        'sandbox_namespace',
+        ('balance', 'points', 'vip_level'),
+    )
+    readonly_fields = ('sandbox_namespace',)
 
 # 扩展用户管理
 class UserAdmin(BaseUserAdmin):

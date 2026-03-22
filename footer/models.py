@@ -12,7 +12,9 @@ class FooterSection(models.Model):
     
     section_type = models.CharField(max_length=20, choices=SECTION_TYPE_CHOICES, unique=True, verbose_name='板块类型')
     title = models.CharField(max_length=100, verbose_name='板块标题')
+    title_i18n = models.JSONField(default=dict, blank=True, verbose_name='板块标题多语言')
     description = models.TextField(blank=True, verbose_name='描述内容', help_text='适用于"关于我们"等需要描述的板块')
+    description_i18n = models.JSONField(default=dict, blank=True, verbose_name='描述内容多语言')
     is_active = models.BooleanField(default=True, verbose_name='是否启用')
     sort_order = models.IntegerField(default=0, verbose_name='排序')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='创建时间')
@@ -36,6 +38,7 @@ class FooterLink(models.Model):
         verbose_name='所属板块'
     )
     title = models.CharField(max_length=100, verbose_name='链接标题')
+    title_i18n = models.JSONField(default=dict, blank=True, verbose_name='链接标题多语言')
     url = models.CharField(max_length=500, verbose_name='链接地址', help_text='可以是相对路径如/articles，或外部链接如https://twitter.com')
     icon = models.CharField(max_length=50, blank=True, verbose_name='图标', help_text='图标类名或Emoji')
     is_external = models.BooleanField(default=False, verbose_name='是否外部链接', help_text='外部链接会在新窗口打开')
@@ -56,6 +59,7 @@ class FooterLink(models.Model):
 class FooterConfig(models.Model):
     """页面底部配置"""
     copyright_text = models.CharField(max_length=200, default='© 2026 CYPHER GAME BUY. 版权所有', verbose_name='版权信息')
+    copyright_text_i18n = models.JSONField(default=dict, blank=True, verbose_name='版权信息多语言')
     show_copyright = models.BooleanField(default=True, verbose_name='显示版权信息')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='更新时间')
 

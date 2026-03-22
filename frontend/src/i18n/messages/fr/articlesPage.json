@@ -1,0 +1,28 @@
+{
+  "articlesPage": {
+    "allNews": "Toutes les actualités",
+    "loading": "Chargement...",
+    "retry": "Réessayer",
+    "share": "Partager",
+    "shareTo": "Partager avec {channel}",
+    "emptyByCategory": "Aucun article dans \"{category}\"",
+    "emptyAll": "Aucun article disponible",
+    "viewAll": "Voir tous les articles",
+    "copyForWechat": "Lien copié. Collez-le dans WeChat pour le partager.",
+    "copyForXiaohongshu": "Lien copié. Collez-le dans Xiaohongshu pour le partager.",
+    "copyForInstagram": "Lien copié. Collez-le sur Instagram pour le partager.",
+    "localShareFallback": "L'URL actuelle est locale/privée et ne peut pas préremplir le contenu sur les plateformes sociales. Lien copié pour le partage manuel.",
+    "shareTitle": "{title} - Actualités du JEU",
+    "categoryDescription": "Dernières mises à jour et guides dans la catégorie : {category}.",
+    "loadFailed": "Échec du chargement des articles. Veuillez réessayer plus tard.",
+    "channels": {
+      "facebook": "Facebook",
+      "twitter": "X/Twitter",
+      "line": "DOUBLER",
+      "wechat": "WeChat",
+      "xiaohongshu": "Xiaohongshu",
+      "whatsapp": "WhatsApp",
+      "instagram": "Instagram"
+    }
+  }
+}

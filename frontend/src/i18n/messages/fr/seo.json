@@ -1,0 +1,31 @@
+{
+  "seo": {
+    "defaultDescription": "Plateforme professionnelle de recharge de jeux et d'actualités avec une expérience multilingue.",
+    "defaultKeywords": "recharge de jeu, actualités de jeux, recharge, site multilingue",
+    "routeTitles": {
+      "default": "Page",
+      "home": "Maison",
+      "games": "Jeux",
+      "gameDetail": "Détail du jeu",
+      "articles": "Articles",
+      "articleDetail": "Détail de l'article",
+      "profile": "Profil",
+      "customerService": "Service client",
+      "about": "À propos",
+      "contact": "Contact",
+      "recharge": "Centre de recharge",
+      "rechargeGuide": "Guide de recharge",
+      "search": "Résultats de la recherche",
+      "translationDemo": "Démo de traduction",
+      "i18nDemo": "Démo I18n",
+      "register": "Registre",
+      "login": "Se connecter",
+      "activate": "Activation du compte",
+      "notFound": "Page introuvable",
+      "cgWiki": "Wiki CG",
+      "tavern": "Taverne",
+      "novelStory": "Nouvelle histoire",
+      "plaza": "Place"
+    }
+  }
+}

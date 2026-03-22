@@ -1,10 +1,10 @@
 ﻿﻿﻿﻿<template>
-  <div class="homepage-shell relative min-h-screen">
+  <div class="homepage-shell relative">
     <!-- Subtle Grid Background -->
-    <div class="fixed inset-0 pointer-events-none home-grid-overlay"></div>
+    <div class="absolute inset-0 pointer-events-none home-grid-overlay"></div>
     <div
       v-if="showAmbientLayer"
-      class="fixed inset-0 pointer-events-none home-ambient-layer"
+      class="absolute inset-0 pointer-events-none home-ambient-layer"
       :style="ambientLayerStyle"
       aria-hidden="true"
     >
@@ -57,8 +57,8 @@
       <!-- Hero Section with Carousel -->
       <section
         v-if="section.sectionKey === 'banner_section'"
-        class="relative py-12"
-        :class="isLightMode ? 'bg-white' : 'bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900'"
+        class="relative py-12 home-banner-section"
+        :class="'bg-white'"
       >
       <div class="container mx-auto px-4">
         <div class="relative h-[400px] md:h-[500px]">
@@ -107,11 +107,6 @@
                         {{ slide.primaryButton }}
                       </button>
                     </RouterLink>
-                    <RouterLink :to="slide.secondaryLink">
-                      <button v-magnetic="{ strength: 0.2, max: 12 }" class="px-6 py-3 rounded-xl font-bold text-sm md:text-base tracking-wide uppercase border-2 border-pink-500 text-pink-400 hover:bg-pink-500 hover:text-black hover:shadow-[0_0_20px_rgba(255,0,255,0.8)] transition-all duration-300">
-                        {{ slide.secondaryButton }}
-                      </button>
-                    </RouterLink>
                   </div>
                 </div>
               </div>
@@ -123,17 +118,13 @@
             @click="prevSlide"
             class="absolute left-4 top-1/2 -translate-y-1/2 z-40 p-2.5 rounded-full bg-slate-900/80 border-2 border-cyan-400 hover:bg-cyan-500/20 hover:shadow-[0_0_15px_rgba(0,255,255,0.8)] shadow-lg transition-all duration-300"
           >
-            <svg class="w-5 h-5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-            </svg>
+            <ChevronLeft class="w-5 h-5 text-cyan-400" />
           </button>
           <button 
             @click="nextSlide"
             class="absolute right-4 top-1/2 -translate-y-1/2 z-40 p-2.5 rounded-full bg-slate-900/80 border-2 border-cyan-400 hover:bg-cyan-500/20 hover:shadow-[0_0_15px_rgba(0,255,255,0.8)] shadow-lg transition-all duration-300"
           >
-            <svg class="w-5 h-5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-            </svg>
+            <ChevronRight class="w-5 h-5 text-cyan-400" />
           </button>
         </div>
         
@@ -154,7 +145,7 @@
         </div>
         
         <!-- Stats -->
-        <div class="grid grid-cols-3 gap-6 mt-12 text-center">
+        <div class="grid grid-cols-3 gap-6 mt-12 text-center carousel-stats">
           <div class="p-4 bg-slate-900/50 border-2 border-cyan-500/50 rounded-xl shadow-[0_0_20px_rgba(0,255,255,0.3)] hover:shadow-[0_0_30px_rgba(0,255,255,0.6)] hover:border-cyan-400 transition-all backdrop-blur-sm motion-breathe">
             <div class="text-2xl md:text-3xl font-black text-cyan-400 mb-1 drop-shadow-[0_0_10px_rgba(0,255,255,0.8)]">100K+</div>
             <div class="text-cyan-200 text-sm font-medium">{{ $t('activePlayers') }}</div>
@@ -175,20 +166,21 @@
       <section v-else-if="section.sectionKey === 'features'" class="py-20 relative" :style="{ backgroundColor: 'var(--page-bg)' }">
         <div class="container mx-auto px-4 relative z-10">
           <div class="text-center mb-16">
-            <div class="inline-flex items-center justify-center p-3 bg-primary/20 rounded-custom mb-4 border border-primary/30">
-              {{ getSectionConfig('features', 'icon', '✨') }}
+            <div class="flex items-center justify-center gap-3 mb-4">
+              <Sparkles class="h-9 w-9 text-cyan-400 drop-shadow-[0_0_10px_rgba(0,255,255,0.8)]" />
+              <!-- 使用后台配置的标题 -->
+              <h2 class="text-4xl md:text-5xl font-black text-slate-900">
+                <span 
+                  class="text-cyan-400"
+                  :contenteditable="isEditMode"
+                  @blur="handleInlineEdit($event, 'features', 'title')"
+                >{{ getSectionConfig('features', 'title', $t('coreFeatures')) }}</span>
+              </h2>
+              <Sparkles class="w-8 h-8 text-pink-500 drop-shadow-[0_0_10px_rgba(236,72,153,0.8)]" />
             </div>
-            <!-- 使用后台配置的标题 -->
-            <h2 class="text-4xl md:text-5xl font-black text-white drop-shadow-[0_0_15px_rgba(0,255,255,0.8)]">
-              <span 
-                class="text-primary"
-                :contenteditable="isEditMode"
-                @blur="handleInlineEdit($event, 'features', 'title')"
-              >{{ getSectionConfig('features', 'title', $t('coreFeatures')) }}</span>
-            </h2>
             <!-- 使用后台配置的副标题 -->
             <p 
-              class="text-xl text-cyan-200 max-w-2xl mx-auto"
+              class="text-xl text-slate-500 max-w-2xl mx-auto"
               :contenteditable="isEditMode"
               @blur="handleInlineEdit($event, 'features', 'subtitle')"
             >
@@ -198,8 +190,8 @@
           
           <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
             <!-- Feature 1 -->
-            <div class="p-8 bg-slate-800/50 rounded-custom border border-slate-700 hover:border-primary transition-all group/card text-center">
-              <div class="w-16 h-16 bg-primary/20 rounded-custom flex items-center justify-center mb-6 mx-auto group-hover/card:scale-110 transition-transform overflow-hidden">
+            <div class="p-8 bg-white rounded-2xl border border-slate-200 hover:border-violet-300 transition-all group/card text-center shadow-sm hover:shadow-md">
+              <div class="w-16 h-16 bg-violet-100 rounded-xl border border-violet-200 flex items-center justify-center mb-6 mx-auto group-hover/card:scale-110 transition-transform overflow-hidden">
                 <!-- 使用后台配置的图标，如果是 emoji 则显示文本，否则显示 SVG/Image -->
                 <span 
                   v-if="getSectionConfig('features', 'feature_1_icon', '⚡').length <= 2" 
@@ -213,20 +205,18 @@
                   class="w-full h-full object-cover"
                   @click="handleImageClick($event, 'features', 'feature_1_icon')"
                 />
-                <svg v-else class="w-8 h-8 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                </svg>
+                <Zap v-else class="w-8 h-8 text-cyan-400" />
               </div>
               <!-- 使用后台配置的特性1标题和描述 -->
               <h3 
-                class="text-xl font-bold text-cyan-300 mb-4 drop-shadow-[0_0_8px_rgba(0,255,255,0.6)]"
+                class="text-xl font-bold text-slate-800 mb-4"
                 :contenteditable="isEditMode"
                 @blur="handleInlineEdit($event, 'features', 'feature_1_title')"
               >
                 {{ getSectionConfig('features', 'feature_1_title', $t('fastArrival')) }}
               </h3>
               <p 
-                class="text-cyan-100/80"
+                class="text-slate-500 leading-relaxed"
                 :contenteditable="isEditMode"
                 @blur="handleInlineEdit($event, 'features', 'feature_1_desc')"
               >
@@ -235,24 +225,22 @@
             </div>
 
             <!-- Feature 2 -->
-            <div class="p-8 bg-slate-800/50 rounded-custom border border-slate-700 hover:border-primary transition-all group/card text-center">
-              <div class="w-16 h-16 bg-primary/20 rounded-custom flex items-center justify-center mb-6 mx-auto group-hover/card:scale-110 transition-transform">
+            <div class="p-8 bg-white rounded-2xl border border-slate-200 hover:border-violet-300 transition-all group/card text-center shadow-sm hover:shadow-md">
+              <div class="w-16 h-16 bg-violet-100 rounded-xl border border-violet-200 flex items-center justify-center mb-6 mx-auto group-hover/card:scale-110 transition-transform">
                 <span v-if="getSectionConfig('features', 'feature_2_icon', '🔒').length <= 2" class="text-4xl">
                   {{ getSectionConfig('features', 'feature_2_icon', '🔒') }}
                 </span>
-                <svg v-else class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                </svg>
+                <ShieldCheck v-else class="w-8 h-8 text-violet-500" />
               </div>
               <h3 
-                class="text-xl font-bold text-white mb-4"
+                class="text-xl font-bold text-slate-800 mb-4"
                 :contenteditable="isEditMode"
                 @blur="handleInlineEdit($event, 'features', 'feature_2_title')"
               >
                 {{ getSectionConfig('features', 'feature_2_title', $t('secureGuarantee')) }}
               </h3>
               <p 
-                class="text-slate-400 leading-relaxed"
+                class="text-slate-500 leading-relaxed"
                 :contenteditable="isEditMode"
                 @blur="handleInlineEdit($event, 'features', 'feature_2_desc')"
               >
@@ -261,24 +249,22 @@
             </div>
             
             <!-- Feature 3 -->
-            <div class="p-8 bg-slate-800/50 rounded-custom border border-slate-700 hover:border-primary transition-all group/card text-center">
-              <div class="w-16 h-16 bg-primary/20 rounded-custom flex items-center justify-center mb-6 mx-auto group-hover/card:scale-110 transition-transform">
+            <div class="p-8 bg-white rounded-2xl border border-slate-200 hover:border-violet-300 transition-all group/card text-center shadow-sm hover:shadow-md">
+              <div class="w-16 h-16 bg-violet-100 rounded-xl border border-violet-200 flex items-center justify-center mb-6 mx-auto group-hover/card:scale-110 transition-transform">
                 <span v-if="getSectionConfig('features', 'feature_3_icon', '💰').length <= 2" class="text-4xl">
                   {{ getSectionConfig('features', 'feature_3_icon', '💰') }}
                 </span>
-                <svg v-else class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                </svg>
+                <Users v-else class="w-8 h-8 text-violet-500" />
               </div>
               <h3 
-                class="text-xl font-bold text-white mb-4"
+                class="text-xl font-bold text-slate-800 mb-4"
                 :contenteditable="isEditMode"
                 @blur="handleInlineEdit($event, 'features', 'feature_3_title')"
               >
                 {{ getSectionConfig('features', 'feature_3_title', $t('support247')) }}
               </h3>
               <p 
-                class="text-slate-400 leading-relaxed"
+                class="text-slate-500 leading-relaxed"
                 :contenteditable="isEditMode"
                 @blur="handleInlineEdit($event, 'features', 'feature_3_desc')"
               >
@@ -292,28 +278,19 @@
       <section
         v-else-if="section.sectionKey === 'hot_games'"
         class="py-20 relative"
-        :class="isLightMode ? 'bg-[#f6f7fb]' : 'bg-slate-950'"
+        :class="'bg-[#f6f7fb]'"
       >
       <div class="container mx-auto px-4 relative">
-        <div class="text-center mb-12">
-          <div class="inline-flex items-center justify-center gap-3 mb-3 px-5 py-2 rounded-full bg-white border border-slate-200 shadow-sm">
-            <span class="text-3xl">
-              {{ getSectionConfig('hot_games', 'icon', '🔥') }}
-            </span>
-            <h2 class="text-3xl md:text-4xl font-black text-slate-900">
-              <span>{{ getSectionConfig('hot_games', 'title', $t('hotGames')) }}</span>
+        <div class="text-center mb-16">
+          <div class="flex items-center justify-center gap-3 mb-4">
+            <Flame class="h-9 w-9 text-cyan-400 drop-shadow-[0_0_10px_rgba(0,255,255,0.8)]" />
+            <h2 class="text-4xl md:text-5xl font-black text-white drop-shadow-[0_0_15px_rgba(0,255,255,0.8)]">
+              <span class="text-cyan-400">{{ getSectionConfig('hot_games', 'title', $t('hotGames')) }}</span>
             </h2>
-            <svg class="w-6 h-6 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-            </svg>
+            <Sparkles class="w-8 h-8 text-pink-500 drop-shadow-[0_0_10px_rgba(236,72,153,0.8)]" />
           </div>
-          <p class="text-base md:text-lg text-slate-500 max-w-2xl mx-auto">
+          <p class="text-xl text-cyan-200 max-w-2xl mx-auto">
             {{ getSectionConfig('hot_games', 'subtitle', $t('mostPopularGamesRecharge')) }}
-          </p>
-          <p class="mt-3 text-cyan-500 text-lg">
-            {{ $t('gamesFound') }}:
-            <span class="text-green-500 font-extrabold text-xl">{{ hotGames.length }}</span>
-            {{ $t('gamesUnit') }}
           </p>
         </div>
 
@@ -351,7 +328,7 @@
                 </div>
 
                 <p :class="hotGameMetaClass">
-                  {{ game.categoryName || '国际游戏' }}
+                  {{ game.categoryName || $t('internationalGames') }}
                   <span> · </span>
                   {{ game.platform || 'Android / iOS' }}
                 </p>
@@ -364,7 +341,7 @@
                     ⭐ {{ getGameRating(game) }}
                   </span>
                   <span class="inline-flex items-center justify-center px-5 py-2 rounded-full bg-violet-100 text-violet-700 font-bold text-sm group-hover:bg-violet-600 group-hover:text-white transition-all">
-                    {{ $t('rechargeNow') || '立即充值' }}
+                    {{ $t('immediateRecharge') }}
                   </span>
                 </div>
               </div>
@@ -386,26 +363,22 @@
       <section
         v-else-if="section.sectionKey === 'latest_news'"
         class="py-20 relative"
-        :class="isLightMode ? 'bg-white' : 'bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900'"
+        :class="'bg-white'"
       >
       <div class="container mx-auto px-4 relative">
         <div class="text-center mb-16">
           <div class="flex items-center justify-center gap-3 mb-4">
             <!-- 使用后台配置的图标 -->
-            <span class="text-4xl drop-shadow-[0_0_10px_rgba(0,255,255,0.8)]">
-              {{ getSectionConfig('latest_news', 'icon', '📰') }}
-            </span>
+            <Newspaper class="h-9 w-9 text-cyan-400 drop-shadow-[0_0_10px_rgba(0,255,255,0.8)]" />
             <h2 class="text-4xl md:text-5xl font-black text-white drop-shadow-[0_0_15px_rgba(0,255,255,0.8)]">
               <!-- 使用后台配置的标题 -->
-              <span class="text-cyan-400">{{ getSectionConfig('latest_news', 'title', '最新资讯') }}</span>
+              <span class="text-cyan-400">{{ getSectionConfig('latest_news', 'title', $t('latestNews')) }}</span>
             </h2>
-            <svg class="w-8 h-8 text-pink-500 drop-shadow-[0_0_10px_rgba(236,72,153,0.8)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-            </svg>
+            <Newspaper class="w-8 h-8 text-pink-500 drop-shadow-[0_0_10px_rgba(236,72,153,0.8)]" />
           </div>
           <!-- 使用后台配置的副标题 -->
           <p class="text-xl text-cyan-200 max-w-2xl mx-auto">
-            {{ getSectionConfig('latest_news', 'subtitle', '智能推荐 · 热门阅读 · 最新发布') }}
+            {{ getSectionConfig('latest_news', 'subtitle', $t('gameNews')) }}
           </p>
         </div>
         
@@ -419,70 +392,96 @@
           <p class="text-pink-400 text-xl mb-4">❗ {{ newsError }}</p>
           <button 
             @click="loadRecommendedNews" 
-            class="px-6 py-3 rounded-xl bg-cyan-500/20 border border-cyan-400 text-cyan-400 hover:bg-cyan-500/30 transition-all"
+            class="ui-btn ui-btn--outline ui-btn-size-default"
           >
-            重试
+            {{ $t('articlesPage.retry') }}
           </button>
         </div>
         
         <!-- 文章列表 -->
         <div v-else-if="recommendedNews.length > 0" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <RouterLink
+          <article
             v-for="(article, newsIndex) in recommendedNews"
             :key="article.id"
-            :to="`/articles/${article.id}`"
-            class="group relative rounded-2xl overflow-hidden border-2 border-cyan-500/50 hover:border-cyan-400 hover:shadow-[0_0_30px_rgba(0,255,255,0.6)] transition-all duration-300"
+            class="group galaxy-news-card relative rounded-[24px] overflow-hidden transition-all duration-300"
             v-tilt="{ max: 4, scale: 1.008 }"
             v-motion-reveal="{ delay: Math.min(newsIndex * 60, 260), y: 18 }"
           >
-            <div class="relative h-48 overflow-hidden">
-              <img 
-                v-if="resolveNewsCardImage(article)"
-                :src="resolveNewsCardImage(article)"
-                :alt="article.title"
-                class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-                @error="handleNewsCardImageError"
-              />
-              <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/50 to-transparent"></div>
-              
-              <!-- 分类徽章 -->
-              <div class="absolute top-4 left-4">
-                <span class="inline-block px-3 py-1 rounded-full bg-cyan-500/20 border border-cyan-400 text-cyan-300 text-xs font-bold uppercase tracking-wider backdrop-blur-sm">
-                  {{ article.category || '资讯' }}
-                </span>
+            <RouterLink :to="`/articles/${article.id}`" class="block">
+              <div class="relative h-48 overflow-hidden">
+                <img 
+                  v-if="resolveNewsCardImage(article)"
+                  :src="resolveNewsCardImage(article)"
+                  :alt="article.title"
+                  class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                  @error="handleNewsCardImageError"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-slate-900/15 to-transparent"></div>
+                
+                <!-- 分类徽章 -->
+                <div class="absolute top-4 left-4">
+                  <span class="galaxy-pill inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
+                    {{ article.category || $t('news') }}
+                  </span>
+                </div>
+                
+                <!-- 热门标记 -->
+                <div v-if="article.readTime" class="absolute top-4 right-4">
+                  <span class="galaxy-pill galaxy-pill--hot inline-block px-2 py-1 rounded text-xs font-bold">
+                    🔥 {{ article.readTime }}
+                  </span>
+                </div>
               </div>
               
-              <!-- 热门标记 -->
-              <div v-if="article.readTime" class="absolute top-4 right-4">
-                <span class="inline-block px-2 py-1 rounded bg-pink-500/80 text-white text-xs font-bold backdrop-blur-sm">
-                  🔥 {{ article.readTime }}
-                </span>
+              <div class="relative p-6 pb-4 bg-white/90 backdrop-blur-sm">
+                <h3 class="text-lg font-bold text-slate-900 mb-4 group-hover:text-sky-700 transition-colors line-clamp-2">
+                  {{ article.title }}
+                </h3>
+                <div class="flex items-center justify-between text-xs text-slate-500">
+                  <span>👤 {{ article.author }}</span>
+                  <span>📅 {{ article.date }}</span>
+                </div>
               </div>
-            </div>
-            
-            <div class="relative p-6 bg-slate-900/90 backdrop-blur-sm">
-              <h3 class="text-lg font-bold text-cyan-300 mb-2 group-hover:text-cyan-400 transition-colors drop-shadow-[0_0_8px_rgba(0,255,255,0.6)] line-clamp-2">
-                {{ article.title }}
-              </h3>
-              <p class="text-cyan-100/80 text-sm mb-4 line-clamp-2">{{ article.excerpt }}</p>
-              <div class="flex items-center justify-between text-xs text-cyan-400">
-                <span>👤 {{ article.author }}</span>
-                <span>📅 {{ article.date }}</span>
+            </RouterLink>
+
+            <div class="relative px-6 pb-5 bg-white/90 backdrop-blur-sm">
+              <div class="h-px bg-sky-100 mb-3"></div>
+              <div class="flex items-start justify-between gap-3">
+                <span class="text-[11px] text-slate-500 uppercase tracking-[0.2em]">Share</span>
+                <div class="flex flex-wrap justify-end gap-1.5">
+                  <button
+                    v-for="channel in newsShareChannels"
+                    :key="`${article.id}-${channel.key}`"
+                    type="button"
+                    class="news-share-icon-btn"
+                    :title="`Share to ${channel.label}`"
+                    :aria-label="`Share to ${channel.label}`"
+                    :style="{ '--share-color': `#${channel.icon.hex}` }"
+                    @click.stop.prevent="shareNewsArticle(article, channel)"
+                  >
+                    <svg viewBox="0 0 24 24" class="h-3.5 w-3.5" aria-hidden="true">
+                      <path :d="channel.icon.path" fill="currentColor" />
+                    </svg>
+                  </button>
+                </div>
               </div>
+              <p v-if="newsShareFeedbackById[article.id]" class="mt-2 text-[11px] text-emerald-600 text-right">
+                {{ newsShareFeedbackById[article.id] }}
+              </p>
             </div>
-          </RouterLink>
+          </article>
         </div>
         
         <!-- 空状态 -->
         <div v-else class="text-center py-12">
-          <p class="text-cyan-400 text-xl">暂无推荐资讯</p>
+          <p class="text-cyan-400 text-xl">{{ $t('noResultsFound') || 'No recommended news yet' }}</p>
         </div>
         
         <!-- 查看更多按钮 -->
         <div v-if="recommendedNews.length > 0" class="text-center mt-12">
           <RouterLink to="/articles">
-            <button v-magnetic="{ strength: 0.2, max: 12 }" class="px-8 py-4 rounded-xl font-bold text-lg tracking-wide uppercase border-2 border-cyan-400 text-cyan-400 hover:bg-cyan-500 hover:text-black hover:shadow-[0_0_25px_rgba(0,255,255,0.8)] transition-all duration-300">
-              查看更多资讯
+            <button v-magnetic="{ strength: 0.2, max: 12 }" class="galaxy-cta-btn">
+              {{ $t('viewMore') }}
             </button>
           </RouterLink>
         </div>
@@ -493,22 +492,18 @@
       <section
         v-else-if="section.sectionKey === 'categories'"
         class="py-20 relative"
-        :class="isLightMode ? 'bg-white' : 'bg-slate-900'"
+        :class="'bg-white'"
       >
       <div class="container mx-auto px-4 relative">
         <div class="text-center mb-16">
           <div class="flex items-center justify-center gap-3 mb-4">
             <!-- 使用后台配置的图标 -->
-            <span class="text-4xl drop-shadow-[0_0_10px_rgba(168,85,247,0.8)]">
-              {{ getSectionConfig('categories', 'icon', '🎮') }}
-            </span>
+            <Gamepad2 class="h-9 w-9 text-purple-400 drop-shadow-[0_0_10px_rgba(168,85,247,0.8)]" />
             <!-- 使用后台配置的标题 -->
             <h2 class="text-4xl md:text-5xl font-black text-white drop-shadow-[0_0_15px_rgba(168,85,247,0.8)]">
               <span class="text-purple-400">{{ getSectionConfig('categories', 'title', $t('games') + ' ' + $t('categories')) }}</span>
             </h2>
-            <svg class="w-8 h-8 text-cyan-500 drop-shadow-[0_0_10px_rgba(0,255,255,0.8)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-            </svg>
+            <Gamepad2 class="w-8 h-8 text-cyan-500 drop-shadow-[0_0_10px_rgba(0,255,255,0.8)]" />
           </div>
           <!-- 使用后台配置的副标题 -->
           <p class="text-xl text-purple-200 max-w-2xl mx-auto">
@@ -533,9 +528,14 @@
             </span>
 
             <div :class="categoriesCardInnerClass">
-              <div v-if="showCategoryIcon" :class="categoriesIconClass">{{ category.icon }}</div>
+              <div v-if="showCategoryIcon" :class="categoriesIconClass">
+                <component
+                  :is="resolveGameCategoryIcon(category)"
+                  class="inline-block h-[1.08em] w-[1.08em] align-middle"
+                />
+              </div>
               <div :class="categoriesTextWrapClass">
-                <h3 :class="categoriesTitleClass">{{ category.name }}</h3>
+                <h3 :class="categoriesTitleClass">{{ resolveHomeCategoryName(category) }}</h3>
                 <div v-if="showCategoryGameCount" :class="categoriesCountClass">
                   {{ category.gamesCount || 0 }} {{ $t('gamesCount') }}
                 </div>
@@ -568,11 +568,18 @@ import { getGameCategories, getGames, getHotGames } from '../api/games'
 import axios from 'axios'
 import { useThemeStore } from '../stores/theme'
 import { MOTION_MODE_CHANGE_EVENT, getCurrentMotionMode } from '../utils/motionMode'
+import { ChevronLeft, ChevronRight, Zap, ShieldCheck, Users, Sparkles, Newspaper, Gamepad2, Flame } from 'lucide-vue-next'
+import { resolveGameCategoryIcon } from '../utils/iconMap'
+import { siFacebook, siInstagram, siLine, siWechat, siWhatsapp, siX, siXiaohongshu } from 'simple-icons'
+import {
+  guardUsagePolicyContent,
+  isUsagePolicyViolationError,
+  openUsagePolicyDialog,
+} from '../utils/usagePolicy'
 
 // 使用增强的 i18n composable（混合自定义 + vue-i18n）
 const { t, locale } = useI18n()
 const themeStore = useThemeStore()
-const isLightMode = computed(() => themeStore.theme === 'light')
 
 interface AmbientParticle {
   id: number
@@ -684,7 +691,7 @@ const selectedSectionKey = ref<string | null>(null)
 const isHovering = ref<string | null>(null)
 
 // 浏览器标题 SEO 联动
-const pageTitle = useTitle('Cypher Game Buy | 游戏充值')
+const pageTitle = useTitle('Cypher Game Buy|你的全球手游买手')
 
 // 监听选中板块的 SEO 标题变化
 watch(() => selectedSectionKey.value, (newKey) => {
@@ -788,18 +795,18 @@ const hotGamesContainerClass = computed(() =>
 
 const hotGameCardClass = computed(() =>
   hotGamesLayout.value === 'list'
-    ? 'rounded-2xl border border-slate-200 bg-white p-4 shadow-sm hover:shadow-md transition-all duration-300 flex items-center gap-4'
-    : 'rounded-2xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1 text-center h-full'
+    ? 'galaxy-card galaxy-hot-card rounded-[24px] p-4 flex items-center gap-4'
+    : 'galaxy-card galaxy-hot-card rounded-[24px] p-6 text-center h-full'
 )
 
 const hotGameThumbClass = computed(() =>
   hotGamesLayout.value === 'list'
-    ? 'w-16 h-16 rounded-2xl overflow-hidden bg-slate-100 shadow shrink-0'
-    : 'w-24 h-24 mx-auto mb-4 rounded-3xl overflow-hidden bg-slate-100 shadow'
+    ? 'w-16 h-16 rounded-2xl overflow-hidden bg-slate-100 shadow-lg shadow-cyan-200/40 ring-2 ring-white shrink-0'
+    : 'w-24 h-24 mx-auto mb-4 rounded-3xl overflow-hidden bg-slate-100 shadow-lg shadow-cyan-200/45 ring-4 ring-white'
 )
 
 const hotGameContentClass = computed(() =>
-  hotGamesLayout.value === 'list' ? 'flex-1 min-w-0 text-left' : ''
+  hotGamesLayout.value === 'list' ? 'flex-1 min-w-0 text-left' : 'text-center'
 )
 
 const hotGameHeaderClass = computed(() =>
@@ -810,8 +817,8 @@ const hotGameHeaderClass = computed(() =>
 
 const hotGameTitleClass = computed(() =>
   hotGamesLayout.value === 'list'
-    ? 'text-lg font-black text-slate-900 line-clamp-1 group-hover:text-violet-700 transition-colors'
-    : 'text-2xl font-black text-slate-900 mb-2 line-clamp-1 group-hover:text-violet-700 transition-colors'
+    ? 'text-lg font-black text-slate-900 line-clamp-1 group-hover:text-sky-700 transition-colors'
+    : 'text-2xl font-black text-slate-900 mb-2 line-clamp-1 group-hover:text-sky-700 transition-colors'
 )
 
 const hotGameMetaClass = computed(() =>
@@ -859,6 +866,9 @@ const getGameRating = (game: any): string => {
 const normalizeBaseUrl = (value: string) => value.replace(/\/+$/, '')
 const BACKEND_ORIGIN = normalizeBaseUrl(
   (import.meta.env.VITE_BACKEND_TARGET as string | undefined)?.trim() || 'http://127.0.0.1:8000'
+)
+const SHARE_ORIGIN = normalizeBaseUrl(
+  (import.meta.env.VITE_SHARE_ORIGIN as string | undefined)?.trim() || ''
 )
 
 const normalizeImageUrl = (raw: unknown): string => {
@@ -925,6 +935,215 @@ const handleNewsCardImageError = (event: Event) => {
   img.onerror = null
 }
 
+type NewsShareChannelKey =
+  | 'facebook'
+  | 'twitter'
+  | 'line'
+  | 'wechat'
+  | 'xiaohongshu'
+  | 'whatsapp'
+  | 'instagram'
+
+interface NewsShareChannel {
+  key: NewsShareChannelKey
+  label: string
+  icon: { path: string; hex: string }
+  mode: 'direct' | 'copy_then_open'
+  buildUrl: (payload: { url: string; title: string }) => string
+  copyMessage?: string
+}
+
+const newsShareChannels: NewsShareChannel[] = [
+  {
+    key: 'facebook',
+    label: 'Facebook',
+    icon: siFacebook,
+    mode: 'direct',
+    buildUrl: ({ url, title }) =>
+      `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}&quote=${encodeURIComponent(title)}`,
+  },
+  {
+    key: 'twitter',
+    label: 'X / Twitter',
+    icon: siX,
+    mode: 'direct',
+    buildUrl: ({ url, title }) =>
+      `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}`,
+  },
+  {
+    key: 'line',
+    label: 'LINE',
+    icon: siLine,
+    mode: 'direct',
+    buildUrl: ({ url }) => `https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(url)}`,
+  },
+  {
+    key: 'wechat',
+    label: 'WeChat',
+    icon: siWechat,
+    mode: 'copy_then_open',
+    buildUrl: () => 'https://web.wechat.com/',
+    copyMessage: 'Link copied. Paste it in WeChat to share.',
+  },
+  {
+    key: 'xiaohongshu',
+    label: '小红书',
+    icon: siXiaohongshu,
+    mode: 'copy_then_open',
+    buildUrl: () => 'https://www.xiaohongshu.com/explore',
+    copyMessage: 'Link copied. Paste it in Xiaohongshu to share.',
+  },
+  {
+    key: 'whatsapp',
+    label: 'WhatsApp',
+    icon: siWhatsapp,
+    mode: 'direct',
+    buildUrl: ({ url, title }) =>
+      `https://api.whatsapp.com/send?text=${encodeURIComponent(`${title} ${url}`)}`,
+  },
+  {
+    key: 'instagram',
+    label: 'Instagram',
+    icon: siInstagram,
+    mode: 'copy_then_open',
+    buildUrl: () => 'https://www.instagram.com/',
+    copyMessage: 'Link copied. Paste it in Instagram to share.',
+  },
+]
+
+const setNewsShareFeedback = (articleId: string, text: string) => {
+  newsShareFeedbackById.value = {
+    ...newsShareFeedbackById.value,
+    [articleId]: text,
+  }
+
+  const existingTimer = newsShareFeedbackTimers.get(articleId)
+  if (existingTimer) {
+    window.clearTimeout(existingTimer)
+  }
+
+  const timer = window.setTimeout(() => {
+    const next = { ...newsShareFeedbackById.value }
+    delete next[articleId]
+    newsShareFeedbackById.value = next
+    newsShareFeedbackTimers.delete(articleId)
+  }, 2600)
+
+  newsShareFeedbackTimers.set(articleId, timer)
+}
+
+const copyShareText = async (text: string): Promise<boolean> => {
+  if (typeof navigator !== 'undefined' && navigator.clipboard?.writeText) {
+    try {
+      await navigator.clipboard.writeText(text)
+      return true
+    } catch {
+      // fallback below
+    }
+  }
+
+  if (typeof document === 'undefined') return false
+
+  try {
+    const textarea = document.createElement('textarea')
+    textarea.value = text
+    textarea.setAttribute('readonly', 'true')
+    textarea.style.position = 'fixed'
+    textarea.style.opacity = '0'
+    document.body.appendChild(textarea)
+    textarea.select()
+    const copied = document.execCommand('copy')
+    document.body.removeChild(textarea)
+    return copied
+  } catch {
+    return false
+  }
+}
+
+const openShareWindow = (url: string) => {
+  if (typeof window === 'undefined') return
+  const popup = window.open(url, '_blank')
+  if (popup) {
+    popup.opener = null
+  }
+}
+
+const isPrivateHostForShare = (host: string): boolean => {
+  const h = String(host || '').toLowerCase()
+  if (!h) return true
+  if (h === 'localhost' || h === '127.0.0.1' || h === '0.0.0.0' || h.endsWith('.local')) return true
+
+  const ipv4 = h.match(/^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$/)
+  if (!ipv4) return false
+
+  const a = Number(ipv4[1])
+  const b = Number(ipv4[2])
+  if (a === 10) return true
+  if (a === 127) return true
+  if (a === 192 && b === 168) return true
+  if (a === 172 && b >= 16 && b <= 31) return true
+  return false
+}
+
+const needsPublicShareOrigin = (url: string): boolean => {
+  try {
+    const parsed = new URL(url)
+    return isPrivateHostForShare(parsed.hostname)
+  } catch {
+    return true
+  }
+}
+
+const resolveNewsShareUrl = (article: any): string => {
+  const articlePath = `/articles/${article.id}`
+  if (SHARE_ORIGIN) return `${SHARE_ORIGIN}${articlePath}`
+  if (typeof window === 'undefined') return articlePath
+  return `${window.location.origin}${articlePath}`
+}
+
+const shareNewsArticle = async (article: any, channel: NewsShareChannel) => {
+  const shareUrl = resolveNewsShareUrl(article)
+  const shareTitle = `${article.title} - ${t('news')}`
+  try {
+    guardUsagePolicyContent(
+      {
+        title: shareTitle,
+        summary: article?.summary || article?.excerpt || '',
+        content: article?.content || '',
+        url: shareUrl,
+      },
+      'share'
+    )
+  } catch (error) {
+    if (isUsagePolicyViolationError(error)) {
+      setNewsShareFeedback(String(article.id), error.message)
+      openUsagePolicyDialog(error.message)
+      return
+    }
+    throw error
+  }
+
+  const targetUrl = channel.buildUrl({ url: shareUrl, title: shareTitle })
+  const isLocalOrPrivateShareUrl = needsPublicShareOrigin(shareUrl)
+
+  if (channel.mode === 'copy_then_open') {
+    const copied = await copyShareText(`${shareTitle}\n${shareUrl}`)
+    if (copied && channel.copyMessage) {
+      setNewsShareFeedback(String(article.id), channel.copyMessage)
+    }
+  } else if (!SHARE_ORIGIN && isLocalOrPrivateShareUrl) {
+    const copied = await copyShareText(`${shareTitle}\n${shareUrl}`)
+    if (copied) {
+      setNewsShareFeedback(
+        String(article.id),
+        'Local URL detected. Link copied, please paste it manually when sharing.',
+      )
+    }
+  }
+
+  openShareWindow(targetUrl)
+}
+
 const categoriesLayoutStyle = computed<'card' | 'icon' | 'list' | 'grid'>(() => {
   const rawStyle = String(getSectionConfig('categories', 'layout_style', 'card') || '')
     .trim()
@@ -964,6 +1183,38 @@ const homepageCategories = computed(() => {
     : items.filter((category) => String(category.id) !== 'all' && String(category.code || '') !== 'all')
   return filtered.slice(0, categoriesDisplayCount.value)
 })
+
+const GAME_CATEGORY_TRANSLATION_KEYS: Record<string, string> = {
+  all: 'allGames',
+  allgames: 'allGames',
+  allgamescategory: 'allGames',
+  international: 'internationalGames',
+  internationalgames: 'internationalGames',
+  global: 'internationalGames',
+  'hongkong-taiwan': 'hongKongTaiwanGames',
+  hongkong: 'hongKongTaiwanGames',
+  taiwan: 'hongKongTaiwanGames',
+  hk: 'hongKongTaiwanGames',
+  tw: 'hongKongTaiwanGames',
+  'southeast-asia': 'southeastAsiaGames',
+  southeastasia: 'southeastAsiaGames',
+  southeast: 'southeastAsiaGames',
+  sea: 'southeastAsiaGames',
+}
+
+const resolveHomeCategoryName = (category: any): string => {
+  const candidates = [category?.nameKey, category?.code, category?.id]
+    .map((item) => String(item || '').trim().toLowerCase())
+    .filter(Boolean)
+
+  for (const token of candidates) {
+    const compact = token.replace(/[\\s_-]+/g, '')
+    const key = GAME_CATEGORY_TRANSLATION_KEYS[token] || GAME_CATEGORY_TRANSLATION_KEYS[compact]
+    if (key) return t(key)
+  }
+
+  return String(category?.name || '')
+}
 
 const categoriesContainerClass = computed(() => {
   if (categoriesLayoutStyle.value === 'list') {
@@ -1026,8 +1277,11 @@ const loading = ref(true)
 const recommendedNews = ref<any[]>([])
 const newsLoading = ref(false)
 const newsError = ref('')
+const newsShareFeedbackById = ref<Record<string, string>>({})
+const newsShareFeedbackTimers = new Map<string, number>()
 const hotGamesSource = ref<any[]>([])
 const gameCategories = ref<any[]>([])
+const CAROUSEL_PRIMARY_LINK = '/recharge-guide'
 
 // 加载轮播图
 const loadBanners = async () => {
@@ -1040,7 +1294,7 @@ const loadBanners = async () => {
       image: banner.image || `https://images.unsplash.com/photo-${banner.id}542751371-adc38448a05e?w=1920&h=600&fit=crop`,
       // 如果后台返回的字段名不同，这里进行映射
       primaryButton: banner.primaryButton || t('startRechargeNow'),
-      secondaryButton: banner.secondaryButton || t('viewDetails'),
+      primaryLink: CAROUSEL_PRIMARY_LINK,
     }))
     console.log('成功加载轮播图:', banners.length)
   } catch (err) {
@@ -1073,7 +1327,7 @@ const loadHomepageGameCategories = async () => {
   } catch (err) {
     console.error('加载首页游戏分类失败:', err)
     gameCategories.value = [
-      { id: 'all', name: '全部游戏', icon: '🎮', gamesCount: 0 },
+      { id: 'all', name: t('allGames'), icon: '🎮', gamesCount: 0 },
     ]
   }
 }
@@ -1091,18 +1345,18 @@ const loadRecommendedNews = async () => {
     recommendedNews.value = articles.map((article: any) => ({
       id: article.id,
       title: article.title,
-      excerpt: article.excerpt || article.summary || article.content?.substring(0, 100) || '暂无摘要',
-      author: article.author_name || article.author || '游戏充值网',
-      date: new Date(article.published_at || article.created_at).toLocaleDateString('zh-CN'),
-      category: article.category?.name || article.category || '资讯',
+      excerpt: article.excerpt || article.summary || article.content?.substring(0, 100) || 'No summary',
+      author: article.author_name || article.author || 'Cypher Game',
+      date: new Date(article.published_at || article.created_at).toLocaleDateString(locale.value || 'zh-CN'),
+      category: article.category?.name || article.category || t('news'),
       cover_image: normalizeImageUrl(article.cover_image),
       image: normalizeImageUrl(article.image || article.cover_image),
-      readTime: article.view_count ? `${article.view_count}次阅读` : null
+      readTime: article.view_count ? `${article.view_count} views` : null
     }))
     console.log('成功加载推荐资讯:', articles.length, '篇（配置数量:', displayCount, '）')
   } catch (err) {
     console.error('加载推荐资讯失败:', err)
-    newsError.value = '加载资讯失败，请稍后再试'
+    newsError.value = 'Failed to load news. Please try again later.'
   } finally {
     newsLoading.value = false
   }
@@ -1117,9 +1371,7 @@ const getDefaultSlides = () => [
     badge: t('carouselBadgeHotSale'),
     image: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1920&h=600&fit=crop',
     primaryButton: t('startRechargeNow'),
-    secondaryButton: t('viewDetails'),
-    primaryLink: '/recharge',
-    secondaryLink: '/games/1'
+    primaryLink: CAROUSEL_PRIMARY_LINK,
   },
   {
     id: 2,
@@ -1128,9 +1380,7 @@ const getDefaultSlides = () => [
     badge: t('carouselBadgeNewArrival'),
     image: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=1920&h=600&fit=crop',
     primaryButton: t('startNow'),
-    secondaryButton: t('learnMore'),
-    primaryLink: '/recharge',
-    secondaryLink: '/games/3'
+    primaryLink: CAROUSEL_PRIMARY_LINK,
   },
   {
     id: 3,
@@ -1139,9 +1389,7 @@ const getDefaultSlides = () => [
     badge: t('carouselBadgeBestSeller'),
     image: 'https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=1920&h=600&fit=crop',
     primaryButton: t('grabNow'),
-    secondaryButton: t('browseMore'),
-    primaryLink: '/recharge',
-    secondaryLink: '/games/2'
+    primaryLink: CAROUSEL_PRIMARY_LINK,
   },
   {
     id: 4,
@@ -1150,9 +1398,7 @@ const getDefaultSlides = () => [
     badge: t('carouselBadgeSpecialOffer'),
     image: 'https://images.unsplash.com/photo-1511512578047-dfb367046420?w=1920&h=600&fit=crop',
     primaryButton: t('immediateRecharge'),
-    secondaryButton: t('viewActivity'),
-    primaryLink: '/recharge',
-    secondaryLink: '/games/4'
+    primaryLink: CAROUSEL_PRIMARY_LINK,
   }
 ]
 
@@ -1461,6 +1707,8 @@ onUnmounted(() => {
     window.cancelAnimationFrame(ambientPointerRaf)
     ambientPointerRaf = null
   }
+  newsShareFeedbackTimers.forEach((timer) => window.clearTimeout(timer))
+  newsShareFeedbackTimers.clear()
 })
 
 // 热门游戏 - 根据后台配置的数量显示
@@ -1581,10 +1829,6 @@ button:focus {
   background-size: 44px 44px;
 }
 
-html.dark .home-grid-overlay {
-  opacity: 0.12;
-}
-
 .home-ambient-layer {
   z-index: 0;
   overflow: hidden;
@@ -1629,6 +1873,73 @@ html.dark .home-grid-overlay {
   background: linear-gradient(90deg, hsl(var(--muted) / 0.45) 25%, hsl(var(--muted) / 0.7) 50%, hsl(var(--muted) / 0.45) 75%);
   background-size: 400% 100%;
   animation: skeleton-loading 1.5s infinite;
+}
+
+.galaxy-hot-card {
+  border: 1px solid color-mix(in srgb, #d5e2f4 74%, #ffffff 26%);
+  box-shadow: 0 18px 34px -24px rgba(15, 23, 42, 0.34);
+}
+
+.galaxy-news-card {
+  border: 1px solid color-mix(in srgb, #d0deef 76%, #ffffff 24%);
+  background: linear-gradient(165deg, #ffffff 0%, #f7fbff 100%);
+  box-shadow: 0 20px 34px -26px rgba(15, 23, 42, 0.35);
+}
+
+.galaxy-news-card:hover {
+  border-color: color-mix(in srgb, #92d3ff 68%, #c5f6dd 32%);
+  box-shadow: 0 28px 48px -32px rgba(3, 105, 161, 0.36);
+  transform: translateY(-4px);
+}
+
+.news-share-icon-btn {
+  width: 1.95rem;
+  height: 1.95rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--share-color) 42%, transparent);
+  background: color-mix(in srgb, var(--share-color) 15%, transparent);
+  color: var(--share-color);
+  transition: transform 0.2s ease, filter 0.2s ease, border-color 0.2s ease;
+}
+
+.news-share-icon-btn:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.08);
+  border-color: color-mix(in srgb, var(--share-color) 68%, transparent);
+}
+
+.galaxy-pill {
+  border: 1px solid color-mix(in srgb, #7dd3fc 38%, #ffffff 62%);
+  color: #0369a1;
+  background: color-mix(in srgb, #dff3ff 68%, #ffffff 32%);
+  backdrop-filter: blur(6px);
+}
+
+.galaxy-pill--hot {
+  border-color: color-mix(in srgb, #fb7185 32%, #ffe4e6 68%);
+  color: #be123c;
+  background: color-mix(in srgb, #ffe4e6 75%, #ffffff 25%);
+}
+
+.galaxy-cta-btn {
+  border: 1px solid color-mix(in srgb, #7dd3fc 38%, #dcf7e8 62%);
+  border-radius: 16px;
+  padding: 14px 26px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #075985;
+  background: linear-gradient(180deg, #ffffff 0%, #f4fbff 100%);
+  box-shadow: 0 18px 34px -28px rgba(3, 105, 161, 0.46);
+  transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+}
+
+.galaxy-cta-btn:hover {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, #22c55e 35%, #7dd3fc 65%);
+  box-shadow: 0 24px 42px -30px rgba(6, 182, 212, 0.45);
 }
 
 .homepage-shell :deep([class*='shadow-[0_0_']) {
@@ -1683,7 +1994,7 @@ html.dark .home-grid-overlay {
   color: hsl(var(--muted-foreground)) !important;
 }
 
-html:not(.dark) .homepage-shell :deep(section) {
+.homepage-shell :deep(section) {
   background-color: #ffffff !important;
 }
 
@@ -1694,6 +2005,22 @@ html:not(.dark) .homepage-shell :deep(section) {
   border-color: hsl(var(--primary)) !important;
   color: hsl(var(--primary-foreground)) !important;
   box-shadow: none !important;
+}
+
+.homepage-shell .home-banner-section :deep([class*='text-']),
+.homepage-shell .home-banner-section :deep(h1),
+.homepage-shell .home-banner-section :deep(h2),
+.homepage-shell .home-banner-section :deep(h3),
+.homepage-shell .home-banner-section :deep(p),
+.homepage-shell .home-banner-section :deep(span),
+.homepage-shell .home-banner-section :deep(button),
+.homepage-shell .home-banner-section :deep(a),
+.homepage-shell .home-banner-section :deep(svg) {
+  color: #fff !important;
+}
+
+.homepage-shell .home-banner-section .carousel-stats :deep(*) {
+  color: #111 !important;
 }
 
 @media (prefers-reduced-motion: reduce) {

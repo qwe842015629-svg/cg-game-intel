@@ -1,0 +1,28 @@
+{
+  "articlesPage": {
+    "allNews": "All News",
+    "loading": "Loading...",
+    "retry": "Retry",
+    "share": "Share",
+    "shareTo": "Share to {channel}",
+    "emptyByCategory": "No articles in \"{category}\"",
+    "emptyAll": "No articles available",
+    "viewAll": "View all articles",
+    "copyForWechat": "Link copied. Paste it in WeChat to share.",
+    "copyForXiaohongshu": "Link copied. Paste it in Xiaohongshu to share.",
+    "copyForInstagram": "Link copied. Paste it in Instagram to share.",
+    "localShareFallback": "Current URL is local/private and cannot prefill content on social platforms. Link copied for manual sharing.",
+    "shareTitle": "{title} - GAME News",
+    "categoryDescription": "Latest updates and guides in category: {category}.",
+    "loadFailed": "Failed to load articles. Please try again later.",
+    "channels": {
+      "facebook": "Facebook",
+      "twitter": "X / Twitter",
+      "line": "LINE",
+      "wechat": "WeChat",
+      "xiaohongshu": "Xiaohongshu",
+      "whatsapp": "WhatsApp",
+      "instagram": "Instagram"
+    }
+  }
+}

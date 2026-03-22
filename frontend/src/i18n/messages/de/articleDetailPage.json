@@ -1,0 +1,29 @@
+{
+  "articleDetailPage": {
+    "loading": "L?dt...",
+    "back": "Zur?ck",
+    "tocTitle": "Inhaltsverzeichnis",
+    "tocEmpty": "F?r diesen Artikel wurde kein nutzbares Inhaltsverzeichnis gefunden. Bitte aktualisieren Sie die Seite.",
+    "defaultCategory": "News",
+    "authorLabel": "Autor: ",
+    "defaultAuthor": "Offizielle Redaktion",
+    "readTimeLabel": "Lesezeit: ",
+    "defaultReadTime": "ca. 3 Min.",
+    "hotGamesTitle": "Beliebte Spiele",
+    "noHotGames": "Noch keine beliebten Spiele",
+    "hotGameAlt": "Beliebtes Spiel",
+    "untitledGame": "Unbenanntes Spiel",
+    "viewRechargeDetail": "Aufladedetails ansehen",
+    "latestArticlesTitle": "Neueste Artikel",
+    "noLatestArticles": "Keine neuen Artikel",
+    "latestArticleAlt": "Neuester Artikel",
+    "untitledArticle": "Unbenannter Artikel",
+    "latestPublished": "Zuletzt ver?ffentlicht",
+    "close": "Schlie?en",
+    "notFoundTitle": "Artikel nicht gefunden",
+    "notFoundDescription": "Entschuldigung, dieser Artikel wurde nicht gefunden.",
+    "backToArticles": "Zur?ck zu den Artikeln",
+    "imageAlt": "Artikelbild",
+    "loadFailed": "Artikel nicht gefunden oder Laden fehlgeschlagen"
+  }
+}

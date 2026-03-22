@@ -9,6 +9,7 @@ from .content_enrichment import (
     compose_rich_seo_article_html,
     inject_game_internal_link,
     merge_unique_tags,
+    sanitize_seo_summary_text,
 )
 
 __all__ = [
@@ -23,4 +24,5 @@ __all__ = [
     "compose_rich_seo_article_html",
     "inject_game_internal_link",
     "merge_unique_tags",
+    "sanitize_seo_summary_text",
 ]

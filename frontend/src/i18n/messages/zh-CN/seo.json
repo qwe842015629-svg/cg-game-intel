@@ -1,0 +1,31 @@
+{
+  "seo": {
+    "defaultDescription": "专业游戏充值与资讯平台，支持多语言访问。",
+    "defaultKeywords": "游戏充值,游戏资讯,代充平台,多语言网站",
+    "routeTitles": {
+      "default": "页面",
+      "home": "首页",
+      "games": "游戏列表",
+      "gameDetail": "游戏详情",
+      "articles": "资讯列表",
+      "articleDetail": "资讯详情",
+      "profile": "个人中心",
+      "customerService": "在线客服",
+      "about": "关于我们",
+      "contact": "联系我们",
+      "recharge": "充值中心",
+      "rechargeGuide": "充值指南",
+      "search": "搜索结果",
+      "translationDemo": "翻译演示",
+      "i18nDemo": "国际化演示",
+      "register": "注册",
+      "login": "登录",
+      "activate": "账号激活",
+      "notFound": "页面不存在",
+      "cgWiki": "CG Wiki",
+      "tavern": "酒馆",
+      "novelStory": "小说剧情",
+      "plaza": "广场"
+    }
+  }
+}
