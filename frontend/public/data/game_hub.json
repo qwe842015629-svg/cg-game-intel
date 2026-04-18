@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-04-18 10:00:07",
-  "run_id": "1776477607",
+  "last_updated": "2026-04-18 20:54:22",
+  "run_id": "1776516862",
   "rankings": {
     "CN": [
       {
@@ -160,7 +160,7 @@
         "rank": 18,
         "id": "6752375425",
         "title": "神泣：纷争",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/e3/ff/17/e3ff177f-42a0-7df2-68fa-14e3cd4df595/AppIcon-0-0-1x_U007epad-0-11-0-85-220.png/100x100bb.png",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/34/25/0c/34250c4a-afe6-ae63-717a-b91f50ab5832/AppIcon-0-0-1x_U007epad-0-11-0-85-220.png/100x100bb.png",
         "artist": "Zhejiang UmarkNetwork Technology Co.,Ltd",
         "url": "https://apps.apple.com/cn/app/%E7%A5%9E%E6%B3%A3-%E7%BA%B7%E4%BA%89/id6752375425?uo=2",
         "global_hot": false
@@ -239,20 +239,20 @@
       },
       {
         "rank": 27,
-        "id": "6544797261",
-        "title": "超自然行动组",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/ba/bb/92/babb923d-8182-8ebb-b901-40821e920bf9/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
-        "artist": "巨人网络科技有限公司",
-        "url": "https://apps.apple.com/cn/app/%E8%B6%85%E8%87%AA%E7%84%B6%E8%A1%8C%E5%8A%A8%E7%BB%84/id6544797261?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 28,
         "id": "6751274630",
         "title": "猪猪来财",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/73/58/86/73588653-fc83-36e7-cc60-9f3f65de150b/AppIcon-0-1x_U007ephone-0-1-85-220-0.png/100x100bb.png",
         "artist": "晟溥 常",
         "url": "https://apps.apple.com/cn/app/%E7%8C%AA%E7%8C%AA%E6%9D%A5%E8%B4%A2/id6751274630?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 28,
+        "id": "6544797261",
+        "title": "超自然行动组",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/ba/bb/92/babb923d-8182-8ebb-b901-40821e920bf9/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
+        "artist": "巨人网络科技有限公司",
+        "url": "https://apps.apple.com/cn/app/%E8%B6%85%E8%87%AA%E7%84%B6%E8%A1%8C%E5%8A%A8%E7%BB%84/id6544797261?uo=2",
         "global_hot": false
       },
       {
@@ -284,20 +284,20 @@
       },
       {
         "rank": 32,
-        "id": "1455054000",
-        "title": "英雄联盟手游",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/ea/58/99/ea5899e0-cdc5-b3e0-c5b2-0b2a4dde4b57/AppIcon-0-0-1x_U007emarketing-0-8-0-0-85-220.png/100x100bb.png",
-        "artist": "Shenzhen Tencent Tianyou Technology Ltd",
-        "url": "https://apps.apple.com/cn/app/%E8%8B%B1%E9%9B%84%E8%81%94%E7%9B%9F%E6%89%8B%E6%B8%B8/id1455054000?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 33,
         "id": "689180123",
         "title": "欢乐麻将",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/b3/42/d9/b342d90a-bfa5-b54c-5c12-01806c191287/AppIcon-1x_U007emarketing-0-7-0-85-220-0.jpeg/100x100bb.png",
         "artist": "Tencent Mobile Games",
         "url": "https://apps.apple.com/cn/app/%E6%AC%A2%E4%B9%90%E9%BA%BB%E5%B0%86/id689180123?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 33,
+        "id": "1455054000",
+        "title": "英雄联盟手游",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/ea/58/99/ea5899e0-cdc5-b3e0-c5b2-0b2a4dde4b57/AppIcon-0-0-1x_U007emarketing-0-8-0-0-85-220.png/100x100bb.png",
+        "artist": "Shenzhen Tencent Tianyou Technology Ltd",
+        "url": "https://apps.apple.com/cn/app/%E8%8B%B1%E9%9B%84%E8%81%94%E7%9B%9F%E6%89%8B%E6%B8%B8/id1455054000?uo=2",
         "global_hot": false
       },
       {
@@ -329,20 +329,20 @@
       },
       {
         "rank": 37,
-        "id": "940547441",
-        "title": "梦幻西游",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/ad/7e/fc/ad7efc05-7ac6-dd4f-290b-bf18735f211f/AppIcon-1x_U007emarketing-0-10-0-85-220-0.png/100x100bb.png",
-        "artist": "网易移动游戏",
-        "url": "https://apps.apple.com/cn/app/%E6%A2%A6%E5%B9%BB%E8%A5%BF%E6%B8%B8/id940547441?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 38,
         "id": "1498874997",
         "title": "巅峰极速-飞驰人生3联动",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/95/b7/85/95b7854c-58e6-dca3-37db-5d9dcfd7b74b/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
         "artist": "网易移动游戏",
         "url": "https://apps.apple.com/cn/app/%E5%B7%85%E5%B3%B0%E6%9E%81%E9%80%9F-%E9%A3%9E%E9%A9%B0%E4%BA%BA%E7%94%9F3%E8%81%94%E5%8A%A8/id1498874997?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 38,
+        "id": "940547441",
+        "title": "梦幻西游",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/ad/7e/fc/ad7efc05-7ac6-dd4f-290b-bf18735f211f/AppIcon-1x_U007emarketing-0-10-0-85-220-0.png/100x100bb.png",
+        "artist": "网易移动游戏",
+        "url": "https://apps.apple.com/cn/app/%E6%A2%A6%E5%B9%BB%E8%A5%BF%E6%B8%B8/id940547441?uo=2",
         "global_hot": false
       },
       {
@@ -374,11 +374,11 @@
       },
       {
         "rank": 42,
-        "id": "1467190251",
-        "title": "原神·空月之歌",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/73/25/b7/7325b73b-c870-580f-cae3-ae0c68040b29/AppIcon-0-0-1x_U007epad-0-1-85-220.png/100x100bb.png",
-        "artist": "miHoYo Games",
-        "url": "https://apps.apple.com/cn/app/%E5%8E%9F%E7%A5%9E-%E7%A9%BA%E6%9C%88%E4%B9%8B%E6%AD%8C/id1467190251?uo=2",
+        "id": "6475002539",
+        "title": "再玩亿关",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/da/76/e0/da76e0ec-4420-e08b-e783-88a5b198a10c/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
+        "artist": "无锡地鼠洞网络科技有限公司",
+        "url": "https://apps.apple.com/cn/app/%E5%86%8D%E7%8E%A9%E4%BA%BF%E5%85%B3/id6475002539?uo=2",
         "global_hot": false
       },
       {
@@ -392,11 +392,11 @@
       },
       {
         "rank": 44,
-        "id": "6475002539",
-        "title": "再玩亿关",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/da/76/e0/da76e0ec-4420-e08b-e783-88a5b198a10c/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
-        "artist": "无锡地鼠洞网络科技有限公司",
-        "url": "https://apps.apple.com/cn/app/%E5%86%8D%E7%8E%A9%E4%BA%BF%E5%85%B3/id6475002539?uo=2",
+        "id": "1467190251",
+        "title": "原神·空月之歌",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/73/25/b7/7325b73b-c870-580f-cae3-ae0c68040b29/AppIcon-0-0-1x_U007epad-0-1-85-220.png/100x100bb.png",
+        "artist": "miHoYo Games",
+        "url": "https://apps.apple.com/cn/app/%E5%8E%9F%E7%A5%9E-%E7%A9%BA%E6%9C%88%E4%B9%8B%E6%AD%8C/id1467190251?uo=2",
         "global_hot": false
       },
       {
@@ -464,20 +464,20 @@
       },
       {
         "rank": 52,
-        "id": "6738345439",
-        "title": "飞机大厨：空中烹饪",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/c7/73/64/c77364a7-c9b9-ed60-b5e6-171352808a7b/AppIconCNRID-0-1x_U007emarketing-0-8-0-85-220-0.png/100x100bb.png",
-        "artist": "Nordcurrent UAB",
-        "url": "https://apps.apple.com/cn/app/%E9%A3%9E%E6%9C%BA%E5%A4%A7%E5%8E%A8-%E7%A9%BA%E4%B8%AD%E7%83%B9%E9%A5%AA/id6738345439?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 53,
         "id": "548592311",
         "title": "台球世界-桌球斯诺克竞技游戏",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/8d/ef/43/8def435c-a703-28ee-7ff5-6463e0e67aca/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
         "artist": "Hangzhou Mention Network Technology Co., Ltd.",
         "url": "https://apps.apple.com/cn/app/%E5%8F%B0%E7%90%83%E4%B8%96%E7%95%8C-%E6%A1%8C%E7%90%83%E6%96%AF%E8%AF%BA%E5%85%8B%E7%AB%9E%E6%8A%80%E6%B8%B8%E6%88%8F/id548592311?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 53,
+        "id": "6738345439",
+        "title": "飞机大厨：空中烹饪",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/c7/73/64/c77364a7-c9b9-ed60-b5e6-171352808a7b/AppIconCNRID-0-1x_U007emarketing-0-8-0-85-220-0.png/100x100bb.png",
+        "artist": "Nordcurrent UAB",
+        "url": "https://apps.apple.com/cn/app/%E9%A3%9E%E6%9C%BA%E5%A4%A7%E5%8E%A8-%E7%A9%BA%E4%B8%AD%E7%83%B9%E9%A5%AA/id6738345439?uo=2",
         "global_hot": false
       },
       {
@@ -536,20 +536,20 @@
       },
       {
         "rank": 60,
-        "id": "6479696944",
-        "title": "欢乐钓鱼大师",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/df/bb/84/dfbb8473-59df-2e07-c9c6-ce882f5f6b47/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
-        "artist": "Ark Game Limited",
-        "url": "https://apps.apple.com/cn/app/%E6%AC%A2%E4%B9%90%E9%92%93%E9%B1%BC%E5%A4%A7%E5%B8%88/id6479696944?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 61,
         "id": "6753840575",
         "title": "不服来通关 - 策略塔防 割草闯关游戏",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/51/bd/52/51bd5216-67d5-d572-48ee-d5e2e7865c65/AppIcon-0-0-1x_U007epad-0-1-85-220.png/100x100bb.png",
         "artist": "ManyFun",
         "url": "https://apps.apple.com/cn/app/%E4%B8%8D%E6%9C%8D%E6%9D%A5%E9%80%9A%E5%85%B3-%E7%AD%96%E7%95%A5%E5%A1%94%E9%98%B2-%E5%89%B2%E8%8D%89%E9%97%AF%E5%85%B3%E6%B8%B8%E6%88%8F/id6753840575?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 61,
+        "id": "6479696944",
+        "title": "欢乐钓鱼大师",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/df/bb/84/dfbb8473-59df-2e07-c9c6-ce882f5f6b47/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
+        "artist": "Ark Game Limited",
+        "url": "https://apps.apple.com/cn/app/%E6%AC%A2%E4%B9%90%E9%92%93%E9%B1%BC%E5%A4%A7%E5%B8%88/id6479696944?uo=2",
         "global_hot": false
       },
       {
@@ -752,15 +752,6 @@
       },
       {
         "rank": 84,
-        "id": "6757994167",
-        "title": "街角服装店",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/f3/5d/72/f35d72fc-3f92-639b-5690-e5d5f792a343/AppIcon-0-1x_U007ephone-0-1-85-220-0.png/100x100bb.png",
-        "artist": "雪晴 刘",
-        "url": "https://apps.apple.com/cn/app/%E8%A1%97%E8%A7%92%E6%9C%8D%E8%A3%85%E5%BA%97/id6757994167?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 85,
         "id": "6757469154",
         "title": "挪箭666 - 箭头消除挪一挪",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/8a/c9/26/8ac92648-3f2d-fbc8-da3b-382eb133add7/AppIcon-1x_U007epad-0-1-85-220-0.png/100x100bb.png",
@@ -769,7 +760,7 @@
         "global_hot": false
       },
       {
-        "rank": 86,
+        "rank": 85,
         "id": "6760804591",
         "title": "心动大豪宅 - 建造家园 装修我的小家",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/40/dd/0f/40dd0f19-2922-f837-de26-2a944d1421d1/AppIcon-0-0-1x_U007epad-0-1-85-220.png/100x100bb.png",
@@ -778,12 +769,21 @@
         "global_hot": false
       },
       {
-        "rank": 87,
+        "rank": 86,
         "id": "654897098",
         "title": "天天爱消除",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/0a/17/ab/0a17ab9a-72fc-da3d-4a3a-cae9db599ef5/AppIcon-0-0-1x_U007emarketing-0-7-0-0-85-220.png/100x100bb.png",
         "artist": "Tencent Mobile Games",
         "url": "https://apps.apple.com/cn/app/%E5%A4%A9%E5%A4%A9%E7%88%B1%E6%B6%88%E9%99%A4/id654897098?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 87,
+        "id": "6757994167",
+        "title": "街角服装店",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/f3/5d/72/f35d72fc-3f92-639b-5690-e5d5f792a343/AppIcon-0-1x_U007ephone-0-1-85-220-0.png/100x100bb.png",
+        "artist": "雪晴 刘",
+        "url": "https://apps.apple.com/cn/app/%E8%A1%97%E8%A7%92%E6%9C%8D%E8%A3%85%E5%BA%97/id6757994167?uo=2",
         "global_hot": false
       },
       {
@@ -815,20 +815,20 @@
       },
       {
         "rank": 91,
-        "id": "1618911882",
-        "title": "恋与深空",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/2c/2e/10/2c2e104c-0f3c-b47f-54e9-1cec411843d9/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
-        "artist": "Paper Games",
-        "url": "https://apps.apple.com/cn/app/%E6%81%8B%E4%B8%8E%E6%B7%B1%E7%A9%BA/id1618911882?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 92,
         "id": "6749657124",
         "title": "冲吧！帕克",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/3d/5d/d3/3d5dd3b8-1ff9-395f-5329-61155c16bde5/AppIcon-1x_U007emarketing-0-8-0-85-220-0.png/100x100bb.png",
         "artist": "烛月游戏",
         "url": "https://apps.apple.com/cn/app/%E5%86%B2%E5%90%A7-%E5%B8%95%E5%85%8B/id6749657124?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 92,
+        "id": "1618911882",
+        "title": "恋与深空",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/2c/2e/10/2c2e104c-0f3c-b47f-54e9-1cec411843d9/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
+        "artist": "Paper Games",
+        "url": "https://apps.apple.com/cn/app/%E6%81%8B%E4%B8%8E%E6%B7%B1%E7%A9%BA/id1618911882?uo=2",
         "global_hot": false
       },
       {
@@ -887,20 +887,20 @@
       },
       {
         "rank": 99,
-        "id": "6502348074",
-        "title": "永远的蔚蓝星球-合成快攻 对战轻松",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/25/41/85/254185c7-80f8-8b6b-e399-334b64107395/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
-        "artist": "Chuangyue Joy",
-        "url": "https://apps.apple.com/cn/app/%E6%B0%B8%E8%BF%9C%E7%9A%84%E8%94%9A%E8%93%9D%E6%98%9F%E7%90%83-%E5%90%88%E6%88%90%E5%BF%AB%E6%94%BB-%E5%AF%B9%E6%88%98%E8%BD%BB%E6%9D%BE/id6502348074?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 100,
         "id": "945598289",
         "title": "掌上穿越火线",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/28/cc/3a/28cc3a15-f2d4-5628-9c76-f651e1a2e48e/CFGroupAppIcon-1x_U007emarketing-0-6-0-0-sRGB-85-220-0.png/100x100bb.png",
         "artist": "Tencent Technology (Shenzhen) Company Limited",
         "url": "https://apps.apple.com/cn/app/%E6%8E%8C%E4%B8%8A%E7%A9%BF%E8%B6%8A%E7%81%AB%E7%BA%BF/id945598289?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 100,
+        "id": "6502348074",
+        "title": "永远的蔚蓝星球-合成快攻 对战轻松",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/25/41/85/254185c7-80f8-8b6b-e399-334b64107395/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
+        "artist": "Chuangyue Joy",
+        "url": "https://apps.apple.com/cn/app/%E6%B0%B8%E8%BF%9C%E7%9A%84%E8%94%9A%E8%93%9D%E6%98%9F%E7%90%83-%E5%90%88%E6%88%90%E5%BF%AB%E6%94%BB-%E5%AF%B9%E6%88%98%E8%BD%BB%E6%9D%BE/id6502348074?uo=2",
         "global_hot": false
       }
     ],
@@ -934,20 +934,20 @@
       },
       {
         "rank": 4,
-        "id": "1617391485",
-        "title": "Block Blast！",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/f8/67/40/f86740db-33e2-15c3-6ce3-2d806b88503b/AppIcon-0-0-1x_U007emarketing-0-11-0-sRGB-85-220.png/100x100bb.png",
-        "artist": "Hungry Studio",
-        "url": "https://apps.apple.com/us/app/block-blast/id1617391485?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 5,
         "id": "6468921495",
         "title": "Vita Mahjong",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/d2/08/43/d208434e-8281-157e-f071-89f377c2040a/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
         "artist": "Vita Studio",
         "url": "https://apps.apple.com/us/app/vita-mahjong/id6468921495?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 5,
+        "id": "1617391485",
+        "title": "Block Blast！",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/f8/67/40/f86740db-33e2-15c3-6ce3-2d806b88503b/AppIcon-0-0-1x_U007emarketing-0-11-0-sRGB-85-220.png/100x100bb.png",
+        "artist": "Hungry Studio",
+        "url": "https://apps.apple.com/us/app/block-blast/id1617391485?uo=2",
         "global_hot": false
       },
       {
@@ -1033,15 +1033,6 @@
       },
       {
         "rank": 15,
-        "id": "1229016807",
-        "title": "Brawl Stars",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/0c/03/ca/0c03ca52-a9a0-c928-7fd3-3ec21af7b65c/AppIcon-0-0-1x_U007epad-0-1-85-220.png/100x100bb.png",
-        "artist": "Supercell",
-        "url": "https://apps.apple.com/us/app/brawl-stars/id1229016807?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 16,
         "id": "6483539426",
         "title": "Fortnite",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/6a/ac/2f/6aac2f0a-e42e-ba37-afcb-f9a09d674696/AppIcon-0-0-1x_U007epad-0-1-85-220.png/100x100bb.png",
@@ -1050,12 +1041,21 @@
         "global_hot": false
       },
       {
-        "rank": 17,
+        "rank": 16,
         "id": "6751056652",
         "title": "Pixel Flow!",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/05/71/b2/0571b2f9-e021-2f4b-4fc8-8f042e303afc/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
         "artist": "Loom Games Oyun Yazilim ve Pazarlama Anonim Sirketi",
         "url": "https://apps.apple.com/us/app/pixel-flow/id6751056652?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 17,
+        "id": "1229016807",
+        "title": "Brawl Stars",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/0c/03/ca/0c03ca52-a9a0-c928-7fd3-3ec21af7b65c/AppIcon-0-0-1x_U007epad-0-1-85-220.png/100x100bb.png",
+        "artist": "Supercell",
+        "url": "https://apps.apple.com/us/app/brawl-stars/id1229016807?uo=2",
         "global_hot": false
       },
       {
@@ -1123,20 +1123,20 @@
       },
       {
         "rank": 25,
-        "id": "1621328561",
-        "title": "MONOPOLY GO!",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/59/43/4f/59434fbb-4bc1-1dbd-fd05-61e34ff7d0de/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
-        "artist": "Scopely, Inc.",
-        "url": "https://apps.apple.com/us/app/monopoly-go/id1621328561?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 26,
         "id": "329218549",
         "title": "Chess - Play & Learn Online",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/d8/c7/85/d8c7853e-b6b0-dd1e-1a91-f113be5f6264/AppIcon-1x_U007epad-0-1-0-0-85-220-0.png/100x100bb.png",
         "artist": "Chess.com",
         "url": "https://apps.apple.com/us/app/chess-play-learn-online/id329218549?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 26,
+        "id": "1621328561",
+        "title": "MONOPOLY GO!",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/59/43/4f/59434fbb-4bc1-1dbd-fd05-61e34ff7d0de/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
+        "artist": "Scopely, Inc.",
+        "url": "https://apps.apple.com/us/app/monopoly-go/id1621328561?uo=2",
         "global_hot": false
       },
       {
@@ -1150,20 +1150,20 @@
       },
       {
         "rank": 28,
-        "id": "1443446174",
-        "title": "Magic Tiles 3: Piano Game",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/2b/aa/6b/2baa6b00-b5fd-ec4b-2665-66d5899a3f3b/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
-        "artist": "Amanotes Pte. Ltd.",
-        "url": "https://apps.apple.com/us/app/magic-tiles-3-piano-game/id1443446174?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 29,
         "id": "6755216191",
         "title": "Arrowscapes™ - Arrows Puzzle",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/3e/fd/71/3efd7199-edff-7bc2-043d-81683beefb77/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
         "artist": "Beijing Youyoutang Technology Co.,ltd.",
         "url": "https://apps.apple.com/us/app/arrowscapes-arrows-puzzle/id6755216191?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 29,
+        "id": "1443446174",
+        "title": "Magic Tiles 3: Piano Game",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/2b/aa/6b/2baa6b00-b5fd-ec4b-2665-66d5899a3f3b/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
+        "artist": "Amanotes Pte. Ltd.",
+        "url": "https://apps.apple.com/us/app/magic-tiles-3-piano-game/id1443446174?uo=2",
         "global_hot": false
       },
       {
@@ -1177,20 +1177,20 @@
       },
       {
         "rank": 31,
-        "id": "543186831",
-        "title": "8 Ball Pool™",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/e5/3d/44/e53d4407-137f-2e23-47c0-f6cd107adcd7/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
-        "artist": "Miniclip.com",
-        "url": "https://apps.apple.com/us/app/8-ball-pool/id543186831?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 32,
         "id": "6471045672",
         "title": "Tasty Travels: Merge Game",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/77/1b/e8/771be8da-e12b-9e6c-cf9d-3a2af8583586/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
         "artist": "Century Games Pte. Ltd.",
         "url": "https://apps.apple.com/us/app/tasty-travels-merge-game/id6471045672?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 32,
+        "id": "543186831",
+        "title": "8 Ball Pool™",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/e5/3d/44/e53d4407-137f-2e23-47c0-f6cd107adcd7/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
+        "artist": "Miniclip.com",
+        "url": "https://apps.apple.com/us/app/8-ball-pool/id543186831?uo=2",
         "global_hot": false
       },
       {
@@ -1249,15 +1249,6 @@
       },
       {
         "rank": 39,
-        "id": "1287282214",
-        "title": "Call of Duty®: Mobile",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/73/f6/aa/73f6aa64-d3a4-4448-d36d-25b41582ec06/AppIcon-1x_U007emarketing-0-10-0-85-220-0.png/100x100bb.png",
-        "artist": "Activision Publishing, Inc.",
-        "url": "https://apps.apple.com/us/app/call-of-duty-mobile/id1287282214?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 40,
         "id": "1482155847",
         "title": "Royal Match",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/f0/95/62/f09562b4-ec3f-df3b-2757-c47f00a120a8/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
@@ -1266,21 +1257,30 @@
         "global_hot": false
       },
       {
-        "rank": 41,
-        "id": "553834731",
-        "title": "Candy Crush Saga",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/73/1a/b7/731ab722-f9bd-dde7-8e93-858e08e5a92a/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
-        "artist": "King",
-        "url": "https://apps.apple.com/us/app/candy-crush-saga/id553834731?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 42,
+        "rank": 40,
         "id": "1597760047",
         "title": "OneState RP: Role Play Online",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/d7/86/b0/d786b0b3-0a66-c3e9-09bb-a1d0e810e233/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
         "artist": "CHILLBASE LTD",
         "url": "https://apps.apple.com/us/app/onestate-rp-role-play-online/id1597760047?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 41,
+        "id": "1287282214",
+        "title": "Call of Duty®: Mobile",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/73/f6/aa/73f6aa64-d3a4-4448-d36d-25b41582ec06/AppIcon-1x_U007emarketing-0-10-0-85-220-0.png/100x100bb.png",
+        "artist": "Activision Publishing, Inc.",
+        "url": "https://apps.apple.com/us/app/call-of-duty-mobile/id1287282214?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 42,
+        "id": "553834731",
+        "title": "Candy Crush Saga",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/73/1a/b7/731ab722-f9bd-dde7-8e93-858e08e5a92a/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
+        "artist": "King",
+        "url": "https://apps.apple.com/us/app/candy-crush-saga/id553834731?uo=2",
         "global_hot": false
       },
       {
@@ -1294,20 +1294,20 @@
       },
       {
         "rank": 44,
-        "id": "6744304405",
-        "title": "Cider Casino - Real Money",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/dd/61/7f/dd617fb1-0402-f31f-68f0-9cc339f06be3/AppIcon-0-0-1x_U007epad-0-11-0-85-220.png/100x100bb.png",
-        "artist": "Mystic Mirror Studio Limited",
-        "url": "https://apps.apple.com/us/app/cider-casino-real-money/id6744304405?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 45,
         "id": "6745120053",
         "title": "Imposter Game - Party Edition",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/a3/9a/44/a39a44be-b868-f179-2005-791bf3386a3c/AppIcon-0-0-1x_U007emarketing-0-11-0-0-85-220.png/100x100bb.png",
         "artist": "Sven Vucak",
         "url": "https://apps.apple.com/us/app/imposter-game-party-edition/id6745120053?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 45,
+        "id": "6744304405",
+        "title": "Cider Casino - Real Money",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/dd/61/7f/dd617fb1-0402-f31f-68f0-9cc339f06be3/AppIcon-0-0-1x_U007epad-0-11-0-85-220.png/100x100bb.png",
+        "artist": "Mystic Mirror Studio Limited",
+        "url": "https://apps.apple.com/us/app/cider-casino-real-money/id6744304405?uo=2",
         "global_hot": false
       },
       {
@@ -1375,6 +1375,15 @@
       },
       {
         "rank": 53,
+        "id": "1608916511",
+        "title": "Rainbow Six Mobile",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/bf/1d/2b/bf1d2b8b-9f59-3ad6-cc28-e35e352e85aa/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
+        "artist": "Ubisoft Nova",
+        "url": "https://apps.apple.com/us/app/rainbow-six-mobile/id1608916511?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 54,
         "id": "1094930513",
         "title": "EA SPORTS FC™ Mobile Soccer 26",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/1e/f6/c1/1ef6c173-2e6f-a89a-f17f-79c750497fcf/AppIcon-1x_U007emarketing-0-8-0-85-220-0.png/100x100bb.png",
@@ -1383,21 +1392,12 @@
         "global_hot": false
       },
       {
-        "rank": 54,
+        "rank": 55,
         "id": "1094591345",
         "title": "Pokémon GO",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/74/56/38/7456386f-029d-992a-a203-d1e12eca07e7/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
         "artist": "Niantic, Inc.",
         "url": "https://apps.apple.com/us/app/pok%C3%A9mon-go/id1094591345?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 55,
-        "id": "1608916511",
-        "title": "Rainbow Six Mobile",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/bf/1d/2b/bf1d2b8b-9f59-3ad6-cc28-e35e352e85aa/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
-        "artist": "Ubisoft Nova",
-        "url": "https://apps.apple.com/us/app/rainbow-six-mobile/id1608916511?uo=2",
         "global_hot": false
       },
       {
@@ -1420,20 +1420,20 @@
       },
       {
         "rank": 58,
-        "id": "1446254576",
-        "title": "Solitaire Cash",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/df/83/e1/df83e1e2-e6b9-4453-3f16-3b011e50d377/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
-        "artist": "Papaya Gaming",
-        "url": "https://apps.apple.com/us/app/solitaire-cash/id1446254576?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 59,
         "id": "6449294809",
         "title": "Invincible: Guarding the Globe",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/8f/87/2d/8f872d08-c391-c45b-ca0f-a0d5902808f9/AppIcon-0-0-1x_U007emarketing-0-7-0-85-220.png/100x100bb.png",
         "artist": "Ubisoft",
         "url": "https://apps.apple.com/us/app/invincible-guarding-the-globe/id6449294809?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 59,
+        "id": "1446254576",
+        "title": "Solitaire Cash",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/df/83/e1/df83e1e2-e6b9-4453-3f16-3b011e50d377/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
+        "artist": "Papaya Gaming",
+        "url": "https://apps.apple.com/us/app/solitaire-cash/id1446254576?uo=2",
         "global_hot": false
       },
       {
@@ -1447,20 +1447,20 @@
       },
       {
         "rank": 61,
-        "id": "6498883328",
-        "title": "Tile Explorer: Tiles Clear!",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/c4/07/16/c4071674-af13-2547-e6c0-1611449ca9e1/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
-        "artist": "Oakever Games",
-        "url": "https://apps.apple.com/us/app/tile-explorer-tiles-clear/id6498883328?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 62,
         "id": "6738109752",
         "title": "Tiles Survive!",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/8e/87/ca/8e87ca59-1196-0231-6c49-f4cba34692c3/FPX_AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
         "artist": "FunPlus International AG",
         "url": "https://apps.apple.com/us/app/tiles-survive/id6738109752?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 62,
+        "id": "6498883328",
+        "title": "Tile Explorer: Tiles Clear!",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/c4/07/16/c4071674-af13-2547-e6c0-1611449ca9e1/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
+        "artist": "Oakever Games",
+        "url": "https://apps.apple.com/us/app/tile-explorer-tiles-clear/id6498883328?uo=2",
         "global_hot": false
       },
       {
@@ -1483,20 +1483,20 @@
       },
       {
         "rank": 65,
-        "id": "6448104157",
-        "title": "Offline Games - No Wifi Games",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/b7/1f/da/b71fda73-ef75-3d3e-eb39-68af439967e4/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
-        "artist": "Moreno Maio",
-        "url": "https://apps.apple.com/us/app/offline-games-no-wifi-games/id6448104157?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 66,
         "id": "6754900673",
         "title": "Jigsawcard Solitaire Puzzle",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/53/84/eb/5384eb73-6242-e503-b5d4-29ba8821f749/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
         "artist": "Oakever Games",
         "url": "https://apps.apple.com/us/app/jigsawcard-solitaire-puzzle/id6754900673?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 66,
+        "id": "6448104157",
+        "title": "Offline Games - No Wifi Games",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/b7/1f/da/b71fda73-ef75-3d3e-eb39-68af439967e4/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
+        "artist": "Moreno Maio",
+        "url": "https://apps.apple.com/us/app/offline-games-no-wifi-games/id6448104157?uo=2",
         "global_hot": false
       },
       {
@@ -1510,42 +1510,6 @@
       },
       {
         "rank": 68,
-        "id": "6745258320",
-        "title": "Cash Carnival - Win Real Money",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/f3/b6/2e/f3b62eb1-6b36-807c-c487-073fea8c6211/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
-        "artist": "ACORN PRODUCT COMPANY LLC",
-        "url": "https://apps.apple.com/us/app/cash-carnival-win-real-money/id6745258320?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 69,
-        "id": "1423046460",
-        "title": "Paper.io 2",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/c6/a5/75/c6a575f0-ee28-4e37-f038-71a9829fd1cf/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
-        "artist": "Voodoo",
-        "url": "https://apps.apple.com/us/app/paper-io-2/id1423046460?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 70,
-        "id": "1389111413",
-        "title": "Hole.io",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/b0/29/01/b029015e-4ba2-0ced-21b7-8a5c30c89bc0/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
-        "artist": "Voodoo",
-        "url": "https://apps.apple.com/us/app/hole-io/id1389111413?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 71,
-        "id": "6745761596",
-        "title": "Coin Master - Board Adventure",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/58/a4/70/58a4702e-9306-3b34-6d72-e60dbc78b3c2/AppIcon-1x_U007emarketing-0-8-0-85-220-0.png/100x100bb.png",
-        "artist": "Moon Active",
-        "url": "https://apps.apple.com/us/app/coin-master-board-adventure/id6745761596?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 72,
         "id": "6739069151",
         "title": "Crossword Go!",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/d0/6f/36/d06f3634-eab9-41eb-4909-feeba2d480cf/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
@@ -1554,7 +1518,7 @@
         "global_hot": false
       },
       {
-        "rank": 73,
+        "rank": 69,
         "id": "6760445324",
         "title": "Arrow Maze-Tap Away",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/22/7d/99/227d9970-646b-9161-af07-0943ba703604/AppIcon-0-0-1x_U007ephone-0-1-85-220.png/100x100bb.png",
@@ -1563,7 +1527,16 @@
         "global_hot": false
       },
       {
-        "rank": 74,
+        "rank": 70,
+        "id": "6745258320",
+        "title": "Cash Carnival - Win Real Money",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/f3/b6/2e/f3b62eb1-6b36-807c-c487-073fea8c6211/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
+        "artist": "ACORN PRODUCT COMPANY LLC",
+        "url": "https://apps.apple.com/us/app/cash-carnival-win-real-money/id6745258320?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 71,
         "id": "6471572249",
         "title": "Fruit Merge™: Match Game",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/e8/75/32/e8753263-e4f2-9c5e-bb26-239c673536ed/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
@@ -1572,12 +1545,39 @@
         "global_hot": false
       },
       {
-        "rank": 75,
+        "rank": 72,
+        "id": "6745761596",
+        "title": "Coin Master - Board Adventure",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/58/a4/70/58a4702e-9306-3b34-6d72-e60dbc78b3c2/AppIcon-1x_U007emarketing-0-8-0-85-220-0.png/100x100bb.png",
+        "artist": "Moon Active",
+        "url": "https://apps.apple.com/us/app/coin-master-board-adventure/id6745761596?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 73,
+        "id": "1423046460",
+        "title": "Paper.io 2",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/c6/a5/75/c6a575f0-ee28-4e37-f038-71a9829fd1cf/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
+        "artist": "Voodoo",
+        "url": "https://apps.apple.com/us/app/paper-io-2/id1423046460?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 74,
         "id": "1521236603",
         "title": "Travel Town - Merge Adventure",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/3e/6f/07/3e6f07d6-7e44-3af7-9c93-4f92527c35bb/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
         "artist": "Moon Active",
         "url": "https://apps.apple.com/us/app/travel-town-merge-adventure/id1521236603?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 75,
+        "id": "1389111413",
+        "title": "Hole.io",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/b0/29/01/b029015e-4ba2-0ced-21b7-8a5c30c89bc0/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
+        "artist": "Voodoo",
+        "url": "https://apps.apple.com/us/app/hole-io/id1389111413?uo=2",
         "global_hot": false
       },
       {
@@ -1591,15 +1591,6 @@
       },
       {
         "rank": 77,
-        "id": "1053012308",
-        "title": "Clash Royale",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/1f/a2/1c/1fa21ca0-610d-b058-2cae-ea4a6d785c76/AppIcon-0-0-1x_U007emarketing-0-7-0-85-220.png/100x100bb.png",
-        "artist": "Supercell",
-        "url": "https://apps.apple.com/us/app/clash-royale/id1053012308?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 78,
         "id": "1197961218",
         "title": "Fillwords: Word Search Puzzle",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/a2/04/d5/a204d536-c507-39fc-9b47-1336342097a5/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
@@ -1608,12 +1599,21 @@
         "global_hot": false
       },
       {
-        "rank": 79,
+        "rank": 78,
         "id": "1660171117",
         "title": "Zen Word® - Relax Puzzle Game",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/44/03/24/4403244e-53f1-6e5d-c6c4-9b2b0f7e3555/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
         "artist": "Oakever Games",
         "url": "https://apps.apple.com/us/app/zen-word-relax-puzzle-game/id1660171117?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 79,
+        "id": "6483252725",
+        "title": "MONGIL: STAR DIVE",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/8d/ae/00/8dae0026-ff6d-0e8d-3c76-aebf600a6b9e/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
+        "artist": "Netmarble Corporation",
+        "url": "https://apps.apple.com/us/app/mongil-star-dive/id6483252725?uo=2",
         "global_hot": false
       },
       {
@@ -1627,15 +1627,6 @@
       },
       {
         "rank": 81,
-        "id": "6741076536",
-        "title": "Modo Casino Slots & Games",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/98/e4/1e/98e41e3d-c0f4-6dd9-3dce-37d0b9734374/AppIcon2-0-0-1x_U007ephone-0-1-85-220.png/100x100bb.png",
-        "artist": "ARB Gaming LLC",
-        "url": "https://apps.apple.com/us/app/modo-casino-slots-games/id6741076536?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 82,
         "id": "6741471925",
         "title": "Highway Racer Pro",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/f3/74/e5/f374e504-7eee-f15b-862b-6ad6ab1fc61f/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
@@ -1644,16 +1635,7 @@
         "global_hot": false
       },
       {
-        "rank": 83,
-        "id": "6483252725",
-        "title": "MONGIL: STAR DIVE",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/8d/ae/00/8dae0026-ff6d-0e8d-3c76-aebf600a6b9e/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
-        "artist": "Netmarble Corporation",
-        "url": "https://apps.apple.com/us/app/mongil-star-dive/id6483252725?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 84,
+        "rank": 82,
         "id": "6756288168",
         "title": "Cookingo: Perfect Meal",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/9d/40/02/9d40029c-2a5b-7432-5b26-708c7efcd32f/AppIcon-1x_U007emarketing-0-8-0-85-220-0.png/100x100bb.png",
@@ -1662,25 +1644,16 @@
         "global_hot": false
       },
       {
-        "rank": 85,
-        "id": "1330123889",
-        "title": "PUBG MOBILE",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/10/13/c2/1013c2bb-c728-f6e0-073e-54879d5820e9/AppIcon-0-0-1x_U007emarketing-0-7-0-85-220.png/100x100bb.png",
-        "artist": "Tencent Mobile International Limited",
-        "url": "https://apps.apple.com/us/app/pubg-mobile/id1330123889?uo=2",
+        "rank": 83,
+        "id": "6741076536",
+        "title": "Modo Casino Slots & Games",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/98/e4/1e/98e41e3d-c0f4-6dd9-3dce-37d0b9734374/AppIcon2-0-0-1x_U007ephone-0-1-85-220.png/100x100bb.png",
+        "artist": "ARB Gaming LLC",
+        "url": "https://apps.apple.com/us/app/modo-casino-slots-games/id6741076536?uo=2",
         "global_hot": false
       },
       {
-        "rank": 86,
-        "id": "6504188939",
-        "title": "Subway Surfers City",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/a5/6a/f7/a56af768-924b-fd4a-ec56-997a05ff3904/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
-        "artist": "Sybo Games ApS",
-        "url": "https://apps.apple.com/us/app/subway-surfers-city/id6504188939?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 87,
+        "rank": 84,
         "id": "6744975195",
         "title": "Sled Surfers",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/d9/22/29/d922294a-0b5e-a2c8-a766-264331ed3b20/AppIcon-1x_U007emarketing-0-8-0-85-220-0.png/100x100bb.png",
@@ -1689,25 +1662,25 @@
         "global_hot": false
       },
       {
-        "rank": 88,
-        "id": "6503697761",
-        "title": "Playtest Pro by BestPlay",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/ed/f1/f5/edf1f5e3-b117-502d-2629-4b693a1246e6/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
-        "artist": "Bestplay Systems",
-        "url": "https://apps.apple.com/us/app/playtest-pro-by-bestplay/id6503697761?uo=2",
+        "rank": 85,
+        "id": "6504188939",
+        "title": "Subway Surfers City",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/a5/6a/f7/a56af768-924b-fd4a-ec56-997a05ff3904/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
+        "artist": "Sybo Games ApS",
+        "url": "https://apps.apple.com/us/app/subway-surfers-city/id6504188939?uo=2",
         "global_hot": false
       },
       {
-        "rank": 89,
-        "id": "1522266397",
-        "title": "Bingo Cash",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/a6/69/3c/a6693cb6-a71b-f278-c048-59444d02500d/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
-        "artist": "Papaya Gaming",
-        "url": "https://apps.apple.com/us/app/bingo-cash/id1522266397?uo=2",
+        "rank": 86,
+        "id": "1053012308",
+        "title": "Clash Royale",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/1f/a2/1c/1fa21ca0-610d-b058-2cae-ea4a6d785c76/AppIcon-0-0-1x_U007emarketing-0-7-0-85-220.png/100x100bb.png",
+        "artist": "Supercell",
+        "url": "https://apps.apple.com/us/app/clash-royale/id1053012308?uo=2",
         "global_hot": false
       },
       {
-        "rank": 90,
+        "rank": 87,
         "id": "6755183085",
         "title": "Yarn Loop: Knit Puzzle",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/8e/f5/35/8ef5357c-726b-8906-279e-21cd99880dd0/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
@@ -1716,7 +1689,25 @@
         "global_hot": false
       },
       {
-        "rank": 91,
+        "rank": 88,
+        "id": "1522266397",
+        "title": "Bingo Cash",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/a6/69/3c/a6693cb6-a71b-f278-c048-59444d02500d/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
+        "artist": "Papaya Gaming",
+        "url": "https://apps.apple.com/us/app/bingo-cash/id1522266397?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 89,
+        "id": "1330123889",
+        "title": "PUBG MOBILE",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/10/13/c2/1013c2bb-c728-f6e0-073e-54879d5820e9/AppIcon-0-0-1x_U007emarketing-0-7-0-85-220.png/100x100bb.png",
+        "artist": "Tencent Mobile International Limited",
+        "url": "https://apps.apple.com/us/app/pubg-mobile/id1330123889?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 90,
         "id": "6449094229",
         "title": "Match Factory!",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/d1/d1/4a/d1d14afe-020b-2d36-dc60-293dbc6b4e5a/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
@@ -1725,12 +1716,21 @@
         "global_hot": false
       },
       {
-        "rank": 92,
+        "rank": 91,
         "id": "1486214495",
         "title": "Brain Test: Tricky Puzzles",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/c9/5b/44/c95b44ab-46c8-8619-fefb-56e94aa6e921/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
         "artist": "UNICO STUDIO",
         "url": "https://apps.apple.com/us/app/brain-test-tricky-puzzles/id1486214495?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 92,
+        "id": "6503697761",
+        "title": "Playtest Pro by BestPlay",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/ed/f1/f5/edf1f5e3-b117-502d-2629-4b693a1246e6/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
+        "artist": "Bestplay Systems",
+        "url": "https://apps.apple.com/us/app/playtest-pro-by-bestplay/id6503697761?uo=2",
         "global_hot": false
       },
       {
@@ -1744,15 +1744,6 @@
       },
       {
         "rank": 94,
-        "id": "6756377863",
-        "title": "Word Kitchen",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/a4/e6/db/a4e6dba4-7a13-cb8e-5de9-696aa5779ef9/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
-        "artist": "Gimica GmbH",
-        "url": "https://apps.apple.com/us/app/word-kitchen/id6756377863?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 95,
         "id": "6757670225",
         "title": "KonKan",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/69/05/fa/6905fab0-04c0-face-8df1-3057b9e2a38f/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
@@ -1761,25 +1752,16 @@
         "global_hot": false
       },
       {
+        "rank": 95,
+        "id": "6756377863",
+        "title": "Word Kitchen",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/a4/e6/db/a4e6dba4-7a13-cb8e-5de9-696aa5779ef9/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
+        "artist": "Gimica GmbH",
+        "url": "https://apps.apple.com/us/app/word-kitchen/id6756377863?uo=2",
+        "global_hot": false
+      },
+      {
         "rank": 96,
-        "id": "1300146617",
-        "title": "Free Fire: Undersea Mystery",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/b5/d6/7e/b5d67e0f-94ad-7a4a-65e2-1c03d0ce2a56/AppIcon-1774968976-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
-        "artist": "GARENA INTERNATIONAL I PRIVATE LIMITED",
-        "url": "https://apps.apple.com/us/app/free-fire-undersea-mystery/id1300146617?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 97,
-        "id": "6444043291",
-        "title": "Domino Dreams™",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/35/3b/f4/353bf4ab-c407-bb0f-a0e8-2f3e61fc71c4/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
-        "artist": "SuperPlay",
-        "url": "https://apps.apple.com/us/app/domino-dreams/id6444043291?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 98,
         "id": "6753818799",
         "title": "Real War: Not Fake",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/d6/54/eb/d654eb53-f231-de6c-0be3-1177f467fd1c/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
@@ -1788,21 +1770,39 @@
         "global_hot": false
       },
       {
-        "rank": 99,
-        "id": "1549027048",
-        "title": "Rocket League Sideswipe",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/36/86/39/36863908-02dd-1790-3849-23128200d6ea/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
-        "artist": "Psyonix LLC",
-        "url": "https://apps.apple.com/us/app/rocket-league-sideswipe/id1549027048?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 100,
+        "rank": 97,
         "id": "1664415775",
         "title": "Royal Cooking",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/df/73/8e/df738efb-ed13-c2ef-95ec-32fcf968a0cd/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
         "artist": "Matryoshka Games (CY) LTD",
         "url": "https://apps.apple.com/us/app/royal-cooking/id1664415775?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 98,
+        "id": "6444043291",
+        "title": "Domino Dreams™",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/35/3b/f4/353bf4ab-c407-bb0f-a0e8-2f3e61fc71c4/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
+        "artist": "SuperPlay",
+        "url": "https://apps.apple.com/us/app/domino-dreams/id6444043291?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 99,
+        "id": "6503272652",
+        "title": "Last Z: Survival Shooter",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/3a/9d/d4/3a9dd4c2-4690-3171-63b9-8a5689c12754/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
+        "artist": "Florere Game Limited",
+        "url": "https://apps.apple.com/us/app/last-z-survival-shooter/id6503272652?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 100,
+        "id": "6476976929",
+        "title": "Truck Star",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/eb/7c/38/eb7c3848-80e8-dae5-bd04-1bde4ade5fc5/AppIcon-1x_U007emarketing-0-8-0-0-85-220-0.png/100x100bb.png",
+        "artist": "Century Games Pte. Ltd.",
+        "url": "https://apps.apple.com/us/app/truck-star/id6476976929?uo=2",
         "global_hot": false
       }
     ],
@@ -2178,20 +2178,20 @@
       },
       {
         "rank": 42,
-        "id": "724594093",
-        "title": "LINE：ディズニー ツムツム",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/0e/71/1e/0e711e76-c1d1-ea9a-47e4-17c70062d099/AppIcon-1x_U007emarketing-0-8-0-85-220-0.jpeg/100x100bb.png",
-        "artist": "LINE Corporation",
-        "url": "https://apps.apple.com/jp/app/line-%E3%83%87%E3%82%A3%E3%82%BA%E3%83%8B%E3%83%BC-%E3%83%84%E3%83%A0%E3%83%84%E3%83%A0/id724594093?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 43,
         "id": "1579464667",
         "title": "Pokémon Sleep",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/11/a2/d2/11a2d231-8d20-4c7a-89a2-e81456b3c013/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
         "artist": "The Pokemon Company",
         "url": "https://apps.apple.com/jp/app/pok%C3%A9mon-sleep/id1579464667?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 43,
+        "id": "724594093",
+        "title": "LINE：ディズニー ツムツム",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/0e/71/1e/0e711e76-c1d1-ea9a-47e4-17c70062d099/AppIcon-1x_U007emarketing-0-8-0-85-220-0.jpeg/100x100bb.png",
+        "artist": "LINE Corporation",
+        "url": "https://apps.apple.com/jp/app/line-%E3%83%87%E3%82%A3%E3%82%BA%E3%83%8B%E3%83%BC-%E3%83%84%E3%83%A0%E3%83%84%E3%83%A0/id724594093?uo=2",
         "global_hot": false
       },
       {
@@ -2295,20 +2295,20 @@
       },
       {
         "rank": 55,
-        "id": "6736896540",
-        "title": "ハローキティ：マイドリームストア",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/8a/8e/37/8a8e375b-368f-6e8d-577e-184f186693d1/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
-        "artist": "ACTGames Co., Ltd.",
-        "url": "https://apps.apple.com/jp/app/%E3%83%8F%E3%83%AD%E3%83%BC%E3%82%AD%E3%83%86%E3%82%A3-%E3%83%9E%E3%82%A4%E3%83%89%E3%83%AA%E3%83%BC%E3%83%A0%E3%82%B9%E3%83%88%E3%82%A2/id6736896540?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 56,
         "id": "1643509748",
         "title": "マージクッキング テーマレストラン",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/f8/c6/b7/f8c6b730-ffa6-1df2-df2e-ebdef1cb4e7a/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
         "artist": "Happibits",
         "url": "https://apps.apple.com/jp/app/%E3%83%9E%E3%83%BC%E3%82%B8%E3%82%AF%E3%83%83%E3%82%AD%E3%83%B3%E3%82%B0-%E3%83%86%E3%83%BC%E3%83%9E%E3%83%AC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%B3/id1643509748?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 56,
+        "id": "6736896540",
+        "title": "ハローキティ：マイドリームストア",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/8a/8e/37/8a8e375b-368f-6e8d-577e-184f186693d1/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
+        "artist": "ACTGames Co., Ltd.",
+        "url": "https://apps.apple.com/jp/app/%E3%83%8F%E3%83%AD%E3%83%BC%E3%82%AD%E3%83%86%E3%82%A3-%E3%83%9E%E3%82%A4%E3%83%89%E3%83%AA%E3%83%BC%E3%83%A0%E3%82%B9%E3%83%88%E3%82%A2/id6736896540?uo=2",
         "global_hot": false
       },
       {
@@ -2322,15 +2322,6 @@
       },
       {
         "rank": 58,
-        "id": "1094591345",
-        "title": "Pokémon GO",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/74/56/38/7456386f-029d-992a-a203-d1e12eca07e7/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
-        "artist": "Niantic, Inc.",
-        "url": "https://apps.apple.com/jp/app/pok%C3%A9mon-go/id1094591345?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 59,
         "id": "6480398822",
         "title": "DISSIDIA DUELLUM FINAL FANTASY",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/e9/d6/a0/e9d6a06d-42ad-28bf-fff1-02566b9ed9a4/AppIcon-0-0-1x_U007emarketing-0-6-85-220.png/100x100bb.png",
@@ -2339,25 +2330,16 @@
         "global_hot": false
       },
       {
+        "rank": 59,
+        "id": "1094591345",
+        "title": "Pokémon GO",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/74/56/38/7456386f-029d-992a-a203-d1e12eca07e7/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
+        "artist": "Niantic, Inc.",
+        "url": "https://apps.apple.com/jp/app/pok%C3%A9mon-go/id1094591345?uo=2",
+        "global_hot": false
+      },
+      {
         "rank": 60,
-        "id": "529996768",
-        "title": "Bingo Blitz™ - ビンゴゲーム",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/96/7a/23/967a2392-26c0-edb4-637c-2dd6eaca0ed0/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
-        "artist": "Playtika Santa Monica, LLC",
-        "url": "https://apps.apple.com/jp/app/bingo-blitz-%E3%83%93%E3%83%B3%E3%82%B4%E3%82%B2%E3%83%BC%E3%83%A0/id529996768?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 61,
-        "id": "6499293031",
-        "title": "ネジマッチ - ネジ外し ナットズルゲーム",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/3a/8a/4e/3a8a4ee7-8d97-ebe0-1fdf-b0866c708790/AppIcon-0-0-1x_U007epad-0-1-85-220.png/100x100bb.png",
-        "artist": "Astrasen Global",
-        "url": "https://apps.apple.com/jp/app/%E3%83%8D%E3%82%B8%E3%83%9E%E3%83%83%E3%83%81-%E3%83%8D%E3%82%B8%E5%A4%96%E3%81%97-%E3%83%8A%E3%83%83%E3%83%88%E3%82%BA%E3%83%AB%E3%82%B2%E3%83%BC%E3%83%A0/id6499293031?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 62,
         "id": "6743923238",
         "title": "ネコぱら セカイコネクト",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/c0/ea/d1/c0ead12a-f297-ef0b-7247-a016f30f591a/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
@@ -2366,21 +2348,39 @@
         "global_hot": false
       },
       {
-        "rank": 63,
-        "id": "6759645536",
-        "title": "Cozy Ropes: Connect the Dots",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/ce/fb/d0/cefbd076-e980-bc37-9ff8-802232ee9b14/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
-        "artist": "SayGames LTD",
-        "url": "https://apps.apple.com/jp/app/cozy-ropes-connect-the-dots/id6759645536?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 64,
+        "rank": 61,
         "id": "6744205088",
         "title": "七つの大罪：Origin",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/bc/d5/29/bcd529b6-3ae2-dd40-e4b8-fb93a1d0b52f/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
         "artist": "Netmarble Corporation",
         "url": "https://apps.apple.com/jp/app/%E4%B8%83%E3%81%A4%E3%81%AE%E5%A4%A7%E7%BD%AA-origin/id6744205088?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 62,
+        "id": "529996768",
+        "title": "Bingo Blitz™ - ビンゴゲーム",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/96/7a/23/967a2392-26c0-edb4-637c-2dd6eaca0ed0/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
+        "artist": "Playtika Santa Monica, LLC",
+        "url": "https://apps.apple.com/jp/app/bingo-blitz-%E3%83%93%E3%83%B3%E3%82%B4%E3%82%B2%E3%83%BC%E3%83%A0/id529996768?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 63,
+        "id": "6499293031",
+        "title": "ネジマッチ - ネジ外し ナットズルゲーム",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/3a/8a/4e/3a8a4ee7-8d97-ebe0-1fdf-b0866c708790/AppIcon-0-0-1x_U007epad-0-1-85-220.png/100x100bb.png",
+        "artist": "Astrasen Global",
+        "url": "https://apps.apple.com/jp/app/%E3%83%8D%E3%82%B8%E3%83%9E%E3%83%83%E3%83%81-%E3%83%8D%E3%82%B8%E5%A4%96%E3%81%97-%E3%83%8A%E3%83%83%E3%83%88%E3%82%BA%E3%83%AB%E3%82%B2%E3%83%BC%E3%83%A0/id6499293031?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 64,
+        "id": "6759645536",
+        "title": "Cozy Ropes: Connect the Dots",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/ce/fb/d0/cefbd076-e980-bc37-9ff8-802232ee9b14/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
+        "artist": "SayGames LTD",
+        "url": "https://apps.apple.com/jp/app/cozy-ropes-connect-the-dots/id6759645536?uo=2",
         "global_hot": false
       },
       {
@@ -2403,24 +2403,6 @@
       },
       {
         "rank": 67,
-        "id": "6448104157",
-        "title": "オフラインゲーム - 暇つぶし ゲーム - パズルゲーム",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/b7/1f/da/b71fda73-ef75-3d3e-eb39-68af439967e4/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
-        "artist": "Moreno Maio",
-        "url": "https://apps.apple.com/jp/app/%E3%82%AA%E3%83%95%E3%83%A9%E3%82%A4%E3%83%B3%E3%82%B2%E3%83%BC%E3%83%A0-%E6%9A%87%E3%81%A4%E3%81%B6%E3%81%97-%E3%82%B2%E3%83%BC%E3%83%A0-%E3%83%91%E3%82%BA%E3%83%AB%E3%82%B2%E3%83%BC%E3%83%A0/id6448104157?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 68,
-        "id": "940320341",
-        "title": "プロ野球スピリッツＡ",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/46/29/4f/46294f8c-d55d-9af2-0c99-6cf8f383160c/AppIcon-0-0-1x_U007epad-0-11-0-85-220.png/100x100bb.png",
-        "artist": "KONAMI",
-        "url": "https://apps.apple.com/jp/app/%E3%83%97%E3%83%AD%E9%87%8E%E7%90%83%E3%82%B9%E3%83%94%E3%83%AA%E3%83%83%E3%83%84%EF%BD%81/id940320341?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 69,
         "id": "6756111327",
         "title": "三国志·極彩 - うさぎ 100% 武士語コラボ中",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/4e/50/7f/4e507fbe-4f10-a500-4402-104f2aa5a8c3/AppIcon-0-0-1x_U007epad-0-11-0-85-220.png/100x100bb.png",
@@ -2429,7 +2411,16 @@
         "global_hot": false
       },
       {
-        "rank": 70,
+        "rank": 68,
+        "id": "6448104157",
+        "title": "オフラインゲーム - 暇つぶし ゲーム - パズルゲーム",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/b7/1f/da/b71fda73-ef75-3d3e-eb39-68af439967e4/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
+        "artist": "Moreno Maio",
+        "url": "https://apps.apple.com/jp/app/%E3%82%AA%E3%83%95%E3%83%A9%E3%82%A4%E3%83%B3%E3%82%B2%E3%83%BC%E3%83%A0-%E6%9A%87%E3%81%A4%E3%81%B6%E3%81%97-%E3%82%B2%E3%83%BC%E3%83%A0-%E3%83%91%E3%82%BA%E3%83%AB%E3%82%B2%E3%83%BC%E3%83%A0/id6448104157?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 69,
         "id": "1517980891",
         "title": "パズル&サバイバル",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/61/b6/a0/61b6a013-1a7e-f53b-c496-8ec3f1053285/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
@@ -2438,12 +2429,21 @@
         "global_hot": false
       },
       {
-        "rank": 71,
-        "id": "1117270703",
-        "title": "eFootball™",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/40/02/2a/40022a4d-5895-2a45-e3d7-0737b7ce692a/PesMobile-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
+        "rank": 70,
+        "id": "940320341",
+        "title": "プロ野球スピリッツＡ",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/46/29/4f/46294f8c-d55d-9af2-0c99-6cf8f383160c/AppIcon-0-0-1x_U007epad-0-11-0-85-220.png/100x100bb.png",
         "artist": "KONAMI",
-        "url": "https://apps.apple.com/jp/app/efootball/id1117270703?uo=2",
+        "url": "https://apps.apple.com/jp/app/%E3%83%97%E3%83%AD%E9%87%8E%E7%90%83%E3%82%B9%E3%83%94%E3%83%AA%E3%83%83%E3%83%84%EF%BD%81/id940320341?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 71,
+        "id": "6744975195",
+        "title": "Sled Surfers - ファーズ - 坂冒険",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/d9/22/29/d922294a-0b5e-a2c8-a766-264331ed3b20/AppIcon-1x_U007emarketing-0-8-0-85-220-0.png/100x100bb.png",
+        "artist": "Crazy Labs",
+        "url": "https://apps.apple.com/jp/app/sled-surfers-%E3%83%95%E3%82%A1%E3%83%BC%E3%82%BA-%E5%9D%82%E5%86%92%E9%99%BA/id6744975195?uo=2",
         "global_hot": false
       },
       {
@@ -2457,11 +2457,11 @@
       },
       {
         "rank": 73,
-        "id": "6744975195",
-        "title": "Sled Surfers - ファーズ - 坂冒険",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/d9/22/29/d922294a-0b5e-a2c8-a766-264331ed3b20/AppIcon-1x_U007emarketing-0-8-0-85-220-0.png/100x100bb.png",
-        "artist": "Crazy Labs",
-        "url": "https://apps.apple.com/jp/app/sled-surfers-%E3%83%95%E3%82%A1%E3%83%BC%E3%82%BA-%E5%9D%82%E5%86%92%E9%99%BA/id6744975195?uo=2",
+        "id": "1117270703",
+        "title": "eFootball™",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/40/02/2a/40022a4d-5895-2a45-e3d7-0737b7ce692a/PesMobile-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
+        "artist": "KONAMI",
+        "url": "https://apps.apple.com/jp/app/efootball/id1117270703?uo=2",
         "global_hot": false
       },
       {
@@ -2592,6 +2592,15 @@
       },
       {
         "rank": 88,
+        "id": "6503603603",
+        "title": "ミステリータウン：マージゲーム (Mystery Town)",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/aa/f5/9f/aaf59fd2-2d3b-8992-9540-eb5293694a08/AppIcon-0-0-1x_U007emarketing-0-5-0-85-220.png/100x100bb.png",
+        "artist": "Cedar Games Studio",
+        "url": "https://apps.apple.com/jp/app/%E3%83%9F%E3%82%B9%E3%83%86%E3%83%AA%E3%83%BC%E3%82%BF%E3%82%A6%E3%83%B3-%E3%83%9E%E3%83%BC%E3%82%B8%E3%82%B2%E3%83%BC%E3%83%A0-mystery-town/id6503603603?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 89,
         "id": "1637753593",
         "title": "ジャグラーオンライン～パチスロアプリ＆パチンコ店舗情報～",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/fb/b8/4d/fbb84ddb-3d15-637e-ff23-e078cc76ce5e/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
@@ -2600,21 +2609,12 @@
         "global_hot": false
       },
       {
-        "rank": 89,
+        "rank": 90,
         "id": "1298368256",
         "title": "コトダマン-共闘ことばRPG",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/9a/bb/91/9abb910f-0fd8-9444-7fde-516a99f62430/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
         "artist": "XFLAG, Inc.",
         "url": "https://apps.apple.com/jp/app/%E3%82%B3%E3%83%88%E3%83%80%E3%83%9E%E3%83%B3-%E5%85%B1%E9%97%98%E3%81%93%E3%81%A8%E3%81%B0rpg/id1298368256?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 90,
-        "id": "6503603603",
-        "title": "ミステリータウン：マージゲーム (Mystery Town)",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/aa/f5/9f/aaf59fd2-2d3b-8992-9540-eb5293694a08/AppIcon-0-0-1x_U007emarketing-0-5-0-85-220.png/100x100bb.png",
-        "artist": "Cedar Games Studio",
-        "url": "https://apps.apple.com/jp/app/%E3%83%9F%E3%82%B9%E3%83%86%E3%83%AA%E3%83%BC%E3%82%BF%E3%82%A6%E3%83%B3-%E3%83%9E%E3%83%BC%E3%82%B8%E3%82%B2%E3%83%BC%E3%83%A0-mystery-town/id6503603603?uo=2",
         "global_hot": false
       },
       {
@@ -2628,20 +2628,20 @@
       },
       {
         "rank": 92,
-        "id": "6752642477",
-        "title": "アークナイツ：エンドフィールド",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/6d/a6/e0/6da6e0eb-c4fa-4dc0-aa55-64eff735eb22/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
-        "artist": "GRYPH FRONTIER PTE.LTD.",
-        "url": "https://apps.apple.com/jp/app/%E3%82%A2%E3%83%BC%E3%82%AF%E3%83%8A%E3%82%A4%E3%83%84-%E3%82%A8%E3%83%B3%E3%83%89%E3%83%95%E3%82%A3%E3%83%BC%E3%83%AB%E3%83%89/id6752642477?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 93,
         "id": "6504332779",
         "title": "Color Block Jam",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/40/f1/bb/40f1bb74-b217-968f-1efd-5238692679ce/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
         "artist": "Rollic Games",
         "url": "https://apps.apple.com/jp/app/color-block-jam/id6504332779?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 93,
+        "id": "6752642477",
+        "title": "アークナイツ：エンドフィールド",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/6d/a6/e0/6da6e0eb-c4fa-4dc0-aa55-64eff735eb22/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
+        "artist": "GRYPH FRONTIER PTE.LTD.",
+        "url": "https://apps.apple.com/jp/app/%E3%82%A2%E3%83%BC%E3%82%AF%E3%83%8A%E3%82%A4%E3%83%84-%E3%82%A8%E3%83%B3%E3%83%89%E3%83%95%E3%82%A3%E3%83%BC%E3%83%AB%E3%83%89/id6752642477?uo=2",
         "global_hot": false
       },
       {
@@ -2655,20 +2655,20 @@
       },
       {
         "rank": 95,
-        "id": "953790507",
-        "title": "城とドラゴン - 『妖怪ウォッチ』 コラボ開催",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/18/b8/99/18b89945-550d-1250-3384-02e1fb11bd7a/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
-        "artist": "Asobism.Co.,Ltd",
-        "url": "https://apps.apple.com/jp/app/%E5%9F%8E%E3%81%A8%E3%83%89%E3%83%A9%E3%82%B4%E3%83%B3-%E5%A6%96%E6%80%AA%E3%82%A6%E3%82%A9%E3%83%83%E3%83%81-%E3%82%B3%E3%83%A9%E3%83%9C%E9%96%8B%E5%82%AC/id953790507?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 96,
         "id": "6754262851",
         "title": "増えうさぎ by クラシル",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/22/28/12/22281245-6d6b-5897-a56c-627da7e2f14e/AppIcon-0-0-1x_U007emarketing-0-6-0-85-220.png/100x100bb.png",
         "artist": "Kurashiru, Inc",
         "url": "https://apps.apple.com/jp/app/%E5%A2%97%E3%81%88%E3%81%86%E3%81%95%E3%81%8E-by-%E3%82%AF%E3%83%A9%E3%82%B7%E3%83%AB/id6754262851?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 96,
+        "id": "953790507",
+        "title": "城とドラゴン - 『妖怪ウォッチ』 コラボ開催",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/18/b8/99/18b89945-550d-1250-3384-02e1fb11bd7a/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
+        "artist": "Asobism.Co.,Ltd",
+        "url": "https://apps.apple.com/jp/app/%E5%9F%8E%E3%81%A8%E3%83%89%E3%83%A9%E3%82%B4%E3%83%B3-%E5%A6%96%E6%80%AA%E3%82%A6%E3%82%A9%E3%83%83%E3%83%81-%E3%82%B3%E3%83%A9%E3%83%9C%E9%96%8B%E5%82%AC/id953790507?uo=2",
         "global_hot": false
       },
       {
@@ -2691,20 +2691,20 @@
       },
       {
         "rank": 99,
-        "id": "1489932710",
-        "title": "プロジェクトセカイ カラフルステージ！ feat. 初音ミク",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/2d/e9/44/2de94456-c9ca-05ae-4e14-87d6729148f9/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
-        "artist": "SEGA CORPORATION",
-        "url": "https://apps.apple.com/jp/app/%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%82%BB%E3%82%AB%E3%82%A4-%E3%82%AB%E3%83%A9%E3%83%95%E3%83%AB%E3%82%B9%E3%83%86%E3%83%BC%E3%82%B8-feat-%E5%88%9D%E9%9F%B3%E3%83%9F%E3%82%AF/id1489932710?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 100,
         "id": "6755815731",
         "title": "Word Screw: ワードパズルゲーム",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/f5/8d/34/f58d3493-61f3-c813-f3e3-689a660318e2/AppIcon-0-0-1x_U007epad-0-1-85-220.png/100x100bb.png",
         "artist": "Astrasen Global",
         "url": "https://apps.apple.com/jp/app/word-screw-%E3%83%AF%E3%83%BC%E3%83%89%E3%83%91%E3%82%BA%E3%83%AB%E3%82%B2%E3%83%BC%E3%83%A0/id6755815731?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 100,
+        "id": "1489932710",
+        "title": "プロジェクトセカイ カラフルステージ！ feat. 初音ミク",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/2d/e9/44/2de94456-c9ca-05ae-4e14-87d6729148f9/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
+        "artist": "SEGA CORPORATION",
+        "url": "https://apps.apple.com/jp/app/%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%82%BB%E3%82%AB%E3%82%A4-%E3%82%AB%E3%83%A9%E3%83%95%E3%83%AB%E3%82%B9%E3%83%86%E3%83%BC%E3%82%B8-feat-%E5%88%9D%E9%9F%B3%E3%83%9F%E3%82%AF/id1489932710?uo=2",
         "global_hot": false
       }
     ],
@@ -2846,20 +2846,20 @@
       },
       {
         "rank": 16,
-        "id": "1619254071",
-        "title": "王者榮耀國際服（Honor of Kings）",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/a4/b8/3e/a4b83e06-18af-9786-cdb5-f16ad0fbb340/AppIcon-1x_U007emarketing-0-7-0-85-220-0.png/100x100bb.png",
-        "artist": "Level Infinite",
-        "url": "https://apps.apple.com/hk/app/%E7%8E%8B%E8%80%85%E6%A6%AE%E8%80%80%E5%9C%8B%E9%9A%9B%E6%9C%8D-honor-of-kings/id1619254071?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 17,
         "id": "6499209744",
         "title": "Magic Sort!",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/89/1b/a9/891ba9a3-3006-e9d5-15df-876fd7b14128/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
         "artist": "Grand Games A.Ş.",
         "url": "https://apps.apple.com/hk/app/magic-sort/id6499209744?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 17,
+        "id": "1619254071",
+        "title": "王者榮耀國際服（Honor of Kings）",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/a4/b8/3e/a4b83e06-18af-9786-cdb5-f16ad0fbb340/AppIcon-1x_U007emarketing-0-7-0-85-220-0.png/100x100bb.png",
+        "artist": "Level Infinite",
+        "url": "https://apps.apple.com/hk/app/%E7%8E%8B%E8%80%85%E6%A6%AE%E8%80%80%E5%9C%8B%E9%9A%9B%E6%9C%8D-honor-of-kings/id1619254071?uo=2",
         "global_hot": false
       },
       {
@@ -2918,24 +2918,6 @@
       },
       {
         "rank": 24,
-        "id": "6751222488",
-        "title": "Order Crazy - 顏色分類水排序拼圖小遊戲",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/b1/c0/24/b1c024b5-3a4b-2c2e-4492-d5185caf044d/AppIcon-0-0-1x_U007epad-0-1-85-220.png/100x100bb.png",
-        "artist": "Snap Brain Games",
-        "url": "https://apps.apple.com/hk/app/order-crazy-%E9%A1%8F%E8%89%B2%E5%88%86%E9%A1%9E%E6%B0%B4%E6%8E%92%E5%BA%8F%E6%8B%BC%E5%9C%96%E5%B0%8F%E9%81%8A%E6%88%B2/id6751222488?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 25,
-        "id": "6746328263",
-        "title": "Castle Clashers!",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/40/7e/d5/407ed560-08bf-f3e6-dd9b-1f0c1b25d71a/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
-        "artist": "Voodoo",
-        "url": "https://apps.apple.com/hk/app/castle-clashers/id6746328263?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 26,
         "id": "6752315686",
         "title": "侏羅紀：重啟",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/50/dd/51/50dd5123-31fa-316d-3d0d-8bb3310e0d37/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
@@ -2944,21 +2926,39 @@
         "global_hot": false
       },
       {
-        "rank": 27,
-        "id": "6748950306",
-        "title": "紙牌接龍 – 文字遊戲",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/e4/bd/b6/e4bdb60a-5a0b-6a67-9dbb-78cc66e544e1/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
-        "artist": "Hitapps Games LTD",
-        "url": "https://apps.apple.com/hk/app/%E7%B4%99%E7%89%8C%E6%8E%A5%E9%BE%8D-%E6%96%87%E5%AD%97%E9%81%8A%E6%88%B2/id6748950306?uo=2",
+        "rank": 25,
+        "id": "6751222488",
+        "title": "Order Crazy - 顏色分類水排序拼圖小遊戲",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/b1/c0/24/b1c024b5-3a4b-2c2e-4492-d5185caf044d/AppIcon-0-0-1x_U007epad-0-1-85-220.png/100x100bb.png",
+        "artist": "Snap Brain Games",
+        "url": "https://apps.apple.com/hk/app/order-crazy-%E9%A1%8F%E8%89%B2%E5%88%86%E9%A1%9E%E6%B0%B4%E6%8E%92%E5%BA%8F%E6%8B%BC%E5%9C%96%E5%B0%8F%E9%81%8A%E6%88%B2/id6751222488?uo=2",
         "global_hot": false
       },
       {
-        "rank": 28,
+        "rank": 26,
+        "id": "6746328263",
+        "title": "Castle Clashers!",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/40/7e/d5/407ed560-08bf-f3e6-dd9b-1f0c1b25d71a/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
+        "artist": "Voodoo",
+        "url": "https://apps.apple.com/hk/app/castle-clashers/id6746328263?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 27,
         "id": "6692615881",
         "title": "SD鋼彈 G世代 永恆",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/4f/08/8c/4f088c77-c68c-6810-c8fc-fca3f9bc45dd/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
         "artist": "Bandai Namco Entertainment Inc.",
         "url": "https://apps.apple.com/hk/app/sd%E9%8B%BC%E5%BD%88-g%E4%B8%96%E4%BB%A3-%E6%B0%B8%E6%81%86/id6692615881?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 28,
+        "id": "6748950306",
+        "title": "紙牌接龍 – 文字遊戲",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/e4/bd/b6/e4bdb60a-5a0b-6a67-9dbb-78cc66e544e1/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
+        "artist": "Hitapps Games LTD",
+        "url": "https://apps.apple.com/hk/app/%E7%B4%99%E7%89%8C%E6%8E%A5%E9%BE%8D-%E6%96%87%E5%AD%97%E9%81%8A%E6%88%B2/id6748950306?uo=2",
         "global_hot": false
       },
       {
@@ -2972,11 +2972,11 @@
       },
       {
         "rank": 30,
-        "id": "1229016807",
-        "title": "《荒野亂鬥》",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/0c/03/ca/0c03ca52-a9a0-c928-7fd3-3ec21af7b65c/AppIcon-0-0-1x_U007epad-0-1-85-220.png/100x100bb.png",
-        "artist": "Supercell",
-        "url": "https://apps.apple.com/hk/app/%E8%8D%92%E9%87%8E%E4%BA%82%E9%AC%A5/id1229016807?uo=2",
+        "id": "6741799620",
+        "title": "串燒時光",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/c7/f7/8a/c7f78ae5-6c32-dd58-7451-b136fd183226/AppIcon-0-0-1x_U007epad-0-11-0-85-220.png/100x100bb.png",
+        "artist": "Chongda Limited",
+        "url": "https://apps.apple.com/hk/app/%E4%B8%B2%E7%87%92%E6%99%82%E5%85%89/id6741799620?uo=2",
         "global_hot": false
       },
       {
@@ -2990,24 +2990,6 @@
       },
       {
         "rank": 32,
-        "id": "6741799620",
-        "title": "串燒時光",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/c7/f7/8a/c7f78ae5-6c32-dd58-7451-b136fd183226/AppIcon-0-0-1x_U007epad-0-11-0-85-220.png/100x100bb.png",
-        "artist": "Chongda Limited",
-        "url": "https://apps.apple.com/hk/app/%E4%B8%B2%E7%87%92%E6%99%82%E5%85%89/id6741799620?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 33,
-        "id": "6751056652",
-        "title": "Pixel Flow!",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/05/71/b2/0571b2f9-e021-2f4b-4fc8-8f042e303afc/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
-        "artist": "Loom Games Oyun Yazilim ve Pazarlama Anonim Sirketi",
-        "url": "https://apps.apple.com/hk/app/pixel-flow/id6751056652?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 34,
         "id": "6743385713",
         "title": "毛線衝擊 - Traffic Jam公車遊戲 塞車解謎",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/e6/13/b8/e613b869-32d3-8ad7-8408-3a4857609355/AppIcon-0-0-1x_U007epad-0-1-85-220.png/100x100bb.png",
@@ -3016,12 +2998,30 @@
         "global_hot": false
       },
       {
-        "rank": 35,
+        "rank": 33,
         "id": "6761673025",
         "title": "時空極域：戰至終焉",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/a3/4d/55/a34d550c-c328-3f1e-14a8-44d1c264a392/AppIcon-0-0-1x_U007epad-0-1-0-85-220.png/100x100bb.png",
         "artist": "Yingbo Technology Limited",
         "url": "https://apps.apple.com/hk/app/%E6%99%82%E7%A9%BA%E6%A5%B5%E5%9F%9F-%E6%88%B0%E8%87%B3%E7%B5%82%E7%84%89/id6761673025?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 34,
+        "id": "6751056652",
+        "title": "Pixel Flow!",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/05/71/b2/0571b2f9-e021-2f4b-4fc8-8f042e303afc/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
+        "artist": "Loom Games Oyun Yazilim ve Pazarlama Anonim Sirketi",
+        "url": "https://apps.apple.com/hk/app/pixel-flow/id6751056652?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 35,
+        "id": "1229016807",
+        "title": "《荒野亂鬥》",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/0c/03/ca/0c03ca52-a9a0-c928-7fd3-3ec21af7b65c/AppIcon-0-0-1x_U007epad-0-1-85-220.png/100x100bb.png",
+        "artist": "Supercell",
+        "url": "https://apps.apple.com/hk/app/%E8%8D%92%E9%87%8E%E4%BA%82%E9%AC%A5/id1229016807?uo=2",
         "global_hot": false
       },
       {
@@ -3089,20 +3089,20 @@
       },
       {
         "rank": 43,
-        "id": "6450953550",
-        "title": "王國之歌（Top Heroes）",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/13/df/23/13df23cd-ad81-842d-46d9-821fe1e87e21/AppIcon-0-0-1x_U007emarketing-0-8-0-0-85-220.png/100x100bb.png",
-        "artist": "River Game HK Limited",
-        "url": "https://apps.apple.com/hk/app/%E7%8E%8B%E5%9C%8B%E4%B9%8B%E6%AD%8C-top-heroes/id6450953550?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 44,
         "id": "6760004571",
         "title": "Mini Tales: GO!",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/a2/82/66/a282661e-b394-6b9d-df1c-b816932d6b00/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
         "artist": "LoadComplete",
         "url": "https://apps.apple.com/hk/app/mini-tales-go/id6760004571?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 44,
+        "id": "6450953550",
+        "title": "王國之歌（Top Heroes）",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/13/df/23/13df23cd-ad81-842d-46d9-821fe1e87e21/AppIcon-0-0-1x_U007emarketing-0-8-0-0-85-220.png/100x100bb.png",
+        "artist": "River Game HK Limited",
+        "url": "https://apps.apple.com/hk/app/%E7%8E%8B%E5%9C%8B%E4%B9%8B%E6%AD%8C-top-heroes/id6450953550?uo=2",
         "global_hot": false
       },
       {
@@ -3134,20 +3134,20 @@
       },
       {
         "rank": 48,
-        "id": "6758662578",
-        "title": "Find The Cat 2 - Spot It!",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/2b/e1/23/2be12316-44c9-156d-7e7c-0194fb77911d/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
-        "artist": "Agave Games",
-        "url": "https://apps.apple.com/hk/app/find-the-cat-2-spot-it/id6758662578?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 49,
         "id": "6443575749",
         "title": "寒霜啟示錄",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/ad/64/49/ad644980-d44a-1750-4b30-c8bb41fa1d97/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
         "artist": "Century Games Pte. Ltd.",
         "url": "https://apps.apple.com/hk/app/%E5%AF%92%E9%9C%9C%E5%95%9F%E7%A4%BA%E9%8C%84/id6443575749?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 49,
+        "id": "6758662578",
+        "title": "Find The Cat 2 - Spot It!",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/2b/e1/23/2be12316-44c9-156d-7e7c-0194fb77911d/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
+        "artist": "Agave Games",
+        "url": "https://apps.apple.com/hk/app/find-the-cat-2-spot-it/id6758662578?uo=2",
         "global_hot": false
       },
       {
@@ -3161,11 +3161,11 @@
       },
       {
         "rank": 51,
-        "id": "553834731",
-        "title": "糖果傳奇",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/73/1a/b7/731ab722-f9bd-dde7-8e93-858e08e5a92a/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
-        "artist": "King",
-        "url": "https://apps.apple.com/hk/app/%E7%B3%96%E6%9E%9C%E5%82%B3%E5%A5%87/id553834731?uo=2",
+        "id": "6479970832",
+        "title": "Pokémon TCG Pocket",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/07/f4/f6/07f4f628-905e-6843-613f-2c59038004be/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
+        "artist": "The Pokemon Company",
+        "url": "https://apps.apple.com/hk/app/pok%C3%A9mon-tcg-pocket/id6479970832?uo=2",
         "global_hot": false
       },
       {
@@ -3188,15 +3188,6 @@
       },
       {
         "rank": 54,
-        "id": "6479970832",
-        "title": "Pokémon TCG Pocket",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/07/f4/f6/07f4f628-905e-6843-613f-2c59038004be/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
-        "artist": "The Pokemon Company",
-        "url": "https://apps.apple.com/hk/app/pok%C3%A9mon-tcg-pocket/id6479970832?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 55,
         "id": "6760325543",
         "title": "Arrow Cube Escape",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/54/d4/9d/54d49d41-6322-ca9a-65b9-2c57f46a19db/AppIcon-1x_U007emarketing-0-8-0-85-220-0.png/100x100bb.png",
@@ -3205,16 +3196,16 @@
         "global_hot": false
       },
       {
-        "rank": 56,
-        "id": "893677096",
-        "title": "Plants vs. Zombies™",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/b0/01/ce/b001ce99-479a-ba5d-afb9-ad6634a5962f/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
-        "artist": "Electronic Arts",
-        "url": "https://apps.apple.com/hk/app/plants-vs-zombies/id893677096?uo=2",
+        "rank": 55,
+        "id": "553834731",
+        "title": "糖果傳奇",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/73/1a/b7/731ab722-f9bd-dde7-8e93-858e08e5a92a/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
+        "artist": "King",
+        "url": "https://apps.apple.com/hk/app/%E7%B3%96%E6%9E%9C%E5%82%B3%E5%A5%87/id553834731?uo=2",
         "global_hot": false
       },
       {
-        "rank": 57,
+        "rank": 56,
         "id": "6754688265",
         "title": "最終曙光（Last Light）",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/ea/49/f0/ea49f074-8e50-9686-d034-14e94e2f00c7/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
@@ -3223,7 +3214,7 @@
         "global_hot": false
       },
       {
-        "rank": 58,
+        "rank": 57,
         "id": "1643509748",
         "title": "摩奇料理 主題餐廳",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/f8/c6/b7/f8c6b730-ffa6-1df2-df2e-ebdef1cb4e7a/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
@@ -3232,21 +3223,30 @@
         "global_hot": false
       },
       {
-        "rank": 59,
-        "id": "6444551035",
-        "title": "代號鳶-沉浸式劇情卡牌手遊",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/8f/e8/f5/8fe8f511-b022-26a1-685e-6f5e28405d03/AppIcon-1x_U007emarketing-0-8-0-85-220-0.png/100x100bb.png",
-        "artist": "Qookka Games",
-        "url": "https://apps.apple.com/hk/app/%E4%BB%A3%E8%99%9F%E9%B3%B6-%E6%B2%89%E6%B5%B8%E5%BC%8F%E5%8A%87%E6%83%85%E5%8D%A1%E7%89%8C%E6%89%8B%E9%81%8A/id6444551035?uo=2",
+        "rank": 58,
+        "id": "893677096",
+        "title": "Plants vs. Zombies™",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/b0/01/ce/b001ce99-479a-ba5d-afb9-ad6634a5962f/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
+        "artist": "Electronic Arts",
+        "url": "https://apps.apple.com/hk/app/plants-vs-zombies/id893677096?uo=2",
         "global_hot": false
       },
       {
-        "rank": 60,
+        "rank": 59,
         "id": "382024751",
         "title": "五色學倉頡 ONLINE",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/7e/94/c9/7e94c939-0201-faf2-38cb-f558564e6d10/AppIcon-0-0-1x_U007emarketing-0-0-0-6-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/100x100bb.png",
         "artist": "Kotech Services Co.",
         "url": "https://apps.apple.com/hk/app/%E4%BA%94%E8%89%B2%E5%AD%B8%E5%80%89%E9%A0%A1-online/id382024751?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 60,
+        "id": "6444551035",
+        "title": "代號鳶-沉浸式劇情卡牌手遊",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/8f/e8/f5/8fe8f511-b022-26a1-685e-6f5e28405d03/AppIcon-1x_U007emarketing-0-8-0-85-220-0.png/100x100bb.png",
+        "artist": "Qookka Games",
+        "url": "https://apps.apple.com/hk/app/%E4%BB%A3%E8%99%9F%E9%B3%B6-%E6%B2%89%E6%B5%B8%E5%BC%8F%E5%8A%87%E6%83%85%E5%8D%A1%E7%89%8C%E6%89%8B%E9%81%8A/id6444551035?uo=2",
         "global_hot": false
       },
       {
@@ -3260,20 +3260,20 @@
       },
       {
         "rank": 62,
-        "id": "6759645536",
-        "title": "Cozy Ropes: Connect the Dots",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/ce/fb/d0/cefbd076-e980-bc37-9ff8-802232ee9b14/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
-        "artist": "SayGames LTD",
-        "url": "https://apps.apple.com/hk/app/cozy-ropes-connect-the-dots/id6759645536?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 63,
         "id": "6523424272",
         "title": "Find The Cat - Hidden Objects",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/74/34/8b/74348b51-c187-0da0-4dab-6c414846bbff/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
         "artist": "Agave Games",
         "url": "https://apps.apple.com/hk/app/find-the-cat-hidden-objects/id6523424272?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 63,
+        "id": "6759645536",
+        "title": "Cozy Ropes: Connect the Dots",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/ce/fb/d0/cefbd076-e980-bc37-9ff8-802232ee9b14/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
+        "artist": "SayGames LTD",
+        "url": "https://apps.apple.com/hk/app/cozy-ropes-connect-the-dots/id6759645536?uo=2",
         "global_hot": false
       },
       {
@@ -3287,20 +3287,20 @@
       },
       {
         "rank": 65,
-        "id": "6479752688",
-        "title": "Match Villains",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/16/e5/13/16e513c6-661a-3752-945c-446d49990c99/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
-        "artist": "Good Job Games",
-        "url": "https://apps.apple.com/hk/app/match-villains/id6479752688?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 66,
         "id": "6749302379",
         "title": "夢幻茶樓",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/9e/ae/42/9eae426f-06d2-245d-358d-17678655f2a8/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
         "artist": "HONGKONG HEILI LIMITED",
         "url": "https://apps.apple.com/hk/app/%E5%A4%A2%E5%B9%BB%E8%8C%B6%E6%A8%93/id6749302379?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 66,
+        "id": "6757844491",
+        "title": "Tricky Story 2: Brain Twist",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/d7/9e/38/d79e38a9-6cdb-f856-46ad-97deead4d1f7/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
+        "artist": "Tang Thi Thuy",
+        "url": "https://apps.apple.com/hk/app/tricky-story-2-brain-twist/id6757844491?uo=2",
         "global_hot": false
       },
       {
@@ -3314,11 +3314,11 @@
       },
       {
         "rank": 68,
-        "id": "6757844491",
-        "title": "Tricky Story 2: Brain Twist",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/d7/9e/38/d79e38a9-6cdb-f856-46ad-97deead4d1f7/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
-        "artist": "Tang Thi Thuy",
-        "url": "https://apps.apple.com/hk/app/tricky-story-2-brain-twist/id6757844491?uo=2",
+        "id": "6479752688",
+        "title": "Match Villains",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/16/e5/13/16e513c6-661a-3752-945c-446d49990c99/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
+        "artist": "Good Job Games",
+        "url": "https://apps.apple.com/hk/app/match-villains/id6479752688?uo=2",
         "global_hot": false
       },
       {
@@ -3359,24 +3359,6 @@
       },
       {
         "rank": 73,
-        "id": "6449991081",
-        "title": "合併甜食(Merge Sweets)",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/e8/7f/36/e87f368d-a3fc-a3f9-cb97-b01ad1d128c9/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
-        "artist": "Springcomes Co., Ltd.",
-        "url": "https://apps.apple.com/hk/app/%E5%90%88%E4%BD%B5%E7%94%9C%E9%A3%9F-merge-sweets/id6449991081?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 74,
-        "id": "1263330630",
-        "title": "開心鬥一番-麻雀、啤牌任你玩",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/91/ec/10/91ec10de-9b72-193a-59eb-5a0b762ea7e3/AppIcon-0-0-1x_U007emarketing-0-11-0-0-85-220.png/100x100bb.png",
-        "artist": "Spring Thunder Technology Limited",
-        "url": "https://apps.apple.com/hk/app/%E9%96%8B%E5%BF%83%E9%AC%A5%E4%B8%80%E7%95%AA-%E9%BA%BB%E9%9B%80-%E5%95%A4%E7%89%8C%E4%BB%BB%E4%BD%A0%E7%8E%A9/id1263330630?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 75,
         "id": "1570641170",
         "title": "開心連球球",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/14/48/5f/14485f21-bc9c-af92-1431-c549d1da4c39/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
@@ -3385,34 +3367,25 @@
         "global_hot": false
       },
       {
-        "rank": 76,
+        "rank": 74,
+        "id": "6449991081",
+        "title": "合併甜食(Merge Sweets)",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/e8/7f/36/e87f368d-a3fc-a3f9-cb97-b01ad1d128c9/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
+        "artist": "Springcomes Co., Ltd.",
+        "url": "https://apps.apple.com/hk/app/%E5%90%88%E4%BD%B5%E7%94%9C%E9%A3%9F-merge-sweets/id6449991081?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 75,
         "id": "1464689103",
         "title": "Family Island — Farming game",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/f8/c3/19/f8c319d6-517e-e7ab-be08-fb1aa06b8891/AppIcon-0-0-1x_U007emarketing-0-7-0-85-220.png/100x100bb.png",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/96/ff/09/96ff0982-761f-ef48-276b-fe1847c5f722/AppIcon-0-0-1x_U007emarketing-0-7-0-85-220.png/100x100bb.png",
         "artist": "Melsoft",
         "url": "https://apps.apple.com/hk/app/family-island-farming-game/id1464689103?uo=2",
         "global_hot": false
       },
       {
-        "rank": 77,
-        "id": "1623318294",
-        "title": "緋聞港口：合併&故事",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/1b/14/8b/1b148b97-e5de-2ebd-c918-7f0813c9da8a/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
-        "artist": "Microfun Limited",
-        "url": "https://apps.apple.com/hk/app/%E7%B7%8B%E8%81%9E%E6%B8%AF%E5%8F%A3-%E5%90%88%E4%BD%B5-%E6%95%85%E4%BA%8B/id1623318294?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 78,
-        "id": "6502926371",
-        "title": "貓咪造咖－有故事的貓咪咖啡廳",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/ab/63/8d/ab638d82-d57a-0149-ece5-029fc8c3a4ca/AppIcon-0-0-1x_U007emarketing-0-6-0-85-220.png/100x100bb.png",
-        "artist": "Gamesofa Inc.",
-        "url": "https://apps.apple.com/hk/app/%E8%B2%93%E5%92%AA%E9%80%A0%E5%92%96-%E6%9C%89%E6%95%85%E4%BA%8B%E7%9A%84%E8%B2%93%E5%92%AA%E5%92%96%E5%95%A1%E5%BB%B3/id6502926371?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 79,
+        "rank": 76,
         "id": "6761820736",
         "title": "Word & Logic: 迷你益智遊戲",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/21/75/f4/2175f430-34bb-113d-55f1-914683db825f/AppIcon-0-0-1x_U007epad-0-11-0-85-220.png/100x100bb.png",
@@ -3421,12 +3394,39 @@
         "global_hot": false
       },
       {
-        "rank": 80,
+        "rank": 77,
+        "id": "1263330630",
+        "title": "開心鬥一番-麻雀、啤牌任你玩",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/91/ec/10/91ec10de-9b72-193a-59eb-5a0b762ea7e3/AppIcon-0-0-1x_U007emarketing-0-11-0-0-85-220.png/100x100bb.png",
+        "artist": "Spring Thunder Technology Limited",
+        "url": "https://apps.apple.com/hk/app/%E9%96%8B%E5%BF%83%E9%AC%A5%E4%B8%80%E7%95%AA-%E9%BA%BB%E9%9B%80-%E5%95%A4%E7%89%8C%E4%BB%BB%E4%BD%A0%E7%8E%A9/id1263330630?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 78,
         "id": "1117841866",
         "title": "Empires & Puzzles: Match-3 RPG",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/f7/34/36/f73436f2-8519-c35b-fdc8-c530d47d523b/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
         "artist": "Small Giant Games",
         "url": "https://apps.apple.com/hk/app/empires-puzzles-match-3-rpg/id1117841866?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 79,
+        "id": "1623318294",
+        "title": "緋聞港口：合併&故事",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/1b/14/8b/1b148b97-e5de-2ebd-c918-7f0813c9da8a/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
+        "artist": "Microfun Limited",
+        "url": "https://apps.apple.com/hk/app/%E7%B7%8B%E8%81%9E%E6%B8%AF%E5%8F%A3-%E5%90%88%E4%BD%B5-%E6%95%85%E4%BA%8B/id1623318294?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 80,
+        "id": "6502926371",
+        "title": "貓咪造咖－有故事的貓咪咖啡廳",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/ab/63/8d/ab638d82-d57a-0149-ece5-029fc8c3a4ca/AppIcon-0-0-1x_U007emarketing-0-6-0-85-220.png/100x100bb.png",
+        "artist": "Gamesofa Inc.",
+        "url": "https://apps.apple.com/hk/app/%E8%B2%93%E5%92%AA%E9%80%A0%E5%92%96-%E6%9C%89%E6%95%85%E4%BA%8B%E7%9A%84%E8%B2%93%E5%92%AA%E5%92%96%E5%95%A1%E5%BB%B3/id6502926371?uo=2",
         "global_hot": false
       },
       {
@@ -3449,11 +3449,11 @@
       },
       {
         "rank": 83,
-        "id": "880047117",
-        "title": "Angry Birds 2",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/74/9e/53/749e5312-3c14-54f3-a5e9-7b5b95eb39ef/AppIcon-1x_U007emarketing-0-8-0-85-220-0.png/100x100bb.png",
-        "artist": "Rovio Entertainment Oyj",
-        "url": "https://apps.apple.com/hk/app/angry-birds-2/id880047117?uo=2",
+        "id": "6755455500",
+        "title": "好萊塢合成：星夢逆襲",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/c5/69/64/c569649f-b61a-7966-cf93-0af1b22387eb/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
+        "artist": "VoyagerOne",
+        "url": "https://apps.apple.com/hk/app/%E5%A5%BD%E8%90%8A%E5%A1%A2%E5%90%88%E6%88%90-%E6%98%9F%E5%A4%A2%E9%80%86%E8%A5%B2/id6755455500?uo=2",
         "global_hot": false
       },
       {
@@ -3467,11 +3467,11 @@
       },
       {
         "rank": 85,
-        "id": "6755455500",
-        "title": "好萊塢合成：星夢逆襲",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/44/c3/a7/44c3a786-4af3-b84d-1b13-6312fde95b29/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
-        "artist": "VoyagerOne",
-        "url": "https://apps.apple.com/hk/app/%E5%A5%BD%E8%90%8A%E5%A1%A2%E5%90%88%E6%88%90-%E6%98%9F%E5%A4%A2%E9%80%86%E8%A5%B2/id6755455500?uo=2",
+        "id": "880047117",
+        "title": "Angry Birds 2",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/74/9e/53/749e5312-3c14-54f3-a5e9-7b5b95eb39ef/AppIcon-1x_U007emarketing-0-8-0-85-220-0.png/100x100bb.png",
+        "artist": "Rovio Entertainment Oyj",
+        "url": "https://apps.apple.com/hk/app/angry-birds-2/id880047117?uo=2",
         "global_hot": false
       },
       {
@@ -3503,20 +3503,20 @@
       },
       {
         "rank": 89,
-        "id": "1443446174",
-        "title": "魔法琴键3",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/2b/aa/6b/2baa6b00-b5fd-ec4b-2665-66d5899a3f3b/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
-        "artist": "Amanotes Pte. Ltd.",
-        "url": "https://apps.apple.com/hk/app/%E9%AD%94%E6%B3%95%E7%90%B4%E9%94%AE3/id1443446174?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 90,
         "id": "6746465127",
         "title": "細胞保衛戰 - 生存射擊大亂鬥",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/f8/fa/51/f8fa5193-7e61-a915-38be-34e070e51b2f/AppIcon-0-0-1x_U007epad-0-1-85-220.png/100x100bb.png",
         "artist": "Snap Brain Games",
         "url": "https://apps.apple.com/hk/app/%E7%B4%B0%E8%83%9E%E4%BF%9D%E8%A1%9B%E6%88%B0-%E7%94%9F%E5%AD%98%E5%B0%84%E6%93%8A%E5%A4%A7%E4%BA%82%E9%AC%A5/id6746465127?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 90,
+        "id": "1443446174",
+        "title": "魔法琴键3",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/2b/aa/6b/2baa6b00-b5fd-ec4b-2665-66d5899a3f3b/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
+        "artist": "Amanotes Pte. Ltd.",
+        "url": "https://apps.apple.com/hk/app/%E9%AD%94%E6%B3%95%E7%90%B4%E9%94%AE3/id1443446174?uo=2",
         "global_hot": false
       },
       {
@@ -3584,11 +3584,11 @@
       },
       {
         "rank": 98,
-        "id": "6752642477",
-        "title": "明日方舟：終末地",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/6d/a6/e0/6da6e0eb-c4fa-4dc0-aa55-64eff735eb22/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
-        "artist": "GRYPH FRONTIER PTE.LTD.",
-        "url": "https://apps.apple.com/hk/app/%E6%98%8E%E6%97%A5%E6%96%B9%E8%88%9F-%E7%B5%82%E6%9C%AB%E5%9C%B0/id6752642477?uo=2",
+        "id": "1480616748",
+        "title": "TFT：《聯盟戰棋》",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/e9/2f/10/e92f10e5-0544-6c6d-7bd6-37ee5979e72b/AppIcon-0-0-1x_U007epad-0-1-85-220.png/100x100bb.png",
+        "artist": "Riot Games",
+        "url": "https://apps.apple.com/hk/app/tft-%E8%81%AF%E7%9B%9F%E6%88%B0%E6%A3%8B/id1480616748?uo=2",
         "global_hot": false
       },
       {
@@ -3602,11 +3602,11 @@
       },
       {
         "rank": 100,
-        "id": "1673675970",
-        "title": "蛋仔派對",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/1e/22/ca/1e22ca99-b964-9411-e950-9073aab8c6bd/AppIcon-0-0-1x_U007emarketing-0-0-0-10-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/100x100bb.png",
-        "artist": "Envoy Interactive Entertainment Co.Ltd.",
-        "url": "https://apps.apple.com/hk/app/%E8%9B%8B%E4%BB%94%E6%B4%BE%E5%B0%8D/id1673675970?uo=2",
+        "id": "6752642477",
+        "title": "明日方舟：終末地",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/6d/a6/e0/6da6e0eb-c4fa-4dc0-aa55-64eff735eb22/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
+        "artist": "GRYPH FRONTIER PTE.LTD.",
+        "url": "https://apps.apple.com/hk/app/%E6%98%8E%E6%97%A5%E6%96%B9%E8%88%9F-%E7%B5%82%E6%9C%AB%E5%9C%B0/id6752642477?uo=2",
         "global_hot": false
       }
     ],
@@ -3973,15 +3973,6 @@
       },
       {
         "rank": 41,
-        "id": "6670604287",
-        "title": "Garena® 三角洲行動",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/07/94/68/079468e4-56d7-45c9-40df-1d972e83a7da/AppIcon-1x_U007emarketing-0-8-0-85-220-0.png/100x100bb.png",
-        "artist": "Garena Mobile Games Private Ltd.",
-        "url": "https://apps.apple.com/tw/app/garena-%E4%B8%89%E8%A7%92%E6%B4%B2%E8%A1%8C%E5%8B%95/id6670604287?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 42,
         "id": "6737973367",
         "title": "一元麻將 - 正宗台灣16張、賽特2，全面鑽石1:1真實打",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/e8/6a/61/e86a61cd-6667-0c37-4db0-30c7bf6b4371/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
@@ -3990,12 +3981,21 @@
         "global_hot": false
       },
       {
-        "rank": 43,
+        "rank": 42,
         "id": "6745761596",
         "title": "Coin Master - Board Adventure",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/58/a4/70/58a4702e-9306-3b34-6d72-e60dbc78b3c2/AppIcon-1x_U007emarketing-0-8-0-85-220-0.png/100x100bb.png",
         "artist": "Moon Active",
         "url": "https://apps.apple.com/tw/app/coin-master-board-adventure/id6745761596?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 43,
+        "id": "6670604287",
+        "title": "Garena® 三角洲行動",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/07/94/68/079468e4-56d7-45c9-40df-1d972e83a7da/AppIcon-1x_U007emarketing-0-8-0-85-220-0.png/100x100bb.png",
+        "artist": "Garena Mobile Games Private Ltd.",
+        "url": "https://apps.apple.com/tw/app/garena-%E4%B8%89%E8%A7%92%E6%B4%B2%E8%A1%8C%E5%8B%95/id6670604287?uo=2",
         "global_hot": false
       },
       {
@@ -4036,29 +4036,29 @@
       },
       {
         "rank": 48,
-        "id": "1089079153",
-        "title": "Garena 傳說對決：全元進擊版本",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/09/19/7d/09197d50-acd8-f5c8-4ec1-a9f0c67049d9/AppIcon-1x_U007emarketing-0-11-0-85-220-0.png/100x100bb.png",
-        "artist": "Garena Online Private Ltd",
-        "url": "https://apps.apple.com/tw/app/garena-%E5%82%B3%E8%AA%AA%E5%B0%8D%E6%B1%BA-%E5%85%A8%E5%85%83%E9%80%B2%E6%93%8A%E7%89%88%E6%9C%AC/id1089079153?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 49,
         "id": "6755455500",
         "title": "好萊塢合成：星夢逆襲",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/44/c3/a7/44c3a786-4af3-b84d-1b13-6312fde95b29/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/c5/69/64/c569649f-b61a-7966-cf93-0af1b22387eb/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
         "artist": "VoyagerOne",
         "url": "https://apps.apple.com/tw/app/%E5%A5%BD%E8%90%8A%E5%A1%A2%E5%90%88%E6%88%90-%E6%98%9F%E5%A4%A2%E9%80%86%E8%A5%B2/id6755455500?uo=2",
         "global_hot": false
       },
       {
-        "rank": 50,
+        "rank": 49,
         "id": "6502926371",
         "title": "貓咪造咖－有故事的貓咪咖啡廳",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/ab/63/8d/ab638d82-d57a-0149-ece5-029fc8c3a4ca/AppIcon-0-0-1x_U007emarketing-0-6-0-85-220.png/100x100bb.png",
         "artist": "Gamesofa Inc.",
         "url": "https://apps.apple.com/tw/app/%E8%B2%93%E5%92%AA%E9%80%A0%E5%92%96-%E6%9C%89%E6%95%85%E4%BA%8B%E7%9A%84%E8%B2%93%E5%92%AA%E5%92%96%E5%95%A1%E5%BB%B3/id6502926371?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 50,
+        "id": "1089079153",
+        "title": "Garena 傳說對決：全元進擊版本",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/09/19/7d/09197d50-acd8-f5c8-4ec1-a9f0c67049d9/AppIcon-1x_U007emarketing-0-11-0-85-220-0.png/100x100bb.png",
+        "artist": "Garena Online Private Ltd",
+        "url": "https://apps.apple.com/tw/app/garena-%E5%82%B3%E8%AA%AA%E5%B0%8D%E6%B1%BA-%E5%85%A8%E5%85%83%E9%80%B2%E6%93%8A%E7%89%88%E6%9C%AC/id1089079153?uo=2",
         "global_hot": false
       },
       {
@@ -4108,15 +4108,6 @@
       },
       {
         "rank": 56,
-        "id": "1094591345",
-        "title": "Pokémon GO",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/74/56/38/7456386f-029d-992a-a203-d1e12eca07e7/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
-        "artist": "Niantic, Inc.",
-        "url": "https://apps.apple.com/tw/app/pok%C3%A9mon-go/id1094591345?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 57,
         "id": "6739616715",
         "title": "楓之谷：放置冒險記",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/a2/50/3f/a2503f2a-4274-5d42-2fa6-47f73e2f6331/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
@@ -4125,7 +4116,7 @@
         "global_hot": false
       },
       {
-        "rank": 58,
+        "rank": 57,
         "id": "6752369665",
         "title": "誰來救救我",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/df/18/ab/df18abf4-c843-8078-6f51-26157d07f614/AppIcon-gl-0-0-1x_U007emarketing-0-11-0-85-220.png/100x100bb.png",
@@ -4134,12 +4125,21 @@
         "global_hot": false
       },
       {
-        "rank": 59,
+        "rank": 58,
         "id": "6498883328",
         "title": "Tile Explorer - 三消配對",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/c4/07/16/c4071674-af13-2547-e6c0-1611449ca9e1/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
         "artist": "Oakever Games",
         "url": "https://apps.apple.com/tw/app/tile-explorer-%E4%B8%89%E6%B6%88%E9%85%8D%E5%B0%8D/id6498883328?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 59,
+        "id": "1094591345",
+        "title": "Pokémon GO",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/74/56/38/7456386f-029d-992a-a203-d1e12eca07e7/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
+        "artist": "Niantic, Inc.",
+        "url": "https://apps.apple.com/tw/app/pok%C3%A9mon-go/id1094591345?uo=2",
         "global_hot": false
       },
       {
@@ -4162,20 +4162,20 @@
       },
       {
         "rank": 62,
-        "id": "6760745608",
-        "title": "怪獸：進化對決",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/fd/d2/59/fdd2590c-e8a0-d333-cd5c-69a24c37c789/AppIcon-0-0-1x_U007emarketing-0-11-0-0-85-220.png/100x100bb.png",
-        "artist": "Jinghong Rannian Network Technology Co., Ltd.",
-        "url": "https://apps.apple.com/tw/app/%E6%80%AA%E7%8D%B8-%E9%80%B2%E5%8C%96%E5%B0%8D%E6%B1%BA/id6760745608?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 63,
         "id": "6760004571",
         "title": "Mini Tales: GO!",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/a2/82/66/a282661e-b394-6b9d-df1c-b816932d6b00/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
         "artist": "LoadComplete",
         "url": "https://apps.apple.com/tw/app/mini-tales-go/id6760004571?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 63,
+        "id": "6760745608",
+        "title": "怪獸：進化對決",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/fd/d2/59/fdd2590c-e8a0-d333-cd5c-69a24c37c789/AppIcon-0-0-1x_U007emarketing-0-11-0-0-85-220.png/100x100bb.png",
+        "artist": "Jinghong Rannian Network Technology Co., Ltd.",
+        "url": "https://apps.apple.com/tw/app/%E6%80%AA%E7%8D%B8-%E9%80%B2%E5%8C%96%E5%B0%8D%E6%B1%BA/id6760745608?uo=2",
         "global_hot": false
       },
       {
@@ -4234,24 +4234,6 @@
       },
       {
         "rank": 70,
-        "id": "501306812",
-        "title": "麻將明星3缺1",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/aa/f8/38/aaf83846-62c0-a0ec-41c2-bef91d69f61b/StarMJ-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
-        "artist": "International Games System Co., Ltd.",
-        "url": "https://apps.apple.com/tw/app/%E9%BA%BB%E5%B0%87%E6%98%8E%E6%98%9F3%E7%BC%BA1/id501306812?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 71,
-        "id": "553834731",
-        "title": "糖果傳奇",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/73/1a/b7/731ab722-f9bd-dde7-8e93-858e08e5a92a/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
-        "artist": "King",
-        "url": "https://apps.apple.com/tw/app/%E7%B3%96%E6%9E%9C%E5%82%B3%E5%A5%87/id553834731?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 72,
         "id": "1643509748",
         "title": "摩奇料理 主題餐廳",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/f8/c6/b7/f8c6b730-ffa6-1df2-df2e-ebdef1cb4e7a/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
@@ -4260,7 +4242,7 @@
         "global_hot": false
       },
       {
-        "rank": 73,
+        "rank": 71,
         "id": "6755030928",
         "title": "屍速碰碰車",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/51/f8/e0/51f8e00f-f525-fc74-9c0b-daf95d257b7f/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
@@ -4269,12 +4251,30 @@
         "global_hot": false
       },
       {
-        "rank": 74,
+        "rank": 72,
+        "id": "501306812",
+        "title": "麻將明星3缺1",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/aa/f8/38/aaf83846-62c0-a0ec-41c2-bef91d69f61b/StarMJ-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
+        "artist": "International Games System Co., Ltd.",
+        "url": "https://apps.apple.com/tw/app/%E9%BA%BB%E5%B0%87%E6%98%8E%E6%98%9F3%E7%BC%BA1/id501306812?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 73,
         "id": "6740189002",
         "title": "太空防禦(Galaxy Defense)",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/15/8f/71/158f71f7-9476-1fa3-c447-0da44ab318a2/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
         "artist": "CYBERJOY LIMITED",
         "url": "https://apps.apple.com/tw/app/%E5%A4%AA%E7%A9%BA%E9%98%B2%E7%A6%A6-galaxy-defense/id6740189002?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 74,
+        "id": "553834731",
+        "title": "糖果傳奇",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/73/1a/b7/731ab722-f9bd-dde7-8e93-858e08e5a92a/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
+        "artist": "King",
+        "url": "https://apps.apple.com/tw/app/%E7%B3%96%E6%9E%9C%E5%82%B3%E5%A5%87/id553834731?uo=2",
         "global_hot": false
       },
       {
@@ -4324,20 +4324,20 @@
       },
       {
         "rank": 80,
-        "id": "1453363650",
-        "title": "PUBG MOBILE：絕地求生M",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/65/b4/1a/65b41a1f-9cf0-7f53-4c46-becfd7d57903/AppIcon-0-0-1x_U007emarketing-0-7-0-85-220.png/100x100bb.png",
-        "artist": "MAINSTREAM UNIVERSAL CO. LTD.",
-        "url": "https://apps.apple.com/tw/app/pubg-mobile-%E7%B5%95%E5%9C%B0%E6%B1%82%E7%94%9Fm/id1453363650?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 81,
         "id": "6756606270",
         "title": "咻咻史萊姆 - 跟著咖波輕鬆放置",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/ab/4a/f3/ab4af3e7-d76b-e6ab-8bbd-f550bf993544/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
         "artist": "X-LEGEND ENTERTAINMENT CO., LTD.",
         "url": "https://apps.apple.com/tw/app/%E5%92%BB%E5%92%BB%E5%8F%B2%E8%90%8A%E5%A7%86-%E8%B7%9F%E8%91%97%E5%92%96%E6%B3%A2%E8%BC%95%E9%AC%86%E6%94%BE%E7%BD%AE/id6756606270?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 81,
+        "id": "1453363650",
+        "title": "PUBG MOBILE：絕地求生M",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/65/b4/1a/65b41a1f-9cf0-7f53-4c46-becfd7d57903/AppIcon-0-0-1x_U007emarketing-0-7-0-85-220.png/100x100bb.png",
+        "artist": "MAINSTREAM UNIVERSAL CO. LTD.",
+        "url": "https://apps.apple.com/tw/app/pubg-mobile-%E7%B5%95%E5%9C%B0%E6%B1%82%E7%94%9Fm/id1453363650?uo=2",
         "global_hot": false
       },
       {
@@ -4396,15 +4396,6 @@
       },
       {
         "rank": 88,
-        "id": "6751560944",
-        "title": "我的花園世界",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/c8/ca/43/c8ca43de-95c5-c73f-0394-057553ec8b87/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
-        "artist": "FLORAL GAMES LIMITED",
-        "url": "https://apps.apple.com/tw/app/%E6%88%91%E7%9A%84%E8%8A%B1%E5%9C%92%E4%B8%96%E7%95%8C/id6751560944?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 89,
         "id": "6743163616",
         "title": "江湖有詭",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/b7/4d/31/b74d318c-5231-fe9c-f5ab-2c008a1c8238/AppIcon-1x_U007emarketing-0-11-0-85-220-0.png/100x100bb.png",
@@ -4413,12 +4404,21 @@
         "global_hot": false
       },
       {
-        "rank": 90,
+        "rank": 89,
         "id": "1484208629",
         "title": "Family Style: Co-op Kitchen",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple125/v4/ed/cf/dd/edcfdd4f-e1ed-2090-04c5-f08586a167e3/AppIcon-1x_U007emarketing-0-7-0-0-85-220.png/100x100bb.png",
         "artist": "Co-op Kitchen LLC",
         "url": "https://apps.apple.com/tw/app/family-style-co-op-kitchen/id1484208629?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 90,
+        "id": "6751560944",
+        "title": "我的花園世界",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/c8/ca/43/c8ca43de-95c5-c73f-0394-057553ec8b87/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
+        "artist": "FLORAL GAMES LIMITED",
+        "url": "https://apps.apple.com/tw/app/%E6%88%91%E7%9A%84%E8%8A%B1%E5%9C%92%E4%B8%96%E7%95%8C/id6751560944?uo=2",
         "global_hot": false
       },
       {
@@ -4441,20 +4441,20 @@
       },
       {
         "rank": 93,
-        "id": "455902495",
-        "title": "麻將 神來也麻將－台灣16張、麻雀",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/c2/6f/6e/c26f6eb1-82bc-3fd6-6a05-6e0498f213ae/AppIcon-1x_U007emarketing-0-11-0-85-220-0.png/100x100bb.png",
-        "artist": "Gamesofa Inc.",
-        "url": "https://apps.apple.com/tw/app/%E9%BA%BB%E5%B0%87-%E7%A5%9E%E4%BE%86%E4%B9%9F%E9%BA%BB%E5%B0%87-%E5%8F%B0%E7%81%A316%E5%BC%B5-%E9%BA%BB%E9%9B%80/id455902495?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 94,
         "id": "6749753704",
         "title": "NBA籃球世界",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/ca/45/f4/ca45f408-bd07-0478-b8f0-656b1f5320c2/AppIcon-0-0-1x_U007epad-0-1-85-220.png/100x100bb.png",
         "artist": "Hong Kong Qushang Technology Co., Limited",
         "url": "https://apps.apple.com/tw/app/nba%E7%B1%83%E7%90%83%E4%B8%96%E7%95%8C/id6749753704?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 94,
+        "id": "455902495",
+        "title": "麻將 神來也麻將－台灣16張、麻雀",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/c2/6f/6e/c26f6eb1-82bc-3fd6-6a05-6e0498f213ae/AppIcon-1x_U007emarketing-0-11-0-85-220-0.png/100x100bb.png",
+        "artist": "Gamesofa Inc.",
+        "url": "https://apps.apple.com/tw/app/%E9%BA%BB%E5%B0%87-%E7%A5%9E%E4%BE%86%E4%B9%9F%E9%BA%BB%E5%B0%87-%E5%8F%B0%E7%81%A316%E5%BC%B5-%E9%BA%BB%E9%9B%80/id455902495?uo=2",
         "global_hot": false
       },
       {
@@ -4524,20 +4524,20 @@
       },
       {
         "rank": 2,
-        "id": "1300146617",
-        "title": "Free Fire: Undersea Mystery",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/b5/d6/7e/b5d67e0f-94ad-7a4a-65e2-1c03d0ce2a56/AppIcon-1774968976-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
-        "artist": "GARENA INTERNATIONAL I PRIVATE LIMITED",
-        "url": "https://apps.apple.com/sg/app/free-fire-undersea-mystery/id1300146617?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 3,
         "id": "1094930513",
         "title": "EA SPORTS FC™ Mobile Football",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/1e/f6/c1/1ef6c173-2e6f-a89a-f17f-79c750497fcf/AppIcon-1x_U007emarketing-0-8-0-85-220-0.png/100x100bb.png",
         "artist": "Electronic Arts",
         "url": "https://apps.apple.com/sg/app/ea-sports-fc-mobile-football/id1094930513?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 3,
+        "id": "1300146617",
+        "title": "Free Fire: Undersea Mystery",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/b5/d6/7e/b5d67e0f-94ad-7a4a-65e2-1c03d0ce2a56/AppIcon-1774968976-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
+        "artist": "GARENA INTERNATIONAL I PRIVATE LIMITED",
+        "url": "https://apps.apple.com/sg/app/free-fire-undersea-mystery/id1300146617?uo=2",
         "global_hot": false
       },
       {
@@ -4551,20 +4551,20 @@
       },
       {
         "rank": 5,
-        "id": "1617391485",
-        "title": "Block Blast!",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/f8/67/40/f86740db-33e2-15c3-6ce3-2d806b88503b/AppIcon-0-0-1x_U007emarketing-0-11-0-sRGB-85-220.png/100x100bb.png",
-        "artist": "Hungry Studio",
-        "url": "https://apps.apple.com/sg/app/block-blast/id1617391485?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 6,
         "id": "6748397500",
         "title": "Arrows – Puzzle Escape",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/f4/3b/81/f43b81f9-2f4a-5efe-4f1d-a2491c4dcde3/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
         "artist": "Lessmore GmbH",
         "url": "https://apps.apple.com/sg/app/arrows-puzzle-escape/id6748397500?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 6,
+        "id": "1617391485",
+        "title": "Block Blast!",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/f8/67/40/f86740db-33e2-15c3-6ce3-2d806b88503b/AppIcon-0-0-1x_U007emarketing-0-11-0-sRGB-85-220.png/100x100bb.png",
+        "artist": "Hungry Studio",
+        "url": "https://apps.apple.com/sg/app/block-blast/id1617391485?uo=2",
         "global_hot": false
       },
       {
@@ -4578,20 +4578,20 @@
       },
       {
         "rank": 8,
-        "id": "431946152",
-        "title": "Roblox",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/41/bc/e9/41bce9a7-584c-4b0f-4e93-ed4748ab0674/AppIcon-0-0-1x_U007epad-0-1-0-85-220.png/100x100bb.png",
-        "artist": "Roblox Corporation",
-        "url": "https://apps.apple.com/sg/app/roblox/id431946152?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 9,
         "id": "6499209744",
         "title": "Magic Sort!",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/89/1b/a9/891ba9a3-3006-e9d5-15df-876fd7b14128/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
         "artist": "Grand Games A.Ş.",
         "url": "https://apps.apple.com/sg/app/magic-sort/id6499209744?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 9,
+        "id": "431946152",
+        "title": "Roblox",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/41/bc/e9/41bce9a7-584c-4b0f-4e93-ed4748ab0674/AppIcon-0-0-1x_U007epad-0-1-0-85-220.png/100x100bb.png",
+        "artist": "Roblox Corporation",
+        "url": "https://apps.apple.com/sg/app/roblox/id431946152?uo=2",
         "global_hot": false
       },
       {
@@ -4614,20 +4614,20 @@
       },
       {
         "rank": 12,
-        "id": "1117270703",
-        "title": "eFootball™",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/40/02/2a/40022a4d-5895-2a45-e3d7-0737b7ce692a/PesMobile-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
-        "artist": "KONAMI",
-        "url": "https://apps.apple.com/sg/app/efootball/id1117270703?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 13,
         "id": "512939461",
         "title": "Subway Surfers",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/ca/4d/8d/ca4d8dbe-b6fa-f365-1970-274ceb397102/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
         "artist": "Sybo Games ApS",
         "url": "https://apps.apple.com/sg/app/subway-surfers/id512939461?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 13,
+        "id": "1117270703",
+        "title": "eFootball™",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/40/02/2a/40022a4d-5895-2a45-e3d7-0737b7ce692a/PesMobile-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
+        "artist": "KONAMI",
+        "url": "https://apps.apple.com/sg/app/efootball/id1117270703?uo=2",
         "global_hot": false
       },
       {
@@ -4704,24 +4704,15 @@
       },
       {
         "rank": 22,
-        "id": "993090598",
-        "title": "Ludo King",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/09/33/e5/0933e5a5-e5c8-dde4-fd54-357068142387/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
-        "artist": "GAMETION GLOBAL TECHNOLOGIES PTE LIMITED",
-        "url": "https://apps.apple.com/sg/app/ludo-king/id993090598?uo=2",
+        "id": "6483252725",
+        "title": "MONGIL: STAR DIVE",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/8d/ae/00/8dae0026-ff6d-0e8d-3c76-aebf600a6b9e/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
+        "artist": "Netmarble Corporation",
+        "url": "https://apps.apple.com/sg/app/mongil-star-dive/id6483252725?uo=2",
         "global_hot": false
       },
       {
         "rank": 23,
-        "id": "6739554056",
-        "title": "Kingshot",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/f6/18/8a/f6188a14-83a7-d226-6f1d-29a58fd2fc09/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
-        "artist": "Century Games Pte. Ltd.",
-        "url": "https://apps.apple.com/sg/app/kingshot/id6739554056?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 24,
         "id": "1638139403",
         "title": "Block Crush: Block Puzzle Game",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/ff/ca/25/ffca25ae-803b-8aef-003d-b9ce2fd97ac9/AppIcon-0-0-1x_U007epad-0-11-0-sRGB-85-220.png/100x100bb.png",
@@ -4730,12 +4721,21 @@
         "global_hot": false
       },
       {
+        "rank": 24,
+        "id": "6739554056",
+        "title": "Kingshot",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/f6/18/8a/f6188a14-83a7-d226-6f1d-29a58fd2fc09/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
+        "artist": "Century Games Pte. Ltd.",
+        "url": "https://apps.apple.com/sg/app/kingshot/id6739554056?uo=2",
+        "global_hot": false
+      },
+      {
         "rank": 25,
-        "id": "6483252725",
-        "title": "MONGIL: STAR DIVE",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/8d/ae/00/8dae0026-ff6d-0e8d-3c76-aebf600a6b9e/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
-        "artist": "Netmarble Corporation",
-        "url": "https://apps.apple.com/sg/app/mongil-star-dive/id6483252725?uo=2",
+        "id": "993090598",
+        "title": "Ludo King",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/09/33/e5/0933e5a5-e5c8-dde4-fd54-357068142387/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
+        "artist": "GAMETION GLOBAL TECHNOLOGIES PTE LIMITED",
+        "url": "https://apps.apple.com/sg/app/ludo-king/id993090598?uo=2",
         "global_hot": false
       },
       {
@@ -4767,15 +4767,6 @@
       },
       {
         "rank": 29,
-        "id": "1462911602",
-        "title": "Dream League Soccer 2026",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/04/87/4e/04874e7c-5e8b-4d82-c7a5-16e24a2aeda4/AppIcon-0-0-1x_U007emarketing-0-11-0-85-220.png/100x100bb.png",
-        "artist": "First Touch Games Ltd.",
-        "url": "https://apps.apple.com/sg/app/dream-league-soccer-2026/id1462911602?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 30,
         "id": "6755418562",
         "title": "Pongz - SG Mahjong",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/af/ff/33/afff331f-ca16-7ccd-20a3-83d91c1c934a/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
@@ -4784,16 +4775,16 @@
         "global_hot": false
       },
       {
-        "rank": 31,
-        "id": "1619254071",
-        "title": "Honor of Kings",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/a4/b8/3e/a4b83e06-18af-9786-cdb5-f16ad0fbb340/AppIcon-1x_U007emarketing-0-7-0-85-220-0.png/100x100bb.png",
-        "artist": "Level Infinite",
-        "url": "https://apps.apple.com/sg/app/honor-of-kings/id1619254071?uo=2",
+        "rank": 30,
+        "id": "1462911602",
+        "title": "Dream League Soccer 2026",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/04/87/4e/04874e7c-5e8b-4d82-c7a5-16e24a2aeda4/AppIcon-0-0-1x_U007emarketing-0-11-0-85-220.png/100x100bb.png",
+        "artist": "First Touch Games Ltd.",
+        "url": "https://apps.apple.com/sg/app/dream-league-soccer-2026/id1462911602?uo=2",
         "global_hot": false
       },
       {
-        "rank": 32,
+        "rank": 31,
         "id": "6443575749",
         "title": "Whiteout Survival",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/ad/64/49/ad644980-d44a-1750-4b30-c8bb41fa1d97/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
@@ -4802,21 +4793,30 @@
         "global_hot": false
       },
       {
-        "rank": 33,
-        "id": "1351168404",
-        "title": "Among Us!",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/b9/a0/14/b9a014bd-a5ad-b29e-fd87-c07d1da0e384/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
-        "artist": "InnerSloth LLC",
-        "url": "https://apps.apple.com/sg/app/among-us/id1351168404?uo=2",
+        "rank": 32,
+        "id": "1619254071",
+        "title": "Honor of Kings",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/a4/b8/3e/a4b83e06-18af-9786-cdb5-f16ad0fbb340/AppIcon-1x_U007emarketing-0-7-0-85-220-0.png/100x100bb.png",
+        "artist": "Level Infinite",
+        "url": "https://apps.apple.com/sg/app/honor-of-kings/id1619254071?uo=2",
         "global_hot": false
       },
       {
-        "rank": 34,
+        "rank": 33,
         "id": "6759596187",
         "title": "無盡輪迴：鬼域摸金",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/ff/d9/30/ffd930df-ba14-7d4a-7bd0-c9be2e63dbd4/AppIcon-1x_U007epad-0-11-0-85-220-0.png/100x100bb.png",
         "artist": "POPJOY (H.K.) LIMITED",
         "url": "https://apps.apple.com/sg/app/%E7%84%A1%E7%9B%A1%E8%BC%AA%E8%BF%B4-%E9%AC%BC%E5%9F%9F%E6%91%B8%E9%87%91/id6759596187?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 34,
+        "id": "1351168404",
+        "title": "Among Us!",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/b9/a0/14/b9a014bd-a5ad-b29e-fd87-c07d1da0e384/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
+        "artist": "InnerSloth LLC",
+        "url": "https://apps.apple.com/sg/app/among-us/id1351168404?uo=2",
         "global_hot": false
       },
       {
@@ -4866,20 +4866,20 @@
       },
       {
         "rank": 40,
-        "id": "1510097347",
-        "title": "The Spike - Volleyball Story",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/14/5b/9a/145b9ac4-6f04-df7b-2357-f007b3d082b6/AppIcon-0-0-1x_U007emarketing-0-8-0-0-85-220.png/100x100bb.png",
-        "artist": "SUNCYAN",
-        "url": "https://apps.apple.com/sg/app/the-spike-volleyball-story/id1510097347?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 41,
         "id": "6745761596",
         "title": "Coin Master - Board Adventure",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/58/a4/70/58a4702e-9306-3b34-6d72-e60dbc78b3c2/AppIcon-1x_U007emarketing-0-8-0-85-220-0.png/100x100bb.png",
         "artist": "Moon Active",
         "url": "https://apps.apple.com/sg/app/coin-master-board-adventure/id6745761596?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 41,
+        "id": "1510097347",
+        "title": "The Spike - Volleyball Story",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/14/5b/9a/145b9ac4-6f04-df7b-2357-f007b3d082b6/AppIcon-0-0-1x_U007emarketing-0-8-0-0-85-220.png/100x100bb.png",
+        "artist": "SUNCYAN",
+        "url": "https://apps.apple.com/sg/app/the-spike-volleyball-story/id1510097347?uo=2",
         "global_hot": false
       },
       {
@@ -4902,24 +4902,15 @@
       },
       {
         "rank": 44,
-        "id": "6472396866",
-        "title": "Where Winds Meet",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/b1/89/2f/b1892f5e-1fd5-d410-86f5-c0f911eedd39/AppIcon-0-0-1x_U007emarketing-0-11-0-85-220.png/100x100bb.png",
-        "artist": "NETEASE INTERACTIVE ENTERTAINMENT PTE. LTD",
-        "url": "https://apps.apple.com/sg/app/where-winds-meet/id6472396866?uo=2",
+        "id": "329218549",
+        "title": "Chess - Play & Learn Online",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/d8/c7/85/d8c7853e-b6b0-dd1e-1a91-f113be5f6264/AppIcon-1x_U007epad-0-1-0-0-85-220-0.png/100x100bb.png",
+        "artist": "Chess.com",
+        "url": "https://apps.apple.com/sg/app/chess-play-learn-online/id329218549?uo=2",
         "global_hot": false
       },
       {
         "rank": 45,
-        "id": "1222857607",
-        "title": "Garena AOV: Flow Strike",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/7e/88/c4/7e88c4a4-3078-f117-de1a-6834ae8b4d0b/AppIcon-1x_U007emarketing-0-11-0-85-220-0.png/100x100bb.png",
-        "artist": "Moba Games Private Limited",
-        "url": "https://apps.apple.com/sg/app/garena-aov-flow-strike/id1222857607?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 46,
         "id": "1094591345",
         "title": "Pokémon GO",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/74/56/38/7456386f-029d-992a-a203-d1e12eca07e7/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
@@ -4928,12 +4919,21 @@
         "global_hot": false
       },
       {
+        "rank": 46,
+        "id": "1222857607",
+        "title": "Garena AOV: Flow Strike",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/7e/88/c4/7e88c4a4-3078-f117-de1a-6834ae8b4d0b/AppIcon-1x_U007emarketing-0-11-0-85-220-0.png/100x100bb.png",
+        "artist": "Moba Games Private Limited",
+        "url": "https://apps.apple.com/sg/app/garena-aov-flow-strike/id1222857607?uo=2",
+        "global_hot": false
+      },
+      {
         "rank": 47,
-        "id": "329218549",
-        "title": "Chess - Play & Learn Online",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/d8/c7/85/d8c7853e-b6b0-dd1e-1a91-f113be5f6264/AppIcon-1x_U007epad-0-1-0-0-85-220-0.png/100x100bb.png",
-        "artist": "Chess.com",
-        "url": "https://apps.apple.com/sg/app/chess-play-learn-online/id329218549?uo=2",
+        "id": "6472396866",
+        "title": "Where Winds Meet",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/b1/89/2f/b1892f5e-1fd5-d410-86f5-c0f911eedd39/AppIcon-0-0-1x_U007emarketing-0-11-0-85-220.png/100x100bb.png",
+        "artist": "NETEASE INTERACTIVE ENTERTAINMENT PTE. LTD",
+        "url": "https://apps.apple.com/sg/app/where-winds-meet/id6472396866?uo=2",
         "global_hot": false
       },
       {
@@ -4974,20 +4974,20 @@
       },
       {
         "rank": 52,
-        "id": "1580603339",
-        "title": "Cricket League",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/bb/5d/a9/bb5da9b2-44b0-7a3d-5a5c-b8e4d5919f3d/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
-        "artist": "Miniclip.com",
-        "url": "https://apps.apple.com/sg/app/cricket-league/id1580603339?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 53,
         "id": "6743385713",
         "title": "Wool Crush®: Bus Knit Away Jam",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/e6/13/b8/e613b869-32d3-8ad7-8408-3a4857609355/AppIcon-0-0-1x_U007epad-0-1-85-220.png/100x100bb.png",
         "artist": "Astrasen Global",
         "url": "https://apps.apple.com/sg/app/wool-crush-bus-knit-away-jam/id6743385713?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 53,
+        "id": "1580603339",
+        "title": "Cricket League",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/bb/5d/a9/bb5da9b2-44b0-7a3d-5a5c-b8e4d5919f3d/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
+        "artist": "Miniclip.com",
+        "url": "https://apps.apple.com/sg/app/cricket-league/id1580603339?uo=2",
         "global_hot": false
       },
       {
@@ -5019,20 +5019,20 @@
       },
       {
         "rank": 57,
-        "id": "1344700142",
-        "title": "UNO!™",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/7a/e9/14/7ae914f8-2252-e1ca-f2a0-e92764bdd780/AppIcon-1x_U007emarketing-0-8-0-85-220-0.png/100x100bb.png",
-        "artist": "Mattel163 Limited",
-        "url": "https://apps.apple.com/sg/app/uno/id1344700142?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 58,
         "id": "1521236603",
         "title": "Travel Town - Merge Adventure",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/3e/6f/07/3e6f07d6-7e44-3af7-9c93-4f92527c35bb/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
         "artist": "Moon Active",
         "url": "https://apps.apple.com/sg/app/travel-town-merge-adventure/id1521236603?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 58,
+        "id": "1344700142",
+        "title": "UNO!™",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/7a/e9/14/7ae914f8-2252-e1ca-f2a0-e92764bdd780/AppIcon-1x_U007emarketing-0-8-0-85-220-0.png/100x100bb.png",
+        "artist": "Mattel163 Limited",
+        "url": "https://apps.apple.com/sg/app/uno/id1344700142?uo=2",
         "global_hot": false
       },
       {
@@ -5046,20 +5046,20 @@
       },
       {
         "rank": 60,
-        "id": "6448104157",
-        "title": "Offline Games - No Wifi Games",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/b7/1f/da/b71fda73-ef75-3d3e-eb39-68af439967e4/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
-        "artist": "Moreno Maio",
-        "url": "https://apps.apple.com/sg/app/offline-games-no-wifi-games/id6448104157?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 61,
         "id": "6751532378",
         "title": "My Garden Tale",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/91/7f/62/917f623b-0b77-6be4-e57d-3c6dddd2f1f2/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
         "artist": "Modo Game",
         "url": "https://apps.apple.com/sg/app/my-garden-tale/id6751532378?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 61,
+        "id": "6448104157",
+        "title": "Offline Games - No Wifi Games",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/b7/1f/da/b71fda73-ef75-3d3e-eb39-68af439967e4/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
+        "artist": "Moreno Maio",
+        "url": "https://apps.apple.com/sg/app/offline-games-no-wifi-games/id6448104157?uo=2",
         "global_hot": false
       },
       {
@@ -5091,24 +5091,6 @@
       },
       {
         "rank": 65,
-        "id": "6756402226",
-        "title": "Bus Simulator Indonesia: Maleo",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/9d/52/69/9d52695d-f631-5117-1636-334a0012c89c/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
-        "artist": "Maleo Media Kreatif",
-        "url": "https://apps.apple.com/sg/app/bus-simulator-indonesia-maleo/id6756402226?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 66,
-        "id": "1458863319",
-        "title": "CarX Street",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/4e/4f/e0/4e4fe005-8a5a-4ff2-94c6-cf27a124683f/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
-        "artist": "CarX Technologies",
-        "url": "https://apps.apple.com/sg/app/carx-street/id1458863319?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 67,
         "id": "6755216191",
         "title": "Arrowscapes™ - Arrows Puzzle",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/3e/fd/71/3efd7199-edff-7bc2-043d-81683beefb77/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
@@ -5117,16 +5099,7 @@
         "global_hot": false
       },
       {
-        "rank": 68,
-        "id": "1420551478",
-        "title": "Carrom Pool: Disc Game",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/33/41/63/334163b4-287f-f9a7-4791-43683c5d7023/AppIcon-0-0-1x_U007epad-0-1-85-220.png/100x100bb.png",
-        "artist": "Miniclip.com",
-        "url": "https://apps.apple.com/sg/app/carrom-pool-disc-game/id1420551478?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 69,
+        "rank": 66,
         "id": "1556357398",
         "title": "Pikmin Bloom",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/2e/8d/ed/2e8dedc1-dc77-89bb-dfed-eb35c8dea335/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
@@ -5135,7 +5108,7 @@
         "global_hot": false
       },
       {
-        "rank": 70,
+        "rank": 67,
         "id": "6476976929",
         "title": "Truck Star",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/eb/7c/38/eb7c3848-80e8-dae5-bd04-1bde4ade5fc5/AppIcon-1x_U007emarketing-0-8-0-0-85-220-0.png/100x100bb.png",
@@ -5144,7 +5117,7 @@
         "global_hot": false
       },
       {
-        "rank": 71,
+        "rank": 68,
         "id": "6746151928",
         "title": "Heartopia",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/93/66/cc/9366ccba-25d9-8141-eb15-23d1643ed790/AppIcon-1x_U007emarketing-0-8-0-85-220-0.png/100x100bb.png",
@@ -5153,7 +5126,7 @@
         "global_hot": false
       },
       {
-        "rank": 72,
+        "rank": 69,
         "id": "1453837845",
         "title": "Charades - Family & Party Game",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/56/85/ce/5685cecc-7d56-da15-20b8-21fc33b936db/AppIcon-0-0-1x_U007epad-0-1-85-220.png/100x100bb.png",
@@ -5162,12 +5135,39 @@
         "global_hot": false
       },
       {
-        "rank": 73,
+        "rank": 70,
+        "id": "6756402226",
+        "title": "Bus Simulator Indonesia: Maleo",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/9d/52/69/9d52695d-f631-5117-1636-334a0012c89c/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
+        "artist": "Maleo Media Kreatif",
+        "url": "https://apps.apple.com/sg/app/bus-simulator-indonesia-maleo/id6756402226?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 71,
         "id": "6689516366",
         "title": "Bus Escape: Traffic Jam",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/a1/ca/f0/a1caf092-5f1d-84f9-fb27-c89a6ee897d3/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
         "artist": "ABI GLOBAL LTD.",
         "url": "https://apps.apple.com/sg/app/bus-escape-traffic-jam/id6689516366?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 72,
+        "id": "1420551478",
+        "title": "Carrom Pool: Disc Game",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/33/41/63/334163b4-287f-f9a7-4791-43683c5d7023/AppIcon-0-0-1x_U007epad-0-1-85-220.png/100x100bb.png",
+        "artist": "Miniclip.com",
+        "url": "https://apps.apple.com/sg/app/carrom-pool-disc-game/id1420551478?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 73,
+        "id": "1458863319",
+        "title": "CarX Street",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/4e/4f/e0/4e4fe005-8a5a-4ff2-94c6-cf27a124683f/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
+        "artist": "CarX Technologies",
+        "url": "https://apps.apple.com/sg/app/carx-street/id1458863319?uo=2",
         "global_hot": false
       },
       {
@@ -5190,15 +5190,6 @@
       },
       {
         "rank": 76,
-        "id": "1402384531",
-        "title": "Play Together:Cozy Social Life",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/b3/62/6e/b3626e4c-02fe-420f-bbb8-25a277368652/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
-        "artist": "HAEGIN Co., Ltd.",
-        "url": "https://apps.apple.com/sg/app/play-together-cozy-social-life/id1402384531?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 77,
         "id": "959498315",
         "title": "Extreme Car Driving Simulator",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/2f/ff/8a/2fff8a5e-ab85-422b-7894-490867959caf/icon_1-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
@@ -5207,16 +5198,16 @@
         "global_hot": false
       },
       {
-        "rank": 78,
-        "id": "1541153375",
-        "title": "Stumble Guys",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/cb/b8/ed/cbb8ed61-e579-0acd-08b6-1d5ae8e4d7b1/AppIcon-0-0-1x_U007emarketing-0-5-0-85-220.png/100x100bb.png",
-        "artist": "Scopely, Inc.",
-        "url": "https://apps.apple.com/sg/app/stumble-guys/id1541153375?uo=2",
+        "rank": 77,
+        "id": "1402384531",
+        "title": "Play Together:Cozy Social Life",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/b3/62/6e/b3626e4c-02fe-420f-bbb8-25a277368652/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
+        "artist": "HAEGIN Co., Ltd.",
+        "url": "https://apps.apple.com/sg/app/play-together-cozy-social-life/id1402384531?uo=2",
         "global_hot": false
       },
       {
-        "rank": 79,
+        "rank": 78,
         "id": "6748950306",
         "title": "Solitaire Associations Journey",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/e4/bd/b6/e4bdb60a-5a0b-6a67-9dbb-78cc66e544e1/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
@@ -5225,12 +5216,21 @@
         "global_hot": false
       },
       {
-        "rank": 80,
+        "rank": 79,
         "id": "561941526",
         "title": "Dragon City: Collect & Battle!",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/63/44/f1/6344f1a6-cfb1-56df-98fa-53866689ac63/AppIcon-0-0-1x_U007emarketing-0-7-0-85-220.png/100x100bb.png",
         "artist": "Socialpoint",
         "url": "https://apps.apple.com/sg/app/dragon-city-collect-battle/id561941526?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 80,
+        "id": "1541153375",
+        "title": "Stumble Guys",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/cb/b8/ed/cbb8ed61-e579-0acd-08b6-1d5ae8e4d7b1/AppIcon-0-0-1x_U007emarketing-0-5-0-85-220.png/100x100bb.png",
+        "artist": "Scopely, Inc.",
+        "url": "https://apps.apple.com/sg/app/stumble-guys/id1541153375?uo=2",
         "global_hot": false
       },
       {
@@ -5280,24 +5280,15 @@
       },
       {
         "rank": 86,
-        "id": "1630315603",
-        "title": "Truckers of Europe 3",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/85/a3/0f/85a30fc9-a6b3-d8cd-4e9f-bbfb938d31d5/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
-        "artist": "Yalcin Senturk",
-        "url": "https://apps.apple.com/sg/app/truckers-of-europe-3/id1630315603?uo=2",
+        "id": "1482155847",
+        "title": "Royal Match",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/f0/95/62/f09562b4-ec3f-df3b-2757-c47f00a120a8/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
+        "artist": "Dream Games",
+        "url": "https://apps.apple.com/sg/app/royal-match/id1482155847?uo=2",
         "global_hot": false
       },
       {
         "rank": 87,
-        "id": "6754558455",
-        "title": "Marble Sort!",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/9d/ce/0b/9dce0b98-de52-cc6e-4811-db023fe8bd11/AppIcon-0-0-1x_U007emarketing-0-6-0-85-220.png/100x100bb.png",
-        "artist": "Voodoo",
-        "url": "https://apps.apple.com/sg/app/marble-sort/id6754558455?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 88,
         "id": "1389111413",
         "title": "Hole.io",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/b0/29/01/b029015e-4ba2-0ced-21b7-8a5c30c89bc0/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
@@ -5306,12 +5297,21 @@
         "global_hot": false
       },
       {
+        "rank": 88,
+        "id": "6754558455",
+        "title": "Marble Sort!",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/9d/ce/0b/9dce0b98-de52-cc6e-4811-db023fe8bd11/AppIcon-0-0-1x_U007emarketing-0-6-0-85-220.png/100x100bb.png",
+        "artist": "Voodoo",
+        "url": "https://apps.apple.com/sg/app/marble-sort/id6754558455?uo=2",
+        "global_hot": false
+      },
+      {
         "rank": 89,
-        "id": "1053012308",
-        "title": "Clash Royale",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/1f/a2/1c/1fa21ca0-610d-b058-2cae-ea4a6d785c76/AppIcon-0-0-1x_U007emarketing-0-7-0-85-220.png/100x100bb.png",
-        "artist": "Supercell",
-        "url": "https://apps.apple.com/sg/app/clash-royale/id1053012308?uo=2",
+        "id": "1630315603",
+        "title": "Truckers of Europe 3",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/85/a3/0f/85a30fc9-a6b3-d8cd-4e9f-bbfb938d31d5/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
+        "artist": "Yalcin Senturk",
+        "url": "https://apps.apple.com/sg/app/truckers-of-europe-3/id1630315603?uo=2",
         "global_hot": false
       },
       {
@@ -5334,11 +5334,11 @@
       },
       {
         "rank": 92,
-        "id": "1482155847",
-        "title": "Royal Match",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/f0/95/62/f09562b4-ec3f-df3b-2757-c47f00a120a8/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
-        "artist": "Dream Games",
-        "url": "https://apps.apple.com/sg/app/royal-match/id1482155847?uo=2",
+        "id": "6612014908",
+        "title": "Magic Chess: Go Go",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/ab/e2/8a/abe28a3e-8b24-c903-7766-fcd5a8d2b4e6/AppIcon-1x_U007emarketing-0-7-0-85-220-0.png/100x100bb.png",
+        "artist": "VIZTA PTE. LTD.",
+        "url": "https://apps.apple.com/sg/app/magic-chess-go-go/id6612014908?uo=2",
         "global_hot": false
       },
       {
@@ -5352,33 +5352,6 @@
       },
       {
         "rank": 94,
-        "id": "6612014908",
-        "title": "Magic Chess: Go Go",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/ab/e2/8a/abe28a3e-8b24-c903-7766-fcd5a8d2b4e6/AppIcon-1x_U007emarketing-0-7-0-85-220-0.png/100x100bb.png",
-        "artist": "VIZTA PTE. LTD.",
-        "url": "https://apps.apple.com/sg/app/magic-chess-go-go/id6612014908?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 95,
-        "id": "951744068",
-        "title": "Traffic Rider",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/43/0a/ed/430aed0d-316c-7722-6baf-008eb7a20f3a/AppIcon-1x_U007emarketing-0-8-0-85-220-0.png/100x100bb.png",
-        "artist": "Skgames Yazilim Muhendislik Teknoloji Ltd. Sti.",
-        "url": "https://apps.apple.com/sg/app/traffic-rider/id951744068?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 96,
-        "id": "1357967682",
-        "title": "Worms Zone .io — Hungry Snake",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/bb/df/f2/bbdff233-7ba7-11ed-7592-21f84c3cea59/AppIcon_iOS-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
-        "artist": "Azur Interactive Games Limited",
-        "url": "https://apps.apple.com/sg/app/worms-zone-io-hungry-snake/id1357967682?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 97,
         "id": "6754363534",
         "title": "Sand Loop",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/d0/74/8e/d0748e80-9d86-d889-cc86-644a08a0e523/AppIcon-1x_U007emarketing-0-8-0-85-220-0.png/100x100bb.png",
@@ -5387,16 +5360,7 @@
         "global_hot": false
       },
       {
-        "rank": 98,
-        "id": "6472040176",
-        "title": "Animal Hunter: Wild Shooting",
-        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/54/7b/3c/547b3c1e-1ee6-4855-5bba-b38e0c0d73e0/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
-        "artist": "Fun Fun Oyun Teknoloji Anonim Şirketi",
-        "url": "https://apps.apple.com/sg/app/animal-hunter-wild-shooting/id6472040176?uo=2",
-        "global_hot": false
-      },
-      {
-        "rank": 99,
+        "rank": 95,
         "id": "6475969303",
         "title": "Truck Masters: India Simulator",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/a1/3a/f1/a13af19d-050b-bec8-a634-4eae063799ff/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
@@ -5405,12 +5369,48 @@
         "global_hot": false
       },
       {
-        "rank": 100,
+        "rank": 96,
+        "id": "1053012308",
+        "title": "Clash Royale",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/1f/a2/1c/1fa21ca0-610d-b058-2cae-ea4a6d785c76/AppIcon-0-0-1x_U007emarketing-0-7-0-85-220.png/100x100bb.png",
+        "artist": "Supercell",
+        "url": "https://apps.apple.com/sg/app/clash-royale/id1053012308?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 97,
         "id": "6754862574",
         "title": "Sheep Dash - Farm Parking 3D",
         "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/6f/76/80/6f76800a-6176-27d0-57a9-36a4e037d6c4/AppIcon-1x_U007epad-0-1-85-220-0.png/100x100bb.png",
         "artist": "Snap Brain Games",
         "url": "https://apps.apple.com/sg/app/sheep-dash-farm-parking-3d/id6754862574?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 98,
+        "id": "951744068",
+        "title": "Traffic Rider",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/43/0a/ed/430aed0d-316c-7722-6baf-008eb7a20f3a/AppIcon-1x_U007emarketing-0-8-0-85-220-0.png/100x100bb.png",
+        "artist": "Skgames Yazilim Muhendislik Teknoloji Ltd. Sti.",
+        "url": "https://apps.apple.com/sg/app/traffic-rider/id951744068?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 99,
+        "id": "6472040176",
+        "title": "Animal Hunter: Wild Shooting",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/54/7b/3c/547b3c1e-1ee6-4855-5bba-b38e0c0d73e0/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
+        "artist": "Fun Fun Oyun Teknoloji Anonim Şirketi",
+        "url": "https://apps.apple.com/sg/app/animal-hunter-wild-shooting/id6472040176?uo=2",
+        "global_hot": false
+      },
+      {
+        "rank": 100,
+        "id": "1357967682",
+        "title": "Worms Zone .io — Hungry Snake",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/bb/df/f2/bbdff233-7ba7-11ed-7592-21f84c3cea59/AppIcon_iOS-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
+        "artist": "Azur Interactive Games Limited",
+        "url": "https://apps.apple.com/sg/app/worms-zone-io-hungry-snake/id1357967682?uo=2",
         "global_hot": false
       }
     ]
@@ -5862,17 +5862,17 @@
     {
       "title": "Genshin Impact 5.0 Update Guide",
       "source": "Fandom",
-      "time": "2026-04-18 10:00:07"
+      "time": "2026-04-18 20:54:22"
     },
     {
       "title": "Wuthering Waves Tier List Updated",
       "source": "Prydwen",
-      "time": "2026-04-18 10:00:07"
+      "time": "2026-04-18 20:54:22"
     },
     {
       "title": "Zenless Zone Zero Character Builds",
       "source": "Game8",
-      "time": "2026-04-18 10:00:07"
+      "time": "2026-04-18 20:54:22"
     }
   ]
 }
