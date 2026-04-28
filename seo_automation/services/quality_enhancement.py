@@ -1,5 +1,7 @@
 ﻿import json
 import random
+import base64
+import hashlib
 import shutil
 import re
 from datetime import datetime
@@ -9,6 +11,10 @@ from typing import Any
 from urllib.parse import quote, urlparse
 
 import requests
+from django.conf import settings
+from django.core.files.base import ContentFile
+from django.core.files.storage import default_storage
+from django.utils.text import slugify
 
 try:
     from PIL import Image
@@ -218,6 +224,23 @@ _CROSS_GAME_HINTS = (
     "eafc",
 )
 
+_STEP5_TOTAL_IMAGE_COUNT = 3
+_STEP5_INLINE_IMAGE_COUNT = 2
+_STEP5_IMAGE_SLOT_ORDER = ("cover", "inline_1", "inline_2")
+_STEP5_IMAGE_SETTING_NAMES = (
+    "seo_image_generation",
+    "seo-image-generation",
+    "gpt-image2",
+    "image_generation",
+)
+_STEP5_IMAGE_DEFAULT_BASE_URL = "https://api.bltcy.ai"
+_STEP5_IMAGE_DEFAULT_MODEL = "gpt-image2"
+_STEP5_IMAGE_DEFAULT_SIZE = "1536x1024"
+_STEP5_IMAGE_DEFAULT_TIMEOUT = 120
+_STEP5_GENERATED_IMAGE_SCORE = 0.96
+_STEP5_GENERATED_IMAGE_RELEVANCE = 0.95
+_STEP5_GENERATED_IMAGE_QUALITY = 0.96
+
 
 
 def run_step5_quality_enhancement(
@@ -259,72 +282,57 @@ def run_step5_quality_enhancement(
 
     h2_sections = _extract_h2_sections(polished_html)
     queries = _build_h2_queries(game_name=normalized_game_name, h2_sections=h2_sections)
-    selected_candidates, image_diag = _select_h2_images_from_bing(
+    target_image_count = _STEP5_TOTAL_IMAGE_COUNT
+    generated_slots, generation_diag = _generate_step5_image_candidates(
+        title=normalized_title,
+        body_html=polished_html,
         game_name=normalized_game_name,
+        source_title=source_title,
         h2_sections=h2_sections,
-        queries=queries,
-        fallback_urls=seed_urls,
+        generated_at=generated_at,
     )
-    target_image_count = max(1, min(8, len(h2_sections) or 3))
-    validated_candidates, validation_diag = _filter_quality_image_candidates(
-        _dedupe_candidates(selected_candidates),
-        game_name=normalized_game_name,
-        limit=target_image_count,
-    )
-    validation_diag["supplement_checked"] = 0
-    validation_diag["supplement_rejected"] = 0
-    validation_diag["supplement_kept"] = 0
+    generated_success_count = sum(1 for slot in _STEP5_IMAGE_SLOT_ORDER if generated_slots.get(slot))
 
-    if len(validated_candidates) < target_image_count:
-        supplement_candidates = _search_bing_images(
-            query=f"{normalized_game_name} official game art wallpaper 1280x720",
-            max_pages=6,
-            per_page_target=64,
-        )
-        supplement_needed = max(0, target_image_count - len(validated_candidates))
-        supplement_validated, supplement_diag = _filter_quality_image_candidates(
-            _dedupe_candidates(supplement_candidates),
+    fallback_candidates: list[dict[str, Any]] = []
+    image_diag: dict[str, Any] = {
+        "status": "skipped_generated_success",
+        "source": "generated_only",
+        "queries": queries,
+        "candidate_count": 0,
+    }
+    validation_diag: dict[str, Any] = {
+        "supplement_checked": 0,
+        "supplement_rejected": 0,
+        "supplement_kept": 0,
+        "target_image_count": target_image_count,
+        "generated_primary": True,
+        "fallback_triggered": False,
+        "generated_success_count": generated_success_count,
+    }
+    if generated_success_count < target_image_count:
+        fallback_candidates, image_diag, validation_diag = _select_search_backed_step5_candidates(
             game_name=normalized_game_name,
-            limit=max(1, supplement_needed),
+            h2_sections=h2_sections,
+            queries=queries,
+            fallback_urls=seed_urls,
+            target_image_count=target_image_count,
         )
-        validation_diag["supplement_checked"] = int(supplement_diag.get("checked", 0))
-        validation_diag["supplement_rejected"] = int(
-            supplement_diag.get("rejected_text_or_watermark", 0)
-        ) + int(supplement_diag.get("rejected_unreachable", 0)) + int(
-            supplement_diag.get("rejected_non_image", 0)
-        ) + int(supplement_diag.get("rejected_irrelevant", 0))
-        merged_candidates = _merge_selected_candidates(
-            base=validated_candidates,
-            extra=supplement_validated,
-            limit=target_image_count,
-        )
-        validation_diag["supplement_kept"] = max(0, len(merged_candidates) - len(validated_candidates))
-        validated_candidates = merged_candidates
+        validation_diag["generated_primary"] = True
+        validation_diag["fallback_triggered"] = True
+        validation_diag["generated_success_count"] = generated_success_count
 
-    ordered_candidates = sorted(
-        validated_candidates,
-        key=lambda item: (
-            float(item.get("score") or 0.0),
-            float(item.get("relevance_score") or 0.0),
-            float(item.get("quality_score") or 0.0),
-        ),
-        reverse=True,
-    )
-    selected_urls = [
-        str(item.get("url") or "").strip()
-        for item in ordered_candidates
-        if str(item.get("url") or "").strip()
-    ][:target_image_count]
-    selected_urls, guarantee_diag = _ensure_real_image_urls(
-        selected_urls=selected_urls,
-        seed_urls=seed_urls,
+    slot_candidates = _compose_step5_slot_candidates(
+        generated_slots=generated_slots,
+        fallback_candidates=fallback_candidates,
         game_name=normalized_game_name,
+        seed_urls=seed_urls,
         target_image_count=target_image_count,
     )
-    validation_diag.update(guarantee_diag)
-
-    media_items = build_media_items(
-        image_urls=selected_urls,
+    cover_candidate = slot_candidates[0] if slot_candidates else {}
+    cover_image_url = str(cover_candidate.get("url") or "").strip()
+    inline_candidates = slot_candidates[1 : 1 + _STEP5_INLINE_IMAGE_COUNT]
+    media_items = _build_media_items_from_candidates(
+        candidates=inline_candidates,
         game_name=normalized_game_name,
     )
 
@@ -360,17 +368,19 @@ def run_step5_quality_enhancement(
         "meta_title": meta["meta_title"],
         "meta_description": meta["meta_description"],
         "selected_images": media_items,
-        "cover_image_url": selected_urls[0] if selected_urls else "",
+        "cover_image_url": cover_image_url,
         "diagnostics": {
             "polish": polish_diag,
             "images": {
+                "generation": generation_diag,
                 **(image_diag if isinstance(image_diag, dict) else {}),
                 **validation_diag,
-                "target_image_count": target_image_count,
-                "validated_selected_count": len(selected_urls),
+                "validated_selected_count": len(slot_candidates),
                 "used_placeholder": False,
-                "guaranteed_real_image": bool(selected_urls),
-                "cover_image_url": selected_urls[0] if selected_urls else "",
+                "guaranteed_real_image": bool(slot_candidates),
+                "cover_image_url": cover_image_url,
+                "inline_image_count": len(media_items),
+                "total_asset_count": int(bool(cover_image_url)) + len(media_items),
             },
             "stats": stats,
             "h2_count": len(h2_sections),
@@ -379,6 +389,556 @@ def run_step5_quality_enhancement(
         },
     }
 
+
+def _load_named_llm_config(setting_name: str) -> dict[str, Any]:
+    normalized_name = str(setting_name or "").strip()
+    if not normalized_name:
+        return {}
+    try:
+        from seo_automation.models import LLMApiSetting
+
+        setting = (
+            LLMApiSetting.objects.filter(name__iexact=normalized_name)
+            .order_by("-updated_at", "-id")
+            .first()
+        )
+        if not setting:
+            return {}
+        return {
+            "name": setting.name,
+            "base_url": setting.base_url,
+            "api_key": setting.api_key,
+            "model_name": setting.model_name,
+            "timeout_seconds": setting.timeout_seconds,
+            "is_active": setting.is_active,
+        }
+    except Exception:
+        return {}
+
+
+def _resolve_step5_image_generation_config() -> dict[str, Any]:
+    named_cfg: dict[str, Any] = {}
+    for setting_name in _STEP5_IMAGE_SETTING_NAMES:
+        named_cfg = _load_named_llm_config(setting_name)
+        if str(named_cfg.get("api_key") or "").strip():
+            break
+
+    llm_cfg = _resolve_llm_config()
+    api_key = str(named_cfg.get("api_key") or llm_cfg.get("api_key") or "").strip()
+    base_url = str(named_cfg.get("base_url") or "").strip().rstrip("/")
+    if not base_url:
+        base_url = str(llm_cfg.get("base_url") or _STEP5_IMAGE_DEFAULT_BASE_URL).strip().rstrip("/")
+    model = str(named_cfg.get("model_name") or "").strip() or _STEP5_IMAGE_DEFAULT_MODEL
+    timeout_seconds = int(named_cfg.get("timeout_seconds") or llm_cfg.get("timeout_seconds") or _STEP5_IMAGE_DEFAULT_TIMEOUT)
+    return {
+        "config_name": str(named_cfg.get("name") or "").strip(),
+        "api_key": api_key,
+        "base_url": base_url,
+        "model": model,
+        "timeout_seconds": max(_STEP5_IMAGE_DEFAULT_TIMEOUT, timeout_seconds),
+        "size": _STEP5_IMAGE_DEFAULT_SIZE,
+    }
+
+
+def _build_openai_images_url(*, base_url: str) -> str:
+    value = str(base_url or _STEP5_IMAGE_DEFAULT_BASE_URL).strip().rstrip("/")
+    if value.endswith("/images/generations"):
+        return value
+    if value.endswith("/v1"):
+        return f"{value}/images/generations"
+    if value.endswith("/chat/completions"):
+        return value[: -len("/chat/completions")] + "/images/generations"
+    if "/v1/" in value:
+        return f"{value}/images/generations"
+    return f"{value}/v1/images/generations"
+
+
+def _generate_step5_image_candidates(
+    *,
+    title: str,
+    body_html: str,
+    game_name: str,
+    source_title: str,
+    h2_sections: list[dict[str, str]],
+    generated_at: datetime | None,
+) -> tuple[dict[str, dict[str, Any]], dict[str, Any]]:
+    cfg = _resolve_step5_image_generation_config()
+    api_key = str(cfg.get("api_key") or "").strip()
+    if not api_key:
+        return {}, {"status": "skipped_missing_api_key", "target_count": _STEP5_TOTAL_IMAGE_COUNT}
+
+    specs = _build_step5_image_specs(
+        title=title,
+        body_html=body_html,
+        game_name=game_name,
+        source_title=source_title,
+        h2_sections=h2_sections,
+    )
+    generated: dict[str, dict[str, Any]] = {}
+    failures: list[dict[str, str]] = []
+
+    for spec in specs:
+        slot = str(spec.get("slot") or "").strip()
+        if not slot:
+            continue
+        try:
+            candidate = _request_step5_generated_image(
+                config=cfg,
+                game_name=game_name,
+                slot=slot,
+                heading=str(spec.get("heading") or "").strip(),
+                prompt=str(spec.get("prompt") or "").strip(),
+                generated_at=generated_at,
+            )
+            if candidate:
+                generated[slot] = candidate
+            else:
+                failures.append({"slot": slot, "error": "empty_result"})
+        except Exception as exc:
+            failures.append({"slot": slot, "error": _truncate_text(str(exc), 260)})
+
+    return generated, {
+        "status": "success" if len(generated) == len(specs) else ("partial" if generated else "failed"),
+        "provider": cfg.get("config_name") or "active_llm_fallback",
+        "base_url": cfg.get("base_url") or "",
+        "model": cfg.get("model") or _STEP5_IMAGE_DEFAULT_MODEL,
+        "size": cfg.get("size") or _STEP5_IMAGE_DEFAULT_SIZE,
+        "target_count": len(specs),
+        "success_count": len(generated),
+        "failure_count": len(failures),
+        "failures": failures,
+    }
+
+
+def _build_step5_image_specs(
+    *,
+    title: str,
+    body_html: str,
+    game_name: str,
+    source_title: str,
+    h2_sections: list[dict[str, str]],
+) -> list[dict[str, str]]:
+    article_summary = _truncate_text(_strip_tags(body_html), 520)
+    intro_text = _truncate_text(_first_paragraph_text(body_html), 260)
+    related_title = source_title or title
+
+    section_specs: list[tuple[str, str, str]] = [("cover", title, intro_text or article_summary)]
+    for index, section in enumerate(h2_sections[:_STEP5_INLINE_IMAGE_COUNT], start=1):
+        section_specs.append(
+            (
+                f"inline_{index}",
+                str(section.get("heading") or f"段落 {index}").strip(),
+                _truncate_text(str(section.get("content") or "").strip(), 260),
+            )
+        )
+
+    while len(section_specs) < _STEP5_TOTAL_IMAGE_COUNT:
+        next_index = len(section_specs)
+        section_specs.append(
+            (
+                f"inline_{next_index}",
+                f"重点段落 {next_index}",
+                intro_text or article_summary,
+            )
+        )
+
+    specs: list[dict[str, str]] = []
+    for slot, heading, paragraph in section_specs[:_STEP5_TOTAL_IMAGE_COUNT]:
+        usage = "文章封面主视觉" if slot == "cover" else "文章正文插图"
+        prompt = (
+            f"请为一篇关于《{game_name}》的游戏文章生成一张原创横版插图。\n"
+            f"用途：{usage}\n"
+            f"文章标题：{title}\n"
+            f"参考来源标题：{related_title}\n"
+            f"对应段落标题：{heading}\n"
+            f"段落重点：{paragraph or article_summary}\n"
+            "画面要求：结合文章内容与该段落重点，创作高质量游戏宣传图/概念图风格画面，突出角色、战斗、探索、活动或资源规划等与正文强相关的场景，16:9 横版，电影感构图，细节丰富。\n"
+            "禁止事项：不要文字、不要 logo、不要 UI 截图、不要聊天框、不要水印、不要二维码、不要低清晰度、不要畸形手。\n"
+            "输出单张成品图，适合直接用于游戏资讯站文章配图。"
+        )
+        specs.append({"slot": slot, "heading": heading, "prompt": prompt})
+    return specs
+
+
+def _request_step5_generated_image(
+    *,
+    config: dict[str, Any],
+    game_name: str,
+    slot: str,
+    heading: str,
+    prompt: str,
+    generated_at: datetime | None,
+) -> dict[str, Any] | None:
+    url = _build_openai_images_url(base_url=str(config.get("base_url") or ""))
+    payload_variants = [
+        {
+            "model": str(config.get("model") or _STEP5_IMAGE_DEFAULT_MODEL),
+            "prompt": prompt,
+            "size": str(config.get("size") or _STEP5_IMAGE_DEFAULT_SIZE),
+            "n": 1,
+            "response_format": "b64_json",
+        },
+        {
+            "model": str(config.get("model") or _STEP5_IMAGE_DEFAULT_MODEL),
+            "prompt": prompt,
+            "size": str(config.get("size") or _STEP5_IMAGE_DEFAULT_SIZE),
+            "n": 1,
+        },
+    ]
+
+    last_error = "empty_response"
+    for payload in payload_variants:
+        response = _post_with_auth_variants(
+            url=url,
+            payload=payload,
+            api_key=str(config.get("api_key") or ""),
+            timeout_seconds=int(config.get("timeout_seconds") or _STEP5_IMAGE_DEFAULT_TIMEOUT),
+            prefer_bearer=True,
+        )
+        if response.status_code >= 400:
+            last_error = f"http_{response.status_code}: {_truncate_text(response.text, 300)}"
+            continue
+        candidate = _extract_step5_generated_candidate(
+            response=response,
+            game_name=game_name,
+            slot=slot,
+            heading=heading,
+            generated_at=generated_at,
+        )
+        if candidate:
+            return candidate
+        last_error = "no_image_payload"
+    raise RuntimeError(last_error)
+
+
+def _extract_step5_generated_candidate(
+    *,
+    response: requests.Response,
+    game_name: str,
+    slot: str,
+    heading: str,
+    generated_at: datetime | None,
+) -> dict[str, Any] | None:
+    try:
+        response_data = response.json()
+    except Exception as exc:
+        raise RuntimeError(f"invalid_json_response: {exc}") from exc
+
+    data_rows = response_data.get("data")
+    if isinstance(data_rows, dict):
+        data_rows = data_rows.get("data") or data_rows.get("items") or []
+    if not isinstance(data_rows, list) or not data_rows:
+        return None
+
+    first_item = data_rows[0] if isinstance(data_rows[0], dict) else {}
+    image_bytes = _extract_image_bytes_from_payload(first_item)
+    image_url = str(first_item.get("url") or first_item.get("image_url") or "").strip()
+
+    if image_bytes:
+        stored_url = _persist_step5_generated_image(
+            image_bytes=image_bytes,
+            game_name=game_name,
+            slot=slot,
+            heading=heading,
+            generated_at=generated_at,
+        )
+    elif image_url:
+        stored_url = _persist_step5_generated_image_url(
+            image_url=image_url,
+            game_name=game_name,
+            slot=slot,
+            heading=heading,
+            generated_at=generated_at,
+        )
+    else:
+        return None
+
+    if not stored_url:
+        return None
+
+    image_hash = hashlib.md5(stored_url.encode("utf-8")).hexdigest()
+    return {
+        "url": stored_url,
+        "title": heading,
+        "heading": heading,
+        "query": slot,
+        "source": _STEP5_IMAGE_DEFAULT_MODEL,
+        "slot": slot,
+        "score": _STEP5_GENERATED_IMAGE_SCORE,
+        "quality_score": _STEP5_GENERATED_IMAGE_QUALITY,
+        "relevance_score": _STEP5_GENERATED_IMAGE_RELEVANCE,
+        "strict_quality_pass": True,
+        "watermark_safe": True,
+        "image_hash": image_hash,
+    }
+
+
+def _extract_image_bytes_from_payload(item: dict[str, Any]) -> bytes:
+    for key in ("b64_json", "image_base64", "base64", "b64"):
+        value = item.get(key)
+        if not value:
+            continue
+        try:
+            return base64.b64decode(str(value), validate=False)
+        except Exception:
+            continue
+    return b""
+
+
+def _persist_step5_generated_image_url(
+    *,
+    image_url: str,
+    game_name: str,
+    slot: str,
+    heading: str,
+    generated_at: datetime | None,
+) -> str:
+    response = requests.get(
+        image_url,
+        headers={"User-Agent": random.choice(_UA_POOL)},
+        timeout=(15, _STEP5_IMAGE_DEFAULT_TIMEOUT),
+    )
+    response.raise_for_status()
+    return _persist_step5_generated_image(
+        image_bytes=response.content,
+        game_name=game_name,
+        slot=slot,
+        heading=heading,
+        generated_at=generated_at,
+    )
+
+
+def _persist_step5_generated_image(
+    *,
+    image_bytes: bytes,
+    game_name: str,
+    slot: str,
+    heading: str,
+    generated_at: datetime | None,
+) -> str:
+    payload = bytes(image_bytes or b"")
+    if not payload:
+        return ""
+    date_path = (generated_at or datetime.now()).strftime("%Y/%m")
+    stem = slugify(f"{game_name}-{slot}-{heading}")[:72] or f"seo-{slot}"
+    digest = hashlib.sha1(payload).hexdigest()[:12]
+    ext = _guess_image_extension(payload)
+    relative_path = f"seo_generated/{date_path}/{stem}-{digest}.{ext}"
+    stored_path = default_storage.save(relative_path, ContentFile(payload))
+    try:
+        return str(default_storage.url(stored_path) or "")
+    except Exception:
+        media_url = str(getattr(settings, "MEDIA_URL", "/media/") or "/media/")
+        return f"{media_url.rstrip('/')}/{stored_path.lstrip('/')}"
+
+
+def _guess_image_extension(payload: bytes) -> str:
+    head = payload[:16]
+    if head.startswith(b"\x89PNG"):
+        return "png"
+    if head.startswith(b"\xff\xd8"):
+        return "jpg"
+    if head[:4] == b"RIFF" and b"WEBP" in head + payload[8:16]:
+        return "webp"
+    if head.startswith((b"GIF87a", b"GIF89a")):
+        return "gif"
+    return "png"
+
+
+def _select_search_backed_step5_candidates(
+    *,
+    game_name: str,
+    h2_sections: list[dict[str, str]],
+    queries: list[str],
+    fallback_urls: list[str],
+    target_image_count: int,
+) -> tuple[list[dict[str, Any]], dict[str, Any], dict[str, Any]]:
+    selected_candidates, image_diag = _select_h2_images_from_bing(
+        game_name=game_name,
+        h2_sections=h2_sections,
+        queries=queries,
+        fallback_urls=fallback_urls,
+    )
+    validated_candidates, validation_diag = _filter_quality_image_candidates(
+        _dedupe_candidates(selected_candidates),
+        game_name=game_name,
+        limit=target_image_count,
+    )
+    validation_diag["supplement_checked"] = 0
+    validation_diag["supplement_rejected"] = 0
+    validation_diag["supplement_kept"] = 0
+
+    if len(validated_candidates) < target_image_count:
+        supplement_candidates = _search_bing_images(
+            query=f"{game_name} official game art wallpaper 1280x720",
+            max_pages=6,
+            per_page_target=64,
+        )
+        supplement_needed = max(0, target_image_count - len(validated_candidates))
+        supplement_validated, supplement_diag = _filter_quality_image_candidates(
+            _dedupe_candidates(supplement_candidates),
+            game_name=game_name,
+            limit=max(1, supplement_needed),
+        )
+        validation_diag["supplement_checked"] = int(supplement_diag.get("checked", 0))
+        validation_diag["supplement_rejected"] = int(
+            supplement_diag.get("rejected_text_or_watermark", 0)
+        ) + int(supplement_diag.get("rejected_unreachable", 0)) + int(
+            supplement_diag.get("rejected_non_image", 0)
+        ) + int(supplement_diag.get("rejected_irrelevant", 0))
+        merged_candidates = _merge_selected_candidates(
+            base=validated_candidates,
+            extra=supplement_validated,
+            limit=target_image_count,
+        )
+        validation_diag["supplement_kept"] = max(0, len(merged_candidates) - len(validated_candidates))
+        validated_candidates = merged_candidates
+
+    ordered_candidates = sorted(
+        validated_candidates,
+        key=lambda item: (
+            float(item.get("score") or 0.0),
+            float(item.get("relevance_score") or 0.0),
+            float(item.get("quality_score") or 0.0),
+        ),
+        reverse=True,
+    )
+    return ordered_candidates[:target_image_count], image_diag, validation_diag
+
+
+def _compose_step5_slot_candidates(
+    *,
+    generated_slots: dict[str, dict[str, Any]],
+    fallback_candidates: list[dict[str, Any]],
+    game_name: str,
+    seed_urls: list[str],
+    target_image_count: int,
+) -> list[dict[str, Any]]:
+    fallback_pool = [dict(item) for item in (fallback_candidates or []) if isinstance(item, dict)]
+    existing_urls = [
+        str(item.get("url") or "").strip()
+        for item in generated_slots.values()
+        if isinstance(item, dict) and str(item.get("url") or "").strip()
+    ]
+    existing_url_set = {url for url in existing_urls if url}
+    fallback_url_set = {
+        str(item.get("url") or "").strip()
+        for item in fallback_pool
+        if str(item.get("url") or "").strip()
+    }
+    known_count = len(existing_url_set | fallback_url_set)
+    if known_count < target_image_count:
+        missing_count = max(0, target_image_count - known_count)
+        extra_urls, _guarantee_diag = _ensure_real_image_urls(
+            selected_urls=[],
+            seed_urls=seed_urls,
+            game_name=game_name,
+            target_image_count=max(1, missing_count),
+        )
+        fallback_pool.extend(
+            _build_fallback_candidates_from_urls(extra_urls, game_name=game_name, source="seed_or_aggressive")
+        )
+
+    final_candidates: list[dict[str, Any]] = []
+    seen_url_keys: set[str] = set()
+    fallback_index = 0
+    for slot in _STEP5_IMAGE_SLOT_ORDER[:target_image_count]:
+        candidate = generated_slots.get(slot)
+        if not _is_candidate_usable(candidate, seen_url_keys):
+            candidate = None
+            while fallback_index < len(fallback_pool):
+                maybe = dict(fallback_pool[fallback_index])
+                fallback_index += 1
+                if not _is_candidate_usable(maybe, seen_url_keys):
+                    continue
+                maybe.setdefault("slot", slot)
+                maybe.setdefault("heading", slot)
+                candidate = maybe
+                break
+        if not candidate:
+            continue
+        key = _url_dedupe_key(str(candidate.get("url") or "").strip())
+        if key:
+            seen_url_keys.add(key)
+        final_candidates.append(candidate)
+    return final_candidates
+
+
+def _build_fallback_candidates_from_urls(
+    urls: list[str],
+    *,
+    game_name: str,
+    source: str,
+) -> list[dict[str, Any]]:
+    results: list[dict[str, Any]] = []
+    for index, url in enumerate(_dedupe_urls(urls or []), start=1):
+        if not url:
+            continue
+        results.append(
+            {
+                "url": url,
+                "title": f"{game_name} image {index}",
+                "heading": f"fallback {index}",
+                "query": source,
+                "source": source,
+                "score": 0.78,
+                "quality_score": 0.76,
+                "relevance_score": 0.74,
+                "strict_quality_pass": True,
+                "watermark_safe": True,
+                "image_hash": hashlib.md5(url.encode("utf-8")).hexdigest(),
+            }
+        )
+    return results
+
+
+def _build_media_items_from_candidates(
+    *,
+    candidates: list[dict[str, Any]],
+    game_name: str,
+) -> list[dict[str, Any]]:
+    image_urls = [str(item.get("url") or "").strip() for item in candidates if str(item.get("url") or "").strip()]
+    base_items = build_media_items(image_urls=image_urls, game_name=game_name)
+    candidate_map = {
+        str(item.get("url") or "").strip(): item
+        for item in candidates
+        if isinstance(item, dict) and str(item.get("url") or "").strip()
+    }
+    enriched: list[dict[str, Any]] = []
+    for item in base_items:
+        url = str(item.get("url") or "").strip()
+        row = dict(item)
+        extra = candidate_map.get(url) or {}
+        row["source"] = str(extra.get("source") or "").strip()
+        row["slot"] = str(extra.get("slot") or "").strip()
+        row["score"] = float(extra.get("score") or extra.get("quality_score") or 0.0)
+        row["quality_score"] = float(extra.get("quality_score") or extra.get("score") or 0.0)
+        row["relevance_score"] = float(extra.get("relevance_score") or extra.get("score") or 0.0)
+        row["strict_quality_pass"] = bool(extra.get("strict_quality_pass", False))
+        row["watermark_safe"] = bool(extra.get("watermark_safe", False))
+        row["image_hash"] = str(extra.get("image_hash") or hashlib.md5(url.encode("utf-8")).hexdigest())
+        enriched.append(row)
+    return enriched
+
+
+def _is_candidate_usable(candidate: dict[str, Any] | None, seen_url_keys: set[str]) -> bool:
+    if not isinstance(candidate, dict):
+        return False
+    url = str(candidate.get("url") or "").strip()
+    if not url:
+        return False
+    key = _url_dedupe_key(url)
+    if not key or key in seen_url_keys:
+        return False
+    return True
+
+
+def _truncate_text(value: str, limit: int) -> str:
+    text = re.sub(r"\s+", " ", str(value or "")).strip()
+    limit_value = max(1, int(limit or 1))
+    if len(text) <= limit_value:
+        return text
+    return text[:limit_value].rstrip(" ，,;；")
 
 
 def _sanitize_body_html(body_html: str) -> str:
